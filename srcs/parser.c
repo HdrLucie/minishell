@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 19:51:36 by ehautefa         ###   ########.fr       */
+/*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
+/*   Updated: 2021/09/26 19:51:28 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_error(char *msg, int retur)
-{
-	write(2, "MINISHELL : ", 12);
-	write(2, msg, ft_strlen(msg));
-	return (retur);
-}
+// int	ft_main_parse(char *str, char **envp)
+// {
+// 	int	i;
 
-int	main(int ac, char **av, char **envp)
-{
-	char	*str;
-
-	if (ac != 1)
-		return (print_error("TOO MUCH ARG", -1));
-	(void)av;
-	(void)envp;
-	while (42)
-	{
-		str = readline("> ");
-		// if (ft_main_parse(str, envp) == -1)
-		// 	return (-1);
-		free(str);
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (str[i])
+// 	{
+// 		while (str[i] >= '\a' && str[i] <= '\r')
+// 			i++;
+		
+// 	}
+// }

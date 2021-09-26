@@ -19,20 +19,20 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 
 .c.o:		${SRCS} ${LST} ${BNS}
-			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
+			@${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${OBJS2} ${OBJS3}
-			ar rc ${NAME} ${OBJS} ${OBJS2} ${OBJS3}
+			@ar rc ${NAME} ${OBJS} ${OBJS2} ${OBJS3}
 
-all: 		${NAME}
+all: 		@${NAME}
 
 clean:
-			rm -f ${OBJS}
-			rm -f ${OBJS2}
-			rm -f ${OBJS3}
+			@rm -f ${OBJS}
+			@rm -f ${OBJS2}
+			@rm -f ${OBJS3}
 
 fclean:		clean
-			rm -f ${NAME}
+			@rm -f ${NAME}
 
 re:			fclean all
 
