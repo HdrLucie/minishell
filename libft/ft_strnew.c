@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 18:12:20 by ehautefa         ###   ########.fr       */
+/*   Created: 2020/09/16 09:18:55 by ehautefa          #+#    #+#             */
+/*   Updated: 2021/08/23 14:32:42 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "./libft.h"
 
-#include <unistd.h>
-#include "../libft/libft.h"
+char	*ft_strnew(size_t size)
+{
+	char	*str;
 
-#endif
+	str = (char *)malloc((size + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	while ((int)size >= 0)
+	{
+		str[(int)size] = '\0';
+		size--;
+	}
+	return (str);
+}

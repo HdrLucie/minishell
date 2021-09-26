@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 18:12:20 by ehautefa         ###   ########.fr       */
+/*   Created: 2021/08/19 18:25:16 by elisehautef       #+#    #+#             */
+/*   Updated: 2021/08/23 14:39:57 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "libft.h"
 
-#include <unistd.h>
-#include "../libft/libft.h"
+void	*ft_realloc(void *ptr, size_t size)
+{
+	void	*new;
 
-#endif
+	if (ptr == NULL || size <= 0)
+		return (NULL);
+	new = malloc(size * sizeof(void));
+	if (new == NULL)
+		return (NULL);
+	ft_memcpy(new, ptr, size);
+	free(ptr);
+	ptr = NULL;
+	return (new);
+}

@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 18:12:20 by ehautefa         ###   ########.fr       */
+/*   Created: 2020/09/16 09:17:57 by ehautefa          #+#    #+#             */
+/*   Updated: 2021/08/23 14:34:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "./libft.h"
 
-#include <unistd.h>
-#include "../libft/libft.h"
+char	*ft_strcat(char *s1, const char *s2)
+{
+	int	size_s1;
+	int	i;
 
-#endif
+	i = 0;
+	size_s1 = ft_strlen(s1);
+	while (s2[i])
+	{
+		s1[i + size_s1] = s2[i];
+		i++;
+	}
+	s1[i + size_s1] = '\0';
+	return (s1);
+}

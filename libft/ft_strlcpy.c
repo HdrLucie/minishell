@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 18:12:20 by ehautefa         ###   ########.fr       */
+/*   Created: 2020/09/16 09:18:35 by ehautefa          #+#    #+#             */
+/*   Updated: 2020/12/23 10:25:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "./libft.h"
 
-#include <unistd.h>
-#include "../libft/libft.h"
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	int	i;
+	int	count;
 
-#endif
+	i = 0;
+	count = ft_strlen(src);
+	if (dstsize == 0)
+		return (count);
+	while (dst && src && i < (int)(dstsize - 1)
+			&& src[i] != '\0' && dstsize != 0)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (count);
+}

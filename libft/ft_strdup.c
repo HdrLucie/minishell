@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 18:12:20 by ehautefa         ###   ########.fr       */
+/*   Created: 2020/09/16 09:18:14 by ehautefa          #+#    #+#             */
+/*   Updated: 2021/08/23 14:34:16 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "./libft.h"
 
-#include <unistd.h>
-#include "../libft/libft.h"
+char	*ft_strdup(const char *s1)
+{
+	char	*s2;
+	int		size;
 
-#endif
+	size = ft_strlen(s1);
+	s2 = (char *)malloc((size + 1) * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	ft_strcpy(s2, s1);
+	return (s2);
+}
