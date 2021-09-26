@@ -18,8 +18,10 @@ DEBUG_FLAG = -fsanitize=address -g3
 			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}
-			${MAKE} -C libft
+			@make -C libft
 			${CC} ${OBJS} ${CFLAGS} ${INCLUDE} -Llibft -lft  -o ${NAME}
+			@echo "\033[33;31mCOMPILED\t\t\tCONGRATS"
+
 
 debug:		${SRCS} ${HEAD}
 			${CC} ${OBJS} ${CFLAGS} ${DEBUG_FLAG} ${INCLUDE} -Llibft -lft  -o ${NAME}
@@ -28,13 +30,16 @@ all: 		${NAME}
 
 clean:
 			rm -f srcs/*.o
-			${MAKE} clean -C libft
+			@make clean -C libft
+			@echo "\033[33;34mCLEAN !\t\t\t\tBUT YOU CAN DO BETTER"
 
 fclean:		clean
 			rm -f ${NAME}
-			${MAKE} fclean -C libft
+			@make fclean -C libft
 			rm -rf minishell.dSYM
+			@echo "\033[33;32mALL CLEAN !\t\t\tYOU'RE VERY PROPER"
 
 re:			fclean all
+			@echo "\033[33;36mRECOMPILED !\t\t\tIT'S WORK NOW ?"
 
 .PHONY:		all fclean clean re debug
