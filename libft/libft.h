@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:36:59 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/08/23 14:29:43 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 13:40:58 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
 
+char			**ft_split_quote(char *str);
 void			*ft_memset(void *b, int c, size_t len);
 void			*ft_realloc(void *ptr, size_t size);
 void			ft_bzero(void *s, size_t n);
