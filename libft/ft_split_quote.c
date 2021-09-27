@@ -6,12 +6,39 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 13:32:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 13:39:53 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
+int	check_quote(char *str, int i)
+{
+	if (str[i] == '\"')
+	{
+		i++;
+		while (str[i] && str[i] != '\"')
+			i++;
+		if (str[i] != '\"')
+			return (-1);
+		i++;
+	}
+	else if (str[i] == '\'')
+	{
+		i++;
+		while (str[i] && str[i] != '\'')
+			i++;
+		if (str[i] != '\'')
+			return (-1);
+		i++;
+	}
+	else
+		while (str[i] && !((str[i] >= '\t' && str[i] <= '\r')
+				|| str[i] == ' ' || str[i] == '\"' || str[i] == '\''))
+			i++;
+	return (i);
+}
 
 int	count_word(char *str)
 {
@@ -26,28 +53,9 @@ int	count_word(char *str)
 			i++;
 		if (str[i])
 			word++;
-		if (str[i] == '\"')
-		{
-			i++;
-			while (str[i] && str[i] != '\"')
-				i++;
-			if (str[i] != '\"')
-				return (-1);
-			i++;
-		}
-		else if (str[i] == '\'')
-		{
-			i++;
-			while (str[i] && str[i] != '\'')
-				i++;
-			if (str[i] != '\'')
-				return (-1);
-			i++;
-		}
-		else
-			while (str[i] && !((str[i] >= '\t' && str[i] <= '\r')
-					|| str[i] == ' ' || str[i] == '\"' || str[i] == '\''))
-				i++;
+		i = check_quote(str, i);
+		if (i == -1)
+			return (-1);
 	}
 	return (word);
 }
@@ -62,24 +70,7 @@ int	size_word(char *str, int *k)
 		i++;
 	begin = i;
 	*k = *k + begin;
-	if (str[i] == '\"')
-	{
-		i++;
-		while (str[i] && str[i] != '\"')
-			i++;
-		i++;
-	}
-	else if (str[i] == '\'')
-	{
-		i++;
-		while (str[i] && str[i] != '\'')
-			i++;
-		i++;
-	}
-	else
-		while (str[i] && !((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' '
-				|| str[i] == '\"' || str[i] == '\''))
-			i++;
+	i = check_quote(str, i);
 	return (i - begin);
 }
 
