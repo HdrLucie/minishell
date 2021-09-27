@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 10:45:09 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 13:48:22 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct  s_cmd
 	struct s_cmd	*next;
 }               t_cmd;
 
-
-int print_error(char *msg, int retur);
-int lexer(char *str, char **envp);
+void	free_strs(char **strs);
+int 	print_error(char *msg, int retur);
+int 	lexer(char *str, char **envp);
 #endif

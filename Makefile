@@ -1,4 +1,5 @@
-SRCS =  srcs/main.c
+SRCS =  srcs/main.c 			\
+		srcs/parser/parser.c 	\
 
 OBJS = ${SRCS:.c=.o}
 
@@ -29,7 +30,7 @@ debug:		${SRCS} ${HEAD}
 all: 		${NAME}
 
 clean:
-			@rm -f srcs/*.o
+			@rm -f ${OBJS}
 			@make clean -C libft
 			@echo "\033[33;34mCLEAN !\t\t\t\tBUT YOU CAN DO BETTER"
 
