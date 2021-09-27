@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 19:51:36 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 10:44:41 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	main(int ac, char **av, char **envp)
 	while (42)
 	{
 		str = readline("> ");
-		// if (ft_main_parse(str, envp) == -1)
-		// 	return (-1);
+		if (lexer(str, envp) == -1)
+			return (-1);
 		free(str);
 	}
 	return (0);
