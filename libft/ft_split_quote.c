@@ -6,12 +6,12 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 14:12:10 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 18:56:02 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+#include <errno.h>
 
 int	check_quote(char *str, int i)
 {
@@ -108,7 +108,15 @@ char	**ft_split_quote(char *str)
 		return (NULL);
 	split = malloc((word + 1) * sizeof(*split));
 	if (split == NULL)
+	{
+		errno = -1;
 		return (NULL);
+	}
 	split = fill_split(str, split, word);
+	if (split == NULL)
+	{
+		errno = -1;
+		return (NULL);
+	}
 	return (split);
 }
