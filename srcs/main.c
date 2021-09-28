@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 19:51:36 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 13:53:19 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ int	print_error(char *msg, int retur)
 	write(2, "MINISHELL : ", 12);
 	write(2, msg, ft_strlen(msg));
 	return (retur);
+}
+
+void	free_strs(char **strs)
+{
+	int	i;
+
+	i = -1;
+	while (strs[++i])
+	{
+		printf("%s\n", strs[i]);
+		free(strs[i]);
+	}
+	free(strs);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -30,8 +43,8 @@ int	main(int ac, char **av, char **envp)
 	while (42)
 	{
 		str = readline("> ");
-		// if (ft_main_parse(str, envp) == -1)
-		// 	return (-1);
+		if (lexer(str, envp) == -1)
+			return (-1);
 		free(str);
 	}
 	return (0);

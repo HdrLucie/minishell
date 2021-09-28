@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:19:03 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/08/23 16:55:08 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/27 18:09:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,50 @@ static int	ft_size_word(char const *s, char c, int i)
 	return (size);
 }
 
-static char	**ft_free(char **strs, int j)
+static void	ft_free(char **strs, int j)
 {
 	while (j-- > 0)
 		free(strs[j]);
 	free(strs);
-	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+int	ft_split2(int word, char c, char **strs, char *s)
 {
-	int		i;
-	int		word;
-	char	**strs;
-	int		size;
-	int		j;
+	int	i;
+	int	j;
+	int	size;
 
 	i = 0;
 	j = -1;
-	word = ft_count_word(s, c);
-	strs = (char **)malloc((word + 1) * sizeof(char *));
-	if (strs == NULL)
-		return (NULL);
 	while (++j < word)
 	{
 		while (s[i] == c)
 			i++;
 		size = ft_size_word(s, c, i);
-		strs[j] = ft_substr(s, i, size);
+		strs[j] = ft_substr((char *)s, i, size);
 		if (strs[j] == NULL)
-			return (ft_free(strs, j));
+		{
+			ft_free(strs, j);
+			return (-1);
+		}
 		i += size;
 	}
-	strs[j] = 0;
+	return (j);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		word;
+	char	**strs;
+	int		j;
+
+	word = ft_count_word(s, c);
+	strs = (char **)malloc((word + 1) * sizeof(char *));
+	if (strs == NULL)
+		return (NULL);
+	j = ft_split2(word, c, strs, (char *)s);
+	if (j == -1)
+		return (NULL);
+	strs[j] = NULL;
 	return (strs);
 }

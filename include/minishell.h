@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 18:56:07 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/28 13:06:22 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <errno.h>
 
 typedef struct  s_redir
 {
@@ -36,7 +37,16 @@ typedef struct  s_cmd
 	struct s_cmd	*next;
 }               t_cmd;
 
+void	free_strs(char **strs);
+int 	print_error(char *msg, int retur);
+int 	lexer(char *str, char **envp);
+int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
+void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
+void	ft_cmd_clear(t_cmd **lst);
+int		ft_cmd_size(t_cmd *lst);
+t_cmd	*ft_cmd_last(t_cmd *lst);
+void	ft_cmd_delone(t_cmd *lst);
+t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir in, t_redir out);
+int		parse_cmd(char *cmd);
 
-int print_error(char *msg, int retur);
-int ft_main_parse(char *str, char **envp);
 #endif
