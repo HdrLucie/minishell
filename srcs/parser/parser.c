@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 18:49:34 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/30 09:14:05 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 // {
 // 	int	fd;
 
-// 	fd = -1;
+// 	fd = 1;
 // 	if (split[0][0] >= '0' && split[0][0] <= '9')
 // 		fd = split[0][0];
-// 	if ()
+// 	else if (split[0][0] == '>' || split[0][0] == '<')
+// 	else
+
 // }
 
 // int	parser(char **split, char **envp)
@@ -32,27 +34,12 @@
 // 	while (split[j])
 // 	{
 // 		if (split[j][0] == '>' || split[j][0] == '<'
-// 			|| split[j][1] == '>' || split[j][1] == '<')
+// 			|| ((split[j][1] == '>'|| split[j][1] == '<')
+// 			&& split[j][0] != '\\'))
 // 			parse_redir(&split[j], cmd);
 // 	}
 	
 // }
-
-int	lexer(char *str, char **envp)
-{
-	char	**split;
-
-	split = ft_split_quote(str);
-	if (split == NULL && errno == -1)
-		return (print_error("ALLOCATION FAILED\n", -1));
-	else if (split == NULL)
-		return (print_error("UNCLOSED QUOTE\n", -2));
-	// if (parser(split, envp) == -1)
-	// 	return (-1);
-	free_strs(split);
-	(void)envp;
-	return (0);
-}
 
 
 

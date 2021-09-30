@@ -2,6 +2,8 @@ SRCS =  srcs/main.c 			\
 		srcs/parser/parser.c 	\
 		srcs/parser/parse_path.c 	\
 		srcs/parser/lst_utils.c 	\
+		srcs/parser/lexer.c			\
+		srcs/parser/ft_split_quote.c
 
 
 OBJS = ${SRCS:.c=.o}
@@ -19,11 +21,11 @@ CFLAGS	= -Wall -Wextra -Werror
 DEBUG_FLAG = -fsanitize=address -g3
 
 .c.o:		${SRCS}
-			@${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}
-			@make -C libft
-			@${CC} ${OBJS} ${CFLAGS} ${INCLUDE} -Llibft -lft -lreadline -o ${NAME}
+			make -C libft
+			${CC} ${OBJS} ${CFLAGS} ${INCLUDE} -Llibft -lft -lreadline -o ${NAME}
 			@echo "\033[33;31mCOMPILED\t\t\tCONGRATS"
 
 

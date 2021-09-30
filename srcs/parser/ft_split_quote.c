@@ -6,12 +6,11 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 18:56:02 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/30 08:57:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <errno.h>
+#include "minishell.h"
 
 int	check_quote(char *str, int i)
 {

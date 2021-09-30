@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/28 13:06:22 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/09/30 08:57:44 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 typedef struct  s_redir
 {
-	int     fd;
-	char    *chevron;
-	char    *file;
+	int     n;
+	char    *op;
+	char    *word;
 }               t_redir; 
 
 typedef struct  s_cmd
@@ -48,5 +48,6 @@ t_cmd	*ft_cmd_last(t_cmd *lst);
 void	ft_cmd_delone(t_cmd *lst);
 t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir in, t_redir out);
 int		parse_cmd(char *cmd);
+char	**ft_split_quote(char *str);
 
 #endif
