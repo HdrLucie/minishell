@@ -1,5 +1,5 @@
 SRCS =  srcs/main.c 			\
-		srcs/parser/parser.c 	\
+		srcs/cmd/init_cmd.c 	\
 		srcs/parser/parse_path.c 	\
 		srcs/parser/lst_utils.c 	\
 		srcs/parser/lexer.c			\

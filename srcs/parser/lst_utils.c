@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/30 09:19:59 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 08:25:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_cmd_delone(t_cmd *lst)
 		free(lst);
 }
 
-t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir in, t_redir out)
+t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir *in, t_redir *out)
 {
 	t_cmd	*tab;
 

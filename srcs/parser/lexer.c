@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/30 09:39:38 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 08:20:32 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	lexer(char *str, char **envp)
 {
 	char	**token;
 
-	rm_quoted_new_line(str);
+	// rm_quoted_new_line(str);
 	token = ft_split_quote(str);
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
@@ -39,6 +39,7 @@ int	lexer(char *str, char **envp)
 		return (print_error("UNCLOSED QUOTE\n", -2));
 	// if (parser(token, envp) == -1)
 	// 	return (-1);
+	fill_cmd(token, envp);
 	free_strs(token);
 	(void)envp;
 	return (0);
