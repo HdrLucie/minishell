@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:37:59 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 14:53:21 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	execute(char **cmd, char **envp)
 
 	cmd[0] = parse_cmd(cmd[0]);
 	if (cmd[0] == NULL)
-		return (print_error("PARSE PATH ERROR", -1));
+		return (print_error("PARSE PATH ERROR\n", -1));
 	pid = fork();
 	if (pid == -1)
-		return (print_error("FORK ERROR", -1));
+		return (print_error("FORK ERROR\n", -1));
 	if (pid == 0)
 	{
 		execve(cmd[0], cmd, envp);
@@ -36,7 +36,7 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp)
 {
 	while (cmd)
 	{
-		if (cmd->cmd != NULL && execute(cmd->cmd, envp))
+		if (cmd->cmd && execute(cmd->cmd, envp))
 			return (-1);
 		cmd = cmd->next;
 	}

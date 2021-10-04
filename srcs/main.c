@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/02 16:01:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 14:53:33 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	free_strs(char **strs)
 	i = -1;
 	while (strs[++i])
 	{
-		printf("%s\n", strs[i]);
+		write(1, strs[i], ft_strlen(strs[i]));
+		write(1, "\n", 1);
 		free(strs[i]);
 	}
 	free(strs);
 }
-
 
 int	main(int ac, char **av, char **envp)
 {

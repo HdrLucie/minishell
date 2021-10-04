@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 11:38:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 16:58:19 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,56 @@ int	find_token(char *str, int *i, char end)
 	return (0);
 }
 
+int	parse_export(char *str, int	i)
+{
+	if (str[i] != '=')
+		return (print_error("UNCLOSED QUOTTE\n", -1));
+	i++;
+	if (str[i++] == '\"')
+	{
+		while (str[i] && str[i] != '\"')
+			i++;
+		if (str[i] != '\"')
+			return (print_error("UNCLOSED QUOTE\n", -1));
+		i++;
+	}
+	else
+		while (str[i] && !is_space(str[i], str[i - 1]))
+			i++;
+	return (i);
+}
+
 int	check_quote(char *str, int i)
 {
 	if (!(str[i - 1] && str[i - 1] == '\\'))
 	{
 		if (str[i] == '\"' && find_token(str, &i, '\"') == -1)
-			return (-1);
+			return (print_error("UNCLOSED QUOTE\n", -1));
 		else if (str[i] == '\'' && find_token(str, &i, '\'') == -1)
-			return (-1);
+			return (print_error("UNCLOSED QUOTE\n", -1));
 		else if (str[i] == '#' && find_token(str, &i, '\n') == -1)
 			return (i);
 		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '('
 			&& find_token(str, &i, ')') == -1)
-			return (-1);
+			return (print_error("UNCLOSED BRACKET\n", -1));
 		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{'
 			&& find_token(str, &i, '}') == -1)
-			return (-1);
+			return (print_error("UNCLOSED BRACKET\n", -1));
 	}
 	while (str[i] && !(is_space(str[i], str[i - 1])
 			|| str[i] == '\"' || str[i] == '\''
-			|| str[i] == '$' || str[i] == '#' || str[i] == '|'
-			|| str[i] == '>' || str[i] == '<'))
+			|| str[i] == '$' || str[i] == '#' || str[i + 1] == '|'
+			|| str[i] == '>' || str[i] == '<' || str[i] == '='))
+		i++;
+	if (str[i + 1] == '|')
 		i++;
 	if (str[i] == '=')
+	{
+		i = parse_export(str, i);
+		if (i == -1)
+			return (-1);
+	}
+	if (str[i] == '>' || str[i] == '<' || str[i] == '|')
 		i++;
 	return (i);
 }
