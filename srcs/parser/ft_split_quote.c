@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/02 14:31:55 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 09:17:13 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	size_word(char *str, int *k)
 	begin = i;
 	*k = *k + begin;
 	i = check_quote(str, i);
-	return (i - begin);
+	return (i - begin - 1);
 }
 
 char	**fill_split(char *str, char **split, int word)

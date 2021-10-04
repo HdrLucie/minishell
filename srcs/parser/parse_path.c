@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 18:30:39 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 09:23:46 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*find_path(char **path, char *cmd)
 	return (cmd);
 }
 
-int	free_path(char **path, int retur)
+void	free_path(char **path)
 {
 	int	i;
 
@@ -91,22 +91,21 @@ int	free_path(char **path, int retur)
 	}
 	free(path);
 	path = NULL;
-	return (retur);
 }
 
-int	parse_cmd(char *cmd)
+char	*parse_cmd(char *cmd)
 {
 	char	**path;
 	char	*env_path;
 
 	env_path = getenv("PATH");
 	if (env_path == NULL)
-		env_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:\
-		/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
+		env_path = "/mnt/nfs/homes/ehautefa/bin:/usr/local/sbin:\
+		/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
 	path = ft_split(env_path, ':');
 	if (path == NULL)
-		return (0);
+		return (NULL);
 	cmd = find_path(path, cmd);
-	printf("cmd : %s\n", cmd);
-	return (free_path(path, 0));
+	free_path(path);
+	return (cmd);
 }

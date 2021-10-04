@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pa.c                                           :+:      :+:    :+:   */
+/*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 08:38:12 by ehautefa         ###   ########.fr       */
+/*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
+/*   Updated: 2021/10/04 09:37:59 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 int	execute(char **cmd, char **envp)
 {
-	int	i;
+	int	pid;
 
-	i = 0;
-	while (envp[i])
+	cmd[0] = parse_cmd(cmd[0]);
+	if (cmd[0] == NULL)
+		return (print_error("PARSE PATH ERROR", -1));
+	pid = fork();
+	if (pid == -1)
+		return (print_error("FORK ERROR", -1));
+	if (pid == 0)
 	{
-		write(1, envp[i], ft_strlen(envp[i]));
-		write(1, "\n", 1);
-		i++;
+		execve(cmd[0], cmd, envp);
+		perror("MINISHELL");
+		exit(0);
 	}
-	(void)cmd;
+	waitpid(pid, NULL, 0);
 	return (0);
 }
 
@@ -31,7 +36,7 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp)
 {
 	while (cmd)
 	{
-		if (execute(cmd->cmd, envp))
+		if (cmd->cmd != NULL && execute(cmd->cmd, envp))
 			return (-1);
 		cmd = cmd->next;
 	}
