@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/26 19:51:36 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/02 16:01:27 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ int	print_error(char *msg, int retur)
 	return (retur);
 }
 
+void	free_strs(char **strs)
+{
+	int	i;
+
+	i = -1;
+	while (strs[++i])
+	{
+		printf("%s\n", strs[i]);
+		free(strs[i]);
+	}
+	free(strs);
+}
+
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
@@ -30,9 +44,11 @@ int	main(int ac, char **av, char **envp)
 	while (42)
 	{
 		str = readline("> ");
-		// if (ft_main_parse(str, envp) == -1)
-		// 	return (-1);
+		add_history(str);
+		if (lexer(str, envp) == -1)
+			return (-1);
 		free(str);
 	}
+	rl_clear_history();
 	return (0);
 }
