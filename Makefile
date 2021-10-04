@@ -1,9 +1,10 @@
-SRCS =  srcs/main.c 			\
-		srcs/cmd/init_cmd.c 	\
-		srcs/parser/parse_path.c 	\
-		srcs/parser/lst_utils.c 	\
-		srcs/parser/lexer.c			\
-		srcs/parser/ft_split_quote.c
+SRCS =  srcs/main.c 					\
+		srcs/cmd/init_cmd.c 			\
+		srcs/parser/parse_path.c 		\
+		srcs/parser/lst_cmd_utils.c 	\
+		srcs/parser/lexer.c				\
+		srcs/parser/ft_split_quote.c	\
+		srcs/parser/split_quote_utils.c
 
 
 OBJS = ${SRCS:.c=.o}
