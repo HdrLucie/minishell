@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:17:13 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 09:45:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	check_quote(char *str, int i)
 			return (-1);
 		else if (str[i] == '#' && find_token(str, &i, '\n') == -1)
 			return (i);
-		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '(' && 
-			find_token(str, &i, ')') == -1)
+		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '('
+			&& find_token(str, &i, ')') == -1)
 			return (-1);
-		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{' && 
-			find_token(str, &i, '}') == -1)
+		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{'
+			&& find_token(str, &i, '}') == -1)
 			return (-1);
 	}
 	while (str[i] && !((str[i] >= '\t' && str[i] <= '\r')

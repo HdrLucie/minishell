@@ -6,12 +6,11 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:23:46 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 09:43:49 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	*ft_strcat_parse_path(char *s1, char *s2)
 {
@@ -34,7 +33,6 @@ char	*ft_strcat_parse_path(char *s1, char *s2)
 	s3[i] = '\0';
 	return (s3);
 }
-
 
 int	ft_strccmp(char *s1, char *s2, char c)
 {
@@ -101,7 +99,8 @@ char	*parse_cmd(char *cmd)
 	env_path = getenv("PATH");
 	if (env_path == NULL)
 		env_path = "/mnt/nfs/homes/ehautefa/bin:/usr/local/sbin:\
-		/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin";
+		/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games\
+		/usr/local/games:/snap/bin";
 	path = ft_split(env_path, ':');
 	if (path == NULL)
 		return (NULL);

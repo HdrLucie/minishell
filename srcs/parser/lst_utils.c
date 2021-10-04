@@ -6,13 +6,13 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 08:25:06 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 09:44:42 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_cmd_add_back(t_cmd **alst, t_cmd *new)
+int	ft_cmd_add_back(t_cmd **alst, t_cmd *new)
 {
 	t_cmd	*last;
 
@@ -46,7 +46,7 @@ void	ft_cmd_clear(t_cmd **lst)
 	}
 }
 
-int		ft_cmd_size(t_cmd *lst)
+int	ft_cmd_size(t_cmd *lst)
 {
 	int	size;
 
@@ -81,7 +81,8 @@ t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir *in, t_redir *out)
 {
 	t_cmd	*tab;
 
-	if (!(tab = malloc(sizeof(t_cmd))))
+	tab = malloc(sizeof(t_cmd));
+	if (!tab)
 		return (NULL);
 	tab->cmd = cmd;
 	tab->built_in = built_in;
