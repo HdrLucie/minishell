@@ -7,8 +7,9 @@ int ft_recover_cmd(char **cmd, char **env)
     i = 0;
     while (cmd[i])
     {
-        if (ft_strncmp(cmd[i], "env", ft_strlen("env")))
+        if (ft_strcmp(cmd[i], "env"))
             create_env_lst(env);
+        
         i++;
     }
     return (1);

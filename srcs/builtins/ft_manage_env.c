@@ -21,7 +21,11 @@ void	ft_print_env(t_env *env)
 {
 	while (env)
 	{
-		printf("%s%s\n", env->name, env->value);
+		if (env->name)
+			printf("%s=", env->name);
+		if (env->value)
+			printf("%s", env->value);
+		printf("\n");
 		env = env->next;
 	}
 }
@@ -31,8 +35,8 @@ int	ft_fill_env_lst_value(char *str, t_env *env, int i)
 	int	j;
 	int	k;
 
-	j = 0;
-	k = i;
+	j = 1;
+	k = i + 1;
 	while (str[++i])
 		j++;
 	env->value = malloc(sizeof(char) * j + 1);
@@ -84,6 +88,8 @@ int	create_env_lst(char **env)
 			return (-1);
 		i++;
 	}
+	ft_export_var(env_lst, "coucou");
+	ft_print_env(env_lst);
 	return (1);
 }
 
@@ -93,6 +99,5 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	(void)argc;
 	create_env_lst(env);
-	// ft_recover_cmd(argv, env);
 	return (0);
 }

@@ -14,9 +14,12 @@
 
 void 	ft_free_node(t_env *node)
 {
-	free(node->name);
+	if (node->name)
+		free(node->name);
+	if (node->value)
     free(node->value);
-    free(node);
+	if (node)
+    	free(node);
 }
 
 void	ft_free_lst(t_env **list)
@@ -36,15 +39,15 @@ void	ft_free_lst(t_env **list)
 	*list = NULL;
 }
 
-int	ft_create_export_noodle(t_env *env, char *var)
+int	ft_create_export_node(t_env *env, char *name, char *value)
 {
 	t_env	*current_node;
 
 	current_node = NULL;
 	current_node = malloc(sizeof(t_env));
+	current_node->name = name;
+	current_node->value = value;
 	ft_lstadd_back_env(&env, current_node);
-	if (!ft_fill_env_lst_name(var, current_node))
-		return (-1);
 	return (1);
 }
 
