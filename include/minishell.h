@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 10:06:35 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 10:12:26 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir *in, t_redir *out);
 */
 char	**ft_split_quote(char *str);
 int		check_quote(char *str, int i);
+int		is_space(char c, char prev);
 /*
 **	parse_path.c 
 */

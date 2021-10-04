@@ -6,26 +6,11 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:54:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/04 11:25:21 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	find_token(char *str, int *i, char end)
-{
-	*i = *i + 1;
-	if (end == '\"')
-		while (str[*i] && (str[*i] != end || str[*i - 1] == '\\'))
-			*i = *i + 1;
-	else
-		while (str[*i] && str[*i] != end)
-			*i = *i + 1;
-	if (str[*i] != end)
-		return (-1);
-	*i = *i + 1;
-	return (0);
-}
 
 int	count_word(char *str)
 {
@@ -36,7 +21,7 @@ int	count_word(char *str)
 	word = 0;
 	while (str[i])
 	{
-		while (str[i] && ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' '))
+		while (str[i] && is_space(str[i], str[i - 1]))
 			i++;
 		if (str[i])
 			word++;
@@ -53,12 +38,12 @@ int	size_word(char *str, int *k)
 	int	begin;
 
 	i = 0;
-	while (str[i] && ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' '))
+	while (str[i] && is_space(str[i], str[i - 1]))
 		i++;
 	begin = i;
 	*k = *k + begin;
 	i = check_quote(str, i);
-	return (i - begin - 1);
+	return (i - begin);
 }
 
 char	**fill_split(char *str, char **split, int word)
@@ -74,12 +59,14 @@ char	**fill_split(char *str, char **split, int word)
 	{
 		i = -1;
 		size = size_word(&str[k], &k);
+		printf("Size word : %d\n", size);
 		split[j] = malloc((size + 1) * sizeof(**split));
 		if (split[j] == NULL)
 			return (NULL);
 		while (++i < size)
 			split[j][i] = str[k++];
 		split[j][i] = '\0';
+		k++;
 	}
 	split[j] = NULL;
 	return (split);
