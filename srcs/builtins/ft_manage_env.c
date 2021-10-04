@@ -90,8 +90,8 @@ int	create_env_lst(char **env)
 			return (-1);
 		i++;
 	}
-	ft_export_var(env_lst, "coucou=a");
-	ft_print_env(env_lst);
+	print_pwd(env_lst);
+	// ft_print_env(env_lst);
 	return (1);
 }
 

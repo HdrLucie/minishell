@@ -37,6 +37,6 @@ int		ft_create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
 int		ft_unset_var(t_env **env, char *unset_var_name);
 int		ft_recover_cmd(char **cmd, char **env);
-
+int		print_pwd(t_env *env);
 
 #endif
