@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 14:37:41 by user42            #+#    #+#             */
-/*   Updated: 2021/10/05 16:48:57 by hlucie           ###   ########.fr       */
+/*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
+/*   Updated: 2021/10/05 16:46:55 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_pwd(t_env *env)
+void	ft_exit(t_env *env)
 {
-	while (env)
+	t_env	*tmp;
+
+	tmp = env;
+	if (env)
 	{
-		if (ft_strcmp(env->name, "PWD"))
-			env = env->next;
-		else
+		while (env)
 		{
-			printf("%s\n", env->value);
-			return (1);
+			tmp = env->next;
+			ft_free_node(env);
+			env = tmp;
 		}
 	}
-	return (0);
+	env = NULL;
+	exit(0);
 }

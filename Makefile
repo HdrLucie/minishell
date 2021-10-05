@@ -5,11 +5,13 @@ SRCS =  srcs/main.c 					\
 		srcs/parser/lexer.c				\
 		srcs/parser/ft_split_quote.c	\
 		srcs/parser/split_quote_utils.c \
-		srcs/builtins/ft_manage_env.c	\
+		srcs/builtins/env.c				\
 		srcs/builtins/lst_utils.c		\
 		srcs/builtins/pwd.c 			\
-		srcs/builtins/ft_recover_cmd.c
-
+		srcs/builtins/recover_cmd.c		\
+		srcs/builtins/exit.c			\
+		srcs/builtins/export.c			\
+		srcs/builtins/unset.c			\
 
 
 OBJS = ${SRCS:.c=.o}

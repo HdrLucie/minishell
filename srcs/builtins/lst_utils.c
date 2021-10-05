@@ -3,14 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:26:03 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/05 10:03:22 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 16:40:44 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_udpate_alpha_road(t_env *env)
+{
+	int		i;
+	t_env	*start;
+	t_env	*next_node;
+	t_env	*current_node;
+	t_env	*tmp;
+
+	i = 0;
+	start = env;
+	current_node = env;
+	next_node = NULL;
+	tmp = current_node;
+	while (current_node->next_alpha)
+	{
+		if (ft_strcmp(current_node->name, current_node->next_alpha->name) > 0)
+		{
+			next_node = current_node->next_alpha;
+			current_node->next_alpha = next_node->next_alpha;
+			next_node->next_alpha = current_node;
+			if (i == 0)
+			{
+				current_node = next_node;
+				start = current_node;
+			}
+			else
+			{
+				tmp->next_alpha = next_node;
+				current_node = start;
+				i = 0;
+			}
+		}
+		else
+		{
+			tmp = current_node;
+			current_node = current_node->next_alpha;
+			i++;
+		}
+	}
+	ft_print_env_alpha(start);
+}
 
 void 	ft_free_node(t_env *node)
 {
@@ -20,23 +62,6 @@ void 	ft_free_node(t_env *node)
     free(node->value);
 	if (node)
     	free(node);
-}
-
-void	ft_free_lst(t_env **list)
-{
-	t_env	*tmp;
-
-	tmp = *list;
-	if (list)
-	{
-		while (*list)
-		{
-			tmp = *list;
-			(*list) = (*list)->next;
-			free(tmp);
-		}
-	}
-	*list = NULL;
 }
 
 int	ft_create_export_node(t_env *env, char *name, char *value)
@@ -69,6 +94,9 @@ void	ft_lstadd_back_env(t_env **alst, t_env *new)
 	if (tmp == NULL)
 		*alst = new;
 	else
+	{
 		tmp->next = new;
+		tmp->next_alpha = new;
+	}
 	new->next = NULL;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_manage_env.c                                    :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/05 09:54:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 16:39:37 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ void	ft_print_env(t_env *env)
 			printf("''");
 		printf("\n");
 		env = env->next;
+	}
+}
+
+void	ft_print_env_alpha(t_env *env)
+{
+	while (env)
+	{
+		if (env->name)
+			printf("%s=", env->name);
+		if (env->value)
+			printf("%s", env->value);
+		else
+			printf("''");
+		printf("\n");
+		env = env->next_alpha;
 	}
 }
 
@@ -92,13 +107,3 @@ t_env	*create_env_lst(char **env)
 	}
 	return (env_lst);
 }
-
-// int	main(int argc, char **argv, char **env)
-// {
-	
-// 	(void)argv;
-// 	(void)argc;
-// 	t_env	*env_lst = create_env_lst(env);
-// 	ft_recover_cmd()
-// 	return (0);
-// }
