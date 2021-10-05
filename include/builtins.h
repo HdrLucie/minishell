@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes_builtins.h                                :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 13:44:56 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/05 09:57:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 10:02:45 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_BUILTINS_H
-# define INCLUDES_BUILTINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-# include "../../libft/libft.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+// # include "../../libft/libft.h"
+// # include <stdio.h>
+// # include <stdlib.h>
+// # include <unistd.h>
 
 typedef struct s_env
 {

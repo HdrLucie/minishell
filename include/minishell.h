@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/05 09:51:15 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 10:04:04 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include "../srcs/builtins/includes_builtins.h"
+# include "builtins.h"
 
 typedef struct s_redir
 {

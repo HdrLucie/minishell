@@ -15,7 +15,7 @@ SRCS =  srcs/main.c 					\
 OBJS = ${SRCS:.c=.o}
 
 HEAD = include/minishell.h \
-		srcs/builtins/includes_builtins.h
+		include/builtins.h
 
 INCLUDE =	-Iinclude
 
