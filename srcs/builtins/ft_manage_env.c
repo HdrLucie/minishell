@@ -21,6 +21,7 @@ void	ft_print_env(t_env *env)
 {
 	while (env)
 	{
+<<<<<<< HEAD
 		if (env->name)
 			printf("%s=", env->name);
 		if (env->value)
@@ -28,6 +29,9 @@ void	ft_print_env(t_env *env)
 		else
 			printf("''");
 		printf("\n");
+=======
+		printf("%s%s\n", env->name, env->value);
+>>>>>>> main
 		env = env->next;
 	}
 }
@@ -37,6 +41,7 @@ int	ft_fill_env_lst_value(char *str, t_env *env, int i)
 	int	j;
 	int	k;
 
+<<<<<<< HEAD
 	j = 1;
 	k = i + 1;
 	while (str[++i])
@@ -45,6 +50,16 @@ int	ft_fill_env_lst_value(char *str, t_env *env, int i)
 	if (!env->value)
 		return (-1);
 	j = 0;
+=======
+	j = 0;
+	k = i;
+	while (str[++i])
+		j++;
+	env->value = malloc(sizeof(char) * j + 1);
+	if (!env->value)
+		return (-1);
+	j = 0;
+>>>>>>> main
 	while (str[k])
 		env->value[j++] = str[k++];
 	env->value[j] = '\0';
@@ -90,7 +105,13 @@ int	create_env_lst(char **env)
 			return (-1);
 		i++;
 	}
+<<<<<<< HEAD
 	print_pwd(env_lst);
+=======
+	// ft_manage_env(env_lst, "LESS");
+	ft_print_env(env_lst);
+	// ft_unset_var(env_lst, "LESS");
+>>>>>>> main
 	// ft_print_env(env_lst);
 	return (1);
 }
@@ -100,6 +121,10 @@ int	main(int argc, char **argv, char **env)
 	
 	(void)argv;
 	(void)argc;
+<<<<<<< HEAD
 	create_env_lst(env);
+=======
+	ft_recover_cmd(argv, env);
+>>>>>>> main
 	return (0);
 }

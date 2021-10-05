@@ -12,6 +12,7 @@
 
 #include "includes_builtins.h"
 
+<<<<<<< HEAD
 void 	ft_free_node(t_env *node)
 {
 	if (node->name)
@@ -22,6 +23,8 @@ void 	ft_free_node(t_env *node)
     	free(node);
 }
 
+=======
+>>>>>>> main
 void	ft_free_lst(t_env **list)
 {
 	t_env	*tmp;
@@ -39,15 +42,25 @@ void	ft_free_lst(t_env **list)
 	*list = NULL;
 }
 
+<<<<<<< HEAD
 int	ft_create_export_node(t_env *env, char *name, char *value)
+=======
+int	ft_create_export_noodle(t_env *env, char *var)
+>>>>>>> main
 {
 	t_env	*current_node;
 
 	current_node = NULL;
 	current_node = malloc(sizeof(t_env));
+<<<<<<< HEAD
 	current_node->name = name;
 	current_node->value = value;
 	ft_lstadd_back_env(&env, current_node);
+=======
+	ft_lstadd_back_env(&env, current_node);
+	if (!ft_fill_env_lst_name(var, current_node))
+		return (-1);
+>>>>>>> main
 	return (1);
 }
 
