@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 15:09:59 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 09:01:43 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ char	**fill_split(char *str, char **split, int word)
 	{
 		i = -1;
 		size = size_word(&str[k], &k);
-		printf("Size word : %d\n", size);
 		split[j] = malloc((size + 1) * sizeof(**split));
 		if (split[j] == NULL)
 			return (NULL);
