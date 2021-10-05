@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes_builtins.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 13:44:56 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/02 16:16:05 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/05 09:57:27 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,19 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
-<<<<<<< HEAD
 void 	ft_free_node(t_env *node);
-=======
->>>>>>> main
-int		create_env_lst(char **env);
+t_env	*create_env_lst(char **env);
 int		ft_fill_env_lst(char *str, t_env *env);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int		ft_fill_env_lst_value(char *str, t_env *env, int i);
 int		ft_check_env(t_env *env, char *var_export);
-<<<<<<< HEAD
 int		ft_export_var(t_env *env, char *var_export);
 int		ft_create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
 int		ft_unset_var(t_env **env, char *unset_var_name);
-int		ft_recover_cmd(char **cmd, char **env);
+int		ft_recover_cmd(char **cmd, t_env *env);
+void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
-=======
-int		ft_manage_env(t_env *env, char *var_export);
-int		ft_create_export_noodle(t_env *env, char *var);
-int		ft_fill_env_lst_name(char *str, t_env *env);
-t_env	*ft_unset_var(t_env *env, char *unset_var);
-int		ft_recover_cmd(char **cmd, char **env);
-
->>>>>>> main
 
 #endif

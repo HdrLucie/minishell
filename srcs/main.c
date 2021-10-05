@@ -6,11 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/02 16:01:27 by ehautefa         ###   ########.fr       */
-=======
-/*   Updated: 2021/10/04 14:53:33 by ehautefa         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2021/10/05 09:52:45 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +26,26 @@ void	free_strs(char **strs)
 	i = -1;
 	while (strs[++i])
 	{
-<<<<<<< HEAD
 		printf("%s\n", strs[i]);
-=======
-		write(1, strs[i], ft_strlen(strs[i]));
-		write(1, "\n", 1);
->>>>>>> main
 		free(strs[i]);
 	}
 	free(strs);
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
+	t_env	*env_lst;
 
 	if (ac != 1)
 		return (print_error("TOO MUCH ARG", -1));
 	(void)av;
-	(void)envp;
+	env_lst = create_env_lst(envp);
 	while (42)
 	{
 		str = readline("> ");
 		add_history(str);
-		if (lexer(str, envp) == -1)
+		if (lexer(str, envp, env_lst) == -1)
 			return (-1);
 		free(str);
 	}

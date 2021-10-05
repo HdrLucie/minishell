@@ -6,13 +6,13 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 13:44:30 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 09:52:47 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	lexer(char *str, char **envp)
+int	lexer(char *str, char **envp, t_env *env_lst)
 {
 	char	**token;
 
@@ -21,9 +21,8 @@ int	lexer(char *str, char **envp)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)
 		return (-2);
-	if (fill_cmd(token, envp) == -1)
+	if (fill_cmd(token, envp, env_lst) == -1)
 		return (-1);
 	free_strs(token);
-	(void)envp;
 	return (0);
 }

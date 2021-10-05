@@ -4,12 +4,18 @@ SRCS =  srcs/main.c 					\
 		srcs/parser/lst_cmd_utils.c 	\
 		srcs/parser/lexer.c				\
 		srcs/parser/ft_split_quote.c	\
-		srcs/parser/split_quote_utils.c
+		srcs/parser/split_quote_utils.c \
+		srcs/builtins/ft_manage_env.c	\
+		srcs/builtins/lst_utils.c		\
+		srcs/builtins/pwd.c 			\
+		srcs/builtins/ft_recover_cmd.c
+
 
 
 OBJS = ${SRCS:.c=.o}
 
-HEAD = include/minishell.h
+HEAD = include/minishell.h \
+		srcs/builtins/includes_builtins.h
 
 INCLUDE =	-Iinclude
 

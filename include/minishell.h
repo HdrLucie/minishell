@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 14:12:19 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 09:51:15 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+# include "../srcs/builtins/includes_builtins.h"
 
 typedef struct s_redir
 {
@@ -54,7 +55,7 @@ int		print_error(char *msg, int retur);
 /*
 **	lexer.c 
 */
-int		lexer(char *str, char **envp);
+int		lexer(char *str, char **envp, t_env *env_lst);
 /*
 **	lst_cmd_utils.c 
 */
@@ -79,6 +80,6 @@ char	*parse_cmd(char *cmd);
 /****************************/
 /*			CMD				*/
 /****************************/
-int		fill_cmd(char **token, char **envp);
+int		fill_cmd(char **token, char **envp, t_env *env_lst);
 
 #endif
