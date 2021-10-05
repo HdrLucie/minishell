@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/05 10:23:38 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 15:05:24 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	parse_export(char *str, int	i)
 
 int	check_quote(char *str, int i)
 {
+	// if (str[i + 2] == '|')
+	// 	return (i);
 	if (!(str[i - 1] && str[i - 1] == '\\'))
 	{
 		if (str[i] == '\"' && find_token(str, &i, '\"') == -1)
@@ -62,10 +64,12 @@ int	check_quote(char *str, int i)
 		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{'
 			&& find_token(str, &i, '}') == -1)
 			return (print_error("UNCLOSED BRACKET\n", -1));
+		else if (str[i] == '$' && find_token(str, &i, ' ') == -1)
+			return (i);
 	}
 	while (str[i] && !(is_space(str[i], str[i - 1])
 			|| str[i] == '\"' || str[i] == '\''
-			|| str[i] == '$' || str[i] == '#'
+			|| str[i] == '$' || str[i] == '#' || str[i] == '|'
 			|| str[i] == '>' || str[i] == '<' || str[i] == '='))
 		i++;
 	if (str[i] == '=')
