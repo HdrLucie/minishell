@@ -10,8 +10,6 @@ SRCS =  srcs/main.c 					\
 		srcs/builtins/pwd.c 			\
 		srcs/builtins/ft_recover_cmd.c
 
-
-
 OBJS = ${SRCS:.c=.o}
 
 HEAD = include/minishell.h

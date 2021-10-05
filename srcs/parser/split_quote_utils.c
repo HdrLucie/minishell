@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/05 15:05:24 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/05 15:35:03 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	find_token(char *str, int *i, char end)
 	return (0);
 }
 
-int	parse_export(char *str, int	i)
+int	parse_export(char *str, int i)
 {
 	if (str[i] != '=')
 		return (print_error("UNCLOSED QUOTTE\n", -1));
@@ -46,10 +46,29 @@ int	parse_export(char *str, int	i)
 	return (i);
 }
 
+int	check_car_spe(char *str, int i)
+{
+	while (str[i] && !(is_space(str[i], str[i - 1])
+			|| str[i] == '\"' || str[i] == '\''
+			|| str[i] == '$' || str[i] == '#' || str[i] == '|'
+			|| str[i + 1] == '|' || str[i + 1] == '>' || str[i + 1] == '<'
+			|| str[i] == '>' || str[i] == '<' || str[i] == '='))
+		i++;
+	if (str[i] == '=')
+	{
+		i = parse_export(str, i);
+		if (i == -1)
+			return (-1);
+	}
+	if (str[i] != ' ' && (str[i + 1] == '>' || str[i + 1] == '<'
+			|| str[i] == '>' || str[i] == '<'
+			|| str[i + 1] == '|' || str[i] == '|'))
+		i++;
+	return (i);
+}
+
 int	check_quote(char *str, int i)
 {
-	// if (str[i + 2] == '|')
-	// 	return (i);
 	if (!(str[i - 1] && str[i - 1] == '\\'))
 	{
 		if (str[i] == '\"' && find_token(str, &i, '\"') == -1)
@@ -67,20 +86,7 @@ int	check_quote(char *str, int i)
 		else if (str[i] == '$' && find_token(str, &i, ' ') == -1)
 			return (i);
 	}
-	while (str[i] && !(is_space(str[i], str[i - 1])
-			|| str[i] == '\"' || str[i] == '\''
-			|| str[i] == '$' || str[i] == '#' || str[i] == '|'
-			|| str[i] == '>' || str[i] == '<' || str[i] == '='))
-		i++;
-	if (str[i] == '=')
-	{
-		i = parse_export(str, i);
-		if (i == -1)
-			return (-1);
-	}
-	if (str[i] == '>' || str[i] == '<')
-		i++;
-	return (i);
+	return (check_car_spe(str, i));
 }
 
 int	is_space(char c, char prev)
