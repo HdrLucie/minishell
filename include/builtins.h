@@ -6,26 +6,23 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 13:44:56 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/05 16:40:54 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/06 13:36:36 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-// # include "../../libft/libft.h"
-// # include <stdio.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-
 typedef struct s_env
 {
+	int				first_alpha_node;
 	char			*name;
 	char			*value;
 	struct s_env	*next;
 	struct s_env	*next_alpha;
 }					t_env;
 
+t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
 void    ft_exit(t_env *env);
 void	ft_udpate_alpha_road(t_env *env);

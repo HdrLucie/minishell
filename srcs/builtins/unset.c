@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 14:31:07 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/05 16:47:58 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/06 16:20:23 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 int	ft_unset_var(t_env **env, char *unset_var_name)
 {
 	t_env	*tmp;
+	t_env	*tmp_alpha;
 	t_env	*current_node;
+	t_env	*current_alpha_node;
 
 	tmp = NULL;
 	current_node = *env;
+	printf("%s\n", tmp_alpha->name);
 	if (!ft_strcmp((*env)->name, unset_var_name))
 	{
 		tmp = (*env)->next;
