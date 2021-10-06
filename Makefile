@@ -22,7 +22,7 @@ CC		= clang
 
 CFLAGS	= -Wall -Wextra -Werror
 
-DEBUG_FLAG = -fsanitize=address -g3
+DEBUG_FLAG =  -g3
 
 .c.o:		${SRCS}
 			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}

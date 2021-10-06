@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/05 15:08:37 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 10:06:57 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	free_strs(char **strs)
 
 	i = -1;
 	while (strs[++i])
-	{
-		printf("%s\n", strs[i]);
 		free(strs[i]);
-	}
 	free(strs);
 }
 

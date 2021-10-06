@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   lst_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:44:42 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 08:52:01 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_cmd_delone(t_cmd *lst)
 		free(lst);
 }
 
-t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir *in, t_redir *out)
+t_cmd	*ft_cmd_new(char **cmd, t_redir *in, t_redir *out)
 {
 	t_cmd	*tab;
 
@@ -85,7 +85,6 @@ t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir *in, t_redir *out)
 	if (!tab)
 		return (NULL);
 	tab->cmd = cmd;
-	tab->built_in = built_in;
 	tab->in = in;
 	tab->out = out;
 	tab->next = NULL;
