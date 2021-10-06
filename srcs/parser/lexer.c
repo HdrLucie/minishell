@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 10:05:44 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:03:23 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,30 @@ char	**ft_substrs(char **s, size_t len)
 	return (str);
 }
 
-void ft_print_list(t_cmd **cmd)
+void ft_print_list(t_cmd *tmp2)
 {
 	int	i;
 	t_cmd	*tmp;
 
-	tmp = *cmd;
-	i = -1;
-	while (tmp->cmd[++i])
-		printf("cmd : %s\n", tmp->cmd[i]);
-	printf("\n");
+	tmp = tmp2;
+	while (tmp)
+	{
+		if (tmp->cmd)
+		{
+			i = -1;
+			while (tmp->cmd[++i])
+				printf("cmd : %s\n", tmp->cmd[i]);
+		}
+		// if (tmp->in->op[0])
+		// 	printf("IN : %c\n", tmp->in->op[0]);
+		// if (tmp->out->op[0])
+		// 	printf("OUT : %c\n", tmp->out->op[0]);
+		tmp = tmp->next;
+		printf("\n");
+	}
 }
 
-int	parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
+t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 {
 	char	**tmp;
 	t_redir	out;
@@ -57,25 +68,31 @@ int	parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 	in.op[0] = '|';
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
-		return(print_error("ALLOCATION FAILED\n", -2));
+		return(NULL);
 	if (cmd && cmd->cmd == NULL)
 	{
 		cmd->cmd = tmp;
 		cmd->out = &out;
 	}
-	else
+	else if (!cmd)
 	{
 		cmd = ft_cmd_new(tmp, (t_redir *)0, &out);
 		if (cmd == NULL)
-			return(print_error("ALLOCATION FAILED\n", -2));
+			return(NULL);
+	}
+	else
+	{
+		new = ft_cmd_new(tmp, (t_redir *)0, &out);
+		if (new == NULL)
+			return(NULL);
+		ft_cmd_add_back(&cmd, new);
 	}
 	new = ft_cmd_new(NULL, &in, (t_redir *)0);
 	if (new == NULL)
-		return(print_error("ALLOCATION FAILED\n", -2));
+		return(NULL);
 	ft_cmd_add_back(&cmd, new);
-	ft_print_list(&cmd);
 	*begin = i + 1;
-	return (0);
+	return (cmd);
 }
 
 int	parser(char **token, char **envp, t_env *env_lst)
@@ -94,9 +111,10 @@ int	parser(char **token, char **envp, t_env *env_lst)
 		// if(!ft_strcmp(token[i], ">") || !ft_strcmp(token[i], "<"))
 		// 	parse_redir(cmd, token, &begin);
 		if (!ft_strcmp(token[i], "|"))
-			parse_pipe(cmd, token, &begin, i);
+			cmd = parse_pipe(cmd, token, &begin, i);
 		i++;
 	}
+	ft_print_list(cmd);
 	return (0);
 }
 
