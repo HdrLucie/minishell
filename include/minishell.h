@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 08:59:07 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:11:17 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**cmd;
-	t_redir			*in;
-	t_redir			*out;
+	t_redir			in;
+	t_redir			out;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -64,7 +64,7 @@ void	ft_cmd_clear(t_cmd **lst);
 int		ft_cmd_size(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
 void	ft_cmd_delone(t_cmd *lst);
-t_cmd	*ft_cmd_new(char **cmd, t_redir *in, t_redir *out);
+t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out);
 /*
 ** 	split_quote.c
 */

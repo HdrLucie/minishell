@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 11:57:50 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:31:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_cmd_size(t_cmd *lst)
 
 t_cmd	*ft_cmd_last(t_cmd *lst)
 {
-	while (lst->next)
+	while (lst && lst->next)
 	{
 		lst = lst->next;
 	}
@@ -76,7 +76,7 @@ void	ft_cmd_delone(t_cmd *lst)
 		free(lst);
 }
 
-t_cmd	*ft_cmd_new(char **cmd, t_redir *in, t_redir *out)
+t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out)
 {
 	t_cmd	*new;
 

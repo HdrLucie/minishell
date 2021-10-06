@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 12:03:23 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:34:13 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,14 @@ void ft_print_list(t_cmd *tmp2)
 	tmp = tmp2;
 	while (tmp)
 	{
-		if (tmp->cmd)
-		{
-			i = -1;
-			while (tmp->cmd[++i])
-				printf("cmd : %s\n", tmp->cmd[i]);
-		}
-		// if (tmp->in->op[0])
-		// 	printf("IN : %c\n", tmp->in->op[0]);
-		// if (tmp->out->op[0])
-		// 	printf("OUT : %c\n", tmp->out->op[0]);
+
+		i = -1;
+		while (tmp->cmd && tmp->cmd[++i])
+			printf("cmd : %s\n", tmp->cmd[i]);
+		if (tmp->in.op[0])
+			printf("IN : %c\n", tmp->in.op[0]);
+		if (tmp->out.op[0])
+			printf("OUT : %c\n", tmp->out.op[0]);
 		tmp = tmp->next;
 		printf("\n");
 	}
@@ -63,31 +61,33 @@ t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 	t_redir	out;
 	t_redir	in;
 	t_cmd	*new;
+	t_cmd	*last;
 
 	out.op[0] = '|';
-	in.op[0] = '|';
+	in.op[0] = '0';
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return(NULL);
-	if (cmd && cmd->cmd == NULL)
+	last = ft_cmd_last(cmd);
+	if (cmd && last->cmd == NULL)
 	{
-		cmd->cmd = tmp;
-		cmd->out = &out;
+		last->cmd = tmp;
+		last->out = out;
 	}
 	else if (!cmd)
 	{
-		cmd = ft_cmd_new(tmp, (t_redir *)0, &out);
+		cmd = ft_cmd_new(tmp, in, out);
 		if (cmd == NULL)
 			return(NULL);
 	}
 	else
 	{
-		new = ft_cmd_new(tmp, (t_redir *)0, &out);
+		new = ft_cmd_new(tmp, in, out);
 		if (new == NULL)
 			return(NULL);
 		ft_cmd_add_back(&cmd, new);
 	}
-	new = ft_cmd_new(NULL, &in, (t_redir *)0);
+	new = ft_cmd_new(NULL, out, in);
 	if (new == NULL)
 		return(NULL);
 	ft_cmd_add_back(&cmd, new);
@@ -114,6 +114,8 @@ int	parser(char **token, char **envp, t_env *env_lst)
 			cmd = parse_pipe(cmd, token, &begin, i);
 		i++;
 	}
+	// if (begin != ft_strslen(token))
+	// 	parse_pipe(cmd, token, &begin, i);
 	ft_print_list(cmd);
 	return (0);
 }

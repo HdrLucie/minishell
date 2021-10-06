@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 09:05:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:11:52 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env *env_lst)
 	return (0);
 }
 
-int	fill_cmd(char **token, char **envp, t_env *env_lst)
-{
-	t_cmd	*cmd;
+// int	fill_cmd(char **token, char **envp, t_env *env_lst)
+// {
+// 	t_cmd	*cmd;
 
-	(void)envp;
-	cmd = ft_cmd_new(token, (t_redir *)0, (t_redir *)0);
-	if (cmd == NULL)
-		return (-1);
-	ft_execute_cmd(cmd, envp, env_lst);
-	return (0);
-}
+// 	(void)envp;
+// 	cmd = ft_cmd_new(token, (t_redir)0, (t_redir)0);
+// 	if (cmd == NULL)
+// 		return (-1);
+// 	ft_execute_cmd(cmd, envp, env_lst);
+// 	return (0);
+// }
