@@ -12,6 +12,7 @@ SRCS =  srcs/main.c 					\
 		srcs/builtins/exit.c			\
 		srcs/builtins/export.c			\
 		srcs/builtins/unset.c			\
+		srcs/builtins/export_utils.c	\
 
 
 OBJS = ${SRCS:.c=.o}

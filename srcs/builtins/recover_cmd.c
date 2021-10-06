@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/06 15:36:26 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/06 18:57:19 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 int	recover_cmd(char **cmd, t_env *env)
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i])
+	if (!ft_strcmp(cmd[0], "env"))
+		ft_print_env(env);
+	else if (!ft_strcmp(cmd[0], "pwd"))
+		print_pwd(env);
+	else if (!ft_strncmp(cmd[0], "export", ft_strlen("export")))
+		ft_export_var(env, cmd[1]);
+	else if (!ft_strncmp(cmd[0], "unset", ft_strlen("unset")))
 	{
-		if (!ft_strcmp(cmd[i], "env"))
-			ft_print_env(env);
-		else if (!ft_strcmp(cmd[i], "pwd"))
-			print_pwd(env);
-		else if (!ft_strncmp(cmd[i], "export", ft_strlen("export")))
-			ft_export_var(env, cmd[1]);
-		else if (!ft_strncmp(cmd[i], "unset", ft_strlen("unset")))
-			ft_unset_var(&env, cmd[i]);
-		else if (!ft_strcmp(cmd[i], "exit"))
-			ft_exit(env);
-		else
-			return (2);
-		i++;
+		printf("\nBEFORE UNSET\n\n");
+		ft_print_env(env);
+		ft_unset_var(&env, cmd[1]);
+		printf("\nAFTER UNSET\n\n");
+		ft_print_env(env);
 	}
+	else if (!ft_strcmp(cmd[0], "exit"))
+	{
+		printf("EXIT : %s\n", (env)->name);
+		ft_exit(env);
+	}
+	else
+		return (2);
 	return (1);
 }
