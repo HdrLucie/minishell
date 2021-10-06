@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 12:11:17 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 15:35:51 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 typedef struct s_redir
 {
 	int		n;
-	char	op[2];
-	char	*word;
+	char	op[3];
+	char	*path;
 }				t_redir;
 
 typedef struct s_cmd
@@ -46,6 +46,7 @@ typedef struct s_cmd
 
 void	free_strs(char **strs);
 int		print_error(char *msg, int retur);
+char	*print_char_error(char *msg, int retur);
 
 /****************************/
 /*			PARSER			*/
@@ -80,5 +81,6 @@ char	*parse_cmd(char *cmd);
 /*			CMD				*/
 /****************************/
 int		fill_cmd(char **token, char **envp, t_env *env_lst);
+int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env *env_lst);
 
 #endif
