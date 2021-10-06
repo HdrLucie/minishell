@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 14:12:44 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:27:55 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env *env_lst)
 {
 	while (cmd)
 	{
-		if (cmd->cmd && ft_recover_cmd(cmd->cmd, env_lst) == 2)
+		if (cmd->cmd && recover_cmd(cmd->cmd, env_lst) == 2)
 		{
 			if (cmd->cmd && execute(cmd->cmd, envp))
 				return (-1);

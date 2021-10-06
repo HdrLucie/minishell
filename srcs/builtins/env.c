@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_manage_env.c                                    :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/05 09:54:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:12:06 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 ** Retours d'erreurs : -1, arret du programme.
 **					   -2, erreur, mais le process continue. 
 */
+
+void	ft_print_flag_alpha(t_env *env)
+{
+	while (env)
+	{
+		printf("%d\n", env->first_alpha_node);
+		env = env->next_alpha;
+	}
+}
 
 void	ft_print_env(t_env *env)
 {
@@ -29,6 +38,21 @@ void	ft_print_env(t_env *env)
 			printf("''");
 		printf("\n");
 		env = env->next;
+	}
+}
+
+void	ft_print_env_alpha(t_env *env)
+{
+	while (env)
+	{
+		if (env->name)
+			printf("%s=", env->name);
+		if (env->value)
+			printf("%s", env->value);
+		else
+			printf("''");
+		printf("\n");
+		env = env->next_alpha;
 	}
 }
 
@@ -85,6 +109,8 @@ t_env	*create_env_lst(char **env)
 	while (env[i])
 	{
 		current_node = malloc(sizeof(t_env));
+		if (!current_node)
+			return (NULL);
 		ft_lstadd_back_env(&env_lst, current_node);
 		if (!ft_fill_env_lst_name(env[i], current_node))
 			return (NULL);
@@ -92,13 +118,3 @@ t_env	*create_env_lst(char **env)
 	}
 	return (env_lst);
 }
-
-// int	main(int argc, char **argv, char **env)
-// {
-	
-// 	(void)argv;
-// 	(void)argc;
-// 	t_env	*env_lst = create_env_lst(env);
-// 	ft_recover_cmd()
-// 	return (0);
-// }
