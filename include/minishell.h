@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 11:41:58 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:58:12 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*print_char_error(char *msg, int retur);
 /*
 **	lexer.c 
 */
-int		lexer(char *str, char **envp, t_env *env_lst);
+int		lexer(char *str, char **envp, t_env **env_lst);
 /*
 **	lst_cmd_utils.c 
 */
@@ -88,7 +88,7 @@ char	**ft_substrs(char **s, size_t len);
 /****************************/
 /*			CMD				*/
 /****************************/
-int		fill_cmd(char **token, char **envp, t_env *env_lst);
-int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env *env_lst);
+int		fill_cmd(char **token, char **envp, t_env **env_lst);
+int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
 
 #endif

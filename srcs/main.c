@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 16:49:10 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:58:05 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int ac, char **av, char **envp)
 			return (-1);
 		if (ft_strcmp(str, ""))
 			add_history(str);
-		if (lexer(str, envp, env_lst) == -1 || errno == -1)
+		if (lexer(str, envp, &env_lst) == -1 || errno == -1)
 			return (-1);
 		free(str);
 	}

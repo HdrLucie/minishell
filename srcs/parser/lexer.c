@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 11:43:09 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:58:43 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_cmd	*parse_redir(t_cmd *cmd, char **token, int *begin, int *i)
 	return (cmd);
 }
 
-int	parser(char **token, char **envp, t_env *env_lst)
+int	parser(char **token, char **envp, t_env **env_lst)
 {
 	int		i;
 	t_cmd	*cmd;
@@ -135,7 +135,7 @@ int	parser(char **token, char **envp, t_env *env_lst)
 	return (0);
 }
 
-int	lexer(char *str, char **envp, t_env *env_lst)
+int	lexer(char *str, char **envp, t_env **env_lst)
 {
 	char	**token;
 

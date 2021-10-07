@@ -6,24 +6,24 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/06 17:02:24 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:57:37 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	recover_cmd(char **cmd, t_env *env)
+int	recover_cmd(char **cmd, t_env **env)
 {
 	if (!ft_strcmp(cmd[0], "env"))
-		ft_print_env(env);
+		ft_print_env(*env);
 	else if (!ft_strcmp(cmd[0], "pwd"))
-		print_pwd(env);
+		print_pwd(*env);
 	else if (!ft_strncmp(cmd[0], "export", ft_strlen("export")))
-		ft_export_var(env, cmd[1]);
+		ft_export_var(*env, cmd[1]);
 	else if (!ft_strncmp(cmd[0], "unset", ft_strlen("unset")))
-		ft_unset_var(&env, cmd[1]);
+		ft_unset_var(env, cmd[1]);
 	else if (!ft_strcmp(cmd[0], "exit"))
-		ft_exit(env);
+		ft_exit(*env);
 	else
 		return (2);
 	return (1);
