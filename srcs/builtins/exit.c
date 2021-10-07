@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/07 14:53:38 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:05:32 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_exit(t_env *env, t_cmd *cmd)
 		while (env)
 		{
 			tmp = env->next;
-			ft_free_node(env);
+			free_node(env);
 			env = tmp;
 		}
 	}

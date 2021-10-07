@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/06 17:51:34 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/07 03:23:41 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_env	*find_first_alpha_node(t_env *env)
 	return (NULL);
 }
 
-void	ft_udpate_alpha_road(t_env *env)
+void	udpate_alpha_road(t_env *env)
 {
 	int		i;
 	t_env	*start;
@@ -66,5 +66,5 @@ void	ft_udpate_alpha_road(t_env *env)
 		}
 	}
 	start->first_alpha_node = 1;
-	ft_print_env_alpha(start);
+	print_env_alpha(start);
 }

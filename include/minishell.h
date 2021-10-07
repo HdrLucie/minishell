@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 14:59:08 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:05:07 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,12 @@ int		ft_unset_var(t_env **env, char *unset_var_name);
 int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
+
+/****************************/
+/*			PRINT			*/
+/****************************/
+
+void	print_env(t_env *env);
+void	print_env_alpha(t_env *env);
 
 #endif

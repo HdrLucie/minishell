@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/07 02:43:50 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/07 04:41:29 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,7 @@
 **					   -2, erreur, mais le process continue. 
 */
 
-void	ft_print_flag_alpha(t_env *env)
-{
-	while (env)
-	{
-		printf("%d\n", env->first_alpha_node);
-		env = env->next_alpha;
-	}
-}
-
-void	ft_print_env(t_env *env)
-{
-	while (env)
-	{
-		if (env->name)
-			printf("%s=", env->name);
-		if (env->value)
-			printf("%s", env->value);
-		else
-			printf("''");
-		printf("\n");
-		env = env->next;
-	}
-}
-
-void	ft_print_env_alpha(t_env *env)
-{
-	while (env)
-	{
-		if (env->name)
-			printf("%s=", env->name);
-		if (env->value)
-			printf("%s", env->value);
-		else
-			printf("''");
-		printf("\n");
-		env = env->next_alpha;
-	}
-}
-
-int	ft_fill_env_lst_value(char *str, t_env *env, int i)
+int	fill_env_lst_value(char *str, t_env *env, int i)
 {
 	int	j;
 	int	k;
@@ -75,7 +36,7 @@ int	ft_fill_env_lst_value(char *str, t_env *env, int i)
 	return (1);
 }
 
-int	ft_fill_env_lst_name(char *str, t_env *env)
+int	fill_env_lst_name(char *str, t_env *env)
 {
 	int	i;
 
@@ -92,7 +53,7 @@ int	ft_fill_env_lst_name(char *str, t_env *env)
 		i++;
 	}
 	env->name[i] = '\0';
-	if (!ft_fill_env_lst_value(str, env, i))
+	if (!fill_env_lst_value(str, env, i))
 		return (-1);
 	return (1);
 }
@@ -111,8 +72,8 @@ t_env	*create_env_lst(char **env)
 		current_node = malloc(sizeof(t_env));
 		if (!current_node)
 			return (NULL);
-		ft_lstadd_back_env(&env_lst, current_node);
-		if (!ft_fill_env_lst_name(env[i], current_node))
+		lstadd_back_env(&env_lst, current_node);
+		if (!fill_env_lst_name(env[i], current_node))
 			return (NULL);
 		i++;
 	}
