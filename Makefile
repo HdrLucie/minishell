@@ -14,6 +14,7 @@ SRCS =  srcs/main.c 					\
 		srcs/builtins/export.c			\
 		srcs/builtins/unset.c			\
 		srcs/builtins/export_utils.c	\
+		srcs/builtins/print_utils.c		\
 
 
 OBJS = ${SRCS:.c=.o}
@@ -31,7 +32,7 @@ CFLAGS	= -Wall -Wextra -Werror
 DEBUG_FLAG =  -g3
 
 .c.o:		${SRCS}
-			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} ${DEBUG_FLAG} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}
 			make -C libft
