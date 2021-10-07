@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 16:05:07 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:18:23 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void 	ft_free_node(t_env *node);
 t_env	*create_env_lst(char **env);
 int		ft_fill_env_lst(char *str, t_env *env);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
+void	lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int		ft_fill_env_lst_value(char *str, t_env *env, int i);
 int		ft_check_env(t_env *env, char *var_export);
