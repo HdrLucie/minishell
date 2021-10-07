@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 09:00:56 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:43:09 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,13 @@ int	parser(char **token, char **envp, t_env *env_lst)
 	begin = 0;
 	while (token[i])
 	{
-		if(!ft_strcmp(token[i], ">") || !ft_strcmp(token[i], "<"))
-		{
-			cmd = parse_redir(cmd, token, &begin, &i);
-			printf("token : %s\n", token[begin]);
-			if (cmd == NULL)
-				return (-2);
-		}
+		// if(!ft_strcmp(token[i], ">") || !ft_strcmp(token[i], "<"))
+		// {
+		// 	cmd = parse_redir(cmd, token, &begin, &i);
+		// 	printf("token : %s\n", token[begin]);
+		// 	if (cmd == NULL)
+		// 		return (-2);
+		// }
 		if (!ft_strcmp(token[i], "|"))
 		{
 			cmd = parse_pipe(cmd, token, &begin, i);
@@ -131,7 +131,7 @@ int	parser(char **token, char **envp, t_env *env_lst)
 	if (begin != ft_strslen(token))
 		cmd = parse_end(cmd, token, &begin, i);
 	ft_execute_cmd(cmd, envp, env_lst);
-	ft_print_list(cmd);
+	// ft_print_list(cmd);
 	return (0);
 }
 
