@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 18:21:42 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 20:49:52 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_redir(t_redir	*red, int count)
+int	ft_realloc_strs(char **strs, size_t size)
+{
+	char	**res;
+	size_t	i;
+
+	i = 0;
+	res = malloc(size * sizeof(char *));
+	if (res == NULL)
+		return (-1);
+	while (strs[i] && i < size)
+	{
+		res[i] = strs[i];
+		i++;
+	}
+	res[i] = NULL;
+	free(strs);
+	strs = res;
+	return (0);
+}
+
+void	print_redir(t_redir	*red, int count, char **cmd)
 {
 	int	i;
 
@@ -23,6 +43,12 @@ void	print_redir(t_redir	*red, int count)
 		printf("n: %d\n", red[i].n);
 		printf("op: %s\n", red[i].op);
 		printf("path: %s\n", red[i].path);
+		i++;
+	}
+	i = 0;
+	while (cmd[i])
+	{
+		printf("CMD : %s\n", cmd[i]);
 		i++;
 	}
 }
@@ -46,13 +72,15 @@ int	count_redir(char **cmd)
 	return (count);
 }
 
-int	fill_red(char **cmd, t_redir *red)
+int	fill_red(char **cmd, t_redir *red, char **exe)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	while (cmd[i])
 	{
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
@@ -86,8 +114,15 @@ int	fill_red(char **cmd, t_redir *red)
 			}
 			j++;	
 		}
+		else
+		{
+			if (ft_realloc_strs(exe, k + 1) == -1)
+				return (print_error("ALLOCATION FAILED\n", -1));
+			exe[k] = ft_strdup(cmd[i]);
+		}
 		i++;
 	}
+	exe[k] = NULL;
 	return (0);
 }
 
@@ -96,14 +131,22 @@ int	redir(char **cmd)
 {
 	int		count;
 	t_redir	*red;
+	char	**exe;
 
 	count = count_redir(cmd);
-	red = malloc(count * sizeof(t_redir));
+	red = malloc(1 * sizeof(t_redir));
 	if (red == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
-	if (fill_red(cmd, red) == -1)
+	exe = malloc(sizeof(char *));
+	if (exe == NULL)
+		return (print_error("ALLOCATION FAILED\n", -1));
+	write(1, "debug1\n", 7);
+	if (fill_red(cmd, red, exe) == -1)
 		return (-1);
-	// print_redir(red, count);
+	write(1, "debug2\n", 7);
+	free_strs(cmd);
+	cmd = exe;
+	print_redir(red, count, cmd);
 	free(red);
 	return (0);
 }
