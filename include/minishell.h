@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 16:18:23 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:58:27 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ int		lexer(char *str, char **envp, t_env **env_lst);
 int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
 void	ft_cmd_clear(t_cmd *lst);
-int		ft_cmd_size(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
-void	ft_cmd_delone(t_cmd *lst);
 t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out);
 /*
 ** 	split_quote.c
@@ -82,6 +80,7 @@ int		check_quote(char *str, int i);
 int		is_space(char *str, int i);
 int		is_redir(char *str, int i);
 int		is_spe_char(char *str, int i);
+int		find_token(char *str, int *i, char end);
 /*
 **	parse_path.c 
 */
@@ -106,19 +105,18 @@ int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
 void    ft_exit(t_env *env, t_cmd *cmd);
-void	ft_udpate_alpha_road(t_env *env);
-void 	ft_free_node(t_env *node);
+void	udpate_alpha_road(t_env *env);
+void 	free_node(t_env *node);
 t_env	*create_env_lst(char **env);
 int		ft_fill_env_lst(char *str, t_env *env);
-void	ft_lstadd_back_env(t_env **alst, t_env *new);
 void	lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int		ft_fill_env_lst_value(char *str, t_env *env, int i);
 int		ft_check_env(t_env *env, char *var_export);
-int		ft_export_var(t_env *env, char *var_export);
-int		ft_create_export_node(t_env *env, char *name, char *value);
+int		export_var(t_env *env, char *var_export);
+int		create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
-int		ft_unset_var(t_env **env, char *unset_var_name);
+int		unset_var(t_env **env, char *unset_var_name);
 int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);

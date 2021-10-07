@@ -16,6 +16,8 @@ SRCS =  srcs/main.c 					\
 		srcs/builtins/unset.c			\
 		srcs/builtins/export_utils.c	\
 		srcs/builtins/print_utils.c		\
+		srcs/parser/ft_is_char.c		\
+		srcs/signal.c
 
 
 OBJS = ${SRCS:.c=.o}

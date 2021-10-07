@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 14:55:35 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:22:58 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	execute(char **cmd, char **envp)
 
 int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 {
-	int	ret;
+	int		ret;
 	t_cmd	*tmp;
 
 	tmp = cmd;

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 11:58:05 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:24:15 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,6 @@ void	free_strs(char **strs)
 		free(strs[i]);
 	}
 	free(strs);
-}
-
-void	sig_int(int num)
-{
-	(void)num;
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	sig_quit(int num)
-{
-	(void)num;
 }
 
 int	main(int ac, char **av, char **envp)

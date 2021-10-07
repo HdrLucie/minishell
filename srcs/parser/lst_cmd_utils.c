@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 14:52:41 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:50:05 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,6 @@ void	ft_cmd_clear(t_cmd *lst)
 	}
 }
 
-int	ft_cmd_size(t_cmd *lst)
-{
-	int	size;
-
-	size = 0;
-	while (lst)
-	{
-		size++;
-		lst = lst->next;
-	}
-	return (size);
-}
-
 t_cmd	*ft_cmd_last(t_cmd *lst)
 {
 	while (lst && lst->next)
@@ -71,12 +58,6 @@ t_cmd	*ft_cmd_last(t_cmd *lst)
 		lst = lst->next;
 	}
 	return (lst);
-}
-
-void	ft_cmd_delone(t_cmd *lst)
-{
-	if (lst)
-		free(lst);
 }
 
 t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out)

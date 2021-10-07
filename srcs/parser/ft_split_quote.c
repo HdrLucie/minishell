@@ -6,11 +6,26 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 09:44:18 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:51:28 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	find_token(char *str, int *i, char end)
+{
+	*i = *i + 1;
+	if (end == '\"')
+		while (str[*i] && (str[*i] != end || str[*i - 1] == '\\'))
+			*i = *i + 1;
+	else
+		while (str[*i] && str[*i] != end)
+			*i = *i + 1;
+	if (str[*i] != end)
+		return (-1);
+	*i = *i + 1;
+	return (0);
+}
 
 int	count_word(char *str)
 {
