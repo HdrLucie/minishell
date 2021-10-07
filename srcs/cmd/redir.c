@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 18:16:00 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:21:42 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int	fill_red(char **cmd, t_redir *red)
 	{
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
-			red[j].n = 1;
+			if (cmd[i][0] == '>')
+				red[j].n = 1;
+			else
+				red[j].n = 0;
 			red[j].op[0] = cmd[i][0];
 			if (cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
 				&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
@@ -101,5 +104,6 @@ int	redir(char **cmd)
 	if (fill_red(cmd, red) == -1)
 		return (-1);
 	// print_redir(red, count);
+	free(red);
 	return (0);
 }
