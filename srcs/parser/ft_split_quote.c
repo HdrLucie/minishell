@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 09:33:13 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 09:44:18 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_word(char *str)
 	word = 0;
 	while (str[i])
 	{
-		while (str[i] && is_space(str[i], str[i - 1]))
+		while (str[i] && is_space(str, i))
 			i++;
 		if (str[i])
 			word++;
@@ -38,7 +38,7 @@ int	size_word(char *str, int *k)
 	int	begin;
 
 	i = 0;
-	while (str[i] && is_space(str[i], str[i - 1]))
+	while (str[i] && is_space(str, i))
 		i++;
 	begin = i;
 	*k = *k + begin;

@@ -60,8 +60,9 @@ printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
 
-# ECHO TESTS
-exec_test 'echo test tout'
-exec_test 'echo test      tout'
-exec_test 'echo -n test tout'
-exec_test 'echo -n -n -n test tout'
+# REDIR TEST
+exec_test 'echo coucou 2>out | cat'
+exec_test 'echo coucou 1>out | cat'
+exec_test 'echo coucou >out >out1 >out2 | cat'
+exec_test 'echo coucou >out >out1 >>out2 | cat'
+exec_test '>out'
