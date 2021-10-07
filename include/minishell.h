@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 16:58:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:03:44 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,15 @@ char	**ft_substrs(char **s, size_t len);
 /****************************/
 /*			CMD				*/
 /****************************/
+/*
+**	init_cmd.c 
+*/
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
 int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
+/*
+**	redir.c 
+*/
+int		redir(char **cmd);
 
 /****************************/
 /*			BUILTINS		*/

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 17:22:58 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:05:39 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 	tmp = cmd;
 	while (cmd)
 	{
-		// redir(cmd);
+		if (redir(cmd->cmd) == -1)
+			return (-1);
 		if (cmd->cmd)
 		{
 			ret = recover_cmd(cmd->cmd, env_lst, tmp);
@@ -55,6 +56,5 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 		}
 		cmd = cmd->next;
 	}
-	// ft_print_list(cmd);
 	return (ret);
 }
