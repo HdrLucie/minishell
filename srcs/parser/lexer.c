@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 11:58:43 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:48:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ void ft_print_list(t_cmd *tmp2)
 		printf("CMD : \n");
 		while (tmp->cmd && tmp->cmd[++i])
 			printf("cmd : %s\n", tmp->cmd[i]);
-		// if (tmp->in[.op[0])
-		// 	printf("IN : %c\n", tmp->in.op[0]);
-		// if (tmp->out.n)
-		// 	printf("OUT : %d\n", tmp->out.n);
-		// if (tmp->out.op[0])
-		// 	printf("OUT : %s\n", tmp->out.op);
-		// if (tmp->out.path)
-		// 	printf("OUT : %s\n", tmp->out.path);
 		tmp = tmp->next;
 		printf("\n");
 	}
@@ -109,43 +101,34 @@ int	parser(char **token, char **envp, t_env **env_lst)
 	int		begin;
 
 	cmd = NULL;
-	i = 0;
+	i = -1;
 	begin = 0;
-	while (token[i])
-	{
-		// if(!ft_strcmp(token[i], ">") || !ft_strcmp(token[i], "<"))
-		// {
-		// 	cmd = parse_redir(cmd, token, &begin, &i);
-		// 	printf("token : %s\n", token[begin]);
-		// 	if (cmd == NULL)
-		// 		return (-2);
-		// }
+	while (token[++i])
 		if (!ft_strcmp(token[i], "|"))
 		{
 			cmd = parse_pipe(cmd, token, &begin, i);
 			if (cmd == NULL)
 				return (-2);
 		}
-		i++;
-	}
 	if (begin != ft_strslen(token))
 		cmd = parse_end(cmd, token, &begin, i);
+	free_strs(token);
 	ft_execute_cmd(cmd, envp, env_lst);
-	// ft_print_list(cmd);
 	return (0);
 }
 
 int	lexer(char *str, char **envp, t_env **env_lst)
 {
 	char	**token;
+	int		ret;
 
 	token = ft_split_quote(str);
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)
 		return (-2);
-	if (parser(token, envp, env_lst) == -1)
-		return (-1);
-	free_strs(token);
-	return (0);
+	ret = parser(token, envp, env_lst);
+	if (ret == -1)
+		return (ret);
+	return (ret);
 }

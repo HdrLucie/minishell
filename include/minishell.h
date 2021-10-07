@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 11:58:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:59:08 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
-# include "builtins.h"
 
 typedef struct s_redir
 {
@@ -39,6 +38,15 @@ typedef struct s_cmd
 	t_redir			out;
 	struct s_cmd	*next;
 }				t_cmd;
+
+typedef struct s_env
+{
+	int				first_alpha_node;
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+	struct s_env	*next_alpha;
+}					t_env;
 
 /****************************/
 /*			MAIN			*/
@@ -61,7 +69,7 @@ int		lexer(char *str, char **envp, t_env **env_lst);
 */
 int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
-void	ft_cmd_clear(t_cmd **lst);
+void	ft_cmd_clear(t_cmd *lst);
 int		ft_cmd_size(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
 void	ft_cmd_delone(t_cmd *lst);
@@ -90,5 +98,28 @@ char	**ft_substrs(char **s, size_t len);
 /****************************/
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
 int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
+
+/****************************/
+/*			BUILTINS		*/
+/****************************/
+
+t_env	*find_first_alpha_node(t_env *env);
+void	ft_print_env_alpha(t_env *env);
+void    ft_exit(t_env *env, t_cmd *cmd);
+void	ft_udpate_alpha_road(t_env *env);
+void 	ft_free_node(t_env *node);
+t_env	*create_env_lst(char **env);
+int		ft_fill_env_lst(char *str, t_env *env);
+void	ft_lstadd_back_env(t_env **alst, t_env *new);
+t_env	*ft_lstlast_env(t_env *lst);
+int		ft_fill_env_lst_value(char *str, t_env *env, int i);
+int		ft_check_env(t_env *env, char *var_export);
+int		ft_export_var(t_env *env, char *var_export);
+int		ft_create_export_node(t_env *env, char *name, char *value);
+int		ft_fill_env_lst_name(char *str, t_env *env);
+int		ft_unset_var(t_env **env, char *unset_var_name);
+int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
+void	ft_print_env(t_env *env);
+int		print_pwd(t_env *env);
 
 #endif

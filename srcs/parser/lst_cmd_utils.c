@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 12:31:29 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:52:41 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,18 @@ void	ft_cmd_add_front(t_cmd **alst, t_cmd *new)
 	*alst = new;
 }
 
-void	ft_cmd_clear(t_cmd **lst)
+void	ft_cmd_clear(t_cmd *lst)
 {
 	t_cmd	*tmp;
 
-	while (*lst)
+	while (lst)
 	{
-		tmp = (*lst)->next;
-		ft_cmd_delone((*lst));
-		(*lst) = tmp;
+		if (lst->cmd)
+			free_strs(lst->cmd);
+		tmp = lst->next;
+		if (lst)
+			free (lst);
+		lst = tmp;
 	}
 }
 

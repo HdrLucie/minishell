@@ -1,9 +1,10 @@
 SRCS =  srcs/main.c 					\
 		srcs/cmd/init_cmd.c 			\
+		srcs/cmd/redir.c 				\
 		srcs/parser/parse_path.c 		\
 		srcs/parser/lst_cmd_utils.c 	\
 		srcs/parser/lexer.c				\
-		srcs/parser/parser.c				\
+		srcs/parser/parser.c			\
 		srcs/parser/ft_split_quote.c	\
 		srcs/parser/split_quote_utils.c \
 		srcs/builtins/env.c				\
@@ -31,7 +32,7 @@ CFLAGS	= -Wall -Wextra -Werror
 DEBUG_FLAG =  -g3
 
 .c.o:		${SRCS}
-			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} ${DEBUG_FLAG} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}
 			make -C libft
