@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 16:27:55 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 02:32:45 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	execute(char **cmd, char **envp)
 	return (0);
 }
 
-int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env *env_lst)
+int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 {
 	while (cmd)
 	{

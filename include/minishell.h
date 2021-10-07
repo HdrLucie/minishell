@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/06 15:35:51 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/07 02:35:03 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*print_char_error(char *msg, int retur);
 /*
 **	lexer.c 
 */
-int		lexer(char *str, char **envp, t_env *env_lst);
+int		lexer(char *str, char **envp, t_env **env_lst);
 /*
 **	lst_cmd_utils.c 
 */
@@ -80,7 +80,7 @@ char	*parse_cmd(char *cmd);
 /****************************/
 /*			CMD				*/
 /****************************/
-int		fill_cmd(char **token, char **envp, t_env *env_lst);
-int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env *env_lst);
+int		fill_cmd(char **token, char **envp, t_env **env_lst);
+int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
 
 #endif

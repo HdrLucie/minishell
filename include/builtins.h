@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 13:44:56 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/06 18:57:29 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/07 02:38:42 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_export_var(t_env *env, char *var_export);
 int		ft_create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
 int		ft_unset_var(t_env **env, char *unset_var_name);
-int		recover_cmd(char **cmd, t_env *env);
+int		recover_cmd(char **cmd, t_env **env);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
 

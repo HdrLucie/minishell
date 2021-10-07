@@ -6,11 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/06 18:56:28 by hlucie           ###   ########.fr       */
-=======
-/*   Updated: 2021/10/06 15:49:57 by ehautefa         ###   ########.fr       */
->>>>>>> 48b42950edca0dd3b1b5a321f814bbe5b8b2c7a4
+/*   Updated: 2021/10/07 02:44:02 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +74,7 @@ int	main(int ac, char **av, char **envp)
 			return (-1);
 		if (ft_strcmp(str, ""))
 			add_history(str);
-		if (lexer(str, envp, env_lst) == -1 || errno == -1)
+		if (lexer(str, envp, &env_lst) == -1 || errno == -1)
 			return (-1);
 		free(str);
 	}
