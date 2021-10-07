@@ -6,7 +6,11 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/10/06 18:56:28 by hlucie           ###   ########.fr       */
+=======
+/*   Updated: 2021/10/06 15:49:57 by ehautefa         ###   ########.fr       */
+>>>>>>> 48b42950edca0dd3b1b5a321f814bbe5b8b2c7a4
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +23,15 @@ int	print_error(char *msg, int retur)
 	return (retur);
 }
 
+char	*print_char_error(char *msg, int retur)
+{
+	write(2, "MINISHELL : ", 12);
+	write(2, msg, ft_strlen(msg));
+	if (retur == -1)
+		errno = -1;
+	return (NULL);
+}
+
 void	free_strs(char **strs)
 {
 	int	i;
@@ -26,10 +39,25 @@ void	free_strs(char **strs)
 	i = -1;
 	while (strs[++i])
 	{
-		printf("%s\n", strs[i]);
+		write(1, strs[i], ft_strlen(strs[i]));
+		write(1, "\n", 1);
 		free(strs[i]);
 	}
 	free(strs);
+}
+
+void	sig_int(int num)
+{
+	(void)num;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	sig_quit(int num)
+{
+	(void)num;
 }
 
 int	main(int ac, char **av, char **envp)
@@ -43,9 +71,14 @@ int	main(int ac, char **av, char **envp)
 	env_lst = create_env_lst(envp);
 	while (42)
 	{
+		// signal(SIGINT, sig_int);
+		// signal(SIGQUIT, sig_quit);
 		str = readline("> ");
-		add_history(str);
-		if (lexer(str, envp, env_lst) == -1)
+		if (!str)
+			return (-1);
+		if (ft_strcmp(str, ""))
+			add_history(str);
+		if (lexer(str, envp, env_lst) == -1 || errno == -1)
 			return (-1);
 		free(str);
 	}

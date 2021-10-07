@@ -17,8 +17,7 @@ SRCS =  srcs/main.c 					\
 
 OBJS = ${SRCS:.c=.o}
 
-HEAD = include/minishell.h \
-		include/builtins.h
+HEAD = include/minishell.h
 
 INCLUDE =	-Iinclude
 
@@ -28,7 +27,7 @@ CC		= clang
 
 CFLAGS	= -Wall -Wextra -Werror
 
-DEBUG_FLAG = -fsanitize=address -g3
+DEBUG_FLAG =  -g3
 
 .c.o:		${SRCS}
 			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}

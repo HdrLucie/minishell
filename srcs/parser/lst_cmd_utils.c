@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   lst_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:44:42 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:31:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_cmd_add_back(t_cmd **alst, t_cmd *new)
 {
 	t_cmd	*last;
 
+	last = *alst;
 	if (new == NULL)
 		return (-1);
 	if (alst == NULL)
@@ -23,7 +24,8 @@ int	ft_cmd_add_back(t_cmd **alst, t_cmd *new)
 		alst = &new;
 		return (0);
 	}
-	last = ft_cmd_last(*alst);
+	while (last->next)
+		last = last->next;
 	last->next = new;
 	return (0);
 }
@@ -61,12 +63,9 @@ int	ft_cmd_size(t_cmd *lst)
 
 t_cmd	*ft_cmd_last(t_cmd *lst)
 {
-	while (lst)
+	while (lst && lst->next)
 	{
-		if (lst->next == NULL)
-			return (lst);
-		else
-			lst = lst->next;
+		lst = lst->next;
 	}
 	return (lst);
 }
@@ -77,17 +76,16 @@ void	ft_cmd_delone(t_cmd *lst)
 		free(lst);
 }
 
-t_cmd	*ft_cmd_new(char **cmd, int built_in, t_redir *in, t_redir *out)
+t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out)
 {
-	t_cmd	*tab;
+	t_cmd	*new;
 
-	tab = malloc(sizeof(t_cmd));
-	if (!tab)
+	new = malloc(sizeof(t_cmd));
+	if (!new)
 		return (NULL);
-	tab->cmd = cmd;
-	tab->built_in = built_in;
-	tab->in = in;
-	tab->out = out;
-	tab->next = NULL;
-	return (tab);
+	new->cmd = cmd;
+	new->in = in;
+	new->out = out;
+	new->next = NULL;
+	return (new);
 }
