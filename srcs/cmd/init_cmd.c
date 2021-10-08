@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 09:53:55 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 15:58:40 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	execute(char **cmd, char **envp)
 {
@@ -36,28 +36,14 @@ int	execute(char **cmd, char **envp)
 
 int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 {
-	int		ret;
 	t_cmd	*tmp;
-	char	**exe;
 
 	tmp = cmd;
 	while (cmd)
 	{
-		exe = redir(cmd->cmd);
-		if (exe == NULL)
+		if (cmd->cmd && redir(cmd->cmd, tmp, envp, env_lst) == -1)
 			return (-1);
-		if (exe)
-		{
-			ret = recover_cmd(exe, env_lst, tmp);
-			if (exe && ret == 2)
-			{
-				ret = execute(exe, envp);
-				if (ret == -1)
-					return (ret);
-			}
-		}
-		free_strs(exe);
 		cmd = cmd->next;
 	}
-	return (ret);
+	return (0);
 }

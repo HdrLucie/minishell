@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 12:05:37 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 16:01:50 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	parse_fd(char **cmd, int i)
 {
@@ -82,7 +82,7 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	return (0);
 }
 
-char	**redir(char **cmd)
+int	redir(char **cmd, t_cmd *lst, char **envp, t_env **env_lst)
 {
 	int		count;
 	t_redir	*red;
@@ -91,13 +91,16 @@ char	**redir(char **cmd)
 	count = count_redir(cmd);
 	red = malloc(count * sizeof(t_redir));
 	if (red == NULL)
-		return (print_char_error("ALLOCATION FAILED\n", -1));
+		return (print_error("ALLOCATION FAILED\n", -1));
 	exe = malloc(sizeof(char *) * (ft_strslen(cmd) + 1));
 	if (exe == NULL)
-		return (print_char_error("ALLOCATION FAILED\n", -1));
+		return (print_error("ALLOCATION FAILED\n", -1));
 	if (fill_red(cmd, red, exe) == -1)
-		return (NULL);
-	// print_redir(red, count, exe);
+		return (-1);
+	exe_redir(red, count);
+	exe_cmd(exe, lst, envp, env_lst);
+	free_strs(exe);
+	close_fd(red, count);
 	free_red(red, count);
-	return (exe);
+	return (0);
 }

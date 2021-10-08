@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/08 12:11:10 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 16:01:43 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_redir
 	int		n;
 	char	op[3];
 	char	*path;
+	int		save_fd;
 }				t_redir;
 
 typedef struct s_cmd
@@ -100,15 +101,21 @@ char	**ft_substrs(char **s, size_t len);
 */
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
 int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
+int		execute(char **cmd, char **envp);
 /*
 **	redir.c 
 */
-char	**redir(char **cmd);
+int		redir(char **cmd, t_cmd *lst, char **envp, t_env **env_lst);
 void	free_red(t_redir *red, int size);
 int		count_redir(char **cmd);
 void	print_redir(t_redir	*red, int count, char **cmd);
 char	**ft_realloc_strs(char **strs, size_t size);
-
+/*
+**	exe_redir.c 
+*/
+int		exe_redir(t_redir *redir, int count);
+int		close_fd(t_redir *red, int count);
+int		exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst);
 /****************************/
 /*			BUILTINS		*/
 /****************************/
