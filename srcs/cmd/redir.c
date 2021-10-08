@@ -6,30 +6,30 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 20:49:52 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 07:48:16 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_realloc_strs(char **strs, size_t size)
+char **ft_realloc_strs(char **strs, size_t size)
 {
 	char	**res;
 	size_t	i;
 
 	i = 0;
-	res = malloc(size * sizeof(char *));
+	res = malloc((size + 1) * sizeof(char *));
 	if (res == NULL)
-		return (-1);
+		return (NULL);
 	while (strs[i] && i < size)
 	{
-		res[i] = strs[i];
+		write(1, "here\n", 6);
+		res[i] = ft_strdup(strs[i]);
 		i++;
 	}
-	res[i] = NULL;
-	free(strs);
-	strs = res;
-	return (0);
+	res[size - 1] = NULL;
+	free_strs(strs);
+	return (res);
 }
 
 void	print_redir(t_redir	*red, int count, char **cmd)
@@ -46,9 +46,10 @@ void	print_redir(t_redir	*red, int count, char **cmd)
 		i++;
 	}
 	i = 0;
-	while (cmd[i])
+	printf("CMD : \n");
+	while (cmd && cmd[i])
 	{
-		printf("CMD : %s\n", cmd[i]);
+		printf("%s\n", cmd[i]);
 		i++;
 	}
 }
@@ -60,7 +61,7 @@ int	count_redir(char **cmd)
 
 	i = 0;
 	count = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
@@ -81,7 +82,7 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	i = 0;
 	j = 0;
 	k = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
@@ -90,7 +91,7 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 			else
 				red[j].n = 0;
 			red[j].op[0] = cmd[i][0];
-			if (cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
+			if (i > 0 && cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
 				&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
 				red[j].n = cmd[i - 1][0] - '0';
 			if (cmd[i + 1] && ft_strlen(cmd[i + 1]) == 1
@@ -102,7 +103,7 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 					red[j].path = ft_strdup(cmd[i + 2]);
 				else
 					return (print_error("PARSE ERROR\n", -1));
-				i++;
+				i += 2;
 			}
 			else
 			{
@@ -111,14 +112,21 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 					red[j].path = ft_strdup(cmd[i + 1]);
 				else
 					return (print_error("PARSE ERROR\n", -1));
+				i++;
 			}
 			j++;	
 		}
 		else
 		{
-			if (ft_realloc_strs(exe, k + 1) == -1)
-				return (print_error("ALLOCATION FAILED\n", -1));
-			exe[k] = ft_strdup(cmd[i]);
+			if (cmd[i + 1] && (!ft_strcmp(cmd[i + 1], "<") || !ft_strcmp(cmd[i + 1], ">"))
+				&& ft_strlen(cmd[i]) == 1 && cmd[i][0] >= '0' && cmd[i][0] <= '9')
+				;
+			else
+			{
+				exe[k] = ft_strdup(cmd[i]);
+				printf("exe[%d] : |%s|\n",k,  exe[k]);
+				k++;
+			}
 		}
 		i++;
 	}
@@ -126,8 +134,21 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	return (0);
 }
 
+void	free_red(t_redir *red, int size)
+{
+	int	i;
 
-int	redir(char **cmd)
+	i = 0;
+	while (i < size)
+	{
+		free (red[i].path);
+		i++;
+	}
+	free(red);
+}
+
+
+char	**redir(char **cmd)
 {
 	int		count;
 	t_redir	*red;
@@ -136,17 +157,13 @@ int	redir(char **cmd)
 	count = count_redir(cmd);
 	red = malloc(1 * sizeof(t_redir));
 	if (red == NULL)
-		return (print_error("ALLOCATION FAILED\n", -1));
-	exe = malloc(sizeof(char *));
+		return (print_char_error("ALLOCATION FAILED\n", -1));
+	exe = malloc(sizeof(char *) * (ft_strslen(cmd) + 1));
 	if (exe == NULL)
-		return (print_error("ALLOCATION FAILED\n", -1));
-	write(1, "debug1\n", 7);
+		return (print_char_error("ALLOCATION FAILED\n", -1));
 	if (fill_red(cmd, red, exe) == -1)
-		return (-1);
-	write(1, "debug2\n", 7);
-	free_strs(cmd);
-	cmd = exe;
-	print_redir(red, count, cmd);
-	free(red);
-	return (0);
+		return (NULL);
+	print_redir(red, count, exe);
+	free_red(red, count);
+	return (exe);
 }

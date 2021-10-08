@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 18:03:44 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 07:50:43 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_env
 
 void	free_strs(char **strs);
 int		print_error(char *msg, int retur);
-char	*print_char_error(char *msg, int retur);
+char	**print_char_error(char *msg, int retur);
 
 /****************************/
 /*			PARSER			*/
@@ -103,7 +103,7 @@ int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
 /*
 **	redir.c 
 */
-int		redir(char **cmd);
+char	**redir(char **cmd);
 
 /****************************/
 /*			BUILTINS		*/
@@ -111,7 +111,7 @@ int		redir(char **cmd);
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void    ft_exit(t_env *env, t_cmd *cmd);
+void    ft_exit(t_env *env, t_cmd *cmd, char **exe);
 void	udpate_alpha_road(t_env *env);
 void 	free_node(t_env *node);
 t_env	*create_env_lst(char **env);

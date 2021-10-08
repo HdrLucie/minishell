@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recover_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/07 16:05:38 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 07:51:10 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	recover_cmd(char **cmd, t_env **env, t_cmd *lst)
 	else if (!ft_strncmp(cmd[0], "unset", ft_strlen("unset")))
 		unset_var(env, cmd[1]);
 	else if (!ft_strcmp(cmd[0], "exit"))
-		ft_exit(*env, lst);
+		ft_exit(*env, lst, cmd);
 	else
 		return (2);
 	return (1);

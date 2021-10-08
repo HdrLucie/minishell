@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 18:05:39 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 07:20:44 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,25 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 {
 	int		ret;
 	t_cmd	*tmp;
+	char	**exe;
 
 	tmp = cmd;
 	while (cmd)
 	{
-		if (redir(cmd->cmd) == -1)
+		exe = redir(cmd->cmd);
+		if (exe == NULL)
 			return (-1);
-		if (cmd->cmd)
+		if (exe)
 		{
-			ret = recover_cmd(cmd->cmd, env_lst, tmp);
-			if (cmd->cmd && ret == 2)
+			ret = recover_cmd(exe, env_lst, tmp);
+			if (exe && ret == 2)
 			{
-				ret = execute(cmd->cmd, envp);
+				ret = execute(exe, envp);
 				if (ret == -1)
 					return (ret);
 			}
 		}
+		free_strs(exe);
 		cmd = cmd->next;
 	}
 	return (ret);
