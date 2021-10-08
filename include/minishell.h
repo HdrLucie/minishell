@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 09:00:19 by elisehautef      ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -120,7 +108,7 @@ void	lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int		ft_fill_env_lst_value(char *str, t_env *env, int i);
 int		ft_check_env(t_env *env, char *var_export);
-int		export_var(t_env *env, char *var_export);
+int		export_var(t_env *env, char **var_export);
 int		create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
 int		unset_var(t_env **env, char *unset_var_name);
