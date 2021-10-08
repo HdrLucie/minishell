@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 10:05:58 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 11:48:01 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,32 +74,32 @@ int	count_redir(char **cmd)
 	return (count);
 }
 
-int	parse_redir(char **cmd, int i, t_redir red)
+int	parse_redir(char **cmd, int i, t_redir *red, int j)
 {
 	if (cmd[i][0] == '>')
-		red.n = 1;
+		red[j].n = 1;
 	else
-		red.n = 0;
-	red.op[0] = cmd[i][0];
+		red[j].n = 0;
+	red[j].op[0] = cmd[i][0];
 	if (i > 0 && cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
 		&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
-		red.n = cmd[i - 1][0] - '0';
+		red[j].n = cmd[i - 1][0] - '0';
 	if (cmd[i + 1] && ft_strlen(cmd[i + 1]) == 1
 		&& cmd[i + 1][0] == cmd[i][0])
 	{
-		red.op[1] = '>';
-		red.op[2] = '\0';
+		red[j].op[1] = '>';
+		red[j].op[2] = '\0';
 		if (cmd[i + 2])
-			red.path = ft_strdup(cmd[i + 2]);
+			red[j].path = ft_strdup(cmd[i + 2]);
 		else
 			return (print_error("PARSE ERROR\n", -1));
 		i += 2;
 	}
 	else
 	{
-		red.op[1] = '\0';
+		red[j].op[1] = '\0';
 		if (cmd[i + 1])
-			red.path = ft_strdup(cmd[i + 1]);
+			red[j].path = ft_strdup(cmd[i + 1]);
 		else
 			return (print_error("PARSE ERROR\n", -1));
 		i++;
@@ -120,7 +120,7 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	{
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
-			i = parse_redir(cmd, i, red[j]);
+			i = parse_redir(cmd, i, red, j);
 			if (i == -1)
 				return (-1);
 			j++;
