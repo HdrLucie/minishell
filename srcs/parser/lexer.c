@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 17:32:34 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:56:26 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	parser(char **token, char **envp, t_env **env_lst)
 		cmd = parse_end(cmd, token, &begin, i);
 	free_strs(token);
 	ft_execute_cmd(cmd, envp, env_lst);
+	ft_cmd_clear(cmd);
 	return (0);
 }
 
