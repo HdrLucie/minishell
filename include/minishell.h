@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 16:58:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 09:00:19 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**cmd;
-	t_redir			in;
-	t_redir			out;
+	int				pipe_in;
+	int				pipe_out;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -54,7 +54,7 @@ typedef struct s_env
 
 void	free_strs(char **strs);
 int		print_error(char *msg, int retur);
-char	*print_char_error(char *msg, int retur);
+char	**print_char_error(char *msg, int retur);
 
 /****************************/
 /*			PARSER			*/
@@ -71,7 +71,7 @@ int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
 void	ft_cmd_clear(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
-t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out);
+t_cmd	*ft_cmd_new(char **cmd, int in, int out);
 /*
 ** 	split_quote.c
 */
@@ -95,8 +95,15 @@ char	**ft_substrs(char **s, size_t len);
 /****************************/
 /*			CMD				*/
 /****************************/
+/*
+**	init_cmd.c 
+*/
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
 int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
+/*
+**	redir.c 
+*/
+char	**redir(char **cmd);
 
 /****************************/
 /*			BUILTINS		*/
@@ -104,7 +111,7 @@ int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void    ft_exit(t_env *env, t_cmd *cmd);
+void    ft_exit(t_env *env, t_cmd *cmd, char **exe);
 void	udpate_alpha_road(t_env *env);
 void 	free_node(t_env *node);
 t_env	*create_env_lst(char **env);

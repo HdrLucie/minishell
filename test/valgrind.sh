@@ -4,7 +4,7 @@ EXEC=./minishell # Put your executable's path here.
 LOG=valgrind
 
 # Compile and set executable rights
-make re -C ../ > /dev/null
+make debug -C ../ > /dev/null
 cp ../minishell .
 chmod 755 minishell
 

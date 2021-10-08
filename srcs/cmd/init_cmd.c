@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 17:22:58 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 09:15:51 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	execute(char **cmd, char **envp)
 	if (cmd[0] == NULL)
 		return (print_error("PARSE PATH ERROR\n", -1));
 	pid = fork();
+
 	if (pid == -1)
 		return (print_error("FORK ERROR\n", -1));
 	if (pid == 0)
@@ -38,23 +39,26 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 {
 	int		ret;
 	t_cmd	*tmp;
+	char	**exe;
 
 	tmp = cmd;
 	while (cmd)
 	{
-		// redir(cmd);
-		if (cmd->cmd)
+		exe = redir(cmd->cmd);
+		if (exe == NULL)
+			return (-1);
+		if (exe)
 		{
-			ret = recover_cmd(cmd->cmd, env_lst, tmp);
-			if (cmd->cmd && ret == 2)
+			ret = recover_cmd(exe, env_lst, tmp);
+			if (exe && ret == 2)
 			{
-				ret = execute(cmd->cmd, envp);
+				ret = execute(exe, envp);
 				if (ret == -1)
 					return (ret);
 			}
 		}
+		free_strs(exe);
 		cmd = cmd->next;
 	}
-	// ft_print_list(cmd);
 	return (ret);
 }

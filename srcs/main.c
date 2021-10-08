@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 17:24:15 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 07:00:17 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	print_error(char *msg, int retur)
 	return (retur);
 }
 
-char	*print_char_error(char *msg, int retur)
+char	**print_char_error(char *msg, int retur)
 {
 	write(2, "MINISHELL : ", 12);
 	write(2, msg, ft_strlen(msg));

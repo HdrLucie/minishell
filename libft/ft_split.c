@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:19:03 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 18:09:06 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 08:47:47 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_split2(int word, char c, char **strs, char *s)
 	j = -1;
 	while (++j < word)
 	{
-		while (s[i] == c)
+		while (s && s[i] && s[i] == c)
 			i++;
 		size = ft_size_word(s, c, i);
 		strs[j] = ft_substr((char *)s, i, size);

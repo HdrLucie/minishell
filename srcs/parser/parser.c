@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 16:57:44 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 09:02:27 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_substrs(char **s, size_t len)
 	return (str);
 }
 
-t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, t_redir in, t_redir out)
+t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, int in, int out)
 {
 	t_cmd	*last;
 	t_cmd	*new;
@@ -43,7 +43,7 @@ t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, t_redir in, t_redir out)
 	if (cmd && last->cmd == NULL)
 	{
 		last->cmd = tmp;
-		last->out = out;
+		last->pipe_out = out;
 	}
 	else if (!cmd)
 	{
@@ -64,19 +64,15 @@ t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, t_redir in, t_redir out)
 t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 {
 	char	**tmp;
-	t_redir	out;
-	t_redir	in;
 	t_cmd	*new;
 
-	out.op[0] = '|';
-	in.op[0] = '0';
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);
-	cmd = find_cmd_struct(cmd, tmp, in, out);
+	cmd = find_cmd_struct(cmd, tmp, 0, 1);
 	if (cmd == NULL)
 		return (NULL);
-	new = ft_cmd_new(NULL, out, in);
+	new = ft_cmd_new(NULL, 1, 0);
 	if (new == NULL)
 		return (NULL);
 	ft_cmd_add_back(&cmd, new);
@@ -87,15 +83,13 @@ t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 t_cmd	*parse_end(t_cmd *cmd, char **token, int *begin, int i)
 {
 	char	**tmp;
-	t_redir	vide;
 	t_cmd	*last;
 
-	vide.op[0] = '0';
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);
 	last = ft_cmd_last(cmd);
-	cmd = find_cmd_struct(cmd, tmp, vide, vide);
+	cmd = find_cmd_struct(cmd, tmp, 0, 0);
 	if (cmd == NULL)
 		return (NULL);
 	*begin = i + 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/04 09:43:49 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 08:54:07 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*ft_strcat_parse_path(char *s1, char *s2)
 	s3 = malloc(sizeof(char *) * (size_s1 + size_s2 + 1));
 	if (s3 == NULL)
 		return (NULL);
-	while (++i < size_s1)
+	while (++i < size_s1 && s1 && s1[i])
 		s3[i] = s1[i];
 	i--;
-	while (++i < size_s1 + size_s2)
+	while (++i < size_s1 + size_s2 && s2 && s2[i - size_s1])
 		s3[i] = s2[i - size_s1];
 	s3[i] = '\0';
 	return (s3);
@@ -59,7 +59,7 @@ char	*find_path(char **path, char *cmd)
 	i = 0;
 	if (cmd == NULL)
 		return (NULL);
-	while (path[i])
+	while (path && path[i])
 	{
 		tmp = ft_strcat_parse_path(path[i], "/");
 		test = ft_strcat_parse_path(tmp, cmd);
@@ -81,7 +81,7 @@ void	free_path(char **path)
 	int	i;
 
 	i = 0;
-	while (path[i])
+	while (path && path[i])
 	{
 		free(path[i]);
 		path[i] = NULL;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/07 16:05:32 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 07:50:56 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(t_env *env, t_cmd *cmd)
+void	ft_exit(t_env *env, t_cmd *cmd, char **exe)
 {
 	t_env	*tmp;
 
@@ -28,6 +28,7 @@ void	ft_exit(t_env *env, t_cmd *cmd)
 			env = tmp;
 		}
 	}
+	free_strs(exe);
 	env = NULL;
 	exit(0);
 }

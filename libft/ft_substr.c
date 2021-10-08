@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:19:28 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/27 18:12:24 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/08 08:40:11 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(const char *s, int start, size_t len)
 		return (str);
 	if (str == NULL)
 		return (NULL);
-	while (i < len && s[i])
+	while (i < len && s && s[i])
 	{
 		str[i] = s[start + i];
 		i++;
