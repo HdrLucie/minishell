@@ -6,13 +6,13 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 09:43:15 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 10:05:58 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **ft_realloc_strs(char **strs, size_t size)
+char	**ft_realloc_strs(char **strs, size_t size)
 {
 	char	**res;
 	size_t	i;
@@ -66,12 +66,45 @@ int	count_redir(char **cmd)
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
 			count++;
-			i++;	
+			i++;
 		}
 		i++;
 	}
 	printf("COUNT RED : %d\n", count);
 	return (count);
+}
+
+int	parse_redir(char **cmd, int i, t_redir red)
+{
+	if (cmd[i][0] == '>')
+		red.n = 1;
+	else
+		red.n = 0;
+	red.op[0] = cmd[i][0];
+	if (i > 0 && cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
+		&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
+		red.n = cmd[i - 1][0] - '0';
+	if (cmd[i + 1] && ft_strlen(cmd[i + 1]) == 1
+		&& cmd[i + 1][0] == cmd[i][0])
+	{
+		red.op[1] = '>';
+		red.op[2] = '\0';
+		if (cmd[i + 2])
+			red.path = ft_strdup(cmd[i + 2]);
+		else
+			return (print_error("PARSE ERROR\n", -1));
+		i += 2;
+	}
+	else
+	{
+		red.op[1] = '\0';
+		if (cmd[i + 1])
+			red.path = ft_strdup(cmd[i + 1]);
+		else
+			return (print_error("PARSE ERROR\n", -1));
+		i++;
+	}
+	return (i);
 }
 
 int	fill_red(char **cmd, t_redir *red, char **exe)
@@ -87,47 +120,16 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	{
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
-			if (cmd[i][0] == '>')
-				red[j].n = 1;
-			else
-				red[j].n = 0;
-			red[j].op[0] = cmd[i][0];
-			if (i > 0 && cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
-				&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
-				red[j].n = cmd[i - 1][0] - '0';
-			if (cmd[i + 1] && ft_strlen(cmd[i + 1]) == 1
-				&& cmd[i + 1][0] == cmd[i][0])
-			{
-				red[j].op[1] = '>';
-				red[j].op[2] = '\0';
-				if (cmd[i + 2])
-					red[j].path = ft_strdup(cmd[i + 2]);
-				else
-					return (print_error("PARSE ERROR\n", -1));
-				i += 2;
-			}
-			else
-			{
-				red[j].op[1] = '\0';
-				if (cmd[i + 1])
-					red[j].path = ft_strdup(cmd[i + 1]);
-				else
-					return (print_error("PARSE ERROR\n", -1));
-				i++;
-			}
-			j++;	
+			i = parse_redir(cmd, i, red[j]);
+			if (i == -1)
+				return (-1);
+			j++;
 		}
 		else
-		{
-			if (cmd[i + 1] && (!ft_strcmp(cmd[i + 1], "<") || !ft_strcmp(cmd[i + 1], ">"))
-				&& ft_strlen(cmd[i]) == 1 && cmd[i][0] >= '0' && cmd[i][0] <= '9')
-				;
-			else
-			{
-				exe[k] = ft_strdup(cmd[i]);
-				k++;
-			}
-		}
+			if (!cmd[i + 1] || (ft_strcmp(cmd[i + 1], "<")
+					&& ft_strcmp(cmd[i + 1], ">")) || ft_strlen(cmd[i]) != 1
+				|| cmd[i][0] < '0' || cmd[i][0] > '9')
+				exe[k++] = ft_strdup(cmd[i]);
 		i++;
 	}
 	exe[k] = NULL;
@@ -146,7 +148,6 @@ void	free_red(t_redir *red, int size)
 	}
 	free(red);
 }
-
 
 char	**redir(char **cmd)
 {
