@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 07:48:16 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 08:06:32 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 			else
 			{
 				exe[k] = ft_strdup(cmd[i]);
-				printf("exe[%d] : |%s|\n",k,  exe[k]);
 				k++;
 			}
 		}

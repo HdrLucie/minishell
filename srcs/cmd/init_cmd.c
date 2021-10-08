@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 07:20:44 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 09:04:36 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	execute(char **cmd, char **envp)
 	if (cmd[0] == NULL)
 		return (print_error("PARSE PATH ERROR\n", -1));
 	pid = fork();
+
 	if (pid == -1)
 		return (print_error("FORK ERROR\n", -1));
 	if (pid == 0)

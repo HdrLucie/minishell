@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 07:50:43 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 09:00:19 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**cmd;
-	t_redir			in;
-	t_redir			out;
+	int				pipe_in;
+	int				pipe_out;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -71,7 +71,7 @@ int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
 void	ft_cmd_clear(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
-t_cmd	*ft_cmd_new(char **cmd, t_redir in, t_redir out);
+t_cmd	*ft_cmd_new(char **cmd, int in, int out);
 /*
 ** 	split_quote.c
 */
