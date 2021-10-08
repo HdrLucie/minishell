@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 03:16:39 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/08 15:43:49 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	print_env(t_env *env)
 {

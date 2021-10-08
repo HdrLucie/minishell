@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 15:58:40 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	execute(char **cmd, char **envp)
 {

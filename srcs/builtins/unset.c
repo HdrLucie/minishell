@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 14:31:07 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/08 15:43:49 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	unset_alpha_var(t_env *env, char *unset_alpha_var_name)
 {

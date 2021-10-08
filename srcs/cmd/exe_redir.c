@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/08 16:26:10 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 17:44:23 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	do_right_redir(t_redir red)
 {
@@ -19,8 +19,8 @@ int	do_right_redir(t_redir red)
 	red.save_fd = dup(red.n);
 	if (ft_strlen(red.path) == 1)
 		file_fd = open(red.path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	else	
-		file_fd = open(red.path, O_WRONLY | O_CREAT , 0666);
+	else
+		file_fd = open(red.path, O_WRONLY | O_CREAT, 0666);
 	dup2(file_fd, red.n);
 	close(file_fd);
 	return (0);
@@ -57,7 +57,7 @@ int	close_fd(t_redir *red, int count)
 int	exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst)
 {
 	int	ret;
-	
+
 	ret = 0;
 	if (exe)
 	{
@@ -74,7 +74,7 @@ int	exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst)
 
 int	exe_redir(t_redir *red, int count)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (i < count)

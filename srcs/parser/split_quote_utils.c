@@ -6,11 +6,11 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 15:43:49 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 int	parse_export(char *str, int i)
 {
