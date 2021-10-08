@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 17:56:39 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 09:00:19 by elisehautef      ###   ########.fr       */
+/*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
+/*   Updated: 2021/10/08 12:11:10 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
 **	redir.c 
 */
 char	**redir(char **cmd);
+void	free_red(t_redir *red, int size);
+int		count_redir(char **cmd);
+void	print_redir(t_redir	*red, int count, char **cmd);
+char	**ft_realloc_strs(char **strs, size_t size);
 
 /****************************/
 /*			BUILTINS		*/
@@ -111,9 +115,9 @@ char	**redir(char **cmd);
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void    ft_exit(t_env *env, t_cmd *cmd, char **exe);
+void	ft_exit(t_env *env, t_cmd *cmd, char **exe);
 void	udpate_alpha_road(t_env *env);
-void 	free_node(t_env *node);
+void	free_node(t_env *node);
 t_env	*create_env_lst(char **env);
 int		ft_fill_env_lst(char *str, t_env *env);
 void	lstadd_back_env(t_env **alst, t_env *new);

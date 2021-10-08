@@ -1,89 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir.c                                            :+:      :+:    :+:   */
+/*   parse_redir_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 11:48:01 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 12:05:37 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_realloc_strs(char **strs, size_t size)
+int	parse_fd(char **cmd, int i)
 {
-	char	**res;
-	size_t	i;
+	int	fd;
 
-	i = 0;
-	res = malloc((size + 1) * sizeof(char *));
-	if (res == NULL)
-		return (NULL);
-	while (strs[i] && i < size)
-	{
-		write(1, "here\n", 6);
-		res[i] = ft_strdup(strs[i]);
-		i++;
-	}
-	res[size - 1] = NULL;
-	free_strs(strs);
-	return (res);
-}
-
-void	print_redir(t_redir	*red, int count, char **cmd)
-{
-	int	i;
-
-	i = 0;
-	while (i < count)
-	{
-		printf("RED : %d\n", i);
-		printf("n: %d\n", red[i].n);
-		printf("op: %s\n", red[i].op);
-		printf("path: %s\n", red[i].path);
-		i++;
-	}
-	i = 0;
-	printf("CMD : \n");
-	while (cmd && cmd[i])
-	{
-		printf("%s\n", cmd[i]);
-		i++;
-	}
-}
-
-int	count_redir(char **cmd)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (cmd && cmd[i])
-	{
-		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
-		{
-			count++;
-			i++;
-		}
-		i++;
-	}
-	printf("COUNT RED : %d\n", count);
-	return (count);
+	if (cmd[i][0] == '>')
+		fd = 1;
+	else
+		fd = 0;
+	if (i > 0 && cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
+		&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
+		fd = cmd[i - 1][0] - '0';
+	return (fd);
 }
 
 int	parse_redir(char **cmd, int i, t_redir *red, int j)
 {
-	if (cmd[i][0] == '>')
-		red[j].n = 1;
-	else
-		red[j].n = 0;
+	red[j].n = parse_fd(cmd, i);
 	red[j].op[0] = cmd[i][0];
-	if (i > 0 && cmd[i - 1] && ft_strlen(cmd[i - 1]) == 1
-		&& cmd[i - 1][0] >= '0' && cmd[i - 1][0] <= '9')
-		red[j].n = cmd[i - 1][0] - '0';
 	if (cmd[i + 1] && ft_strlen(cmd[i + 1]) == 1
 		&& cmd[i + 1][0] == cmd[i][0])
 	{
@@ -134,19 +80,6 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	}
 	exe[k] = NULL;
 	return (0);
-}
-
-void	free_red(t_redir *red, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		free (red[i].path);
-		i++;
-	}
-	free(red);
 }
 
 char	**redir(char **cmd)

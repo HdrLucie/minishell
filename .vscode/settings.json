@@ -1,6 +1,6 @@
 {
 	"files.associations": {
-		"minishell.h": "${workspaceFolder}/include/minishell.h"
+		"minishell.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Enabled"
 }
