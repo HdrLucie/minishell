@@ -35,7 +35,7 @@ CFLAGS	= -Wall -Wextra -Werror
 DEBUG_FLAG =  -g3
 
 .c.o:		${SRCS}
-			${CC} ${CFLAGS} ${DEBUG_FLAG} ${INCLUDE} -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}
 			make -C libft
@@ -44,7 +44,10 @@ ${NAME}:	${OBJS} ${HEAD}
 
 
 debug:		${SRCS} ${HEAD}
-			@${CC} ${OBJS} ${CFLAGS} ${DEBUG_FLAG} ${INCLUDE} -Llibft -lft -lreadline -o ${NAME}
+			make -C libft
+			@${CC} ${SRCS} ${CFLAGS} ${DEBUG_FLAG} ${INCLUDE} -Llibft -lft -lreadline -o ${NAME}
+			@echo "\033[33mREADY TO DEBUG\t\t\tGOOD LUCK\033[0m"
+
 
 all: 		${NAME}
 

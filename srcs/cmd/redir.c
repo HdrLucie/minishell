@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 08:06:32 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/08 09:43:15 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	count_redir(char **cmd)
 		}
 		i++;
 	}
+	printf("COUNT RED : %d\n", count);
 	return (count);
 }
 
@@ -154,7 +155,7 @@ char	**redir(char **cmd)
 	char	**exe;
 
 	count = count_redir(cmd);
-	red = malloc(1 * sizeof(t_redir));
+	red = malloc(count * sizeof(t_redir));
 	if (red == NULL)
 		return (print_char_error("ALLOCATION FAILED\n", -1));
 	exe = malloc(sizeof(char *) * (ft_strslen(cmd) + 1));
@@ -162,7 +163,7 @@ char	**redir(char **cmd)
 		return (print_char_error("ALLOCATION FAILED\n", -1));
 	if (fill_red(cmd, red, exe) == -1)
 		return (NULL);
-	print_redir(red, count, exe);
+	// print_redir(red, count, exe);
 	free_red(red, count);
 	return (exe);
 }
