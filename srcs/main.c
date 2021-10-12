@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:21 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:35:03 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_strs(char **strs)
 	while (strs[++i])
 	{
 		// write(1, strs[i], ft_strlen(strs[i]));
-		// write(1, "\n", 1);
+		// write(1, "|\n", 2);
 		free(strs[i]);
 	}
 	free(strs);

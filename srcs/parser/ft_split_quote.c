@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 18:17:34 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:33:13 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char	**fill_split(char *str, char **split, int word)
 			return (NULL);
 		while (++i < size)
 			split[j][i] = str[k++];
+		if (str[k] == '\"')
+			k++;
 		split[j][i] = '\0';
 	}
 	split[j] = NULL;
