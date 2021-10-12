@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
+/*   Updated: 2021/10/12 18:19:22 by elisehautef      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -17,6 +29,7 @@ typedef struct s_redir
 	int		n;
 	char	op[3];
 	char	*path;
+	int		save_fd;
 }				t_redir;
 
 typedef struct s_cmd
@@ -88,20 +101,30 @@ char	**ft_substrs(char **s, size_t len);
 */
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
 int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
+int		execute(char **cmd, char **envp);
 /*
 **	redir.c 
 */
-char	**redir(char **cmd);
-
+int		redir(char **cmd, t_cmd *lst, char **envp, t_env **env_lst);
+void	free_red(t_redir *red, int size);
+int		count_redir(char **cmd);
+void	print_redir(t_redir	*red, int count, char **cmd);
+char	**ft_realloc_strs(char **strs, size_t size);
+/*
+**	exe_redir.c 
+*/
+int		exe_redir(t_redir *redir, int count);
+int		close_fd(t_redir *red, int count);
+int		exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst);
 /****************************/
 /*			BUILTINS		*/
 /****************************/
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void    ft_exit(t_env *env, t_cmd *cmd, char **exe);
+void	ft_exit(t_env *env, t_cmd *cmd, char **exe);
 void	udpate_alpha_road(t_env *env);
-void 	free_node(t_env *node);
+void	free_node(t_env *node);
 t_env	*create_env_lst(char **env);
 int		ft_fill_env_lst(char *str, t_env *env);
 void	lstadd_back_env(t_env **alst, t_env *new);

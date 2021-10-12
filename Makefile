@@ -1,11 +1,14 @@
 SRCS =  srcs/main.c 					\
 		srcs/cmd/init_cmd.c 			\
-		srcs/cmd/redir.c 				\
+		srcs/cmd/parse_redir_1.c		\
+		srcs/cmd/parse_redir_2.c		\
+		srcs/cmd/exe_redir.c			\
 		srcs/parser/parse_path.c 		\
 		srcs/parser/lst_cmd_utils.c 	\
 		srcs/parser/lexer.c				\
 		srcs/parser/parser.c			\
 		srcs/parser/ft_split_quote.c	\
+		srcs/parser/ft_is_char.c		\
 		srcs/parser/split_quote_utils.c \
 		srcs/builtins/env.c				\
 		srcs/builtins/lst_utils.c		\
@@ -16,7 +19,6 @@ SRCS =  srcs/main.c 					\
 		srcs/builtins/unset.c			\
 		srcs/builtins/export_utils.c	\
 		srcs/builtins/print_utils.c		\
-		srcs/parser/ft_is_char.c		\
 		srcs/signal.c
 
 
