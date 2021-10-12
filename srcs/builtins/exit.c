@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/12 18:19:44 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:39:59 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	ft_exit(t_env *env, t_cmd *cmd, char **exe)
 	}
 	free_strs(exe);
 	env = NULL;
+	printf("exit\n");
 	exit(0);
 }
