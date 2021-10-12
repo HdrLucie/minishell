@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/12 19:23:31 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/12 19:55:02 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		check_quote(char *str, int i);
 int		is_space(char *str, int i);
 int		is_redir(char *str, int i);
 int		is_spe_char(char *str, int i);
-int		find_token(char *str, int *i, char end);
+int		find_token(char *str, int i, char end);
 /*
 **	parse_path.c 
 */
