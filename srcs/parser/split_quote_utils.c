@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:18:59 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	check_quote(char *str, int i)
 	{
 		if (str[i] == '\"' && find_token(str, &i, '\"') == -1)
 			return (print_error("UNCLOSED QUOTE\n", -1));
-		else if (str[i] == '\'' && find_token(str, &i, '\'') == -1)
+		if (str[i] == '\'' && find_token(str, &i, '\'') == -1)
 			return (print_error("UNCLOSED QUOTE\n", -1));
 		else if (str[i] == '#' && find_token(str, &i, '\n') == -1)
 			return (i);

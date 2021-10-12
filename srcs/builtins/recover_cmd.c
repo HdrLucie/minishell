@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recover_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/12 18:20:28 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:23:03 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ int	recover_cmd(char **cmd, t_env **env, t_cmd *lst)
 		else if (!ft_strcmp(cmd[0], "pwd"))
 			print_pwd(*env);
 		else if (!ft_strncmp(cmd[0], "export", ft_strlen("export")))
-			export_var(*env, cmd[1]);
+			export_var(*env, cmd);
 		else if (!ft_strncmp(cmd[0], "unset", ft_strlen("unset")))
 			unset_var(env, cmd[1]);
 		else if (!ft_strcmp(cmd[0], "exit"))
 			ft_exit(*env, lst, cmd);
+		else if (!ft_strncmp(cmd[0], "echo", ft_strlen("echo")))
+			echo(cmd);
 		else
 			return (2);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/12 18:19:22 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:23:31 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int		unset_var(t_env **env, char *unset_var_name);
 int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
+void    echo(char **to_print);
 
 /****************************/
 /*			PRINT			*/

@@ -19,7 +19,8 @@ SRCS =  srcs/main.c 					\
 		srcs/builtins/unset.c			\
 		srcs/builtins/export_utils.c	\
 		srcs/builtins/print_utils.c		\
-		srcs/signal.c
+		srcs/signal.c					\
+		srcs/builtins/echo.c
 
 
 OBJS = ${SRCS:.c=.o}
