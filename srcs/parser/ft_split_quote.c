@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/07 17:33:54 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:43:47 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,12 @@ int	size_word(char *str, int *k)
 	while (str[i] && is_space(str, i))
 		i++;
 	begin = i;
+	if (str[i] == '\"' || str[i] == '\'')
+		begin++;
 	*k = *k + begin;
 	i = check_quote(str, i);
+	if (str[i - 1] == '\"' || str[i - 1] == '\'')
+		i--;
 	return (i - begin);
 }
 
