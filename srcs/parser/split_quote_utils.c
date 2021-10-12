@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 19:18:59 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/12 19:56:40 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,18 @@ int	check_quote(char *str, int i)
 {
 	if (i == 0 || str[i - 1] != '\\')
 	{
-		if (str[i] == '\"' && find_token(str, &i, '\"') == -1)
-			return (print_error("UNCLOSED QUOTE\n", -1));
-		if (str[i] == '\'' && find_token(str, &i, '\'') == -1)
-			return (print_error("UNCLOSED QUOTE\n", -1));
-		else if (str[i] == '#' && find_token(str, &i, '\n') == -1)
-			return (i);
-		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '('
-			&& find_token(str, &i, ')') == -1)
-			return (print_error("UNCLOSED BRACKET\n", -1));
-		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{'
-			&& find_token(str, &i, '}') == -1)
-			return (print_error("UNCLOSED BRACKET\n", -1));
-		else if (str[i] == '$' && find_token(str, &i, ' ') == -1)
-			return (i);
+		if (str[i] == '\"')
+			return (find_token(str, i, '\"'));
+		if (str[i] == '\'')
+			return (find_token(str, i, '\''));
+		else if (str[i] == '#')
+			return (find_token(str, i, '\n'));
+		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '(')
+			return (find_token(str, i, ')'));
+		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{')
+			return (find_token(str, i, '}'));
+		else if (str[i] == '$')
+			return (find_token(str, i, ' '));
 	}
 	return (check_car_spe(str, i));
 }

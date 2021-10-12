@@ -6,25 +6,25 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 19:33:13 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 19:54:15 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	find_token(char *str, int *i, char end)
+int	find_token(char *str, int i, char end)
 {
-	*i = *i + 1;
+	i = i + 1;
 	if (end == '\"')
-		while (str[*i] && (str[*i] != end || str[*i - 1] == '\\'))
-			*i = *i + 1;
+		while (str[i] && (str[i] != end || str[i - 1] == '\\'))
+			i = i + 1;
 	else
-		while (str[*i] && str[*i] != end)
-			*i = *i + 1;
-	if (str[*i] != end)
-		return (-1);
-	*i = *i + 1;
-	return (0);
+		while (str[i] && str[i] != end)
+			i = i + 1;
+	if (str[i] != end)
+		return (print_error("UNCLOSED QUOTE\n", -1));
+	i = i + 1;
+	return (i);
 }
 
 int	count_word(char *str)
@@ -77,6 +77,7 @@ char	**fill_split(char *str, char **split, int word)
 	while (++j < word)
 	{
 		i = -1;
+		printf("size : |%s|\n", &str[k]);
 		size = size_word(&str[k], &k);
 		split[j] = malloc((size + 1) * sizeof(**split));
 		if (split[j] == NULL)
