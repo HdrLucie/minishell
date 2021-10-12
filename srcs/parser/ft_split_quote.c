@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 19:54:15 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/12 20:05:07 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	**fill_split(char *str, char **split, int word)
 	while (++j < word)
 	{
 		i = -1;
-		printf("size : |%s|\n", &str[k]);
+		// printf("size : |%s|\n", &str[k]);
 		size = size_word(&str[k], &k);
 		split[j] = malloc((size + 1) * sizeof(**split));
 		if (split[j] == NULL)
