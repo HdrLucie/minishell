@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/12 22:48:37 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/13 04:30:55 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
 int		echo(char **to_print, t_env *env);
+int		change_directory(t_env *env, char **cmd);
+int		change_exp_value(t_env *env, char *name_exp, char *value_exp);
 
 /****************************/
 /*			PRINT			*/

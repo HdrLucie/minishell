@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:21:45 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/12 23:28:27 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/12 23:34:47 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	to_find_substitute(char *to_print, int last_char, char **to_find)
 
 	i = 0;
 	j = 0;
-	if (to_print[i] == '$' && to_print[i + 1] == '{' && to_print[last_char] == '}')
+	if (to_print[i] == '$' && to_print[i + 1] == '{'
+		&& to_print[last_char] == '}')
 	{
 		i = 2;
 		*to_find = malloc(sizeof(char) * (last_char - 1));
@@ -34,13 +35,14 @@ int	to_find_substitute(char *to_print, int last_char, char **to_find)
 
 int	print_substitute(t_env *env, char *to_print)
 {
-	int	j;
-	int	last_char;
-	char	*to_find = NULL;
+	int		j;
+	int		last_char;
+	char	*to_find;
 
 	j = 0;
 	last_char = ft_strlen(to_print) - 1;
-	if(!to_find_substitute(to_print, last_char, &to_find))
+	to_find = NULL;
+	if (!to_find_substitute(to_print, last_char, &to_find))
 		return (-1);
 	if (to_print[j] == '$' && to_print[j + 1] == '{')
 	{

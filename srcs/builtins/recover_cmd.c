@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/12 23:02:28 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/13 04:30:51 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	recover_cmd(char **cmd, t_env **env, t_cmd *lst)
 			ft_exit(*env, lst, cmd);
 		else if (!ft_strncmp(cmd[0], "echo", ft_strlen("echo")))
 			echo(cmd, *env);
+		else if (!ft_strncmp(cmd[0], "cd", ft_strlen("cd")))
+			change_directory(*env, cmd);
 		else
 			return (2);
 	}
