@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/13 06:02:42 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/14 01:18:21 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,63 @@ int	malloc_directory(t_env *env, char **directory, char *to_find)
 		if (!ft_strcmp(env->name, to_find))
 		{
 			while (env->value[i])
-			(*directory)[size++] = env->value[i++];
+				(*directory)[size++] = env->value[i++];
 		}
 		env = env->next;
 	}
 	(*directory)[i] = '\0';
+	return (1);
+}
+
+int	check_last_slash(char *str)
+{
+	int	i;
+
+	i = ft_strlen(str) - 1;
+	while (i > 0)
+	{
+		if (str[i] == '/')
+			return (i);
+		i--;
+	}
+	return (0);
+}
+
+int	previous_directory(t_env *env)
+{
+	char	*pwd;
+	int		size;
+	int		i = 0;
+	int		j = 0;
+	t_env	*tmp;
+
+	tmp = env;
+	malloc_directory(env, &pwd, "PWD");
+	while (env)
+	{
+		if (!ft_strcmp(env->name, "PWD"))
+		{
+			size = check_last_slash(env->value);
+			change_exp_value(env, "OLDPWD", pwd);
+		}
+		env = env->next;
+	}
+	pwd = malloc(sizeof(char) * size + 1);
+	env = tmp;
+	while (env)
+	{
+		if (!ft_strcmp(env->name, "PWD"))
+		{
+			while (size > 0)
+			{
+				pwd[j++] = env->value[i++];
+				size--; 
+			}
+			pwd[j] = '\0';
+			change_exp_value(env, "PWD", pwd);
+		}
+		env = env->next;
+	}
 	return (1);
 }
 
@@ -83,13 +135,13 @@ int	change_directory(t_env *env, char **cmd)
 	int		j;
 
 	i = 0;
-	j = 2;
+	j = 0;
 	new_directory = NULL;
-	if (cmd[i][j] && cmd[i][j] != ' ')
-		return (-1);
 	while (cmd[i][j] && cmd[i][j] == ' ')
 		j++;
-	if (cmd[i][j] == '\0')
+	if (!cmd[1] && cmd[i][j] == 'c' && cmd[i][j + 1] == 'd' && cmd[i][j + 2] == '\0')
 		change_directory_home(env);
+	else if (cmd[1][j] == '.' && cmd[1][j + 1] == '.')
+		previous_directory(env);
 	return (0);
 }
