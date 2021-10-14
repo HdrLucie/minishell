@@ -6,33 +6,33 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/08 17:44:23 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/14 12:00:07 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	do_right_redir(t_redir red)
+int	do_right_redir(t_redir *red)
 {
 	int	file_fd;
 
-	red.save_fd = dup(red.n);
-	if (ft_strlen(red.path) == 1)
-		file_fd = open(red.path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	red->save_fd = dup(red->n);
+	if (ft_strlen(red->op) == 1)
+		file_fd = open(red->path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	else
-		file_fd = open(red.path, O_WRONLY | O_CREAT, 0666);
-	dup2(file_fd, red.n);
+		file_fd = open(red->path, O_WRONLY | O_CREAT, 0666);
+	dup2(file_fd, red->n);
 	close(file_fd);
-	return (0);
+	return (red->save_fd);
 }
 
-int	do_left_redir(t_redir red)
+int	do_left_redir(t_redir *red)
 {
 	int	file_fd;
 
-	red.save_fd = dup(red.n);
-	file_fd = open(red.path, O_RDONLY);
-	dup2(file_fd, red.n);
+	red->save_fd = dup(red->n);
+	file_fd = open(red->path, O_RDONLY);
+	dup2(file_fd, red->n);
 	close(file_fd);
 	return (0);
 }
@@ -44,7 +44,7 @@ int	close_fd(t_redir *red, int count)
 	i = 0;
 	while (i < count)
 	{
-		if (red[i].op[1] == '\0' || red[i].op[1] == '>')
+		if (red[i].op[1] == '\0' || red[i].op[0] == '>')
 		{
 			dup2(red[i].save_fd, red[i].n);
 			close(red[i].save_fd);
@@ -80,9 +80,9 @@ int	exe_redir(t_redir *red, int count)
 	while (i < count)
 	{
 		if (red[i].op[0] == '>')
-			do_right_redir(red[i]);
+			do_right_redir(&red[i]);
 		else if (red[i].op[1] == '\0')
-			do_left_redir(red[i]);
+			do_left_redir(&red[i]);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/13 09:30:56 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parser(char **token, char **envp, t_env **env_lst)
 	begin = 0;
 	while (token[++i])
 	{
-		if (!ft_strcmp(token[i], "|"))
+		if (!ft_strcmp(token[i], ";"))
 		{
 			cmd = parse_pipe(cmd, token, &begin, i);
 			if (cmd == NULL)

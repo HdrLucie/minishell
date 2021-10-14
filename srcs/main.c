@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 19:57:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/14 12:10:54 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	main(int ac, char **av, char **envp)
 		if (lexer(str, envp, &env_lst) == -1 || errno == -1)
 			return (-1);
 		free(str);
+		write(1, "coucou\n", 7);
 	}
 	rl_clear_history();
 	return (0);

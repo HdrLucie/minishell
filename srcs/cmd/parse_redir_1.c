@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/14 11:19:27 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int	redir(char **cmd, t_cmd *lst, char **envp, t_env **env_lst)
 		return (-1);
 	exe_redir(red, count);
 	exe_cmd(exe, lst, envp, env_lst);
-	free_strs(exe);
 	close_fd(red, count);
+	free_strs(exe);
 	free_red(red, count);
 	return (0);
 }
