@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/14 04:14:47 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/15 14:53:23 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+
+/****************************/
+/*			DEFINE			*/
+/****************************/
+
+# define PAGE_SIZE 4096
+
+/****************************/
+/*			STRUCT			*/
+/****************************/
 
 typedef struct s_redir
 {
@@ -56,6 +66,13 @@ typedef struct s_env
 void	free_strs(char **strs);
 int		print_error(char *msg, int retur);
 char	**print_char_error(char *msg, int retur);
+
+/****************************/
+/*			SIGNAL			*/
+/****************************/
+
+void	sig_int(int num);
+void	sig_quit(int num);
 
 /****************************/
 /*			PARSER			*/

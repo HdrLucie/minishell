@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 19:57:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/15 14:07:40 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	main(int ac, char **av, char **envp)
 	env_lst = create_env_lst(envp);
 	while (42)
 	{
-		// signal(SIGINT, sig_int);
-		// signal(SIGQUIT, sig_quit);
+		signal(SIGINT, sig_int);
+		signal(SIGQUIT, sig_quit);
 		str = readline("> ");
 		if (!str)
 			return (-1);
