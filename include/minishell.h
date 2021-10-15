@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/15 12:20:32 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:08:57 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,13 @@ typedef struct s_env
 void	free_strs(char **strs);
 int		print_error(char *msg, int retur);
 char	**print_char_error(char *msg, int retur);
+
+/****************************/
+/*			SIGNAL			*/
+/****************************/
+
+void	sig_int(int num);
+void	sig_quit(int num);
 
 /****************************/
 /*			PARSER			*/
