@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/14 09:23:10 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/15 12:20:32 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <signal.h>
+
+/****************************/
+/*			DEFINE			*/
+/****************************/
+
+# define PAGE_SIZE 4096
+
+/****************************/
+/*			STRUCT			*/
+/****************************/
 
 typedef struct s_redir
 {
