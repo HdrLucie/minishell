@@ -53,6 +53,38 @@ function exec_test()
 	sleep 0.1
 }
 
+function exec_env()
+{
+	echo $@ "; exit" | ./minishell 2>&- 1>out_1
+	ES_1=$?
+	echo $@ "; exit" | bash 2>&- 1>out_2
+	ES_2=$?
+	sed -i '/SHLVL/d' ./out_1 ./out_2
+	sed -i '/declare -x _=/d' ./out_1 ./out_2
+	TEST1=$(tail -n +2 out_1)
+	TEST2=$(cat out_2)
+	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
+		printf " $BOLDGREEN%s$RESET" "✓ "
+	else
+		printf " $BOLDRED%s$RESET" "✗ "
+	fi
+	printf "$CYAN \"$@\" $RESET"
+	if [ "$TEST1" != "$TEST2" ]; then
+		echo
+		echo
+		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	fi
+	if [ "$ES_1" != "$ES_2" ]; then
+		echo
+		echo
+		printf $BOLDRED"Your exit status : $BOLDRED$ES_1$RESET\n"
+		printf $BOLDGREEN"Expected exit status : $BOLDGREEN$ES_2$RESET\n"
+	fi
+	echo
+	sleep 0.1
+}
+
 printf "$BOLDMAGENTA __  __ _____ _   _ _____  _____ _    _ ______ _      _      \n"
 printf "|  \/  |_   _| \ | |_   _|/ ____| |  | |  ____| |    | |     \n"
 printf "| \  / | | | |  \| | | | | (___ | |__| | |__  | |    | |     \n"
@@ -119,8 +151,8 @@ exec_test '< /dev/null cat'
 # ENV EXPANSIONS
 ENV_SHOW="env"
 EXPORT_SHOW="export"
-exec_test 'export ='
-# exec_test 'export 1TEST= ;' $ENV_SHOW
+exec_env 'export'
+exec_test 'export 1TEST= ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW
 # exec_test 'export TES=T="" ;' $ENV_SHOW
@@ -133,4 +165,4 @@ exec_test 'export ='
 # exec_test 'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' $ENV_SHOW
 
 shopt -s extglob 
-rm -- !(*.sh)
+# rm -- !(*.sh out_1 out_2)
