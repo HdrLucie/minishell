@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/15 11:37:28 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 11:55:42 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
 	tmp = cmd;
 	while (cmd)
 	{
+		// int	i = -1;
+		// while (cmd->cmd && cmd->cmd[++i])
+		// 	printf("|%s|\n", cmd->cmd[i]);
 		if (cmd->cmd && redir(cmd->cmd, tmp, envp, env_lst) == -1)
 			return (-1);
 		cmd = cmd->next;
