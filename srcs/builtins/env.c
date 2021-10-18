@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/14 04:17:18 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/18 10:05:37 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_env	*create_env_lst(char **env)
 	i = 0;
 	env_lst = NULL;
 	current_node = NULL;
+
 	while (env[i])
 	{
 		current_node = malloc(sizeof(t_env));
