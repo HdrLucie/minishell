@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/18 10:56:07 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/18 12:11:45 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fill_value_exp(char **value, char **cmd, int j)
 	{
 		while (cmd[i][++j])
 		{
-			if (cmd[i][j] != '\"' && cmd[i][j] != '=' && cmd[i][j] != '\'')
+			if (cmd[i][j] != '\"' && cmd[i][j] != '\'')
 				(*value)[k++] = cmd[i][j];
 		}
 		j = -1;
@@ -125,7 +125,13 @@ int	export_var(t_env *env, char **var_export)
 
 	value_exp = NULL;
 	name_exp = NULL;
-	if (!var_export[1])
+	// int	i = 0;
+	// while (var_export[i])
+	// {
+	// 	printf("EXPORT : %s\n", var_export[i]);
+	// 	i++;
+	// }
+	if (var_export && !var_export[1])
 	{
 		udpate_alpha_road(env);
 		return (0);
