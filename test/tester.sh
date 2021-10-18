@@ -98,11 +98,14 @@ exec_test 'cat Makefile'
 
 
 # # ECHO TESTS
-# exec_test 'echo test tout'
-# exec_test 'echo "coucou"les"amis"'
-# exec_test 'echo test      tout'
-# exec_test 'echo -n test tout'
-# exec_test 'echo -n -n -n test tout'
+exec_test 'echo test tout'
+exec_test 'echo "coucou"les"amis"'
+exec_test 'echo test      tout'
+exec_test 'echo -n test tout'
+exec_test 'echo -n -n -n test tout'
+exec_test 'echo "salut"cou""'
+exec_test 'echo $PATH'
+
 
 # # ENV EXPANSIONS + ESCAPE
 # exec_test 'echo test     \    test'
@@ -152,7 +155,7 @@ exec_test '< /dev/null cat'
 ENV_SHOW="env"
 EXPORT_SHOW="export"
 exec_env 'export'
-exec_test 'export 1TEST= ;' $ENV_SHOW
+# exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW
 # exec_test 'export TES=T="" ;' $ENV_SHOW
@@ -165,4 +168,4 @@ exec_test 'export 1TEST= ;' $ENV_SHOW
 # exec_test 'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' $ENV_SHOW
 
 shopt -s extglob 
-# rm -- !(*.sh out_1 out_2)
+rm !(*.sh)

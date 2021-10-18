@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/15 14:53:54 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 10:57:59 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 int	find_token(char *str, int i, char end)
 {
 	i = i + 1;
-	if (end == '\"')
-		while (str[i] && (str[i] != end || str[i - 1] == '\\'))
-			i = i + 1;
-	else
-		while (str[i] && str[i] != end)
-			i = i + 1;
-	if (str[i] != end)
+	while (str[i] && str[i] != end)
+		i++;
+	if (str[i] != end && end != ' ')
 		return (print_error("UNCLOSED QUOTE\n", -1));
-	i = i + 1;
+	i++;
 	return (i);
 }
 
@@ -36,7 +32,7 @@ int	count_word(char *str)
 	word = 0;
 	while (str[i])
 	{
-		while (str[i] && is_space(str, i))
+		while (str[i] && is_space(str[i]))
 			i++;
 		if (str[i])
 			word++;
@@ -53,7 +49,7 @@ int	size_word(char *str, int *k)
 	int	begin;
 
 	i = 0;
-	while (str[i] && is_space(str, i))
+	while (str[i] && is_space(str[i]))
 		i++;
 	begin = i;
 	if (str[i] == '\"' || str[i] == '\'')
@@ -77,15 +73,12 @@ char	**fill_split(char *str, char **split, int word)
 	while (++j < word)
 	{
 		i = -1;
-		// printf("size : |%s|\n", &str[k]);
 		size = size_word(&str[k], &k);
 		split[j] = malloc((size + 1) * sizeof(**split));
 		if (split[j] == NULL)
 			return (NULL);
 		while (++i < size)
 			split[j][i] = str[k++];
-		if (str[k] == '\"')
-			k++;
 		split[j][i] = '\0';
 	}
 	split[j] = NULL;

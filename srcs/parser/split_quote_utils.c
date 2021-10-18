@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/12 20:00:52 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/18 10:45:15 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int	parse_export(char *str, int i)
 		i++;
 	}
 	else
-		while (str[i] && !is_space(str, i))
+		while (str[i] && !is_space(str[i]))
 			i++;
 	return (i);
 }
 
 int	check_car_spe(char *str, int i)
 {
-	while (str && str[i] && !(is_space(str, i) || is_redir(str, i)
-			|| is_redir(str, i + 1) || is_spe_char(str, i)))
+	while (str && str[i] && !(is_space(str[i]) || is_redir(str[i])
+			|| is_redir(str[i + 1]) || is_spe_char(str[i])))
 		i++;
 	if (str && str[i] && str[i] == '=')
 	{
@@ -42,28 +42,25 @@ int	check_car_spe(char *str, int i)
 		if (i == -1)
 			return (-1);
 	}
-	if (str && str[i] && str[i] != ' ' && (is_redir(str, i)
-			|| is_redir(str, i + 1)))
+	if (str && str[i] && str[i] != ' ' && (is_redir(str[i])
+			|| is_redir(str[i + 1])))
 		i++;
 	return (i);
 }
 
 int	check_quote(char *str, int i)
 {
-	if (i == 0 || str[i - 1] != '\\')
-	{
-		if (str[i] == '\"')
-			return (find_token(str, i, '\"'));
-		if (str[i] == '\'')
-			return (find_token(str, i, '\''));
-		else if (str[i] == '#')
-			return (find_token(str, i, '\n'));
-		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '(')
-			return (find_token(str, i, ')'));
-		else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{')
-			return (find_token(str, i, '}'));
-		else if (str[i] == '$')
-			return (find_token(str, i, ' '));
-	}
+	if (str[i] == '\"')
+		return (find_token(str, i, '\"'));
+	if (str[i] == '\'')
+		return (find_token(str, i, '\''));
+	else if (str[i] == '#')
+		return (find_token(str, i, '\n'));
+	else if (str[i] == '$' && str[i + 1] && str[i + 1] == '(')
+		return (find_token(str, i, ')'));
+	else if (str[i] == '$' && str[i + 1] && str[i + 1] == '{')
+		return (find_token(str, i, '}'));
+	else if (str[i] == '$')
+		return (find_token(str, i, ' '));
 	return (check_car_spe(str, i));
 }

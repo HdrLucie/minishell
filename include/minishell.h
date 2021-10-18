@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/15 14:53:23 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 10:20:04 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ t_cmd	*ft_cmd_new(char **cmd, int in, int out);
 */
 char	**ft_split_quote(char *str);
 int		check_quote(char *str, int i);
-int		is_space(char *str, int i);
-int		is_redir(char *str, int i);
-int		is_spe_char(char *str, int i);
+int		is_space(char c);
+int		is_redir(char c);
+int		is_spe_char(char c);
 int		find_token(char *str, int i, char end);
 /*
 **	parse_path.c 
