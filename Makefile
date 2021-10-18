@@ -10,6 +10,7 @@ SRCS =  srcs/main.c 					\
 		srcs/parser/ft_split_quote.c	\
 		srcs/parser/ft_is_char.c		\
 		srcs/parser/split_quote_utils.c \
+		srcs/parser/ft_split_dollar.c	\
 		srcs/builtins/env.c				\
 		srcs/builtins/lst_utils.c		\
 		srcs/builtins/pwd.c 			\
@@ -39,7 +40,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 DEBUG_FLAG =  -g3
 
-.c.o:		${SRCS}
+%.o: %.c	${SRCS}
 			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}

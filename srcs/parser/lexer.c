@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 14:13:28 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:16:12 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char **expand_var_env(char **token, t_env **env_lst)
 			{
 				if (ft_strcmp(&token[i][1], tmp->name) == 0)
 				{
-					expand(token, i, *tmp);
+					if (expand(token, i, *tmp) == -1)
+						return (NULL);
 					tmp = NULL;
 				}
 				else
@@ -98,8 +99,12 @@ int	lexer(char *str, char **envp, t_env **env_lst)
 	char	**token;
 	int		ret;
 
-	token = ft_split_quote(str);
+	token = ft_split_dollar(str);
+	if (token == NULL)
+		return (-1);
 	token = expand_var_env(token, env_lst);
+	if (token == NULL)
+		return (-1);
 	token = ft_split_quote(ft_reverse_split(token, ' '));
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));

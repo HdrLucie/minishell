@@ -1,0 +1,14 @@
+> cat ls >> /dev/random ; exit
+
+str = |cat ls > > /dev/random ; exit |
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 

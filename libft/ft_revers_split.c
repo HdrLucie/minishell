@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_revers_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:57:58 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 15:29:23 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:14:54 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char	*ft_reverse_split(char **strs, char sep)
 		i++;
 	}
 	free_strs(strs);
-	str[k++] = '\0';
-	printf("str = |%s|\n", str);
+	str[k] = '\0';
 	return (str);
 }

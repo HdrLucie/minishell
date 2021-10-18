@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/18 10:20:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 14:20:55 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int		is_space(char c);
 int		is_redir(char c);
 int		is_spe_char(char c);
 int		find_token(char *str, int i, char end);
+char	**ft_split_dollar(char *str);
 /*
 **	parse_path.c 
 */
