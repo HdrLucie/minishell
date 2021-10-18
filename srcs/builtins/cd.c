@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/14 04:55:33 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/18 10:02:23 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ int	change_directory(t_env *env, char **cmd)
 	i = 0;
 	j = 0;
 	new_directory = NULL;
-	env_execve(env);
 	while (cmd[i][j] && cmd[i][j] == ' ')
 		j++;
 	if (!cmd[1] && cmd[i][j] == 'c' && cmd[i][j + 1] == 'd' && cmd[i][j + 2] == '\0')

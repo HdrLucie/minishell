@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/14 01:17:53 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/18 10:56:07 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,14 @@ void	fill_value_exp(char **value, char **cmd, int j)
 
 	i = 1;
 	k = 0;
+	while (cmd[i][j] && (cmd[i][j] == '=' || cmd[i][j] == '\"' || cmd[i][j] =='\''))
+		j++;
+	j--;
 	while(cmd[i])
 	{
-		while (cmd[i][j++])
+		while (cmd[i][++j])
 		{
-			if (cmd[i][j] != '\"')
+			if (cmd[i][j] != '\"' && cmd[i][j] != '=' && cmd[i][j] != '\'')
 				(*value)[k++] = cmd[i][j];
 		}
 		j = -1;
@@ -64,7 +67,7 @@ int	recover_value_exp(char **cmd, char **value, int j)
 	{
 		while (cmd[i][++j])
 		{
-			if (cmd[i][j] != '\"')
+			if (cmd[i][j] != '\"' || cmd[i][j] != '=' || cmd[i][j] != '\'')
 				counter_l++;
 		}
 		j = -1;
