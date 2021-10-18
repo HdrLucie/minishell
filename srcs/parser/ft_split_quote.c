@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 10:57:59 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 12:04:18 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	**fill_split(char *str, char **split, int word)
 			return (NULL);
 		while (++i < size)
 			split[j][i] = str[k++];
+		if (str && str[k + 1] && (str[k] == '\"' || str[k] == '\''))
+			k++;
 		split[j][i] = '\0';
 	}
 	split[j] = NULL;
