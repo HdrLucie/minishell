@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/13 09:30:56 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/18 14:13:28 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,52 @@ int	parser(char **token, char **envp, t_env **env_lst)
 	return (0);
 }
 
+int	expand(char **token, int i, t_env env)
+{
+	token[i] = ft_realloc(token[i], ft_strlen(env.value));
+	if (token[i] == NULL)
+		return (print_error("ALLOCATION FAILED\n", -1));
+	ft_strcpy(token[i], env.value);
+	return (0);
+}
+
+char **expand_var_env(char **token, t_env **env_lst)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	while (token && token[i])
+	{
+		if (token[i][0] == '$')
+		{
+			tmp = *env_lst;
+			while (tmp)
+			{
+				if (ft_strcmp(&token[i][1], tmp->name) == 0)
+				{
+					expand(token, i, *tmp);
+					tmp = NULL;
+				}
+				else
+					tmp = tmp->next;
+			}
+			if (token[i][0] == '$')
+				token[i][0] = '\0';
+		}
+		i++;
+	}
+	return (token);
+}
+
 int	lexer(char *str, char **envp, t_env **env_lst)
 {
 	char	**token;
 	int		ret;
 
 	token = ft_split_quote(str);
+	token = expand_var_env(token, env_lst);
+	token = ft_split_quote(ft_reverse_split(token, ' '));
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)

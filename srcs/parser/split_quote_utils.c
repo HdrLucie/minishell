@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 10:45:15 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:23:39 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	parse_export(char *str, int i)
 	{
 		while (str[i] && str[i] != '\"')
 			i++;
+		printf("bip : |%s\n", &str[i]);
 		if (str[i] != '\"')
 			return (print_error("UNCLOSED QUOTE\n", -1));
 		i++;

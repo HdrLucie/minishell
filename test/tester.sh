@@ -154,7 +154,7 @@ exec_test '< /dev/null cat'
 # ENV EXPANSIONS
 ENV_SHOW="env"
 EXPORT_SHOW="export"
-exec_env 'export'
+exec_env 'export ls="ls -la" ;' $ENV_SHOW
 # exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW

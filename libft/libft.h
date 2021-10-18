@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:36:59 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/09/30 09:22:11 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/18 14:07:38 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
+char			*ft_reverse_split(char **strs, char sep);
 void			*ft_memset(void *b, int c, size_t len);
 void			*ft_realloc(void *ptr, size_t size);
 void			ft_bzero(void *s, size_t n);
