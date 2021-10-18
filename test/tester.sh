@@ -95,7 +95,7 @@ echo
 
 # SYNTAX ERROR
 exec_test 'cat Makefile'
-
+exec_test 'cat ~/Documents/minishell/Makefile'
 
 # # ECHO TESTS
 exec_test 'echo test tout'

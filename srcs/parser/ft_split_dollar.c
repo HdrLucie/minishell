@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/18 15:14:47 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/18 15:43:55 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ static int	count_word(char *str)
 		if (str[i] == '$')
 		{
 			word++;
-			while (str && str[i] && str[i] != ' ' && str[i] != '$')
-				i++;
+			i++;
+			if (str[i] && str[i] == '{')
+				while (str && str[i] && str[i] != '}')
+					i++;
+			else
+				while (str && str[i] && str[i] != ' ' && str[i] != '$')
+					i++;
 		}
 		i++;
 	}
@@ -40,7 +45,10 @@ static int	size_word(char *str, int k)
 	int	size;
 
 	size = k;
-	if (str[k] == '$')
+	if (str[k] == '$' && str[k + 1] && str[k + 1] == '{')
+		while (str && str[++k] && str[k] != '}')
+			;
+	else if (str[k] == '$')
 		while (str && str[++k] && str[k] != ' ' && str[k] != '$')
 			;
 	else
