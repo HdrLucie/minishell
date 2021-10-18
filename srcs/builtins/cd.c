@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/18 10:02:23 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/18 17:25:35 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_last_slash(char *str)
 	i = ft_strlen(str) - 1;
 	while (i > 0)
 	{
-		if (str[i] == '/')
+		if (str[i] == '/' && i != 0)
 			return (i);
 		i--;
 	}
@@ -78,6 +78,8 @@ int	previous_directory(t_env *env)
 		}
 		env = env->next;
 	}
+	if (size == 0)
+		size = 1;
 	pwd = malloc(sizeof(char) * size + 1);
 	env = tmp;
 	while (env)
@@ -108,7 +110,7 @@ char	*search_value(t_env *env, char *to_find)
 	return (NULL);
 }
 
-void	change_directory_home(t_env *env)
+void	change_directory_home(t_env *env, char c)
 {
 	char	*home;
 	char	*oldpwd;
@@ -122,7 +124,15 @@ void	change_directory_home(t_env *env)
 		if (!ft_strcmp(env->name, "PWD"))
 		{
 			change_exp_value(env, "OLDPWD", pwd);
-			change_exp_value(env, "PWD", home);
+			if (c == '/')
+			{
+				env->value[0] = '/';
+				env->value[1] = '\0';
+			}
+			else if (c == '-')
+				change_exp_value(env, "PWD", oldpwd);
+			else
+				change_exp_value(env, "PWD", home);
 		}
 		env = env->next;
 	}
@@ -140,8 +150,14 @@ int	change_directory(t_env *env, char **cmd)
 	while (cmd[i][j] && cmd[i][j] == ' ')
 		j++;
 	if (!cmd[1] && cmd[i][j] == 'c' && cmd[i][j + 1] == 'd' && cmd[i][j + 2] == '\0')
-		change_directory_home(env);
+		change_directory_home(env, '0');
+	else if (cmd[1][j] == '~')
+		change_directory_home(env, '0');
 	else if (cmd[1][j] == '.' && cmd[1][j + 1] == '.')
 		previous_directory(env);
+	else if (cmd[1][j] == '/')
+		change_directory_home(env, '/');
+	else if (cmd[1][j] == '-')
+		change_directory_home(env, '-');
 	return (0);
 }
