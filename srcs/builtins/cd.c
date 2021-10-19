@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/18 17:25:35 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 14:53:41 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,54 +110,76 @@ char	*search_value(t_env *env, char *to_find)
 	return (NULL);
 }
 
-void	change_directory_home(t_env *env, char c)
+void	change_directory_home(t_env *env, char **home, char **pwd)
 {
-	char	*home;
-	char	*oldpwd;
-	char	*pwd;
-
-	malloc_directory(env, &home, "HOME");
-	malloc_directory(env, &oldpwd, "OLDPWD");
-	malloc_directory(env, &pwd, "PWD");
+	printf("COUCOU\n");
 	while (env)
 	{
 		if (!ft_strcmp(env->name, "PWD"))
 		{
-			change_exp_value(env, "OLDPWD", pwd);
-			if (c == '/')
-			{
-				env->value[0] = '/';
-				env->value[1] = '\0';
-			}
-			else if (c == '-')
-				change_exp_value(env, "PWD", oldpwd);
-			else
-				change_exp_value(env, "PWD", home);
+			printf("%s\n", env->name);
+			change_exp_value(env, "OLDPWD", *pwd);
+			change_exp_value(env, "PWD", *home);
+			printf("HOLa\n");
 		}
 		env = env->next;
 	}
 }
 
-int	change_directory(t_env *env, char **cmd)
+int	change_directory_previous(t_env *env, char **pwd, char **oldpwd)
 {
-	char	*new_directory;
+	while(env)
+	{
+		if (!ft_strcmp(env->name, "PWD"))
+		{
+			change_exp_value(env, "OLDPWD", *pwd);
+			change_exp_value(env, "PWD", *oldpwd);
+		}
+		env = env->next;
+	}
+	return (0);
+}
+
+int	recover_path_directory(char **home, char **pwd, char **oldpwd, t_env *env)
+{
+	if (!malloc_directory(env, home, "HOME"))
+		return (-1);
+	else if (!malloc_directory(env, oldpwd, "OLDPWD"))
+		return (-1);
+	else if (!malloc_directory(env, pwd, "PWD"))
+		return (-1);
+	return (1);
+}
+
+int	change_directory(t_env *env, char *cmd)
+{
 	int		i;
-	int		j;
+	char	*home;
+	char	*oldpwd;
+	char	*pwd;
 
 	i = 0;
-	j = 0;
-	new_directory = NULL;
-	while (cmd[i][j] && cmd[i][j] == ' ')
-		j++;
-	if (!cmd[1] && cmd[i][j] == 'c' && cmd[i][j + 1] == 'd' && cmd[i][j + 2] == '\0')
-		change_directory_home(env, '0');
-	else if (cmd[1][j] == '~')
-		change_directory_home(env, '0');
-	else if (cmd[1][j] == '.' && cmd[1][j + 1] == '.')
-		previous_directory(env);
-	else if (cmd[1][j] == '/')
-		change_directory_home(env, '/');
-	else if (cmd[1][j] == '-')
-		change_directory_home(env, '-');
+	home = NULL;
+	oldpwd = NULL;
+	pwd = NULL;
+	recover_path_directory(&home, &pwd, &oldpwd, env);
+	if (!cmd)
+		change_directory_home(env, &home, &pwd);
+	printf("HOLA\n");
+	// else
+	// {
+	// 	while (cmd[i] && cmd[i] == ' ')
+	// 	i++;
+	// }
+	// if (cmd[i] == '-')
+	// 	change_directory_previous(env, &pwd, &oldpwd);
+	// else if (cmd[1][j] == '~')
+	// 	change_directory_home(env, '0');
+	// else if (cmd[1][j] == '.' && cmd[1][j + 1] == '.')
+	// 	previous_directory(env);
+	// else if (cmd[1][j] == '/')
+	// 	change_directory_home(env, '/');
+	// else if (cmd[1][j] == '-')
+	// 	change_directory_home(env, '-');
 	return (0);
 }

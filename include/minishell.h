@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/18 10:20:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:51:39 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
 int		echo(char **to_print, t_env *env);
-int		change_directory(t_env *env, char **cmd);
+int		change_directory(t_env *env, char *cmd);
 int		change_exp_value(t_env *env, char *name_exp, char *value_exp);
 int		env_execve(t_env *env);
 

@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/18 15:25:57 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 13:45:24 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ int env_execve(t_env *env)
 	while (env)
 	{
 		nb_var++;
+		if (!ft_strcmp(env->name, "PATH"))
+			printf("%s\n", env->value);
 		env = env->next;
 	}
+
 	execve = malloc(sizeof(char *) * nb_var + 1);
 	if (!execve)
 		return (-1);
