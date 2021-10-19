@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/19 12:45:53 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,26 @@ void	free_path(char **path)
 	path = NULL;
 }
 
-char	*parse_cmd(char *cmd)
+char	*ft_getenv(char *name, char **envp)
+{
+	int		i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strccmp(envp[i], name, '=') == 0)
+			return (&envp[i][ft_strlen(name) + 1]);
+		i++;
+	}
+	return (NULL);
+}
+
+char	*parse_cmd(char *cmd, char **envp)
 {
 	char	**path;
 	char	*env_path;
 
-	env_path = getenv("PATH");
-	if (env_path == NULL)
-		env_path = "/mnt/nfs/homes/ehautefa/bin:/usr/local/sbin:\
-		/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games\
-		/usr/local/games:/snap/bin";
+	env_path = ft_getenv("PATH", envp);
 	path = ft_split(env_path, ':');
 	if (path == NULL)
 		return (NULL);

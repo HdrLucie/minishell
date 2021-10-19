@@ -95,7 +95,7 @@ echo
 
 # SYNTAX ERROR
 exec_test 'cat Makefile'
-
+exec_test ''
 
 # # # ECHO TESTS ESPACE
 # exec_test 'echo test tout'
@@ -155,16 +155,20 @@ exec_test '> lol echo test lol; cat lol'
 exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test'
 exec_test 'cat ls > out'
 exec_test 'cat ls > /dev/null'
-exec_test 'cat ls >> /dev/random'
+# exec_test 'cat ls >> /dev/random'
 exec_test '< /dev/null cat'
 
 # ENV EXPANSIONS
 ENV_SHOW="env"
 EXPORT_SHOW="export"
+<<<<<<< HEAD
 exec_env 'export'
 exec_env 'export coucou="salut les gars" hey="heyhey"'
 exec_env 'export coucou="salut" blabla=hey'
 exec_env 'export coucou='salut' blabla=hey'
+=======
+# exec_env 'export ls="ls -la" ;' $ENV_SHOW
+>>>>>>> origin/elise
 # exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW

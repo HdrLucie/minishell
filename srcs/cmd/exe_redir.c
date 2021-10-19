@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/15 13:09:59 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:16:22 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,22 @@ int	close_fd(t_redir *red, int count)
 	return (0);
 }
 
-int	exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst)
+int	exe_cmd(t_mini *mini)
 {
 	int	ret;
 
 	ret = 0;
-	if (exe)
+	if (mini->exe)
 	{
-		ret = recover_cmd(exe, env_lst, lst);
-		if (exe && ret == 2)
+		ret = recover_cmd(mini);
+		if (mini->exe && ret == 2)
 		{
-			ret = execute(exe, envp);
+			ret = execute(mini->exe, mini->envp);
 			if (ret == -1)
 				return (ret);
 		}
 	}
+	mini->envp = env_execve(mini);
 	return (ret);
 }
 

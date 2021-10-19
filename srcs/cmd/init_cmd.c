@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 11:55:42 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:51:36 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	execute(char **cmd, char **envp)
 	int	ret;
 
 	ret = 0;
-	cmd[0] = parse_cmd(cmd[0]);
+	cmd[0] = parse_cmd(cmd[0], envp);
 	if (cmd[0] == NULL)
 		return (print_error("PARSE PATH ERROR\n", -1));
 	pid = fork();
@@ -34,19 +34,16 @@ int	execute(char **cmd, char **envp)
 	return (ret);
 }
 
-int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
+int	ft_execute_cmd(t_mini *mini)
 {
 	t_cmd	*tmp;
 
-	tmp = cmd;
-	while (cmd)
+	tmp = mini->cmd;
+	while (tmp)
 	{
-		// int	i = -1;
-		// while (cmd->cmd && cmd->cmd[++i])
-		// 	printf("|%s|\n", cmd->cmd[i]);
-		if (cmd->cmd && redir(cmd->cmd, tmp, envp, env_lst) == -1)
+		if (tmp->cmd && redir(tmp->cmd, mini) == -1)
 			return (-1);
-		cmd = cmd->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }

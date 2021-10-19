@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/19 14:51:39 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 15:03:15 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ typedef struct s_env
 	struct s_env	*next_alpha;
 }					t_env;
 
+typedef struct s_mini
+{
+	t_env	**env;
+	t_cmd	*cmd;
+	char	**exe;
+	char	**envp;
+	int		f_envp;
+	t_redir	*red;
+	int		nb_red;
+}				t_mini;
+
 /****************************/
 /*			MAIN			*/
 /****************************/
@@ -81,7 +92,7 @@ void	sig_quit(int num);
 /*
 **	lexer.c 
 */
-int		lexer(char *str, char **envp, t_env **env_lst);
+int		lexer(char *str, t_mini *mini);
 /*
 **	lst_cmd_utils.c 
 */
@@ -99,10 +110,11 @@ int		is_space(char c);
 int		is_redir(char c);
 int		is_spe_char(char c);
 int		find_token(char *str, int i, char end);
+char	**ft_split_dollar(char *str);
 /*
 **	parse_path.c 
 */
-char	*parse_cmd(char *cmd);
+char	*parse_cmd(char *cmd, char **envp);
 /*
 **	parser.c 
 */
@@ -117,12 +129,12 @@ char	**ft_substrs(char **s, size_t len);
 **	init_cmd.c 
 */
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
-int		ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst);
+int		ft_execute_cmd(t_mini *mini);
 int		execute(char **cmd, char **envp);
 /*
 **	redir.c 
 */
-int		redir(char **cmd, t_cmd *lst, char **envp, t_env **env_lst);
+int		redir(char **cmd, t_mini *mini);
 void	free_red(t_redir *red, int size);
 int		count_redir(char **cmd);
 void	print_redir(t_redir	*red, int count, char **cmd);
@@ -132,14 +144,14 @@ char	**ft_realloc_strs(char **strs, size_t size);
 */
 int		exe_redir(t_redir *redir, int count);
 int		close_fd(t_redir *red, int count);
-int		exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst);
+int		exe_cmd(t_mini *mini);
 /****************************/
 /*			BUILTINS		*/
 /****************************/
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void	ft_exit(t_env *env, t_cmd *cmd, char **exe);
+void	ft_exit(t_mini *mini);
 void	udpate_alpha_road(t_env *env);
 void	free_node(t_env *node);
 t_env	*create_env_lst(char **env);
@@ -152,13 +164,13 @@ int		export_var(t_env *env, char **var_export);
 int		create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
 int		unset_var(t_env **env, char *unset_var_name);
-int		recover_cmd(char **cmd, t_env **env, t_cmd *lst);
+int		recover_cmd(t_mini *mini);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
 int		echo(char **to_print, t_env *env);
 int		change_directory(t_env *env, char *cmd);
 int		change_exp_value(t_env *env, char *name_exp, char *value_exp);
-int		env_execve(t_env *env);
+char	**env_execve(t_mini *mini);
 
 /****************************/
 /*			PRINT			*/

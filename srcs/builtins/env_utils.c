@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 13:45:24 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 15:03:14 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,25 @@ int malloc_execve(t_env *env, char **execve)
 	return (1);
 }
 
-int env_execve(t_env *env)
+char	**env_execve(t_mini *mini)
 {
-	char    **execve;
 	int     nb_var;
 	t_env   *tmp;
 
-	execve = NULL;
+	if (mini->envp && mini->f_envp)
+		free_strs(mini->envp);
+	mini->envp = NULL;
 	nb_var = 0;
-	tmp = env;
-	while (env)
+	tmp = *mini->env;
+	while (tmp)
 	{
 		nb_var++;
-		if (!ft_strcmp(env->name, "PATH"))
-			printf("%s\n", env->value);
-		env = env->next;
+		tmp = tmp->next;
 	}
-
-	execve = malloc(sizeof(char *) * nb_var + 1);
-	if (!execve)
-		return (-1);
-	malloc_execve(tmp, execve);
-	return(0);
+	mini->envp = malloc(sizeof(char *) * nb_var + 1);
+	if (!mini->envp)
+		return (NULL);
+	mini->f_envp = 1;
+	malloc_execve(*mini->env, mini->envp);
+	return(mini->envp);
 }
