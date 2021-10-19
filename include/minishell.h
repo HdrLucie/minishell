@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/19 18:56:54 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 17:32:46 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_mini
 	int		f_envp;
 	t_redir	*red;
 	int		nb_red;
+	int		old_ret;
 }				t_mini;
 
 /****************************/
@@ -130,7 +131,7 @@ char	**ft_substrs(char **s, size_t len);
 */
 int		fill_cmd(char **token, char **envp, t_env **env_lst);
 int		ft_execute_cmd(t_mini *mini);
-int		execute(char **cmd, char **envp);
+int		execute(char **cmd, t_mini *mini);
 /*
 **	redir.c 
 */

@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/19 12:16:22 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 17:01:39 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	exe_cmd(t_mini *mini)
 		ret = recover_cmd(mini);
 		if (mini->exe && ret == 2)
 		{
-			ret = execute(mini->exe, mini->envp);
+			ret = execute(mini->exe, mini);
 			if (ret == -1)
 				return (ret);
 		}

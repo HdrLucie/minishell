@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 15:03:07 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 17:31:41 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ void	free_strs(char **strs)
 	free(strs);
 }
 
+void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
+{
+	mini->env = env;
+	mini->cmd = NULL;
+	mini->exe = NULL;
+	mini->envp = envp;
+	mini->f_envp = 0;
+	mini->red = NULL;
+	mini->nb_red = 0;
+	mini->old_ret = 0;
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
@@ -51,10 +63,10 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (print_error("TOO MUCH ARG", -1));
 	(void)av;
-	mini.envp = envp;
-	mini.f_envp = 0;
 	env = create_env_lst(envp);
-	mini.env = &env;
+	if (env == NULL)
+		return (print_error("ALLOCATION FAILED\n", -1));
+	init_mini_struct(&mini, envp, &env);
 	while (42)
 	{
 		signal(SIGINT, sig_int);
