@@ -6,19 +6,18 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 12:51:36 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 17:17:35 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute(char **cmd, char **envp)
+int	execute(char **cmd, t_mini *mini)
 {
 	int	pid;
-	int	ret;
+	int	status;
 
-	ret = 0;
-	cmd[0] = parse_cmd(cmd[0], envp);
+	cmd[0] = parse_cmd(cmd[0], mini->envp);
 	if (cmd[0] == NULL)
 		return (print_error("PARSE PATH ERROR\n", -1));
 	pid = fork();
@@ -26,12 +25,13 @@ int	execute(char **cmd, char **envp)
 		return (print_error("FORK ERROR\n", -1));
 	if (pid == 0)
 	{
-		ret = execve(cmd[0], cmd, envp);
+		execve(cmd[0], cmd, mini->envp);
 		perror("MINISHELL");
-		exit(ret);
+		exit(0);
 	}
-	waitpid(pid, NULL, 0);
-	return (ret);
+	waitpid(pid, &status, 0);
+	mini->old_ret = status;
+	return (0);
 }
 
 int	ft_execute_cmd(t_mini *mini)

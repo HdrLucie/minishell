@@ -27,8 +27,8 @@ chmod 755 minishell
 function exec_test()
 {
 	echo $@ "; exit" | ./minishell 2>&- 1>sorti
-	TEST1=$(tail -n +2 sorti)
 	ES_1=$?
+	TEST1=$(tail -n +2 sorti)
 	TEST2=$(echo $@ "; exit" | bash 2>&-)
 	ES_2=$?
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
@@ -95,7 +95,7 @@ echo
 
 # SYNTAX ERROR
 exec_test 'cat Makefile'
-exec_test ''
+exec_test '' 
 
 # # # ECHO TESTS ESPACE
 # exec_test 'echo test tout'
@@ -107,13 +107,14 @@ exec_test ''
 # exec_test 'echo $PATH'
 
 # # ECHO TESTS ESPACE
-exec_test 'echo testtout'
-exec_test 'echo "coucou"les"amis"'
-exec_test 'echo testout'
-exec_test 'echo -n test'
-exec_test 'echo -n -n -n testtout'
-exec_test 'echo "salut"cou""'
-exec_test 'echo $PATH'
+exec_test 'echo testtout' 
+exec_test 'echo "coucou"les"amis"' 
+exec_test 'echo testout' 
+exec_test 'echo -n test' 
+exec_test 'echo -n -n -n testtout' 
+exec_test 'echo "salut"cou""' 
+exec_test 'echo $PATH' 
+
 # # ENV EXPANSIONS + ESCAPE
 # exec_test 'echo test     \    test'
 # exec_test 'echo \"test'
@@ -148,15 +149,15 @@ exec_test 'echo $PATH'
 # exec_test "exit wrong_command"
 
 # REDIRECTIONS
-exec_test 'cat < ls'
-exec_test 'cat < ls > ls'
-exec_test 'echo test > ls >> ls >> ls ; echo test >> ls; cat ls'
-exec_test '> lol echo test lol; cat lol'
-exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test'
-exec_test 'cat ls > out'
-exec_test 'cat ls > /dev/null'
+exec_test 'cat < ls' 
+exec_test 'cat < ls > ls' 
+exec_test 'echo test > ls >> ls >> ls ; echo test >> ls; cat ls' 
+exec_test '> lol echo test lol; cat lol'  
+exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test' 
+exec_test 'cat ls > out' 
+exec_test 'cat ls > /dev/null' 
 # exec_test 'cat ls >> /dev/random'
-exec_test '< /dev/null cat'
+exec_test '< /dev/null cat' 
 
 # ENV EXPANSIONS
 ENV_SHOW="env"

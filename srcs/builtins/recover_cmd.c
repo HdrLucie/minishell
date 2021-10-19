@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 12:42:48 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 16:45:13 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ int	recover_cmd(t_mini	*mini)
 		if (!ft_strcmp(mini->exe[0], "env"))
 			print_env(*mini->env);
 		else if (!ft_strcmp(mini->exe[0], "pwd"))
-			print_pwd(*mini->env);
+			mini->old_ret = print_pwd(*mini->env);
 		else if (!ft_strncmp(mini->exe[0], "export", ft_strlen("export")))
-			export_var(*mini->env, mini->exe);
+			mini->old_ret = export_var(*mini->env, mini->exe);
 		else if (!ft_strncmp(mini->exe[0], "unset", ft_strlen("unset")))
-			unset_var(mini->env, mini->exe[1]);
+			mini->old_ret = unset_var(mini->env, mini->exe[1]);
 		else if (!ft_strcmp(mini->exe[0], "exit"))
 			ft_exit(mini);
 		else if (!ft_strncmp(mini->exe[0], "echo", ft_strlen("echo")))
-			echo(mini->exe, *mini->env);
+			mini->old_ret = echo(mini->exe, *mini->env);
 		else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))
-			change_directory(*mini->env, mini->exe);
+			mini->old_ret = change_directory(*mini->env, mini->exe);
 		else
 			return (2);
 	}

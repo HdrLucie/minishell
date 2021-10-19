@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 12:03:21 by elise            ###   ########.fr       */
-=======
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 11:49:46 by ehautefa         ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2021/10/19 16:44:37 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +54,18 @@ int	parser(char **token, t_mini *mini)
 	return (0);
 }
 
-int	expand(char **token, int i, t_env env)
+int	expand(char **token, int i, char *value)
 {
-	token[i] = ft_realloc(token[i], ft_strlen(env.value));
+	if (value == NULL)
+		return (print_error("ALLOCATION FAILED\n", -1));
+	token[i] = ft_realloc(token[i], ft_strlen(value));
 	if (token[i] == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
-	ft_strcpy(token[i], env.value);
+	ft_strcpy(token[i], value);
 	return (0);
 }
 
-char **expand_var_env(char **token, t_env **env_lst)
+char **expand_var_env(char **token, t_env **env_lst, int old_ret)
 {
 	int		i;
 	t_env	*tmp;
@@ -85,14 +80,16 @@ char **expand_var_env(char **token, t_env **env_lst)
 			{
 				if (ft_strcmp(&token[i][1], tmp->name) == 0)
 				{
-					if (expand(token, i, *tmp) == -1)
+					if (expand(token, i, tmp->value) == -1)
 						return (NULL);
 					tmp = NULL;
 				}
 				else
 					tmp = tmp->next;
 			}
-			if (token[i][0] == '$')
+			if (token[i][0] == '$' && token[i][1] == '?' && expand(token, i, ft_itoa(old_ret)) == -1)
+				return (NULL);
+			else if (token[i][0] == '$')
 				token[i][0] = '\0';
 		}
 		i++;
@@ -108,7 +105,7 @@ int	lexer(char *str, t_mini *mini)
 	token = ft_split_dollar(str);
 	if (token == NULL)
 		return (-1);
-	token = expand_var_env(token, mini->env);
+	token = expand_var_env(token, mini->env, mini->old_ret);
 	if (token == NULL)
 		return (-1);
 	token = ft_split_quote(ft_reverse_split(token, ' '));

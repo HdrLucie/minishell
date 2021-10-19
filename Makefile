@@ -40,7 +40,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 DEBUG_FLAG =  -g3
 
-%.o: %.c	${SRCS}
+%.o : %.c	${SRCS}
 			${CC} ${CFLAGS} ${INCLUDE} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS} ${HEAD}
