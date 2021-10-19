@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 14:53:41 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 14:57:27 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	change_directory_home(t_env *env, char **home, char **pwd)
 			printf("%s\n", env->name);
 			change_exp_value(env, "OLDPWD", *pwd);
 			change_exp_value(env, "PWD", *home);
-			printf("HOLa\n");
 		}
 		env = env->next;
 	}
@@ -164,15 +163,17 @@ int	change_directory(t_env *env, char *cmd)
 	pwd = NULL;
 	recover_path_directory(&home, &pwd, &oldpwd, env);
 	if (!cmd)
+	{
 		change_directory_home(env, &home, &pwd);
-	printf("HOLA\n");
-	// else
-	// {
-	// 	while (cmd[i] && cmd[i] == ' ')
-	// 	i++;
-	// }
-	// if (cmd[i] == '-')
-	// 	change_directory_previous(env, &pwd, &oldpwd);
+		return (0);
+	}
+	else
+	{
+		while (cmd[i] && cmd[i] == ' ')
+		i++;
+	}
+	if (cmd[i] == '-')
+		change_directory_previous(env, &pwd, &oldpwd);
 	// else if (cmd[1][j] == '~')
 	// 	change_directory_home(env, '0');
 	// else if (cmd[1][j] == '.' && cmd[1][j + 1] == '.')
