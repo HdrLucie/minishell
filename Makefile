@@ -1,29 +1,31 @@
-SRCS =  srcs/main.c 					\
-		srcs/cmd/init_cmd.c 			\
-		srcs/cmd/parse_redir_1.c		\
-		srcs/cmd/parse_redir_2.c		\
-		srcs/cmd/exe_redir.c			\
-		srcs/parser/parse_path.c 		\
-		srcs/parser/lst_cmd_utils.c 	\
-		srcs/parser/lexer.c				\
-		srcs/parser/parser.c			\
-		srcs/parser/ft_split_quote.c	\
-		srcs/parser/ft_is_char.c		\
-		srcs/parser/split_quote_utils.c \
-		srcs/parser/ft_split_dollar.c	\
-		srcs/builtins/env.c				\
-		srcs/builtins/lst_utils.c		\
-		srcs/builtins/pwd.c 			\
-		srcs/builtins/recover_cmd.c		\
-		srcs/builtins/exit.c			\
-		srcs/builtins/export.c			\
-		srcs/builtins/unset.c			\
-		srcs/builtins/export_utils.c	\
-		srcs/builtins/print_utils.c		\
-		srcs/signal.c					\
-		srcs/builtins/echo.c			\
-		srcs/builtins/cd.c				\
-		srcs/builtins/env_utils.c
+SRCS =  srcs/main.c 								\
+		srcs/cmd/init_cmd.c 						\
+		srcs/cmd/parse_redir_1.c					\
+		srcs/cmd/parse_redir_2.c					\
+		srcs/cmd/exe_redir.c						\
+		srcs/parser/parse_path.c 					\
+		srcs/parser/lst_cmd_utils.c 				\
+		srcs/parser/lexer.c							\
+		srcs/parser/parser.c						\
+		srcs/parser/ft_split_quote.c				\
+		srcs/parser/ft_is_char.c					\
+		srcs/parser/split_quote_utils.c 			\
+		srcs/parser/ft_split_dollar.c				\
+		srcs/builtins/env.c							\
+		srcs/builtins/lst_utils.c					\
+		srcs/builtins/pwd.c 						\
+		srcs/builtins/recover_cmd.c					\
+		srcs/builtins/exit.c						\
+		srcs/builtins/export.c						\
+		srcs/builtins/unset.c						\
+		srcs/builtins/export_utils.c				\
+		srcs/builtins/print_utils.c					\
+		srcs/signal.c								\
+		srcs/builtins/echo.c						\
+		srcs/builtins/cd.c							\
+		srcs/builtins/env_utils.c					\
+		srcs/builtins/absolute_change_directory.c	\
+		srcs/builtins/relative_change_directory.c	\
 
 
 OBJS = ${SRCS:.c=.o}

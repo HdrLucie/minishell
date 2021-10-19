@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 15:03:17 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 16:33:18 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,35 +110,6 @@ char	*search_value(t_env *env, char *to_find)
 	return (NULL);
 }
 
-void	change_directory_home(t_env *env, char **home, char **pwd)
-{
-	printf("COUCOU\n");
-	while (env)
-	{
-		if (!ft_strcmp(env->name, "PWD"))
-		{
-			printf("%s\n", env->name);
-			change_exp_value(env, "OLDPWD", *pwd);
-			change_exp_value(env, "PWD", *home);
-		}
-		env = env->next;
-	}
-}
-
-int	change_directory_previous(t_env *env, char **pwd, char **oldpwd)
-{
-	while(env)
-	{
-		if (!ft_strcmp(env->name, "PWD"))
-		{
-			change_exp_value(env, "OLDPWD", *pwd);
-			change_exp_value(env, "PWD", *oldpwd);
-		}
-		env = env->next;
-	}
-	return (0);
-}
-
 int	recover_path_directory(char **home, char **pwd, char **oldpwd, t_env *env)
 {
 	if (!malloc_directory(env, home, "HOME"))
@@ -161,26 +132,22 @@ int	change_directory(t_env *env, char *cmd)
 	home = NULL;
 	oldpwd = NULL;
 	pwd = NULL;
-	recover_path_directory(&home, &pwd, &oldpwd, env);
+	if (!recover_path_directory(&home, &pwd, &oldpwd, env))
+		return (-1);
 	if (!cmd)
 	{
 		change_directory_home(env, &home, &pwd);
 		return (0);
 	}
-	else
-	{
-		while (cmd[i] && cmd[i] == ' ')
+	while (cmd[i] && cmd[i] == ' ')
 		i++;
-	}
 	if (cmd[i] == '-')
 		change_directory_previous(env, &pwd, &oldpwd);
-	// else if (cmd[1][j] == '~')
-	// 	change_directory_home(env, '0');
-	// else if (cmd[1][j] == '.' && cmd[1][j + 1] == '.')
-	// 	previous_directory(env);
-	// else if (cmd[1][j] == '/')
-	// 	change_directory_home(env, '/');
-	// else if (cmd[1][j] == '-')
-	// 	change_directory_home(env, '-');
+	else if (cmd[i] == '~')
+		change_directory_home(env, &home, &pwd);
+	else if (cmd[i] == '/' && cmd[i + 1] == '\0')
+		change_directory_root(env, &pwd);
+	else
+		relative_path(env, cmd, &pwd, &oldpwd);
 	return (0);
 }

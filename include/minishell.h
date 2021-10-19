@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/19 15:03:15 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 18:56:54 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,12 @@ int		print_pwd(t_env *env);
 int		echo(char **to_print, t_env *env);
 int		change_directory(t_env *env, char *cmd);
 int		change_exp_value(t_env *env, char *name_exp, char *value_exp);
+void	change_directory_home(t_env *env, char **home, char **pwd);
+int		change_directory_previous(t_env *env, char **pwd, char **oldpwd);
+void	change_directory_root(t_env *env, char **pwd);
 char	**env_execve(t_mini *mini);
+int		relative_path(t_env *env, char *path, char **pwd, char **oldpwd);
+int		check_last_slash(char *str);
 
 /****************************/
 /*			PRINT			*/
