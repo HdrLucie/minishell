@@ -148,13 +148,13 @@ exec_test '> lol echo test lol; cat lol'
 exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test'
 exec_test 'cat ls > out'
 exec_test 'cat ls > /dev/null'
-exec_test 'cat ls >> /dev/random'
+# exec_test 'cat ls >> /dev/random'
 exec_test '< /dev/null cat'
 
 # ENV EXPANSIONS
 ENV_SHOW="env"
 EXPORT_SHOW="export"
-exec_env 'export ls="ls -la" ;' $ENV_SHOW
+# exec_env 'export ls="ls -la" ;' $ENV_SHOW
 # exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW

@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 11:51:04 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 12:44:00 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,25 @@ int malloc_execve(t_env *env, char **execve)
 	return (1);
 }
 
-char	**env_execve(t_env *env, char **execve)
+char	**env_execve(t_mini *mini)
 {
 	int     nb_var;
 	t_env   *tmp;
 
-	// if (execve)
-	// 	free_strs(execve);
-	execve = NULL;
+	if (mini->envp && mini->f_envp)
+		free_strs(mini->envp);
+	mini->envp = NULL;
 	nb_var = 0;
-	tmp = env;
-	while (env)
+	tmp = *mini->env;
+	while (tmp)
 	{
 		nb_var++;
-		env = env->next;
+		tmp = tmp->next;
 	}
-	execve = malloc(sizeof(char *) * nb_var + 1);
-	if (!execve)
+	mini->envp = malloc(sizeof(char *) * nb_var + 1);
+	if (!mini->envp)
 		return (NULL);
-	malloc_execve(tmp, execve);
-	return(execve);
+	mini->f_envp = 1;
+	malloc_execve(*mini->env, mini->envp);
+	return(mini->envp);
 }

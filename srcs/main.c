@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 15:11:49 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:41:59 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ void	free_strs(char **strs)
 int	main(int ac, char **av, char **envp)
 {
 	char	*str;
-	t_env	*env_lst;
+	t_mini	mini;
+	t_env	*env;
 
 	if (ac != 1)
 		return (print_error("TOO MUCH ARG", -1));
 	(void)av;
-	env_lst = create_env_lst(envp);
+	mini.envp = envp;
+	mini.f_envp = 0;
+	env = create_env_lst(envp);
+	mini.env = &env;
 	while (42)
 	{
 		signal(SIGINT, sig_int);
@@ -60,7 +64,7 @@ int	main(int ac, char **av, char **envp)
 			return (-1);
 		if (ft_strcmp(str, ""))
 			add_history(str);
-		if (lexer(str, envp, &env_lst) == -1 || errno == -1)
+		if (lexer(str, &mini) == -1 || errno == -1)
 			return (-1);
 		free(str);
 	}

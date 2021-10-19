@@ -3,32 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/14 09:39:46 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/19 12:34:07 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit(t_env *env, t_cmd *cmd, char **exe)
+void	free_env(t_env *env)
 {
 	t_env	*tmp;
 
-	tmp = env;
-	ft_cmd_clear(cmd);
-	if (env)
+	while (env)
 	{
-		while (env)
-		{
-			tmp = env->next;
-			free_node(env);
-			env = tmp;
-		}
+		tmp = env->next;
+		free_node(env);
+		env = tmp;
 	}
-	free_strs(exe);
 	env = NULL;
+}
+
+void	ft_exit(t_mini *mini)
+{
+	if (mini->cmd)
+		ft_cmd_clear(mini->cmd);
+	if (mini->env)
+		free_env(*mini->env);
+	if (mini->exe)
+		free_strs(mini->exe);
+	if (mini->envp && mini->f_envp)
+		free_strs(mini->envp);
+	if (mini->red)
+		free_red(mini->red, mini->nb_red);
 	write(2, "exit\n", 5);
 	exit(1);
 }

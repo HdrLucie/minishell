@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 11:33:00 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 12:06:28 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ int	execute(char **cmd, char **envp)
 	return (ret);
 }
 
-int	ft_execute_cmd(t_cmd *cmd, char **envp, t_env **env_lst)
+int	ft_execute_cmd(t_mini *mini)
 {
 	t_cmd	*tmp;
 
-	tmp = cmd;
-	while (cmd)
+	tmp = mini->cmd;
+	while (tmp)
 	{
-		if (cmd->cmd && redir(cmd->cmd, tmp, envp, env_lst) == -1)
+		if (tmp->cmd && redir(tmp->cmd, mini) == -1)
 			return (-1);
-		cmd = cmd->next;
+		tmp = tmp->next;
 	}
 	return (0);
 }

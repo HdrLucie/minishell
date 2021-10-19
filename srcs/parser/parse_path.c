@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 11:34:26 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 12:45:53 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ char	*parse_cmd(char *cmd, char **envp)
 	char	*env_path;
 
 	env_path = ft_getenv("PATH", envp);
-	printf("%s\n",env_path);
 	path = ft_split(env_path, ':');
 	if (path == NULL)
 		return (NULL);

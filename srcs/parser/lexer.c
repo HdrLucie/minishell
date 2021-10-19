@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 15:16:12 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 12:03:21 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,28 @@ void	ft_print_list(t_cmd *tmp2)
 	}
 }
 
-int	parser(char **token, char **envp, t_env **env_lst)
+int	parser(char **token, t_mini *mini)
 {
 	int		i;
-	t_cmd	*cmd;
 	int		begin;
 
-	cmd = NULL;
+	mini->cmd = NULL;
 	i = -1;
 	begin = 0;
 	while (token[++i])
 	{
 		if (!ft_strcmp(token[i], ";"))
 		{
-			cmd = parse_pipe(cmd, token, &begin, i);
-			if (cmd == NULL)
+			mini->cmd = parse_pipe(mini->cmd, token, &begin, i);
+			if (mini->cmd == NULL)
 				return (-2);
 		}
 	}
 	if (begin != ft_strslen(token))
-		cmd = parse_end(cmd, token, &begin, i);
+		mini->cmd = parse_end(mini->cmd, token, &begin, i);
 	free_strs(token);
-	ft_execute_cmd(cmd, envp, env_lst);
-	ft_cmd_clear(cmd);
+	ft_execute_cmd(mini);
+	ft_cmd_clear(mini->cmd);
 	return (0);
 }
 
@@ -94,7 +93,7 @@ char **expand_var_env(char **token, t_env **env_lst)
 	return (token);
 }
 
-int	lexer(char *str, char **envp, t_env **env_lst)
+int	lexer(char *str, t_mini *mini)
 {
 	char	**token;
 	int		ret;
@@ -102,7 +101,7 @@ int	lexer(char *str, char **envp, t_env **env_lst)
 	token = ft_split_dollar(str);
 	if (token == NULL)
 		return (-1);
-	token = expand_var_env(token, env_lst);
+	token = expand_var_env(token, mini->env);
 	if (token == NULL)
 		return (-1);
 	token = ft_split_quote(ft_reverse_split(token, ' '));
@@ -110,7 +109,7 @@ int	lexer(char *str, char **envp, t_env **env_lst)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)
 		return (-2);
-	ret = parser(token, envp, env_lst);
+	ret = parser(token, mini);
 	if (ret == -1)
 		return (ret);
 	return (ret);
