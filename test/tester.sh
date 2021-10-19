@@ -97,16 +97,23 @@ echo
 exec_test 'cat Makefile'
 exec_test ''
 
-# # ECHO TESTS
-exec_test 'echo test tout'
+# # # ECHO TESTS ESPACE
+# exec_test 'echo test tout'
+# exec_test 'echo "coucou"les"amis"'
+# exec_test 'echo test      tout'
+# exec_test 'echo -n test tout'
+# exec_test 'echo -n -n -n test tout'
+# exec_test 'echo "salut"cou""'
+# exec_test 'echo $PATH'
+
+# # ECHO TESTS ESPACE
+exec_test 'echo testtout'
 exec_test 'echo "coucou"les"amis"'
-exec_test 'echo test      tout'
-exec_test 'echo -n test tout'
-exec_test 'echo -n -n -n test tout'
+exec_test 'echo testout'
+exec_test 'echo -n test'
+exec_test 'echo -n -n -n testtout'
 exec_test 'echo "salut"cou""'
 exec_test 'echo $PATH'
-
-
 # # ENV EXPANSIONS + ESCAPE
 # exec_test 'echo test     \    test'
 # exec_test 'echo \"test'
