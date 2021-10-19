@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/15 13:09:59 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/19 11:46:05 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ int	exe_cmd(char **exe, t_cmd *lst, char **envp, t_env **env_lst)
 			if (ret == -1)
 				return (ret);
 		}
+	}
+	envp = env_execve(*env_lst, envp);
+	int i = 0;
+	while (envp[i])
+	{
+		printf("envp[%d] : %s\n", i, envp[i]);
+		i++;
 	}
 	return (ret);
 }

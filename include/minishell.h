@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/18 14:20:55 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/19 11:46:41 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	**ft_split_dollar(char *str);
 /*
 **	parse_path.c 
 */
-char	*parse_cmd(char *cmd);
+char	*parse_cmd(char *cmd, char **envp);
 /*
 **	parser.c 
 */
@@ -159,7 +159,7 @@ int		print_pwd(t_env *env);
 int		echo(char **to_print, t_env *env);
 int		change_directory(t_env *env, char **cmd);
 int		change_exp_value(t_env *env, char *name_exp, char *value_exp);
-int		env_execve(t_env *env);
+char	**env_execve(t_env *env, char **execve);
 
 /****************************/
 /*			PRINT			*/

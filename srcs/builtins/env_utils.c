@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/18 10:12:22 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/19 11:51:04 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,13 @@ int malloc_execve(t_env *env, char **execve)
 	return (1);
 }
 
-int env_execve(t_env *env)
+char	**env_execve(t_env *env, char **execve)
 {
-	char    **execve;
 	int     nb_var;
 	t_env   *tmp;
 
+	// if (execve)
+	// 	free_strs(execve);
 	execve = NULL;
 	nb_var = 0;
 	tmp = env;
@@ -86,7 +87,7 @@ int env_execve(t_env *env)
 	}
 	execve = malloc(sizeof(char *) * nb_var + 1);
 	if (!execve)
-		return (-1);
+		return (NULL);
 	malloc_execve(tmp, execve);
-	return(0);
+	return(execve);
 }
