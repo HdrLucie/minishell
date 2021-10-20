@@ -24,8 +24,6 @@ SRCS =  srcs/main.c 								\
 		srcs/builtins/echo.c						\
 		srcs/builtins/cd.c							\
 		srcs/builtins/env_utils.c					\
-		srcs/builtins/absolute_change_directory.c	\
-		srcs/builtins/relative_change_directory.c	\
 
 
 OBJS = ${SRCS:.c=.o}
