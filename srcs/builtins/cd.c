@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 16:33:18 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/20 16:41:04 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_last_slash(char *str)
 			return (i);
 		i--;
 	}
-	return (0);
+	return (1);
 }
 
 int	previous_directory(t_env *env)
@@ -148,6 +148,6 @@ int	change_directory(t_env *env, char *cmd)
 	else if (cmd[i] == '/' && cmd[i + 1] == '\0')
 		change_directory_root(env, &pwd);
 	else
-		relative_path(env, cmd, &pwd, &oldpwd);
+		relative_path(env, cmd, &pwd);
 	return (0);
 }
