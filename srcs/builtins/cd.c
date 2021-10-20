@@ -6,148 +6,70 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 16:33:18 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/20 18:10:07 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	malloc_directory(t_env *env, char **directory, char *to_find)
+int	search_value(t_env *env, char **value)
 {
-	int		i;
-	int		size;
+	int		i; 
 	t_env	*tmp;
+	int		size;
 
 	i = 0;
-	size = 0;
 	tmp = env;
 	while (env)
 	{
-		if (!ft_strcmp(env->name, (to_find)))
+		if (!ft_strcmp("PWD", env->name))
 			size = ft_strlen(env->value);
 		env = env->next;
 	}
-	*directory = malloc(sizeof(char) * size + 1);
-	if (!directory)
+	*value = malloc(sizeof(char) * size + 1);
+	if (!value)
 		return (-1);
 	size = 0;
-	env = tmp;
-	while (env)
+	while (tmp)
 	{
-		if (!ft_strcmp(env->name, to_find))
+		if (!ft_strcmp("PWD", tmp->name))
 		{
-			while (env->value[i])
-				(*directory)[size++] = env->value[i++];
+			while (tmp->value[i])
+				(*value)[size++] = tmp->value[i++];
 		}
-		env = env->next;
+		tmp = tmp->next;
 	}
-	(*directory)[i] = '\0';
-	return (1);
-}
-
-int	check_last_slash(char *str)
-{
-	int	i;
-
-	i = ft_strlen(str) - 1;
-	while (i > 0)
-	{
-		if (str[i] == '/' && i != 0)
-			return (i);
-		i--;
-	}
+	(*value)[size] = '\0';
 	return (0);
-}
-
-int	previous_directory(t_env *env)
-{
-	char	*pwd;
-	int		size;
-	int		i = 0;
-	int		j = 0;
-	t_env	*tmp;
-
-	tmp = env;
-	malloc_directory(env, &pwd, "PWD");
-	while (env)
-	{
-		if (!ft_strcmp(env->name, "PWD"))
-		{
-			size = check_last_slash(env->value);
-			change_exp_value(env, "OLDPWD", pwd);
-		}
-		env = env->next;
-	}
-	if (size == 0)
-		size = 1;
-	pwd = malloc(sizeof(char) * size + 1);
-	env = tmp;
-	while (env)
-	{
-		if (!ft_strcmp(env->name, "PWD"))
-		{
-			while (size > 0)
-			{
-				pwd[j++] = env->value[i++];
-				size--; 
-			}
-			pwd[j] = '\0';
-			change_exp_value(env, "PWD", pwd);
-		}
-		env = env->next;
-	}
-	return (1);
-}
-
-char	*search_value(t_env *env, char *to_find)
-{
-	while (env)
-	{
-		if (!ft_strcmp(env->name, to_find))
-			return (env->value);
-		env = env->next;
-	}
-	return (NULL);
-}
-
-int	recover_path_directory(char **home, char **pwd, char **oldpwd, t_env *env)
-{
-	if (!malloc_directory(env, home, "HOME"))
-		return (-1);
-	else if (!malloc_directory(env, oldpwd, "OLDPWD"))
-		return (-1);
-	else if (!malloc_directory(env, pwd, "PWD"))
-		return (-1);
-	return (1);
 }
 
 int	change_directory(t_env *env, char *cmd)
 {
-	int		i;
-	char	*home;
-	char	*oldpwd;
+	char	*tmp_path;
 	char	*pwd;
 
-	i = 0;
-	home = NULL;
-	oldpwd = NULL;
 	pwd = NULL;
-	if (!recover_path_directory(&home, &pwd, &oldpwd, env))
+	tmp_path = malloc(sizeof(char) * 1000);
+	if (!tmp_path)
 		return (-1);
-	if (!cmd)
-	{
-		change_directory_home(env, &home, &pwd);
-		return (0);
-	}
-	while (cmd[i] && cmd[i] == ' ')
-		i++;
-	if (cmd[i] == '-')
-		change_directory_previous(env, &pwd, &oldpwd);
-	else if (cmd[i] == '~')
-		change_directory_home(env, &home, &pwd);
-	else if (cmd[i] == '/' && cmd[i + 1] == '\0')
-		change_directory_root(env, &pwd);
+	if (search_value(env, &pwd) != 0)
+		return (-1);
+	if (chdir(cmd) == -1)
+		printf("PATH NOT FOUND\n");
 	else
-		relative_path(env, cmd, &pwd, &oldpwd);
+	{
+		while (env)
+		{
+			if (!ft_strcmp(env->name, "PWD"))
+			{
+				tmp_path = getcwd(tmp_path, 1000);
+				if (!tmp_path)
+					return (-1);
+				change_exp_value(env, "PWD", tmp_path);
+				change_exp_value(env, "OLDPWD", pwd);
+			}
+			env = env->next;
+		}
+	}
 	return (0);
 }

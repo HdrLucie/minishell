@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/20 15:29:33 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/20 16:31:24 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void	change_directory_home(t_env *env, char **home, char **pwd);
 int		change_directory_previous(t_env *env, char **pwd, char **oldpwd);
 void	change_directory_root(t_env *env, char **pwd);
 char	**env_execve(t_mini *mini);
-int		relative_path(t_env *env, char *path, char **pwd, char **oldpwd);
+int		relative_path(t_env *env, char *path, char **pwd);
 int		check_last_slash(char *str);
 
 /****************************/
