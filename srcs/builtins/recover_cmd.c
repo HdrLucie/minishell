@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 17:32:36 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:29:15 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	recover_cmd(t_mini	*mini)
 		else if (!ft_strcmp(mini->exe[0], "exit"))
 			ft_exit(mini);
 		else if (!ft_strncmp(mini->exe[0], "echo", ft_strlen("echo")))
-			mini->old_ret = echo(mini->exe, *mini->env);
+			mini->old_ret = echo(mini->exe);
 		else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))
 			mini->old_ret = change_directory(*mini->env, mini->exe[1]);
 		else

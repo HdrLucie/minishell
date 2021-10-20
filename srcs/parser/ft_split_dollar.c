@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/18 15:43:55 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:30:34 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,30 @@ static int	count_word(char *str)
 		word = 0;
 	while (str && str[i])
 	{
-		if (str[i] == '$')
+		if (str[i] == '\'')
+		{
+			while  (str && str[++i] && str[i] != '\'')
+				;
+		}
+		else if (str[i] == '$')
 		{
 			word++;
 			i++;
 			if (str[i] && str[i] == '{')
+			{
 				while (str && str[i] && str[i] != '}')
 					i++;
+				i++;
+			}
 			else
-				while (str && str[i] && str[i] != ' ' && str[i] != '$')
+				while (str && str[i] && str[i] != '\"' && str[i] != '\''
+					&& !is_spe_char(str[i]) && !is_space(str[i]) && !is_redir(str[i]))
 					i++;
+			if (str && str[i] != '\0')
+				word++;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (word);
 }
@@ -46,14 +58,26 @@ static int	size_word(char *str, int k)
 
 	size = k;
 	if (str[k] == '$' && str[k + 1] && str[k + 1] == '{')
+	{
 		while (str && str[++k] && str[k] != '}')
 			;
+		k++;
+	}
 	else if (str[k] == '$')
-		while (str && str[++k] && str[k] != ' ' && str[k] != '$')
-			;
+		while (str && str[++k] && str[k] != '\"' && str[k] != '\''
+			&& !(is_spe_char(str[k]) || is_space(str[k]) || is_redir(str[k])))
+				;
 	else
-		while (str && str[k] && str[k] != '$')
+	{
+		while (str && str[k] && str[k] != '$' && str[k] != '\'')
 			k++;
+		if (str[k] == '\'')
+		{
+			while  (str && str[++k] && str[k] != '\'')
+				;
+			k++;
+		}
+	}
 	size = k - size;
 	return (size);
 }

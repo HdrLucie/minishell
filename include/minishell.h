@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/19 17:32:46 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:29:33 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int		unset_var(t_env **env, char *unset_var_name);
 int		recover_cmd(t_mini *mini);
 void	ft_print_env(t_env *env);
 int		print_pwd(t_env *env);
-int		echo(char **to_print, t_env *env);
+int		echo(char **to_print);
 int		change_directory(t_env *env, char *cmd);
 int		change_exp_value(t_env *env, char *name_exp, char *value_exp);
 void	change_directory_home(t_env *env, char **home, char **pwd);

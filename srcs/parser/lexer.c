@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 17:35:02 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/20 16:09:13 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,16 @@ char **expand_var_env(char **token, t_env **env_lst, int old_ret)
 	i = 0;
 	while (token && token[i])
 	{
+		
+		if (token[i][0] == '$' && token[i][1] && token[i][1] == '{')
+			token[i][ft_strlen(token[i]) - 1] = '\0';
 		if (token[i][0] == '$')
 		{
 			tmp = *env_lst;
 			while (tmp)
 			{
-				if (ft_strcmp(&token[i][1], tmp->name) == 0)
+				if ((token[i][1] && token[i][1] == '{' && ft_strcmp(&token[i][2], tmp->name) == 0) || 
+					ft_strcmp(&token[i][1], tmp->name) == 0)
 				{
 					if (expand(token, i, tmp->value) == -1)
 						return (NULL);
@@ -109,6 +113,9 @@ int	lexer(char *str, t_mini *mini)
 	if (token == NULL)
 		return (-1);
 	token = ft_split_quote(ft_reverse_split(token, ' '));
+	int	i = -1;
+	while(token[++i])
+		printf("FINAL TOKEN[%d] : %s\n",i, token[i]);
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)
