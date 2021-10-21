@@ -6,12 +6,11 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:57:58 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 15:14:54 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/21 13:33:07 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "minishell.h"
 
 static int	find_size_total(char **strs)
 {
@@ -29,19 +28,6 @@ static int	find_size_total(char **strs)
 	if (res < 0)
 		return (0);
 	return (res);
-}
-
-static void	free_strs(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs && strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
 }
 
 char	*ft_reverse_split(char **strs, char sep)
@@ -71,6 +57,6 @@ char	*ft_reverse_split(char **strs, char sep)
 		i++;
 	}
 	free_strs(strs);
-	str[k] = '\0';
+	str[k - 1] = '\0';
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/20 16:31:38 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/21 13:51:19 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,11 @@ int	lexer(char *str, t_mini *mini)
 	if (token == NULL)
 		return (-1);
 	token = ft_split_quote(ft_reverse_split(token, ' '));
-	int	i = -1;
-	while(token[++i])
-		printf("FINAL TOKEN[%d] : %s\n",i, token[i]);
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)
 		return (-2);
+	token = remove_quote(token);
 	ret = parser(token, mini);
 	if (ret == -1)
 		return (ret);
