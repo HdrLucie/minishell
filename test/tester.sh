@@ -162,14 +162,10 @@ exec_test '< /dev/null cat'
 # ENV EXPANSIONS
 ENV_SHOW="env"
 EXPORT_SHOW="export"
-<<<<<<< HEAD
 exec_env 'export'
 exec_env 'export coucou="salut les gars" hey="heyhey"'
 exec_env 'export coucou="salut" blabla=hey'
 exec_env 'export coucou='salut' blabla=hey'
-=======
-# exec_env 'export ls="ls -la" ;' $ENV_SHOW
->>>>>>> origin/elise
 # exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW
