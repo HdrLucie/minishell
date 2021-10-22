@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 16:53:58 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:10:56 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ char	**expand_var_env(char **token, t_env **env_lst, int old_ret)
 			if (token[i][0] == '$' && token[i][1] == '?' && expand(token, i, ft_itoa(old_ret)) == -1)
 				return (NULL);
 			else if (token[i][0] == '$')
-				token[i][0] = '\0';
+			{
+				if (token[i][1] && ft_isalnum(token[i][1]))
+					token[i][0] = '\0';
+			}
 		}
 		i++;
 	}
