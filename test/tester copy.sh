@@ -28,27 +28,17 @@ function exec_test()
 {
 	echo $@ "; exit" | ./minishell 2>&- 1>sorti
 	TEST1=$(tail -n +2 sorti)
-	ES_1=$?
 	TEST2=$(echo $@ "; exit" | bash 2>&-)
-	ES_2=$?
-	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
-		printf " $BOLDGREEN%s$RESET" "✓ "
-	else
-		printf " $BOLDRED%s$RESET" "✗ "
-	fi
-	printf "$CYAN \"$@\" $RESET"
 	if [ "$TEST1" != "$TEST2" ]; then
-		echo
-		echo
-		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+		printf " $BOLDRED%s$RESET" "✗ "
+		printf "$CYAN \"$@\" $RESET"
 	fi
-	if [ "$ES_1" != "$ES_2" ]; then
-		echo
-		echo
-		printf $BOLDRED"Your exit status : $BOLDRED$ES_1$RESET\n"
-		printf $BOLDGREEN"Expected exit status : $BOLDGREEN$ES_2$RESET\n"
-	fi
+	# if [ "$TEST1" != "$TEST2" ]; then
+	# 	echo
+	# 	echo
+	# 	printf $BOLDRED"Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	# 	printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+	# fi
 	echo
 	sleep 0.1
 }
@@ -94,100 +84,64 @@ printf " ##   ##    ##     ##  ##     ##          ##   ##  ##  ##         ##    
 printf " ##   ##   ####    ##  ##    ####    ######   ###  ##   #####    ####     ####\n$RESET"
 echo
 
- echo bonjour ; |
- echo bonjour | |
- |
- echo bonjour |;
- echo bonjour ; ls
- echo bonjour > test\ 1
- cd $HOME/Documents
- echo "\s" & echo "\s"
- echo >
- echo -n -n -nnnn -nnnnm
- cat /dev/random | head -n 1 | cat -e
- unset var1 # with undefined var1
- export "" et unset ""
- echo test > file test1
- $
- not_cmd bonjour > salut
- env puis export puis env # vars aren't sorted
- cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
- cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code
- cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
- echo bonjour >>> test
- echo bonjour > > out
- echo 2 >> out1 > out2
- echo 2 > out1 >> out2
- cat < test # with non-existent test
- export var; export var=test
- echo bonjour > $test # with test not defined
- file_name_in_current_dir
- cd ../../../../../.. ; pwd
- ctrl-C . 130 sur bin(ex : sleep 10)&line vide
- ctrl-\ .131 sur bin
- echo "bip | bip ; coyotte > < " "
- cat | cat | cat | ls # check outputs order
- $bla # with bla not defined
- export var ="cat Makefile | grep >"
- export "test=ici"=coucou
- c$var Makefile # with var=at
- $LESS$VAR
- /bin/echo bonjour
- not_cmd
- sleep 5 | exit
- echo bonjour > $test w/ t
- "exit retour a la ligne"
- minishell # binary not in path without "./" before
- cat diufosgid # check exit code
- exit # should return the last exit code value
- exit -10
- exit +10
- ;
- echo coucou | ;
- echo "$HOME"
- echo '$HOME'
- export ; env # display is different for both commands
- echo $HOME
- > log echo coucou
- echo hudifg d | | hugdfihd
- echo
- echo simple
- echo -n simple
- echo ''
- echo ""
- echo "\"
- echo "\n \n \n"
- echo "\n \n \\n"
- echo ;;
- echo hi";" hihi
- echo hi " ; " hihi
- cd
- cd .
- cd ~
- cd /
- cd no_file
- cd a b c d
- pwd a
- pwd a b c d
- export LOL=lala ROR=rara
- unset LOL ROR
- export "HI= hi"
- export "HI =hi"
- /bin/ls
- # write something the press ctrl+c
- # write something then press ctrl+d
- # write something then press ctrl+\
- echo $?
- l^Ds
- echo |
- | echo
- sort | ls # check output order
- cat < >
- cat < <
- cat > >
- > a ls > b < Makefile
- echo > a Hello World!
- > a echo Hello World!
- cat < Makefile | grep gcc > output
- exit 0 | exit 1
- exit 1 | exit 0
+# exec_test 'echo bonjour ; |'
+# exec_test 'echo bonjour | |'
+# exec_test '|'
+# exec_test 'echo bonjour |;'
+
+exec_test 'echo -n -n -nnnn -nnnnm'
+# exec_test 'cat /dev/random | head -n 1 | cat -e'
+exec_test 'unset var1 # with undefined var1'
+
+exec_test 'not_cmd bonjour > salut'
+# exec_test 'cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code'
+# exec_test 'cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code'
+# exec_test 'cat Makefile | grep pr | head -n 5 | hello (NA) # check status code'
+
+exec_test 'cat < test # with non-existent test'
+
+exec_test 'echo bonjour > $test # with test not defined'
+
+# exec_test 'ctrl-\ .131 sur bin'
+# exec_test 'echo "bip | bip ; coyotte > < " "'
+# exec_test 'cat | cat | cat | ls # check outputs order'
+exec_test '$bla # with bla not defined'
+# exec_test 'export var ="cat Makefile | grep >"'
+exec_test 'c$var Makefile # with var=at'
+
+# exec_test 'sleep 5 | exit'
+exec_test 'echo bonjour > $test w/ t'
+exec_test 'minishell # binary not in path without "./" before'
+exec_test 'cat diufosgid # check exit code'
+exec_test 'exit # should return the last exit code value'
+
+# exec_test 'echo coucou | ;'
+
+exec_test 'export ; env'
+
+# exec_test 'echo hudifg d | | hugdfihd'
+
+exec_test 'echo ""'
+# exec_test 'echo "\n \n \n"'
+exec_test 'echo "\n \n \\n"'
+exec_test 'echo hi";" hihi'
+
+exec_test 'cd ~'
+exec_test 'cd no_file'
+exec_test 'cd a b c d'
+
+# exec_test 'echo |'
+# exec_test '| echo'
+# exec_test 'sort | ls # check output order'
+exec_test 'cat < <'
+exec_test 'cat > >'
+
+# exec_test 'cat < Makefile | grep gcc > output'
+# exec_test 'exit 0 | exit 1'
+# exec_test 'exit 1 | exit 0'
+
+#BOUCLE INFINI
+# exec_test '$'
+
+shopt -s extglob 
+rm !(*.sh)
