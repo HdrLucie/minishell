@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/21 13:18:06 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/22 10:51:34 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ char	**remove_quote(char **token)
 		i = 0;
 		while (token[j][i])
 		{
-			if (token[j][i] == '\"')
+			if (token[j][i] == '\"' || token[j][i] == '\'')
 			{
 				erase_copy(&token[j][i + 1], &token[j][i]);
 			}

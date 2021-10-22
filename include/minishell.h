@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/21 13:30:47 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/22 14:42:14 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ void	sig_quit(int num);
 /****************************/
 /*			PARSER			*/
 /****************************/
-
+/*
+**	expand_var_env.c 
+*/
+char 	**expand_var_env(char **token, t_env **env_lst, int old_ret);
 /*
 **	lexer.c 
 */

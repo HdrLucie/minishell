@@ -3,15 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_dollar.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/21 09:58:16 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/22 14:49:54 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int		isnt_var(char *str, int *i)
+{
+	if ((ft_isdigit(str[*i]) || str[*i] == '?')
+		&& str[*i - 1] && str[*i - 1] == '$')
+	{
+		*i = *i + 1;
+		return (0);
+	}
+	if (ft_isalnum(str[*i]) == 0)
+		return (0);
+	return (1);
+}
 
 static int	count_word(char *str)
 {
@@ -40,8 +52,7 @@ static int	count_word(char *str)
 				i++;
 			}
 			else
-				while (str && str[i] && str[i] != '\"' && str[i] != '\''
-					&& !is_spe_char(str[i]) && !is_space(str[i]) && !is_redir(str[i]))
+				while (str && str[i] && isnt_var(str, &i))
 					i++;
 			if (str && str[i] != '\0')
 				word++;
@@ -64,8 +75,7 @@ static int	size_word(char *str, int k)
 		k++;
 	}
 	else if (str[k] == '$')
-		while (str && str[++k] && str[k] != '\"' && str[k] != '\''
-			&& !(is_spe_char(str[k]) || is_space(str[k]) || is_redir(str[k])))
+		while (str && str[++k] && isnt_var(str, &k))
 				;
 	else
 	{
@@ -94,6 +104,7 @@ static int fill_strs(char *str, char **strs, int word)
 	while (j < word)
 	{
 		size = size_word(str, k);
+		// printf("SIZE : %d\n", size);
 		strs[j] = malloc((size + 1) * sizeof(**strs));
 		if (strs[j] == NULL)
 			return (print_error("ALLOCATION FAILED\n", -1));
