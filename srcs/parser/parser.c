@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 10:51:34 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:45:02 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,41 +94,4 @@ t_cmd	*parse_end(t_cmd *cmd, char **token, int *begin, int i)
 		return (NULL);
 	*begin = i + 1;
 	return (cmd);
-}
-
-char	*erase_copy(char *src, char *dest)
-{
-	int	i;
-
-	i = 0;
-	while (src && dest && src[i] && dest[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	**remove_quote(char **token)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (token[j])
-	{
-		i = 0;
-		while (token[j][i])
-		{
-			if (token[j][i] == '\"' || token[j][i] == '\'')
-			{
-				erase_copy(&token[j][i + 1], &token[j][i]);
-			}
-			else
-				i++;
-		}
-		j++;
-	}
-	return (token);
 }

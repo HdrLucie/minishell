@@ -8,6 +8,7 @@ SRCS =  srcs/main.c 								\
 		srcs/parser/lexer.c							\
 		srcs/parser/parser.c						\
 		srcs/parser/ft_split_quote.c				\
+		srcs/parser/remove_quote.c					\
 		srcs/parser/ft_is_char.c					\
 		srcs/parser/split_quote_utils.c 			\
 		srcs/parser/ft_revers_split.c				\

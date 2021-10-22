@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_char.c                                       :+:      :+:    :+:   */
+/*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 16:56:11 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:47:18 by ehautefa         ###   ########.fr       */
+/*   Created: 2021/10/22 17:44:41 by ehautefa          #+#    #+#             */
+/*   Updated: 2021/10/22 17:45:07 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_spe_char(char c)
+char	*erase_copy(char *src, char *dest)
 {
-	if (c == '$' || c == '#')
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (src && dest && src[i] && dest[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
 
-int	is_redir(char c)
+char	**remove_quote(char **token)
 {
-	if (c == '>' || c == '<' || c == ';')
-		return (1);
-	return (0);
-}
+	int	i;
+	int	j;
 
-int	is_space(char c)
-{
-	if (c && c >= '\t' && c <= '\r')
-		return (1);
-	else if (c && c == ' ')
-		return (1);
-	return (0);
+	j = 0;
+	while (token[j])
+	{
+		i = 0;
+		while (token[j][i])
+		{
+			if (token[j][i] == '\"' || token[j][i] == '\'')
+			{
+				erase_copy(&token[j][i + 1], &token[j][i]);
+			}
+			else
+				i++;
+		}
+		j++;
+	}
+	return (token);
 }

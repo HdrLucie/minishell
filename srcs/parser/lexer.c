@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:14:46 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:46:55 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ int	lexer(char *str, t_mini *mini)
 	ret = parser(token, mini);
 	if (ret == -1)
 		return (ret);
-	return  (ret);
+	return (ret);
 }

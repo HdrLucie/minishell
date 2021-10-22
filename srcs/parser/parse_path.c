@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 12:45:53 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/22 17:46:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,6 @@ char	*find_path(char **path, char *cmd)
 	return (cmd);
 }
 
-void	free_path(char **path)
-{
-	int	i;
-
-	i = 0;
-	while (path && path[i])
-	{
-		free(path[i]);
-		path[i] = NULL;
-		i++;
-	}
-	free(path);
-	path = NULL;
-}
-
 char	*ft_getenv(char *name, char **envp)
 {
 	int		i;
@@ -115,6 +100,6 @@ char	*parse_cmd(char *cmd, char **envp)
 	if (path == NULL)
 		return (NULL);
 	cmd = find_path(path, cmd);
-	free_path(path);
+	free_strs(path);
 	return (cmd);
 }

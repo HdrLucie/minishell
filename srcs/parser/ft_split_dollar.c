@@ -6,13 +6,13 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/22 17:14:56 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:49:50 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		isnt_var(char *str, int *i)
+int	isnt_var(char *str, int *i)
 {
 	if ((ft_isdigit(str[*i]) || str[*i] == '?')
 		&& str[*i - 1] && str[*i - 1] == '$')
@@ -34,13 +34,13 @@ static int	count_word(char *str)
 
 	i = 0;
 	word = 1;
-	if(str[i] == '$')
+	if (str[i] == '$')
 		word = 0;
 	while (str && str[i])
 	{
 		if (str[i] == '\'')
 		{
-			while  (str && str[++i] && str[i] != '\'')
+			while (str && str[++i] && str[i] != '\'')
 				;
 		}
 		else if (str[i] == '$')
@@ -78,14 +78,14 @@ static int	size_word(char *str, int k)
 	}
 	else if (str[k] == '$')
 		while (str && str[++k] && isnt_var(str, &k))
-				;
+			;
 	else
 	{
 		while (str && str[k] && str[k] != '$' && str[k] != '\'')
 			k++;
 		if (str[k] == '\'')
 		{
-			while  (str && str[++k] && str[k] != '\'')
+			while (str && str[++k] && str[k] != '\'')
 				;
 			k++;
 		}
@@ -94,7 +94,7 @@ static int	size_word(char *str, int k)
 	return (size);
 }
 
-static int fill_strs(char *str, char **strs, int word)
+static int	fill_strs(char *str, char **strs, int word)
 {
 	int	i;
 	int	j;
