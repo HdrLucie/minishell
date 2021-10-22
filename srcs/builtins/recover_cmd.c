@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 14:08:26 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:47:48 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	recover_cmd(t_mini	*mini)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	if (mini->exe && mini->exe[0])
 	{
 		if (!ft_strcmp(mini->exe[0], "env"))

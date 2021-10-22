@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 14:31:07 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 15:03:12 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:44:48 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,25 @@ int	unset_alpha_var(t_env *env, char *unset_alpha_var_name)
 	return (0);
 }
 
+int	unset_env_var(t_env *current_node, char *unset_var_name)
+{
+	t_env	*tmp;
+
+	tmp = NULL;
+	while (current_node->next)
+	{
+		if (!ft_strcmp(current_node->next->name, unset_var_name))
+		{
+			tmp = current_node->next->next;
+			free_node(current_node->next);
+			current_node->next = tmp;
+			return (1);
+		}
+		current_node = current_node->next;
+	}
+	return (0);
+}
+
 int	unset_var(t_env **env, char *unset_var_name)
 {
 	t_env	*tmp;
@@ -54,16 +73,7 @@ int	unset_var(t_env **env, char *unset_var_name)
 		free_node(tmp);
 		return (1);
 	}
-	while (current_node->next)
-	{
-		if (!ft_strcmp(current_node->next->name, unset_var_name))
-		{
-			tmp = current_node->next->next;
-			free_node(current_node->next);
-			current_node->next = tmp;
-			return (1);
-		}
-		current_node = current_node->next;
-	}
+	if (unset_env_var(current_node, unset_var_name) == 1)
+		return (1);
 	return (0);
 }

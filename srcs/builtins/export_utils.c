@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/12 18:19:52 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/22 18:48:25 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (env)
+	{
+		if (ft_strcmp(env->name, name_exp))
+			env = env->next;
+		else
+		{
+			free(env->value);
+			env->value = value_exp;
+			return (1);
+		}
+	}
+	return (0);
+}
 
 t_env	*find_first_alpha_node(t_env *env)
 {
