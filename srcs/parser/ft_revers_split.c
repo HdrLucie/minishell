@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:57:58 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:48:54 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 18:07:13 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,14 @@ static int	find_size_total(char **strs)
 	return (res);
 }
 
-char	*ft_reverse_split(char **strs)
+char	*fill_str(char **strs, char *str)
 {
 	int		i;
 	int		j;
 	int		k;
-	int		size;
-	char	*str;
 
 	i = 0;
 	k = 0;
-	size = find_size_total(strs);
-	str = malloc((size + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
 	while (strs && strs[i])
 	{
 		j = 0;
@@ -54,5 +48,18 @@ char	*ft_reverse_split(char **strs)
 	}
 	free_strs(strs);
 	str[k] = '\0';
+	return (str);
+}
+
+char	*ft_reverse_split(char **strs)
+{
+	int		size;
+	char	*str;
+
+	size = find_size_total(strs);
+	str = malloc((size + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	str = fill_str(strs, str);
 	return (str);
 }

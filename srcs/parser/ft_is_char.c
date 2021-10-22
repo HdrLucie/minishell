@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:56:11 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:47:18 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:56:48 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,19 @@ int	is_space(char c)
 	else if (c && c == ' ')
 		return (1);
 	return (0);
+}
+
+int	isnt_var(char *str, int *i)
+{
+	if ((ft_isdigit(str[*i]) || str[*i] == '?')
+		&& str[*i - 1] && str[*i - 1] == '$')
+	{
+		*i = *i + 1;
+		return (0);
+	}
+	else if (str[*i] == '_')
+		return (1);
+	if (ft_isalnum(str[*i]) == 0)
+		return (0);
+	return (1);
 }

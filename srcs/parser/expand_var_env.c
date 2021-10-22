@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:48:42 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 18:03:49 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,27 @@ int	expand(char **token, int i, char *value)
 	return (0);
 }
 
+char	**find_value(t_env *env, char **token, int i)
+{
+	while (env)
+	{
+		if ((token[i][1] && token[i][1] == '{'
+			&& ft_strcmp(&token[i][2], env->name) == 0)
+			|| ft_strcmp(&token[i][1], env->name) == 0)
+		{
+			if (expand(token, i, env->value) == -1)
+				return (NULL);
+			env = NULL;
+		}
+		else
+			env = env->next;
+	}
+	return (token);
+}
+
 char	**expand_var_env(char **token, t_env **env_lst, int old_ret)
 {
 	int		i;
-	t_env	*tmp;
 
 	i = 0;
 	while (token && token[i])
@@ -35,20 +52,9 @@ char	**expand_var_env(char **token, t_env **env_lst, int old_ret)
 			token[i][ft_strlen(token[i]) - 1] = '\0';
 		if (token[i][0] == '$')
 		{
-			tmp = *env_lst;
-			while (tmp)
-			{
-				if ((token[i][1] && token[i][1] == '{'
-					&& ft_strcmp(&token[i][2], tmp->name) == 0)
-					|| ft_strcmp(&token[i][1], tmp->name) == 0)
-				{
-					if (expand(token, i, tmp->value) == -1)
-						return (NULL);
-					tmp = NULL;
-				}
-				else
-					tmp = tmp->next;
-			}
+			token = find_value(*env_lst, token, i);
+			if (token == NULL)
+				return (NULL);
 			if (token[i][0] == '$' && token[i][1] == '?'
 				&& expand(token, i, ft_itoa(old_ret)) == -1)
 				return (NULL);

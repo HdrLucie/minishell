@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 15:28:24 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:09:51 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	free_strs(char **strs)
 	i = 0;
 	while (strs && strs[i])
 	{
-		// write(1, strs[i], ft_strlen(strs[i]));
-		// write(1, "|\n", 2);
 		free(strs[i]);
 		strs[i] = NULL;
 		i++;

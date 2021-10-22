@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:19:28 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 08:40:11 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/22 18:08:59 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ char	*ft_substr(const char *s, int start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
-
