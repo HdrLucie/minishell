@@ -72,8 +72,8 @@ function exec_env()
 	if [ "$TEST1" != "$TEST2" ]; then
 		echo
 		echo
-		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED$TEST1\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
-		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN$TEST2\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED|$TEST1|\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
+		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN|$TEST2|\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 	fi
 	if [ "$ES_1" != "$ES_2" ]; then
 		echo
@@ -115,26 +115,26 @@ exec_test 'echo -n -n -n testtout'
 exec_test 'echo "salut"cou""' 
 exec_test 'echo $PATH' 
 
-# # ENV EXPANSIONS + ESCAPE
+# ENV EXPANSIONS + ESCAPE
 # exec_test 'echo test     \    test'
 # exec_test 'echo \"test'
-# exec_test 'echo $TEST'
-# exec_test 'echo "$TEST"'
-# exec_test "echo '$TEST'"
-# exec_test 'echo "$TEST$TEST$TEST"'
-# exec_test 'echo "$TEST$TEST=lol$TEST"'
-# exec_test 'echo "   $TEST lol $TEST"'
-# exec_test 'echo $TEST$TEST$TEST'
-# exec_test 'echo $TEST$TEST=lol$TEST""lol'
-# exec_test 'echo    $TEST lol $TEST'
-# exec_test 'echo test "" test "" test'
+exec_test 'echo $TEST'
+exec_test 'echo "$TEST"'
+exec_test "echo '$TEST'"
+exec_test 'echo "$TEST$TEST$TEST"'
+exec_test 'echo "$TEST$TEST=lol$TEST"'
+exec_test 'echo "   $TEST lol $TEST"'
+exec_test 'echo $TEST$TEST$TEST'
+exec_test 'echo $TEST$TEST=lol$TEST""lol'
+exec_test 'echo    $TEST lol $TEST'
+exec_test 'echo test "" test "" test'
 # exec_test 'echo "\$TEST"'
-# exec_test 'echo "$=TEST"'
-# exec_test 'echo "$"'
-# exec_test 'echo "$?TEST"'
-# exec_test 'echo $TEST $TEST'
-# exec_test 'echo "$1TEST"'
-# exec_test 'echo "$T1TEST"'
+exec_test 'echo "$=TEST"'
+exec_test 'echo "$"'
+exec_test 'echo "$?TEST"'
+exec_test 'echo $TEST $TEST'
+exec_test 'echo "$1TEST"'
+exec_test 'echo "$T1TEST"'
 
 # EXIT
 # exec_test "exit 42"
@@ -163,9 +163,9 @@ exec_test '< /dev/null cat'
 ENV_SHOW="env"
 EXPORT_SHOW="export"
 exec_env 'export'
-exec_env 'export coucou="salut les gars" hey="heyhey"'
-exec_env 'export coucou="salut" blabla=hey'
-exec_env 'export coucou='salut' blabla=hey'
+exec_env 'export coucou="salut les gars" hey="heyhey" ; export'
+exec_env 'export coucou="salut" blabla=hey ; export'
+exec_env 'export coucou='salut' blabla=hey ; export'
 # exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW
