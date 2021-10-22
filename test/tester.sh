@@ -178,5 +178,5 @@ exec_env 'export coucou='salut' blabla=hey ; export'
 # exec_test $EXPORT_SHOW
 # exec_test 'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' $ENV_SHOW
 
-shopt -s extglob 
-rm !(*.sh)
+# shopt -s extglob 
+# rm !(*.sh)
