@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:26:03 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/12 18:20:13 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/22 13:47:22 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ void	free_node(t_env *node)
 {
 	if (node->name)
 		free(node->name);
+	node->name = NULL;
 	if (node->value)
 		free(node->value);
+	node->value = NULL;
 	if (node)
 		free(node);
+	node = NULL;
 }
 
 int	create_export_node(t_env *env, char *name, char *value)
@@ -39,7 +42,7 @@ t_env	*lstlast_env(t_env *lst)
 {
 	if (lst == NULL)
 		return (NULL);
-	while (lst->next != NULL)
+	while (lst && lst->next)
 		lst = lst->next;
 	return (lst);
 }
@@ -48,7 +51,7 @@ t_env	*lstlast_env_alpha(t_env *lst)
 {
 	if (lst == NULL)
 		return (NULL);
-	while (lst->next_alpha != NULL)
+	while (lst && lst->next_alpha)
 		lst = lst->next_alpha;
 	return (lst);
 }
@@ -63,8 +66,8 @@ void	lstadd_back_env(t_env **alst, t_env *new)
 	tmp = lstlast_env(*alst);
 	if (tmp == NULL)
 	{
-		new->first_alpha_node = 1;
 		*alst = new;
+		new->first_alpha_node = 1;
 		return ;
 	}
 	else
