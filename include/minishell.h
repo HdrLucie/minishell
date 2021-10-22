@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/22 14:42:14 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:41:22 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,11 @@ void	sig_quit(int num);
 **	expand_var_env.c 
 */
 char 	**expand_var_env(char **token, t_env **env_lst, int old_ret);
+int		isnt_var(char *str, int *i);
 /*
 **	lexer.c 
 */
-char	*ft_reverse_split(char **strs, char sep);
+char	*ft_reverse_split(char **strs);
 int		lexer(char *str, t_mini *mini);
 /*
 **	lst_cmd_utils.c 

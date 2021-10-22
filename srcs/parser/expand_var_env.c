@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 14:50:03 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:53:58 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	expand(char **token, int i, char *value)
 {
 	if (value == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
-	token[i] = ft_realloc(token[i], ft_strlen(value));
+	token[i] = ft_realloc(token[i], ft_strlen(value) + 1);
 	if (token[i] == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	ft_strcpy(token[i], value);

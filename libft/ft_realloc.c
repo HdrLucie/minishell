@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 18:25:16 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/08/23 14:39:57 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:54:45 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*ft_realloc(void *ptr, size_t size)
 	new = malloc(size * sizeof(void));
 	if (new == NULL)
 		return (NULL);
-	ft_memcpy(new, ptr, size);
 	free(ptr);
 	ptr = NULL;
 	return (new);

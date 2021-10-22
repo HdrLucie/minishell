@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 14:49:31 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:39:56 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	lexer(char *str, t_mini *mini)
 	token = expand_var_env(token, mini->env, mini->old_ret);
 	if (token == NULL)
 		return (-1);
-	token = ft_split_quote(ft_reverse_split(token, '\0'));
+	token = ft_split_quote(ft_reverse_split(token));
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	else if (token == NULL)

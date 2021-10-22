@@ -6,13 +6,13 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:57:58 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 12:12:17 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:29:34 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	find_size_total(char **strs, char sep)
+static int	find_size_total(char **strs)
 {
 	int	i;
 	int	res;
@@ -24,14 +24,10 @@ static int	find_size_total(char **strs, char sep)
 		res += ft_strlen(strs[i]);
 		i++;
 	}
-	if (sep)
-		res += i - 1;
-	if (res < 0)
-		return (0);
 	return (res);
 }
 
-char	*ft_reverse_split(char **strs, char sep)
+char	*ft_reverse_split(char **strs)
 {
 	int		i;
 	int		j;
@@ -41,8 +37,8 @@ char	*ft_reverse_split(char **strs, char sep)
 
 	i = 0;
 	k = 0;
-	size = find_size_total(strs, sep);
-	str = malloc((size + 1) * sizeof(*str));
+	size = find_size_total(strs);
+	str = malloc((size + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	while (strs && strs[i])
@@ -54,14 +50,9 @@ char	*ft_reverse_split(char **strs, char sep)
 			k++;
 			j++;
 		}
-		if (sep)
-			str[k++] = sep;
 		i++;
 	}
 	free_strs(strs);
-	if (sep)
-		str[k - 1] = '\0';
-	else
-		str[k] = '\0';
+	str[k] = '\0';
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/22 14:49:54 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:57:54 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		isnt_var(char *str, int *i)
 		*i = *i + 1;
 		return (0);
 	}
+	else if (str[*i] == '_')
+		return (1);
 	if (ft_isalnum(str[*i]) == 0)
 		return (0);
 	return (1);
@@ -104,7 +106,6 @@ static int fill_strs(char *str, char **strs, int word)
 	while (j < word)
 	{
 		size = size_word(str, k);
-		// printf("SIZE : %d\n", size);
 		strs[j] = malloc((size + 1) * sizeof(**strs));
 		if (strs[j] == NULL)
 			return (print_error("ALLOCATION FAILED\n", -1));
