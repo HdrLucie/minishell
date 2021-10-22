@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 17:31:41 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/21 13:52:13 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,17 @@ void	free_strs(char **strs)
 {
 	int	i;
 
-	i = -1;
-	while (strs[++i])
+	i = 0;
+	while (strs && strs[i])
 	{
 		// write(1, strs[i], ft_strlen(strs[i]));
 		// write(1, "|\n", 2);
 		free(strs[i]);
+		strs[i] = NULL;
+		i++;
 	}
 	free(strs);
+	strs = NULL;
 }
 
 void	init_mini_struct(t_mini *mini, char **envp, t_env **env)

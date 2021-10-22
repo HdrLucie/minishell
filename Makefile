@@ -10,6 +10,7 @@ SRCS =  srcs/main.c 								\
 		srcs/parser/ft_split_quote.c				\
 		srcs/parser/ft_is_char.c					\
 		srcs/parser/split_quote_utils.c 			\
+		srcs/parser/ft_revers_split.c				\
 		srcs/parser/ft_split_dollar.c				\
 		srcs/builtins/env.c							\
 		srcs/builtins/lst_utils.c					\

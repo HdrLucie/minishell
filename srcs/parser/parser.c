@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/21 13:18:06 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,41 @@ t_cmd	*parse_end(t_cmd *cmd, char **token, int *begin, int i)
 		return (NULL);
 	*begin = i + 1;
 	return (cmd);
+}
+
+char	*erase_copy(char *src, char *dest)
+{
+	int	i;
+
+	i = 0;
+	while (src && dest && src[i] && dest[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	**remove_quote(char **token)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (token[j])
+	{
+		i = 0;
+		while (token[j][i])
+		{
+			if (token[j][i] == '\"')
+			{
+				erase_copy(&token[j][i + 1], &token[j][i]);
+			}
+			else
+				i++;
+		}
+		j++;
+	}
+	return (token);
 }

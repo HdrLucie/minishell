@@ -6,7 +6,7 @@
 /*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/20 16:31:24 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/21 13:30:47 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	sig_quit(int num);
 /*
 **	lexer.c 
 */
+char	*ft_reverse_split(char **strs, char sep);
 int		lexer(char *str, t_mini *mini);
 /*
 **	lst_cmd_utils.c 
@@ -122,6 +123,7 @@ char	*parse_cmd(char *cmd, char **envp);
 t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i);
 t_cmd	*parse_end(t_cmd *cmd, char **token, int *begin, int i);
 char	**ft_substrs(char **s, size_t len);
+char	**remove_quote(char **token);
 
 /****************************/
 /*			CMD				*/

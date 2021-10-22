@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/18 12:04:18 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:03:27 by elise            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	size_word(char *str, int *k)
 	while (str[i] && is_space(str[i]))
 		i++;
 	begin = i;
-	if (str[i] == '\"' || str[i] == '\'')
-		begin++;
+	// if (str[i] == '\"' || str[i] == '\'')
+	// 	begin++;
 	*k = *k + begin;
 	i = check_quote(str, i);
-	if (str[i - 1] == '\"' || str[i - 1] == '\'')
-		i--;
+	// if (str[i - 1] == '\"' || str[i - 1] == '\'')
+	// 	i--;
 	return (i - begin);
 }
 
@@ -79,7 +79,7 @@ char	**fill_split(char *str, char **split, int word)
 			return (NULL);
 		while (++i < size)
 			split[j][i] = str[k++];
-		if (str && str[k + 1] && (str[k] == '\"' || str[k] == '\''))
+		if (str && str[k] && str[k + 1] && (str[k] == '\"' || str[k] == '\''))
 			k++;
 		split[j][i] = '\0';
 	}
@@ -92,6 +92,8 @@ char	**ft_split_quote(char *str)
 	int		word;
 	char	**split;
 
+	if (str == NULL)
+		return (print_char_error("ALLOCATION FAILED\n", -1));
 	word = count_word(str);
 	if (word == -1)
 		return (NULL);
@@ -107,5 +109,6 @@ char	**ft_split_quote(char *str)
 		errno = -1;
 		return (NULL);
 	}
+	free(str);
 	return (split);
 }
