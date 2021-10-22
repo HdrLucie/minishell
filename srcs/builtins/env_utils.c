@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 15:03:14 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/22 13:36:44 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	**env_execve(t_mini *mini)
 		nb_var++;
 		tmp = tmp->next;
 	}
-	mini->envp = malloc(sizeof(char *) * nb_var + 1);
+	mini->envp = malloc(sizeof(char *) * (nb_var + 1));
 	if (!mini->envp)
 		return (NULL);
 	mini->f_envp = 1;
