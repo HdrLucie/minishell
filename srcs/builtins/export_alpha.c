@@ -6,23 +6,18 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:02:36 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/25 14:02:58 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 17:16:10 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*find_first_alpha_node(t_env *env)
+void	init_node_alpha(t_env **start, t_env **current_node, t_env **next_node, t_env *env)
 {
-	if (env == NULL)
-		return (NULL);
-	while (env)
-	{
-		if (env->first_alpha_node == 1)
-			return (env);
-		env = env->next;
-	}
-	return (NULL);
+	*start = find_first_alpha_node(env);
+	*current_node = find_first_alpha_node(env);
+	(*current_node)->first_alpha_node = 0;
+	*next_node = NULL;	
 }
 
 void	udpate_alpha_road(t_env *env)
@@ -34,10 +29,7 @@ void	udpate_alpha_road(t_env *env)
 	t_env	*tmp;
 
 	i = 0;
-	start = find_first_alpha_node(env);
-	current_node = find_first_alpha_node(env);
-	current_node->first_alpha_node = 0;
-	next_node = NULL;
+	init_node_alpha(&start, &current_node, &next_node, env);
 	tmp = current_node;
 	while (current_node->next_alpha)
 	{

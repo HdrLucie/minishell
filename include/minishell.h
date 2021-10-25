@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/25 14:39:33 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 15:59:24 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,8 @@ char	**env_execve(t_mini *mini);
 int		relative_path(t_env *env, char *path, char **pwd);
 int		check_last_slash(char *str);
 int		check_export_value(char **var_export);
+int		search_value(t_env *env, char **value, char *to_find);
+int		go_home(t_env *env, int i, char *path, char *pwd);
 
 /****************************/
 /*			PRINT			*/

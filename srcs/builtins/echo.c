@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:21:45 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 17:14:53 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:47:27 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	echo(char **to_print)
 	i = 1;
 	new_line = 0;
 	if (!to_print[1])
-		return (-2);
+	{
+		write(1, "\n", 1);
+		return (0);
+	}
 	while (to_print[i])
 	{
 		if (to_print[i][0] == '-' && to_print[i][1] == 'n')
