@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:18:26 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/08/23 14:33:25 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/25 15:43:43 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
 	free((char *)s1);
-	free((char *)s2);
 	return (str);
 }
