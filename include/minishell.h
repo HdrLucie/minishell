@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/22 18:09:24 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/25 13:50:43 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,11 @@ char	**ft_realloc_strs(char **strs, size_t size);
 int		exe_redir(t_redir *redir, int count);
 int		close_fd(t_redir *red, int count);
 int		exe_cmd(t_mini *mini);
+/*
+**	here_document.c 
+*/
+int		do_here_doc(t_redir *red);
+
 /****************************/
 /*			BUILTINS		*/
 /****************************/

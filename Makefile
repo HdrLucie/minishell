@@ -1,8 +1,10 @@
 SRCS =  srcs/main.c 								\
+		srcs/error.c								\
 		srcs/cmd/init_cmd.c 						\
 		srcs/cmd/parse_redir_1.c					\
 		srcs/cmd/parse_redir_2.c					\
 		srcs/cmd/exe_redir.c						\
+		srcs/cmd/here_document.c					\
 		srcs/parser/parse_path.c 					\
 		srcs/parser/lst_cmd_utils.c 				\
 		srcs/parser/lexer.c							\

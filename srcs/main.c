@@ -6,42 +6,11 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 18:09:51 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:35:17 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	print_error(char *msg, int retur)
-{
-	write(2, "MINISHELL : ", 12);
-	write(2, msg, ft_strlen(msg));
-	return (retur);
-}
-
-char	**print_char_error(char *msg, int retur)
-{
-	write(2, "MINISHELL : ", 12);
-	write(2, msg, ft_strlen(msg));
-	if (retur == -1)
-		errno = -1;
-	return (NULL);
-}
-
-void	free_strs(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs && strs[i])
-	{
-		free(strs[i]);
-		strs[i] = NULL;
-		i++;
-	}
-	free(strs);
-	strs = NULL;
-}
 
 void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 {
@@ -55,9 +24,51 @@ void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 	mini->old_ret = 0;
 }
 
-int	main(int ac, char **av, char **envp)
+char	*init_prompt(void)
+{
+	char	*prompt;
+	int		i;
+
+	i = 0;
+	prompt = malloc(1000 * sizeof(char));
+	if (prompt == NULL)
+		return (*print_char_error("ALLOCATION FAILED\n", -1));
+	ft_strcpy(prompt, "\033[1m\033[36m");
+	while (prompt[i])
+		i++;
+	getcwd(&prompt[i], 950);
+	if (prompt == NULL)
+		return (*print_char_error("TOO MUCH CHAR ON PWD\n", -1));
+	while (prompt[i])
+		i++;
+	ft_strcpy(&prompt[i], "\033[0m$ ");
+	return (prompt);
+}
+
+int	launch_minishell(t_mini *mini)
 {
 	char	*str;
+	char	*prompt;
+
+	signal(SIGINT, sig_int);
+	signal(SIGQUIT, sig_quit);
+	prompt = init_prompt();
+	if (prompt == NULL)
+		return (-1);
+	str = readline(prompt);
+	free(prompt);
+	if (!str)
+		return (-1);
+	if (ft_strcmp(str, ""))
+		add_history(str);
+	if (lexer(str, mini) == -1 || errno == -1)
+		return (-1);
+	free(str);
+	return (0);
+}
+
+int	main(int ac, char **av, char **envp)
+{
 	t_mini	mini;
 	t_env	*env;
 
@@ -70,16 +81,8 @@ int	main(int ac, char **av, char **envp)
 	init_mini_struct(&mini, envp, &env);
 	while (42)
 	{
-		signal(SIGINT, sig_int);
-		signal(SIGQUIT, sig_quit);
-		str = readline("> ");
-		if (!str)
+		if (launch_minishell(&mini) == -1)
 			return (-1);
-		if (ft_strcmp(str, ""))
-			add_history(str);
-		if (lexer(str, &mini) == -1 || errno == -1)
-			return (-1);
-		free(str);
 	}
 	rl_clear_history();
 	return (0);

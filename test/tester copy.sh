@@ -122,8 +122,7 @@ exec_test 'export ; env'
 # exec_test 'echo hudifg d | | hugdfihd'
 
 exec_test 'echo ""'
-# exec_test 'echo "\n \n \n"'
-exec_test 'echo "\n \n \\n"'
+exec_test 'echo "\n \n \n"'
 exec_test 'echo hi";" hihi'
 
 exec_test 'cd ~'

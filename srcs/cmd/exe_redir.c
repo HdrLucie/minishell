@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/21 14:03:42 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/25 14:06:53 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ int	exe_redir(t_redir *red, int count)
 			do_right_redir(&red[i]);
 		else if (red[i].op[1] == '\0')
 			do_left_redir(&red[i]);
+		// else
+		// 	do_here_doc(&red[i]);
 		i++;
 	}
 	return (0);
