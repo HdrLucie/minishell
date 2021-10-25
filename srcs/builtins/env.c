@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 15:18:45 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 13:55:32 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	fill_env_lst_value(char *str, t_env *env, int i)
 			if (env->value)
 				free(env->value);
 			env->value = str;
-			return (1);
+			return (0);
 		}
 		else
 			env->value[j] = str[k];
@@ -46,7 +46,7 @@ int	fill_env_lst_value(char *str, t_env *env, int i)
 		k++;
 	}
 	env->value[j] = '\0';
-	return (1);
+	return (0);
 }
 
 int	fill_env_lst_name(char *str, t_env *env)
@@ -66,9 +66,9 @@ int	fill_env_lst_name(char *str, t_env *env)
 		i++;
 	}
 	env->name[i] = '\0';
-	if (!fill_env_lst_value(str, env, i))
+	if (fill_env_lst_value(str, env, i) == -1)
 		return (-1);
-	return (1);
+	return (0);
 }
 
 t_env	*create_env_lst(char **env)
@@ -88,7 +88,7 @@ t_env	*create_env_lst(char **env)
 		current_node->next = NULL;
 		current_node->next_alpha = NULL;
 		lstadd_back_env(&env_lst, current_node);
-		if (!fill_env_lst_name(env[i], current_node))
+		if (fill_env_lst_name(env[i], current_node) == -1)
 			return (NULL);
 		i++;
 	}

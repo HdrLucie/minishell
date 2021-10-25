@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:26:03 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 13:47:22 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 14:10:39 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	create_export_node(t_env *env, char *name, char *value)
 
 	current_node = NULL;
 	current_node = malloc(sizeof(t_env));
+	if (!current_node)
+		return (print_error("ALLOCATION FAILED\n", -1));
 	current_node->name = name;
 	current_node->value = value;
 	current_node->first_alpha_node = 0;

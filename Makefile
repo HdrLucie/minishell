@@ -29,6 +29,7 @@ SRCS =  srcs/main.c 								\
 		srcs/builtins/echo.c						\
 		srcs/builtins/cd.c							\
 		srcs/builtins/env_utils.c					\
+		srcs/builtins/export_alpha.c				\
 
 
 OBJS = ${SRCS:.c=.o}

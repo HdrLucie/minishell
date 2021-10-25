@@ -6,52 +6,44 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 13:36:44 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/22 18:57:54 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    fill_execve(t_env *env, char **execve)
+void	fill_execve(t_env *env, char **execve)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	k = 0;
 	while (env)
 	{
-		while (env->name[i])
-		{
-			execve[j][k] = env->name[i];
-			i++;
-			k++;
-		}
+		while (env->name[++i])
+			execve[j][k++] = env->name[i];
 		execve[j][k] = '=';
-		i = 0;
+		i = -1;
 		k++;
-		while (env->value[i])
-		{
-			execve[j][k] = env->value[i];
-			i++;
-			k++;
-		}
+		while (env->value[++i])
+			execve[j][k++] = env->value[i];
 		execve[j][k] = '\0';
 		k = 0;
-		i = 0;
+		i = -1;
 		j++;
 		env = env->next;
 	}
 }
 
-int malloc_execve(t_env *env, char **execve)
+int	malloc_execve(t_env *env, char **execve)
 {
-	int i;
-	int size_name;
-	int size_value;
-	t_env   *tmp;
+	int		i;
+	int		size_name;
+	int		size_value;
+	t_env	*tmp;
 
 	i = 0;
 	size_name = 0;
@@ -72,8 +64,8 @@ int malloc_execve(t_env *env, char **execve)
 
 char	**env_execve(t_mini *mini)
 {
-	int     nb_var;
-	t_env   *tmp;
+	int		nb_var;
+	t_env	*tmp;
 
 	if (mini->envp && mini->f_envp)
 		free_strs(mini->envp);
@@ -90,5 +82,5 @@ char	**env_execve(t_mini *mini)
 		return (NULL);
 	mini->f_envp = 1;
 	malloc_execve(*mini->env, mini->envp);
-	return(mini->envp);
+	return (mini->envp);
 }

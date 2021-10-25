@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/25 13:50:43 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/25 14:39:33 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int		ft_fill_env_lst(char *str, t_env *env);
 void	lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int		ft_fill_env_lst_value(char *str, t_env *env, int i);
-int		ft_check_env(t_env *env, char *var_export);
+int		is_in_env(t_env *env, char *var_export);
 int		export_var(t_env *env, char **var_export);
 int		create_export_node(t_env *env, char *name, char *value);
 int		ft_fill_env_lst_name(char *str, t_env *env);
@@ -188,6 +188,7 @@ void	change_directory_root(t_env *env, char **pwd);
 char	**env_execve(t_mini *mini);
 int		relative_path(t_env *env, char *path, char **pwd);
 int		check_last_slash(char *str);
+int		check_export_value(char **var_export);
 
 /****************************/
 /*			PRINT			*/
