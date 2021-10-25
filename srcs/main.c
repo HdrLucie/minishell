@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 15:28:24 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 12:00:38 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	print_error(char *msg, int retur)
 {
+	if (retur == -1)
+		errno = -1;
 	write(2, "MINISHELL : ", 12);
 	write(2, msg, ft_strlen(msg));
 	return (retur);

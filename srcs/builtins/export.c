@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 18:49:05 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 14:21:15 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,40 +72,48 @@ int	recover_name_exp(char *cmd, char **name, char **value)
 	return (0);
 }
 
-int	check_env(t_env *env, char *var_export)
+int	export(t_env *env, char **var_export, int ret)
 {
-	while (env)
-	{
-		if (ft_strcmp(env->name, var_export))
-			env = env->next;
-		else
-			return (1);
-	}
-	return (0);
-}
-
-int	export_var(t_env *env, char **var_export)
-{
-	char	*name_exp;
-	char	*value_exp;
 	int		i;
+	char	*name_exp;
+	char	*value_exp;	
 
 	i = 1;
 	value_exp = NULL;
 	name_exp = NULL;
+	while (var_export[i])
+	{
+		ret = recover_name_exp(var_export[i], &name_exp, &value_exp);
+		if (ret == -1)
+			return (-1);
+		if (!is_in_env(env, name_exp))
+		{
+			ret = create_export_node(env, name_exp, value_exp);
+			if (ret == -1)
+				return (-1);
+		}
+		else
+			ret = change_exp_value(env, name_exp, value_exp);
+		i++;
+	}
+	return (ret);
+}
+
+int	export_var(t_env *env, char **var_export)
+{
+	int		ret;
+
+	ret = check_export_value(var_export);
+	if (ret == 1)
+		return (1);
 	if (var_export && !var_export[1])
 	{
 		udpate_alpha_road(env);
 		return (0);
 	}
-	while (var_export[i])
-	{
-		recover_name_exp(var_export[i], &name_exp, &value_exp);
-		if (!check_env(env, name_exp))
-			create_export_node(env, name_exp, value_exp);
-		else
-			change_exp_value(env, name_exp, value_exp);
-		i++;
-	}
-	return (1);
+	ret = export(env, var_export, ret);
+	print_env(env);
+	if (ret == -1)
+		return (print_error("ALLOCATION FAILED\n", -1));
+	return (0);
 }

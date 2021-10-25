@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 18:54:27 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 14:33:41 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,10 @@ int	relative_change_directory(t_env *env, char *cmd)
 	if (search_value(env, &pwd, "PWD") != 0)
 		return (-1);
 	if (chdir(cmd) == -1)
-		printf("PATH NOT FOUND\n");
+	{
+		perror("MINISHELL :");
+		return (-1);
+	}
 	else
 	{
 		tmp_path = getcwd(tmp_path, 1000);
@@ -126,12 +129,19 @@ int	relative_change_directory(t_env *env, char *cmd)
 
 int	change_directory(t_env *env, char *cmd)
 {
-	if (simple_change_directory(env, cmd) == 0)
-		return (0);
-	else if (simple_change_directory(env, cmd) == -1)
-		return (-1);
-	if (relative_change_directory(env, cmd) == 0)
-		return (0);
+	int	ret;
+
+	ret = 0;
+	ret = simple_change_directory(env, cmd);
+	if (ret == -1 || ret == 0)
+	{
+		if (ret == -1)
+			return (print_error("ALLOCATION FAILED\n", -1));
+		return (ret);
+	}
 	else
-		return (-1);
+		ret = relative_change_directory(env, cmd);
+	if (ret == -1)
+		return (print_error("ALLOCATION FAILED\n", -1));
+	return (ret);
 }

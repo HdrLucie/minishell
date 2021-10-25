@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:37:41 by user42            #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/25 13:43:09 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	print_pwd(t_env *env)
 		else
 		{
 			printf("%s\n", env->value);
-			return (1);
+			return (0);
 		}
 	}
-	return (0);
+	return (1);
 }

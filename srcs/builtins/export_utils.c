@@ -6,11 +6,29 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 18:48:25 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/25 14:20:15 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	check_export_value(char **var_export)
+{
+	int	i;
+
+	i = 1;
+	while (var_export[i])
+	{
+		if (ft_isdigit(var_export[i][0]) == 1)
+		{
+			printf("bash: export: `%c': not a valid identifier\n",
+				var_export[i][0]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 {
@@ -25,65 +43,20 @@ int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 		{
 			free(env->value);
 			env->value = value_exp;
-			return (1);
+			return (0);
 		}
 	}
-	return (0);
+	return (1);
 }
 
-t_env	*find_first_alpha_node(t_env *env)
+int	is_in_env(t_env *env, char *var_export)
 {
-	if (env == NULL)
-		return (NULL);
 	while (env)
 	{
-		if (env->first_alpha_node == 1)
-			return (env);
-		env = env->next;
-	}
-	return (NULL);
-}
-
-void	udpate_alpha_road(t_env *env)
-{
-	int		i;
-	t_env	*start;
-	t_env	*next_node;
-	t_env	*current_node;
-	t_env	*tmp;
-
-	i = 0;
-	start = find_first_alpha_node(env);
-	current_node = find_first_alpha_node(env);
-	current_node->first_alpha_node = 0;
-	next_node = NULL;
-	tmp = current_node;
-	while (current_node->next_alpha)
-	{
-		if (ft_strcmp(current_node->name, current_node->next_alpha->name) > 0)
-		{
-			next_node = current_node->next_alpha;
-			current_node->next_alpha = next_node->next_alpha;
-			next_node->next_alpha = current_node;
-			if (i == 0)
-			{
-				current_node = next_node;
-				start = current_node;
-			}
-			else
-			{
-				tmp->next_alpha = next_node;
-				current_node = start;
-				i = 0;
-			}
-		}
+		if (ft_strcmp(env->name, var_export))
+			env = env->next;
 		else
-		{
-			tmp = current_node;
-			current_node = current_node->next_alpha;
-			i++;
-		}
+			return (1);
 	}
-	start->first_alpha_node = 1;
-	print_env_alpha(start);
+	return (0);
 }
