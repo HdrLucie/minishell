@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/25 12:23:31 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/26 11:38:33 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,15 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 	{
 		red[j].op[1] = cmd[i][0];
 		red[j].op[2] = '\0';
-		if (cmd[i + 2])
-			red[j].path = ft_strdup(cmd[i + 2]);
-		else
-			return (print_error("PARSE ERROR\n", -1));
-		i += 2;
-	}
-	else
-	{
-		red[j].op[1] = '\0';
-		if (cmd[i + 1])
-			red[j].path = ft_strdup(cmd[i + 1]);
-		else
-			return (print_error("PARSE ERROR\n", -1));
 		i++;
 	}
+	else
+		red[j].op[1] = '\0';
+	if (cmd[i + 1])
+		red[j].path = ft_strdup(cmd[i + 1]);
+	else
+		return (print_error("PARSE ERROR\n", -1));
+	i++;
 	return (i);
 }
 

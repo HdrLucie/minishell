@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/25 14:39:30 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/26 11:19:18 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	launch_minishell(t_mini *mini)
 	char	*prompt;
 
 	signal(SIGINT, sig_int);
-	signal(SIGQUIT, sig_quit);
-	prompt = init_prompt();
+	signal(SIGQUIT, SIG_IGN);
+ 	prompt = init_prompt();
 	if (prompt == NULL)
 		return (-1);
 	str = readline(prompt);
