@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 17:17:35 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/27 12:51:07 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ int	execute(char **cmd, t_mini *mini)
 	mini->old_ret = status;
 	return (0);
 }
-
+void	ft_print_list(t_cmd *tmp2);
 int	ft_execute_cmd(t_mini *mini)
 {
 	t_cmd	*tmp;
 
 	tmp = mini->cmd;
+	ft_print_list(tmp);
 	while (tmp)
 	{
-		if (tmp->cmd && redir(tmp->cmd, mini) == -1)
+		// if (tmp->pipe_out)
+		// 	printf("INIT : 0 : %d 1: %d\n", tmp->pipe_out[0], tmp->pipe_out[1]);
+		if (tmp->cmd && exe_pipe(mini, tmp) == -1)
 			return (-1);
 		tmp = tmp->next;
 	}

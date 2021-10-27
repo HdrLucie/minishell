@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/26 11:38:33 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/27 11:19:20 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,16 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 	return (0);
 }
 
-int	redir(char **cmd, t_mini *mini)
+int	redir(char **exe, t_mini *mini)
 {
-	mini->nb_red = count_redir(cmd);
+	mini->nb_red = count_redir(exe);
 	mini->red = malloc(mini->nb_red * sizeof(t_redir));
 	if (mini->red == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
-	mini->exe = malloc(sizeof(char *) * (ft_strslen(cmd) + 1));
+	mini->exe = malloc(sizeof(char *) * (ft_strslen(exe) + 1));
 	if (mini->exe == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
-	if (fill_red(cmd, mini->red, mini->exe) == -1)
+	if (fill_red(exe, mini->red, mini->exe) == -1)
 		return (-1);
 	exe_redir(mini->red, mini->nb_red);
 	exe_cmd(mini);

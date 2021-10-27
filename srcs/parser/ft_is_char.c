@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:56:11 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:56:48 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/26 12:18:18 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_spe_char(char c)
 
 int	is_redir(char c)
 {
-	if (c == '>' || c == '<' || c == ';')
+	if (c == '>' || c == '<' || c == '|')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:45:02 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/27 11:25:47 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_substrs(char **s, size_t len)
 	return (str);
 }
 
-t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, int in, int out)
+t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, int *in, int *out)
 {
 	t_cmd	*last;
 	t_cmd	*new;
@@ -69,10 +69,10 @@ t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);
-	cmd = find_cmd_struct(cmd, tmp, 0, 1);
+	cmd = find_cmd_struct(cmd, tmp, NULL, NULL);
 	if (cmd == NULL)
 		return (NULL);
-	new = ft_cmd_new(NULL, 1, 0);
+	new = ft_cmd_new(NULL, NULL, NULL);
 	if (new == NULL)
 		return (NULL);
 	ft_cmd_add_back(&cmd, new);

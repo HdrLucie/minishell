@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/25 14:39:33 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/27 12:51:00 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**cmd;
-	int				pipe_in;
-	int				pipe_out;
+	int				*pipe_in;
+	int				*pipe_out;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -63,6 +63,8 @@ typedef struct s_mini
 {
 	t_env	**env;
 	t_cmd	*cmd;
+	int		nb_pipe;
+	int		*pid;
 	char	**exe;
 	char	**envp;
 	int		f_envp;
@@ -106,7 +108,7 @@ int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
 void	ft_cmd_clear(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
-t_cmd	*ft_cmd_new(char **cmd, int in, int out);
+t_cmd	*ft_cmd_new(char **cmd, int *in, int *out);
 /*
 ** 	split_quote.c
 */
@@ -141,7 +143,7 @@ int		execute(char **cmd, t_mini *mini);
 /*
 **	redir.c 
 */
-int		redir(char **cmd, t_mini *mini);
+int		redir(char **exe, t_mini *mini);
 void	free_red(t_redir *red, int size);
 int		count_redir(char **cmd);
 void	print_redir(t_redir	*red, int count, char **cmd);
@@ -196,5 +198,11 @@ int		check_export_value(char **var_export);
 
 void	print_env(t_env *env);
 void	print_env_alpha(t_env *env);
+
+/****************************/
+/*			PIPE			*/
+/****************************/
+
+int	exe_pipe(t_mini *mini, t_cmd *cmd);
 
 #endif
