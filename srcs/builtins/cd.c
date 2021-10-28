@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 13:39:43 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 18:12:49 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	simple_change_directory(t_env *env, char *path)
 	home = NULL;
 	pwd = NULL;
 	if ((search_value(env, &home, "HOME") != 0
-			|| search_value(env, &pwd, "PWD") != 0))
+		|| search_value(env, &pwd, "PWD") != 0))
 		return (-1);
 	if (!path)
 	{
@@ -98,9 +98,20 @@ int	relative_change_directory(t_env *env, char *cmd)
 int	change_directory(t_env *env, char *cmd)
 {
 	int	ret;
+	int	i;
 
 	ret = 0;
-	ret = simple_change_directory(env, cmd);
+	i = 0;
+	if (cmd)
+	{
+		while (cmd[i] && ret == 0)
+		{
+			ret = ft_isalpha(cmd[i]);
+			i++;
+		}
+	}
+	if (ret == 0)
+		ret = simple_change_directory(env, cmd);
 	if (ret == -1 || ret == 0)
 	{
 		if (ret == -1)

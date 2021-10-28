@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 13:39:11 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 18:51:21 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int	export_var(t_env *env, char **var_export)
 		udpate_alpha_road(env);
 		return (0);
 	}
-	ret = export(env, var_export, ret);
+	else
+		ret = export(env, var_export, ret);
 	if (ret == -1)
 		return (print_error("ALLOCATION FAILED\n", -1));
 	return (0);

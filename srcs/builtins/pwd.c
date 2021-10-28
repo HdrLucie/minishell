@@ -6,23 +6,20 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 14:37:41 by user42            #+#    #+#             */
-/*   Updated: 2021/10/25 13:43:09 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 16:02:53 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_pwd(t_env *env)
+int	print_pwd(void)
 {
-	while (env)
-	{
-		if (ft_strcmp(env->name, "PWD"))
-			env = env->next;
-		else
-		{
-			printf("%s\n", env->value);
-			return (0);
-		}
-	}
+	char	*pwd;
+
+	pwd = malloc(sizeof(char) * 1000);
+	if (!pwd)
+		return (-1);
+	printf("%s\n", getcwd(pwd, 1000));
+	free(pwd);
 	return (1);
 }

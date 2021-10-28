@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/25 17:09:35 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 18:51:27 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 			env = env->next;
 		else
 		{
-			free(env->value);
+			if (env->value)
+				free(env->value);
 			env->value = value_exp;
 			return (0);
 		}
