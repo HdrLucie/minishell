@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 16:24:00 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:49:02 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd)
 	int	ret;
 
 	ret = 0;
+	g_flag_fork = 1;
 	pid = fork();
 	if (pid == 0)
 	{

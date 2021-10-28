@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 16:11:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:45:39 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 /****************************/
 
 # define PAGE_SIZE 4096
+int	g_flag_fork;
 
 /****************************/
 /*			STRUCT			*/
@@ -87,6 +88,7 @@ char	**print_char_error(char *msg, int retur);
 
 void	sig_int(int num);
 void	sig_quit(int num);
+void	sig_child(int num);
 
 /****************************/
 /*			PARSER			*/

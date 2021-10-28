@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 13:59:53 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:45:52 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,28 @@ void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 	mini->old_ret = 0;
 }
 
+char	*find_couleur(void)
+{
+	static int	i = 0;
+
+	i++;
+	if (i > 5)
+		i = 0;
+	if (i == 0)
+		return("\033[1m\033[31m");
+	if (i == 1)
+		return("\033[1m\033[32m");
+	if (i == 2)
+		return("\033[1m\033[33m");
+	if (i == 3)
+		return("\033[1m\033[34m");
+	if (i == 4)
+		return("\033[1m\033[35m");
+	if (i == 5)
+		return("\033[1m\033[36m");
+	return("\033[1m\033[36m");
+}
+
 char	*init_prompt(void)
 {
 	char	*prompt;
@@ -33,7 +55,7 @@ char	*init_prompt(void)
 	prompt = malloc(1000 * sizeof(char));
 	if (prompt == NULL)
 		return (*print_char_error("ALLOCATION FAILED\n", -1));
-	ft_strcpy(prompt, "\033[1m\033[36m");
+	ft_strcpy(prompt, find_couleur());
 	while (prompt[i])
 		i++;
 	getcwd(&prompt[i], 950);
@@ -52,6 +74,7 @@ int	launch_minishell(t_mini *mini)
 
 	signal(SIGINT, sig_int);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGCHLD, SIG_IGN);
 	prompt = init_prompt();
 	if (prompt == NULL)
 		return (-1);
@@ -75,6 +98,7 @@ int	main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (print_error("TOO MUCH ARG", -1));
 	(void)av;
+	g_flag_fork = 0;
 	env = create_env_lst(envp);
 	if (env == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1));
