@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/19 17:17:35 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/28 11:34:58 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ int	execute(char **cmd, t_mini *mini)
 	return (0);
 }
 
+void	wait_child(int nb_pipe)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	status = 0;
+	while (i < nb_pipe + 1)
+	{
+		wait(&status);
+		i++;
+	}
+}
+
 int	ft_execute_cmd(t_mini *mini)
 {
 	t_cmd	*tmp;
@@ -41,9 +55,32 @@ int	ft_execute_cmd(t_mini *mini)
 	tmp = mini->cmd;
 	while (tmp)
 	{
-		if (tmp->cmd && redir(tmp->cmd, mini) == -1)
+		if (tmp->cmd && !tmp->pipe_in && !tmp->pipe_out
+			&& redir(tmp->cmd, mini) == -1)
+			return (-1);
+		else if (tmp->cmd && exe_pipe(mini, tmp) == -1)
 			return (-1);
 		tmp = tmp->next;
 	}
+	tmp = mini->cmd;
+	while (tmp)
+	{
+		if (tmp->pipe_in)
+		{
+			close(tmp->pipe_in[0]);
+			close(tmp->pipe_in[1]);
+			// free(tmp->pipe_in);
+			tmp->pipe_in = NULL;
+		}
+		if (tmp->pipe_out)
+		{
+			close(tmp->pipe_out[0]);
+			close(tmp->pipe_out[1]);
+			// free(tmp->pipe_out);
+			tmp->pipe_out = NULL;
+		}
+		tmp = tmp->next;
+	}
+	wait_child(mini->nb_pipe);
 	return (0);
 }

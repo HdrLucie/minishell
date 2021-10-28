@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/25 14:06:53 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/26 10:26:28 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,8 @@ int	close_fd(t_redir *red, int count)
 	i = count - 1;
 	while (i >= 0)
 	{
-		if (red[i].op[1] == '\0' || red[i].op[0] == '>')
-		{
-			dup2(red[i].save_fd, red[i].n);
-			close(red[i].save_fd);
-		}
+		dup2(red[i].save_fd, red[i].n);
+		close(red[i].save_fd);
 		i--;
 	}
 	return (0);
@@ -91,8 +88,8 @@ int	exe_redir(t_redir *red, int count)
 			do_right_redir(&red[i]);
 		else if (red[i].op[1] == '\0')
 			do_left_redir(&red[i]);
-		// else
-		// 	do_here_doc(&red[i]);
+		else
+			do_here_doc(&red[i]);
 		i++;
 	}
 	return (0);

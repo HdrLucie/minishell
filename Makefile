@@ -30,7 +30,12 @@ SRCS =  srcs/main.c 								\
 		srcs/builtins/cd.c							\
 		srcs/builtins/env_utils.c					\
 		srcs/builtins/export_alpha.c				\
+<<<<<<< HEAD
 		srcs/builtins/cd_utils.c					\
+=======
+		srcs/pipe/pipe.c							\
+		srcs/pipe/init_fd.c
+>>>>>>> main
 
 
 OBJS = ${SRCS:.c=.o}

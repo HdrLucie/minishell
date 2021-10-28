@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/10/25 15:59:57 by hlucie           ###   ########.fr       */
+=======
+/*   Updated: 2021/10/28 09:33:40 by ehautefa         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +85,11 @@ int	relative_change_directory(t_env *env, char *cmd)
 		return (-1);
 	if (chdir(cmd) == -1)
 	{
+<<<<<<< HEAD
 		perror("MINISHELL ");
+=======
+		perror("WHAT THE fUCK ARE YOU DOING HERE ????");
+>>>>>>> main
 		return (-1);
 	}
 	else
