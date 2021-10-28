@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 17:30:34 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 21:10:50 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,40 @@
 **					   -2, erreur, mais le process continue. 
 */
 
+int	check_shlvl(char *str, t_env *env, int k)
+{
+	if (!ft_strcmp("SHLVL", env->name))
+	{
+		if_free(env->value);
+		env->value = ft_itoa(ft_atoi(&str[k]) + 1);
+		return (0);
+	}
+	return (1);
+}
+
 int	fill_env_lst_value(char *str, t_env *env, int i)
 {
 	int	k;
 	int	j;
 
 	j = 1;
-	k = i + 1;
+	k = i;
 	while (str[++i])
 		j++;
 	env->value = malloc(sizeof(char) * j + 1);
 	if (!env->value)
 		return (-1);
 	j = 0;
-	while (str[k])
+	while (str[++k])
 	{
 		if (!ft_strcmp("SHLVL", env->name))
 		{
-			if (env->value)
-				free(env->value);
+			if_free(env->value);
 			env->value = ft_itoa(ft_atoi(&str[k]) + 1);
 			return (0);
 		}
 		else
-			env->value[j] = str[k];
-		j++;
-		k++;
+			env->value[j++] = str[k];
 	}
 	env->value[j] = '\0';
 	return (0);

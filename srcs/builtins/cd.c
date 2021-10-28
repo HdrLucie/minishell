@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 18:54:37 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 21:43:01 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,22 @@ int	next_simple_cd(t_env *env, char *path, char *pwd)
 		printf("%s\n", oldpwd);
 		return (0);
 	}
-	else if (go_home(env, i, path, pwd) == 0)
+	if_free(oldpwd);
+	if (go_home(env, i, path, pwd) == 0)
 		return (0);
 	return (1);
+}
+
+int	init_path(t_env *env, char **home, char **pwd)
+{
+	if ((search_value(env, home, "HOME") != 0
+			|| search_value(env, pwd, "PWD") != 0))
+	{
+		if_free(*home);
+		if_free(*pwd);
+		return (-1);
+	}
+	return (0);
 }
 
 int	simple_change_directory(t_env *env, char *path)
@@ -49,8 +62,7 @@ int	simple_change_directory(t_env *env, char *path)
 	i = 0;
 	home = NULL;
 	pwd = NULL;
-	if ((search_value(env, &home, "HOME") != 0
-		|| search_value(env, &pwd, "PWD") != 0))
+	if (init_path(env, &home, &pwd) == -1)
 		return (-1);
 	if (!path)
 	{
@@ -63,8 +75,10 @@ int	simple_change_directory(t_env *env, char *path)
 		}
 		return (0);
 	}
+	if_free(home);
 	if (next_simple_cd(env, path, pwd) == 0)
 		return (0);
+	if_free(pwd);
 	return (1);
 }
 
@@ -95,22 +109,21 @@ int	relative_change_directory(t_env *env, char *cmd)
 	return (0);
 }
 
-int	change_directory(t_env *env, char *cmd)
+int	change_directory(t_env *env, char *start, char *cmd)
 {
 	int	ret;
 	int	i;
 
 	ret = 0;
 	i = 0;
-	if (cmd)
+	if (start && (ft_strcmp("cd", start) != 0))
 	{
-		while (cmd[i] && ret == 0)
-		{
-			ret = ft_isalpha(cmd[i]);
-			i++;
-		}
+		printf("bash: %s: No such file or directory\n", start);
+		return (0);
 	}
-	if (ret == 0)
+	while (cmd && cmd[i] && ft_isalpha(cmd[i]))
+		i++;
+	if (!cmd || cmd[i])
 		ret = simple_change_directory(env, cmd);
 	if (ret == -1 || ret == 0)
 	{
@@ -118,9 +131,5 @@ int	change_directory(t_env *env, char *cmd)
 			return (print_error("ALLOCATION FAILED\n", -1));
 		return (ret);
 	}
-	else
-		ret = relative_change_directory(env, cmd);
-	if (ret == -1)
-		return (-1);
-	return (ret);
+	return (relative_change_directory(env, cmd));
 }
