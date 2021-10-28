@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 15:25:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:08:23 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,18 @@ int	do_here_doc(t_redir *red)
 	return (fd[0]);
 }
 
+int	change_fd(t_redir *red, int last, int fd)
+{
+	if (last != -1)
+	{
+		red[last].save_fd = dup(red[last].n);
+		if (dup2(fd, red[last].n) == -1)
+			return (print_error(strerror(errno), -1));
+		close(fd);
+	}
+	return (0);
+}
+
 int	exe_here_doc(t_redir *red, int count)
 {
 	int	i;
@@ -75,12 +87,5 @@ int	exe_here_doc(t_redir *red, int count)
 			last = i;
 		}
 	}
-	if (last != -1)
-	{
-		red[last].save_fd = dup(red[last].n);
-		if (dup2(fd, red[last].n) == -1)
-			return (print_error(strerror(errno), -1));
-		close(fd);
-	}
-	return (0);
+	return (change_fd(red, last, fd) == -1);
 }

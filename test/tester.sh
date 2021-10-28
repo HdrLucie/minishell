@@ -228,5 +228,3 @@ exec_test 'cat < >'
 exec_test 'echo ;;'
 
 
-shopt -s extglob 
-rm !(*.sh)

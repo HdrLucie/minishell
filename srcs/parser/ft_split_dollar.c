@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/28 15:51:24 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:05:12 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,8 @@ static int	size_word(char *str, int k)
 		while (str && str[k] && str[k] != '$')
 		{
 			if (str[k] == '\'')
-			{
 				while (str && str[++k] && str[k] != '\'')
 					;
-			}
 			k++;
 		}
 	}
