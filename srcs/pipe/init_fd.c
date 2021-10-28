@@ -6,42 +6,48 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 09:09:42 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 11:34:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:57:33 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	create_fd(t_cmd *tmp, int f_begin)
+{
+	int		*fd;
+
+	if (f_begin)
+		f_begin = 0;
+	if (tmp->next)
+	{
+		fd = malloc(2 * sizeof(int));
+		if (fd == NULL)
+			return (print_error(strerror(errno), -1));
+		if (pipe(fd) == -1)
+			return (print_error(strerror(errno), -1));
+		tmp->pipe_out = fd;
+		tmp->next->pipe_in = fd;
+	}
+	return (0);
+}
+
 int	init_pipe(t_mini *mini)
 {
 	t_cmd	*tmp;
 	int		f_begin;
-	int		*fd;
-	
+
 	f_begin = 1;
 	tmp = mini->cmd;
-	tmp->pipe_in = NULL;
-	tmp->pipe_out = NULL;
 	mini->nb_pipe = 0;
+	tmp->pipe_in = NULL;
 	while (tmp)
 	{
-		if (f_begin)
-			f_begin = 0;
-		if (tmp->next)
-		{
-			fd = malloc(2 * sizeof(int));
-			if (fd == NULL)
-				return (-1);
-			if (pipe(fd) == -1)
-			{
-				perror("SHELLA ");
-				return (-1);
-			}
-			tmp->pipe_out = fd;
-			tmp->next->pipe_in = fd;
-		}
+		tmp->pipe_out = NULL;
+		if (create_fd(tmp, f_begin) == -1)
+			return (-1);
 		mini->nb_pipe++;
 		tmp = tmp->next;
 	}
+	mini->nb_pipe--;
 	return (0);
 }

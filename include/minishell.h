@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 11:33:29 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:47:09 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,4 +206,6 @@ void	print_env_alpha(t_env *env);
 int		exe_pipe(t_mini *mini, t_cmd *cmd);
 int		init_pipe(t_mini *mini);
 int		init_save_fd(t_mini *mini);
+void	close_pipe(int *fd);
+void	close_all_pipe(t_cmd *cmd);
 #endif

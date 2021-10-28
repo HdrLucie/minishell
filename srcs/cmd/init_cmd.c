@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 11:34:58 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:50:01 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,34 +53,21 @@ int	ft_execute_cmd(t_mini *mini)
 	t_cmd	*tmp;
 
 	tmp = mini->cmd;
-	while (tmp)
+	if (mini->nb_pipe == 0)
 	{
-		if (tmp->cmd && !tmp->pipe_in && !tmp->pipe_out
-			&& redir(tmp->cmd, mini) == -1)
+		if (tmp->cmd && redir(tmp->cmd, mini) == -1)
 			return (-1);
-		else if (tmp->cmd && exe_pipe(mini, tmp) == -1)
-			return (-1);
-		tmp = tmp->next;
 	}
-	tmp = mini->cmd;
-	while (tmp)
+	else
 	{
-		if (tmp->pipe_in)
+		while (tmp)
 		{
-			close(tmp->pipe_in[0]);
-			close(tmp->pipe_in[1]);
-			// free(tmp->pipe_in);
-			tmp->pipe_in = NULL;
+			if (tmp->cmd && exe_pipe(mini, tmp) == -1)
+				return (-1);
+			tmp = tmp->next;
 		}
-		if (tmp->pipe_out)
-		{
-			close(tmp->pipe_out[0]);
-			close(tmp->pipe_out[1]);
-			// free(tmp->pipe_out);
-			tmp->pipe_out = NULL;
-		}
-		tmp = tmp->next;
+		close_all_pipe(mini->cmd);
+		wait_child(mini->nb_pipe);
 	}
-	wait_child(mini->nb_pipe);
 	return (0);
 }
