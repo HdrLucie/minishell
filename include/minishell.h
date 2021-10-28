@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 13:47:09 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 15:25:39 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int		exe_cmd(t_mini *mini);
 **	here_document.c 
 */
 int		do_here_doc(t_redir *red);
+int		exe_here_doc(t_redir *red, int count);
 
 /****************************/
 /*			BUILTINS		*/

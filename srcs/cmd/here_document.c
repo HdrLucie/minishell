@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 13:59:26 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 15:25:12 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,35 @@ int	do_here_doc(t_redir *red)
 	write(fd[1], file, ft_strlen(file));
 	close(fd[1]);
 	free(file);
-	red->save_fd = dup(red->n);
-	dup2(fd[0], red->n);
-	close(fd[0]);
+	return (fd[0]);
+}
+
+int	exe_here_doc(t_redir *red, int count)
+{
+	int	i;
+	int	last;
+	int	fd;
+
+	i = -1;
+	last = -1;
+	while (++i < count)
+	{
+		if (red[i].op[0] == '<' && red[i].op[1] == '<')
+		{
+			if (fd)
+				close(fd);
+			fd = do_here_doc(&red[i]);
+			if (fd == -1)
+				return (-1);
+			last = i;
+		}
+	}
+	if (last != -1)
+	{
+		red[last].save_fd = dup(red[last].n);
+		if (dup2(fd, red[last].n) == -1)
+			return (print_error(strerror(errno), -1));
+		close(fd);
+	}
 	return (0);
 }
