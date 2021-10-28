@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/21 12:57:09 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/28 15:33:18 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parse_export(char *str, int i)
 		while (str[i] && str[i] != '\"')
 			i++;
 		if (str[i] != '\"')
-			return (print_error("UNCLOSED QUOTE\n", -1));
+			return (print_error("YOU ARENT CLOSE YOUR FUCKING QUOTE\n", -1));
 		i++;
 	}
 	else

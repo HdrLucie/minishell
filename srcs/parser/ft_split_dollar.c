@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/22 17:56:41 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 15:51:24 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	count_word(char *str)
 		if (str[i] == '\'')
 			while (str && str[++i] && str[i] != '\'')
 				;
-		else if (str[i] == '$')
+		if (str[i] == '$')
 			i = find_var(i, &word, str);
 		else
 			i++;
@@ -68,12 +68,13 @@ static int	size_word(char *str, int k)
 			;
 	else
 	{
-		while (str && str[k] && str[k] != '$' && str[k] != '\'')
-			k++;
-		if (str[k] == '\'')
+		while (str && str[k] && str[k] != '$')
 		{
-			while (str && str[++k] && str[k] != '\'')
-				;
+			if (str[k] == '\'')
+			{
+				while (str && str[++k] && str[k] != '\'')
+					;
+			}
 			k++;
 		}
 	}
