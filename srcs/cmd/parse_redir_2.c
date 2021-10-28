@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/08 17:43:14 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/28 16:12:56 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,5 @@ void	free_red(t_redir *red, int size)
 		i++;
 	}
 	free(red);
+	red = NULL;
 }

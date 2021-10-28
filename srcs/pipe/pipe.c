@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 13:51:03 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 16:24:00 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ void	close_all_pipe(t_cmd *cmd)
 	}
 }
 
+void	free_all(t_mini *mini)
+{
+	if (mini->cmd)
+		ft_cmd_clear(mini->cmd);
+	if (mini->env)
+		free_env(*mini->env);
+	if (mini->envp && mini->f_envp)
+		free_strs(mini->envp);
+	exit (0);
+}
+
 int	exe_pipe(t_mini *mini, t_cmd *cmd)
 {
 	int	pid;
@@ -58,7 +69,7 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd)
 		ret = redir(cmd->cmd, mini);
 		if (ret == -1)
 			exit (-1);
-		exit(0);
+		free_all(mini);
 	}
 	else if (pid == -1)
 		return (print_error("FORK FUCKING FAILED !!!", -1));
