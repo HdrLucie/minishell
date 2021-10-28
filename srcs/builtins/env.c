@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/25 16:06:42 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 15:40:55 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int	fill_env_lst_value(char *str, t_env *env, int i)
 	{
 		if (!ft_strcmp("SHLVL", env->name))
 		{
-			str = ft_itoa(ft_atoi(&str[k]) + 1);
 			if (env->value)
 				free(env->value);
-			env->value = str;
+			env->value = ft_itoa(ft_atoi(&str[k]) + 1);
 			return (0);
 		}
 		else

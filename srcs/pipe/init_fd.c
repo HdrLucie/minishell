@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 09:09:42 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 11:34:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 13:50:00 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int	init_pipe(t_mini *mini)
 		mini->nb_pipe++;
 		tmp = tmp->next;
 	}
+	mini->nb_pipe--;
 	return (0);
 }
