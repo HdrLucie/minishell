@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/27 12:49:14 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 09:10:31 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,52 +31,6 @@ void	ft_print_list(t_cmd *tmp2)
 		tmp = tmp->next;
 		printf("\n");
 	}
-}
-
-// int	*create_pipe(void)
-// {
-// 	int fd[2];
-
-// 	if (pipe(fd) == -1)
-// 	{
-// 		perror("MINISHELL ");
-// 		return (NULL);
-// 	}
-// 	return (fd);
-// }
-
-int	init_pipe(t_mini *mini)
-{
-	t_cmd	*tmp;
-	int		f_begin;
-	int		*fd;
-	
-	f_begin = 1;
-	tmp = mini->cmd;
-	tmp->pipe_in = NULL;
-	tmp->pipe_out = NULL;
-	while (tmp)
-	{
-		if (f_begin)
-			f_begin = 0;
-		if (tmp->next)
-		{
-			fd = malloc(2 * sizeof(int));
-			if (fd == NULL)
-				return (-1);
-			if (pipe(fd) == -1)
-			{
-				perror("MINISHELL ");
-				return (-1);
-			}
-			
-			tmp->pipe_out = fd;
-			tmp->next->pipe_in = fd;
-			printf("INIT : 0 : %d 1: %d\n", tmp->pipe_out[0], tmp->pipe_out[1]);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
 }
 
 int	parser(char **token, t_mini *mini)
