@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 18:45:52 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/28 18:54:50 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	launch_minishell(t_mini *mini)
 		return (-1);
 	str = readline(prompt);
 	free(prompt);
-	if (!str)
-		return (-1);
+	if (str[0] == '\0')
+		return (0);
 	if (ft_strcmp(str, ""))
 		add_history(str);
 	if (lexer(str, mini) == -1 || errno == -1)

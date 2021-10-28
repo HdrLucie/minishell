@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/22 18:47:48 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 16:03:55 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	recover_cmd(t_mini	*mini)
 		if (!ft_strcmp(mini->exe[0], "env"))
 			print_env(*mini->env);
 		else if (!ft_strcmp(mini->exe[0], "pwd"))
-			mini->old_ret = print_pwd(*mini->env);
+			mini->old_ret = print_pwd();
 		else if (!ft_strncmp(mini->exe[0], "export", ft_strlen("export")))
 			mini->old_ret = export_var(*mini->env, mini->exe);
 		else if (!ft_strncmp(mini->exe[0], "unset", ft_strlen("unset")))

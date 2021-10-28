@@ -30,6 +30,7 @@ SRCS =  srcs/main.c 								\
 		srcs/builtins/cd.c							\
 		srcs/builtins/env_utils.c					\
 		srcs/builtins/export_alpha.c				\
+		srcs/builtins/cd_utils.c					\
 		srcs/pipe/pipe.c							\
 		srcs/pipe/init_fd.c
 

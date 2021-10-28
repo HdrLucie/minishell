@@ -6,11 +6,24 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/25 14:20:15 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/28 18:51:27 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_env	*find_first_alpha_node(t_env *env)
+{
+	if (env == NULL)
+		return (NULL);
+	while (env)
+	{
+		if (env->first_alpha_node == 1)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
+}
 
 int	check_export_value(char **var_export)
 {
@@ -41,7 +54,8 @@ int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 			env = env->next;
 		else
 		{
-			free(env->value);
+			if (env->value)
+				free(env->value);
 			env->value = value_exp;
 			return (0);
 		}
