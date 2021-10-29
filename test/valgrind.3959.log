@@ -1,0 +1,47 @@
+==3959== Memcheck, a memory error detector
+==3959== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3959== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==3959== Command: ./minishell
+==3959== Parent PID: 3915
+==3959== 
+==3959== Invalid read of size 8
+==3959==    at 0x406080: unset_var (unset.c:73)
+==3959==    by 0x40575B: recover_cmd (recover_cmd.c:45)
+==3959==    by 0x40219A: exe_cmd (exe_redir.c:73)
+==3959==    by 0x401B8C: redir (parse_redir_1.c:105)
+==3959==    by 0x4014D3: ft_execute_cmd (init_cmd.c:61)
+==3959==    by 0x402F97: parser (lexer.c:58)
+==3959==    by 0x4030A5: lexer (lexer.c:80)
+==3959==    by 0x4010A3: launch_minishell (main.c:87)
+==3959==    by 0x401178: main (main.c:108)
+==3959==  Address 0x56a0058 is 24 bytes inside a block of size 40 free'd
+==3959==    at 0x4C30D3B: free (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3959==    by 0x4051D2: free_node (lst_utils.c:24)
+==3959==    by 0x406078: unset_var (unset.c:72)
+==3959==    by 0x40575B: recover_cmd (recover_cmd.c:45)
+==3959==    by 0x40219A: exe_cmd (exe_redir.c:73)
+==3959==    by 0x401B8C: redir (parse_redir_1.c:105)
+==3959==    by 0x4014D3: ft_execute_cmd (init_cmd.c:61)
+==3959==    by 0x402F97: parser (lexer.c:58)
+==3959==    by 0x4030A5: lexer (lexer.c:80)
+==3959==    by 0x4010A3: launch_minishell (main.c:87)
+==3959==    by 0x401178: main (main.c:108)
+==3959==  Block was alloc'd at
+==3959==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==3959==    by 0x4050D1: create_env_lst (env.c:92)
+==3959==    by 0x401133: main (main.c:102)
+==3959== 
+==3959== 
+==3959== HEAP SUMMARY:
+==3959==     in use at exit: 135,073 bytes in 238 blocks
+==3959==   total heap usage: 1,081 allocs, 843 frees, 212,656 bytes allocated
+==3959== 
+==3959== LEAK SUMMARY:
+==3959==    definitely lost: 0 bytes in 0 blocks
+==3959==    indirectly lost: 0 bytes in 0 blocks
+==3959==      possibly lost: 0 bytes in 0 blocks
+==3959==    still reachable: 0 bytes in 0 blocks
+==3959==         suppressed: 135,073 bytes in 238 blocks
+==3959== 
+==3959== For counts of detected and suppressed errors, rerun with: -v
+==3959== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

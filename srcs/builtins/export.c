@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 20:54:22 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 14:09:09 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,23 @@ int	recover_name_exp(char *cmd, char **name, char **value)
 		return (-2);
 	while (cmd[++i] && cmd[i] != '=')
 		counter_l++;
+	if (cmd[i] == '=')
+		counter_l++;
 	*name = malloc(sizeof(char) * counter_l + 1);
 	if (!name)
 		return (-1);
 	i = -1;
 	while (cmd[++i] && cmd[i] != '=')
 		(*name)[k++] = cmd[i];
-	(*name)[k] = '\0';
+	printf("STR K : %c\n", (*name)[k]);	
+	if ((*name)[k] == '=')
+	{
+		printf("STR K : %c\n", (*name)[k]);
+		(*name)[k] = '=';
+		(*name)[k + 1] = '\0';
+	}
+	else
+		(*name)[k] = '\0';
 	recover_value_exp(cmd, value, i);
 	return (0);
 }

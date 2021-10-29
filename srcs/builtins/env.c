@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 21:10:50 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 14:05:31 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	fill_env_lst_name(char *str, t_env *env)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
+	if (str[i] == '=')
+		i++;
 	env->name = malloc(sizeof(char) * i + 1);
 	if (!env->name)
 		return (-1);
@@ -72,7 +74,13 @@ int	fill_env_lst_name(char *str, t_env *env)
 		env->name[i] = str[i];
 		i++;
 	}
-	env->name[i] = '\0';
+	if (str[i] == '=')
+	{
+		env->name[i] = '=';
+		env->name[i + 1] = '\0';
+	}
+	else
+		env->name[i] = '\0';
 	if (fill_env_lst_value(str, env, i) == -1)
 		return (-1);
 	return (0);
