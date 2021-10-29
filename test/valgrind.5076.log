@@ -1,0 +1,14 @@
+==5076== 
+==5076== HEAP SUMMARY:
+==5076==     in use at exit: 134,431 bytes in 196 blocks
+==5076==   total heap usage: 482 allocs, 286 frees, 163,866 bytes allocated
+==5076== 
+==5076== LEAK SUMMARY:
+==5076==    definitely lost: 0 bytes in 0 blocks
+==5076==    indirectly lost: 0 bytes in 0 blocks
+==5076==      possibly lost: 0 bytes in 0 blocks
+==5076==    still reachable: 0 bytes in 0 blocks
+==5076==         suppressed: 134,431 bytes in 196 blocks
+==5076== 
+==5076== For counts of detected and suppressed errors, rerun with: -v
+==5076== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

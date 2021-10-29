@@ -1,0 +1,109 @@
+==4751== 
+==4751== HEAP SUMMARY:
+==4751==     in use at exit: 139,153 bytes in 319 blocks
+==4751==   total heap usage: 549 allocs, 230 frees, 230,946 bytes allocated
+==4751== 
+==4751== 2 bytes in 1 blocks are still reachable in loss record 1 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x4083F9: ft_itoa (in /home/user42/Documents/minishell/test/minishell)
+==4751==    by 0x404F19: fill_env_lst_value (env.c:49)
+==4751==    by 0x4050B0: fill_env_lst_name (env.c:76)
+==4751==    by 0x405177: create_env_lst (env.c:98)
+==4751==    by 0x40118A: main (main.c:107)
+==4751== 
+==4751== 9 bytes in 1 blocks are still reachable in loss record 3 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x407E7E: ft_strdup (in /home/user42/Documents/minishell/test/minishell)
+==4751==    by 0x401909: parse_redir (parse_redir_1.c:57)
+==4751==    by 0x401A58: fill_red (parse_redir_1.c:77)
+==4751==    by 0x401C65: redir (parse_redir_1.c:102)
+==4751==    by 0x4015C3: ft_execute_cmd (init_cmd.c:66)
+==4751==    by 0x4030F6: parser (lexer.c:58)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 9 bytes in 2 blocks are still reachable in loss record 4 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x407E7E: ft_strdup (in /home/user42/Documents/minishell/test/minishell)
+==4751==    by 0x401B45: fill_red (parse_redir_1.c:86)
+==4751==    by 0x401C65: redir (parse_redir_1.c:102)
+==4751==    by 0x4015C3: ft_execute_cmd (init_cmd.c:66)
+==4751==    by 0x4030F6: parser (lexer.c:58)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 20 bytes in 4 blocks are still reachable in loss record 14 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x403305: ft_substrs (parser.c:28)
+==4751==    by 0x4035AC: parse_end (parser.c:88)
+==4751==    by 0x4030AF: parser (lexer.c:54)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 24 bytes in 1 blocks are still reachable in loss record 16 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x401BC0: redir (parse_redir_1.c:96)
+==4751==    by 0x4015C3: ft_execute_cmd (init_cmd.c:66)
+==4751==    by 0x4030F6: parser (lexer.c:58)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 32 bytes in 1 blocks are still reachable in loss record 18 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x402E22: ft_cmd_new (lst_cmd_utils.c:71)
+==4751==    by 0x403405: find_cmd_struct (parser.c:50)
+==4751==    by 0x4035F5: parse_end (parser.c:92)
+==4751==    by 0x4030AF: parser (lexer.c:54)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 40 bytes in 1 blocks are still reachable in loss record 19 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x40327B: ft_substrs (parser.c:22)
+==4751==    by 0x4035AC: parse_end (parser.c:88)
+==4751==    by 0x4030AF: parser (lexer.c:54)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 40 bytes in 1 blocks are still reachable in loss record 20 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x401C12: redir (parse_redir_1.c:99)
+==4751==    by 0x4015C3: ft_execute_cmd (init_cmd.c:66)
+==4751==    by 0x4030F6: parser (lexer.c:58)
+==4751==    by 0x40321C: lexer (lexer.c:81)
+==4751==    by 0x4010C9: launch_minishell (main.c:89)
+==4751==    by 0x4011D6: main (main.c:113)
+==4751== 
+==4751== 457 bytes in 38 blocks are still reachable in loss record 28 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x404FFB: fill_env_lst_name (env.c:66)
+==4751==    by 0x405177: create_env_lst (env.c:98)
+==4751==    by 0x40118A: main (main.c:107)
+==4751== 
+==4751== 1,520 bytes in 38 blocks are still reachable in loss record 37 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x405121: create_env_lst (env.c:92)
+==4751==    by 0x40118A: main (main.c:107)
+==4751== 
+==4751== 2,693 bytes in 37 blocks are still reachable in loss record 42 of 55
+==4751==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4751==    by 0x404E8B: fill_env_lst_value (env.c:40)
+==4751==    by 0x4050B0: fill_env_lst_name (env.c:76)
+==4751==    by 0x405177: create_env_lst (env.c:98)
+==4751==    by 0x40118A: main (main.c:107)
+==4751== 
+==4751== LEAK SUMMARY:
+==4751==    definitely lost: 0 bytes in 0 blocks
+==4751==    indirectly lost: 0 bytes in 0 blocks
+==4751==      possibly lost: 0 bytes in 0 blocks
+==4751==    still reachable: 4,846 bytes in 125 blocks
+==4751==         suppressed: 134,307 bytes in 194 blocks
+==4751== 
+==4751== For counts of detected and suppressed errors, rerun with: -v
+==4751== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

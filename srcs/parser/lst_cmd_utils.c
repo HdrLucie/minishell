@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/27 11:23:29 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 17:18:14 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	ft_cmd_clear(t_cmd *lst)
 	{
 		if (lst->cmd)
 			free_strs(lst->cmd);
+		if (lst->pipe_out)
+		{
+			free(lst->pipe_out);
+			lst->pipe_out = NULL;
+		}
 		tmp = lst->next;
 		if (lst)
 			free (lst);

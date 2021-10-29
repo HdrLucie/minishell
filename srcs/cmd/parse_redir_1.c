@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 14:42:44 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 19:41:14 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int	redir(char **exe, t_mini *mini)
 		return (-1);
 	exe_redir(mini->red, mini->nb_red);
 	exe_cmd(mini);
+	write(9, mini->cmd->cmd[0], 3);
+	write(9, "\n", 1);
 	close_fd(mini->red, mini->nb_red);
 	free_strs(mini->exe);
 	free_red(mini->red, mini->nb_red);

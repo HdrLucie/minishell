@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 15:21:40 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 19:48:02 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,15 @@ int	exe_cmd(t_mini *mini)
 		ret = recover_cmd(mini);
 		if (mini->exe && ret == 2)
 		{
+			write(9, mini->exe[0], 3);
+			write(9, "\n", 1);
 			ret = execute(mini->exe, mini);
 			if (ret == -1)
 				return (ret);
 		}
 	}
+	write(9, mini->exe[0], 3);
+	write(9, "\n", 1);
 	mini->envp = env_execve(mini);
 	return (ret);
 }
