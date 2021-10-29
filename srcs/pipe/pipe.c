@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 18:54:31 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 14:46:44 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	execute_pipe(int *fd, int fd_std)
 {
 	close(fd[!fd_std]);
 	if (dup2(fd[fd_std], fd_std) == -1)
-		return (print_error("FUCK OF THIS FUCKING SHIT !!!", -1));
+		return (print_error(strerror(errno), -1, errno));
 	close(fd[fd_std]);
 	return (0);
 }
@@ -73,6 +73,6 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd)
 		free_all(mini);
 	}
 	else if (pid == -1)
-		return (print_error("FORK FUCKING FAILED !!!", -1));
+		return (print_error(strerror(errno), -1, errno));
 	return (0);
 }

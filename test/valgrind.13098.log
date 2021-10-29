@@ -1,0 +1,23 @@
+==13098== 
+==13098== HEAP SUMMARY:
+==13098==     in use at exit: 134,465 bytes in 197 blocks
+==13098==   total heap usage: 464 allocs, 267 frees, 162,076 bytes allocated
+==13098== 
+==13098== 8 bytes in 1 blocks are definitely lost in loss record 2 of 47
+==13098==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==13098==    by 0x4076CA: create_fd (init_fd.c:23)
+==13098==    by 0x4077C8: init_pipe (init_fd.c:46)
+==13098==    by 0x403098: parser (lexer.c:56)
+==13098==    by 0x4031DC: lexer (lexer.c:81)
+==13098==    by 0x4010D6: launch_minishell (main.c:89)
+==13098==    by 0x4011E6: main (main.c:113)
+==13098== 
+==13098== LEAK SUMMARY:
+==13098==    definitely lost: 8 bytes in 1 blocks
+==13098==    indirectly lost: 0 bytes in 0 blocks
+==13098==      possibly lost: 0 bytes in 0 blocks
+==13098==    still reachable: 0 bytes in 0 blocks
+==13098==         suppressed: 134,457 bytes in 196 blocks
+==13098== 
+==13098== For counts of detected and suppressed errors, rerun with: -v
+==13098== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

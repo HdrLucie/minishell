@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 09:09:42 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 18:55:02 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 14:47:10 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	create_fd(t_cmd *tmp, int f_begin)
 	{
 		fd = malloc(2 * sizeof(int));
 		if (fd == NULL)
-			return (print_error(strerror(errno), -1));
+			return (print_error(strerror(errno), -1, -1));
 		if (pipe(fd) == -1)
-			return (print_error(strerror(errno), -1));
+			return (print_error(strerror(errno), -1, errno));
 		tmp->pipe_out = fd;
 		tmp->next->pipe_in = fd;
 	}

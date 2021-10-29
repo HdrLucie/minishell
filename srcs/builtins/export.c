@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 20:54:22 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 14:44:36 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	export_var(t_env *env, char **var_export)
 	{
 		ret = export(env, var_export[i], ret);
 		if (ret == -1)
-			return (print_error("ALLOCATION FAILED\n", -1));
+			return (print_error("ALLOCATION FAILED\n", -1, errno));
 		i++;
 	}
 	return (0);

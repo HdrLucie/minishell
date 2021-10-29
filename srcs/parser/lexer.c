@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 15:52:04 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 13:52:59 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ int	parser(char **token, t_mini *mini)
 	if (begin != ft_strslen(token))
 		mini->cmd = parse_end(mini->cmd, token, &begin, i);
 	free_strs(token);
-	if (init_pipe(mini))
+	if (mini->cmd == NULL || init_pipe(mini))
 		return (-1);
-	ft_execute_cmd(mini);
+	if (ft_execute_cmd(mini) == -1)
+		return (-1);
 	ft_cmd_clear(mini->cmd);
 	return (0);
 }
@@ -73,7 +74,7 @@ int	lexer(char *str, t_mini *mini)
 		return (-1);
 	token = ft_split_quote(ft_reverse_split(token));
 	if (token == NULL && errno == -1)
-		return (print_error("ALLOCATION FAILED\n", -1));
+		return (print_error("ALLOCATION FAILED\n", -1, errno));
 	else if (token == NULL)
 		return (-2);
 	token = remove_quote(token);

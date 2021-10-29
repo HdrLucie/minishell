@@ -6,25 +6,27 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:34:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 09:37:40 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 15:15:33 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	print_error(char *msg, int retur)
+int	print_error(char *msg, int retur, int error)
 {
-	write(2, "MINISHELL : ", 12);
+	if (ft_strcmp(msg, "exit\n"))
+		write(2, "MINISHELL : ", 12);
 	write(2, msg, ft_strlen(msg));
+	errno = error;
 	return (retur);
 }
 
-char	**print_char_error(char *msg, int retur)
+char	**print_char_error(char *msg, int retur, int error)
 {
+	(void)retur;
 	write(2, "MINISHELL : ", 12);
 	write(2, msg, ft_strlen(msg));
-	if (retur == -1)
-		errno = -1;
+	errno = error;
 	return (NULL);
 }
 

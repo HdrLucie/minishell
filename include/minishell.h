@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 21:39:04 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 13:18:55 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_mini
 /****************************/
 
 void	free_strs(char **strs);
-int		print_error(char *msg, int retur);
-char	**print_char_error(char *msg, int retur);
+int		print_error(char *msg, int retur, int error);
+char	**print_char_error(char *msg, int retur, int error);
 
 /****************************/
 /*			SIGNAL			*/

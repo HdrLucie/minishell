@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 15:52:20 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 13:57:45 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	find_token(char *str, int i, char end)
 	i = i + 1;
 	while (str[i] && str[i] != end)
 		i++;
-	if (str[i] != end && end != ' ')
-		return (print_error("UNCLOSED QUOTE\n", -1));
+	if (str[i] != end && end != '\n')
+		return (print_error("UNCLOSED QUOTE\n", -1, 130));
 	i++;
 	return (i);
 }
@@ -51,7 +51,7 @@ int	size_word(char *str, int *k)
 	i = 0;
 	while (str[i] && is_space(str[i]))
 		i++;
-	begin = i;
+	begin = i;	
 	*k = *k + begin;
 	i = check_quote(str, i);
 	return (i - begin);
@@ -78,6 +78,11 @@ char	**fill_split(char *str, char **split, int word)
 		if (str && str[k] && str[k + 1] && (str[k] == '\"' || str[k] == '\''))
 			k++;
 		split[j][i] = '\0';
+		if (split[j][0] == '#')
+		{
+			free(split[j]);
+			split[j] = NULL;
+		}
 	}
 	split[j] = NULL;
 	return (split);
@@ -89,22 +94,16 @@ char	**ft_split_quote(char *str)
 	char	**split;
 
 	if (str == NULL)
-		return (print_char_error("ALLOCATION FAILED\n", -1));
+		return (print_char_error("ALLOCATION FAILED\n", -1, -1));
 	word = count_word(str);
 	if (word == -1)
 		return (NULL);
 	split = malloc((word + 1) * sizeof(*split));
 	if (split == NULL)
-	{
-		errno = -1;
-		return (NULL);
-	}
+		print_char_error("ALLOCATION FAILED\n", -1, -1);
 	split = fill_split(str, split, word);
 	if (split == NULL)
-	{
-		errno = -1;
 		return (NULL);
-	}
 	free(str);
 	return (split);
 }

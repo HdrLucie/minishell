@@ -1,0 +1,31 @@
+==15348== 
+==15348== HEAP SUMMARY:
+==15348==     in use at exit: 134,695 bytes in 211 blocks
+==15348==   total heap usage: 675 allocs, 464 frees, 178,092 bytes allocated
+==15348== 
+==15348== 4 bytes in 1 blocks are definitely lost in loss record 1 of 48
+==15348==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==15348==    by 0x4083B9: ft_itoa (in /home/user42/Documents/minishell/test/minishell)
+==15348==    by 0x404CA5: expand_var_env (expand_var_env.c:59)
+==15348==    by 0x40313A: lexer (lexer.c:72)
+==15348==    by 0x4010D6: launch_minishell (main.c:89)
+==15348==    by 0x4011E6: main (main.c:113)
+==15348== 
+==15348== 16 bytes in 2 blocks are definitely lost in loss record 8 of 48
+==15348==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==15348==    by 0x4076CA: create_fd (init_fd.c:23)
+==15348==    by 0x4077C8: init_pipe (init_fd.c:46)
+==15348==    by 0x403098: parser (lexer.c:56)
+==15348==    by 0x4031DC: lexer (lexer.c:81)
+==15348==    by 0x4010D6: launch_minishell (main.c:89)
+==15348==    by 0x4011E6: main (main.c:113)
+==15348== 
+==15348== LEAK SUMMARY:
+==15348==    definitely lost: 20 bytes in 3 blocks
+==15348==    indirectly lost: 0 bytes in 0 blocks
+==15348==      possibly lost: 0 bytes in 0 blocks
+==15348==    still reachable: 0 bytes in 0 blocks
+==15348==         suppressed: 134,675 bytes in 208 blocks
+==15348== 
+==15348== For counts of detected and suppressed errors, rerun with: -v
+==15348== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/19 17:25:55 by elise            ###   ########.fr       */
+/*   Updated: 2021/10/29 12:13:51 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	ft_exit(t_mini *mini)
 	if (mini->red)
 		free_red(mini->red, mini->nb_red);
 	write(2, "exit\n", 5);
-	if (ret == -1)
+	if (ret == -1 && mini->old_ret)
 		exit(mini->old_ret);
-	else
+	else if (ret != -1)
 		exit(ret);
+	else
+		exit (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 18:56:00 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 13:55:22 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,25 @@ int	execute(char **cmd, t_mini *mini)
 
 	cmd[0] = parse_cmd(cmd[0], mini->envp);
 	if (cmd[0] == NULL)
-		return (print_error("PARSE PATH ERROR\n", -1));
+		return (print_error("PARSE PATH ERROR\n", -1, errno));
 	g_flag_fork = 1;
 	pid = fork();
 	if (pid == -1)
-		return (print_error("FORK ERROR\n", -1));
+		return (print_error("FORK ERROR\n", -1, errno));
 	if (pid == 0)
 	{
 		execve(cmd[0], cmd, mini->envp);
-		perror("MINISHELL");
-		exit(0);
+		print_error(strerror(errno), -1, errno);
+		exit(127);
 	}
 	waitpid(pid, &status, 0);
 	g_flag_fork = 0;
-	mini->old_ret = status;
+	if (WIFEXITED(status)) {
+		mini->old_ret = WEXITSTATUS(status);
+	}
+	if (WIFSIGNALED(status)) {
+		mini->old_ret = WTERMSIG(status);
+	}
 	return (0);
 }
 

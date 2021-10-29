@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 18:08:23 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 14:43:12 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	change_fd(t_redir *red, int last, int fd)
 	{
 		red[last].save_fd = dup(red[last].n);
 		if (dup2(fd, red[last].n) == -1)
-			return (print_error(strerror(errno), -1));
+			return (print_error(strerror(errno), -1, errno));
 		close(fd);
 	}
 	return (0);

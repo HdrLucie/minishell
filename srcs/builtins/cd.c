@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 21:43:01 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/29 14:45:16 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	change_directory(t_env *env, char *start, char *cmd)
 	if (ret == -1 || ret == 0)
 	{
 		if (ret == -1)
-			return (print_error("ALLOCATION FAILED\n", -1));
+			return (print_error("ALLOCATION FAILED\n", -1, -1));
 		return (ret);
 	}
 	return (relative_change_directory(env, cmd));

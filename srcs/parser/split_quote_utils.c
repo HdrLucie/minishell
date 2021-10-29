@@ -6,30 +6,11 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 15:33:18 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 11:13:24 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	parse_export(char *str, int i)
-{
-	if (str[i] != '=')
-		return (print_error("UNCLOSED QUOTTE\n", -1));
-	i++;
-	if (str[i++] == '\"')
-	{
-		while (str[i] && str[i] != '\"')
-			i++;
-		if (str[i] != '\"')
-			return (print_error("YOU ARENT CLOSE YOUR FUCKING QUOTE\n", -1));
-		i++;
-	}
-	else
-		while (str[i] && !is_space(str[i]))
-			i++;
-	return (i);
-}
 
 int	check_car_spe(char *str, int i)
 {
