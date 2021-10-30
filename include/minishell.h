@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 21:39:04 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/30 17:56:57 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
+	int				flag_export;
 	int				first_alpha_node;
 	char			*name;
 	char			*value;

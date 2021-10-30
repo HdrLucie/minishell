@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/29 15:02:02 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/30 18:56:27 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	recover_value_exp(char *cmd, char **value, int i)
 	return (0);
 }
 
-int	recover_name_exp(char *cmd, char **name, char **value)
+int	recover_name_exp(t_env *env, char *cmd, char **name, char **value)
 {
 	int	i;
 	int	k;
@@ -57,25 +57,17 @@ int	recover_name_exp(char *cmd, char **name, char **value)
 	i = -1;
 	k = 0;
 	counter_l = 0;
-	if (!cmd)
-		return (-2);
 	while (cmd[++i] && cmd[i] != '=')
 		counter_l++;
 	if (cmd[i] == '=')
-		counter_l++;
+		env->flag_export = 1;
 	*name = malloc(sizeof(char) * counter_l + 1);
 	if (!name)
 		return (-1);
 	i = -1;
 	while (cmd[++i] && cmd[i] != '=')
 		(*name)[k++] = cmd[i];
-	if (cmd[i] == '=')
-	{
-		(*name)[k] = '=';
-		(*name)[k + 1] = '\0';
-	}
-	else
-		(*name)[k] = '\0';
+	(*name)[k] = '\0';
 	recover_value_exp(cmd, value, i);
 	return (0);
 }
@@ -87,7 +79,7 @@ int	export(t_env *env, char *var_export, int ret)
 
 	value_exp = NULL;
 	name_exp = NULL;
-	ret = recover_name_exp(var_export, &name_exp, &value_exp);
+	ret = recover_name_exp(env, var_export, &name_exp, &value_exp);
 	if (ret == -1)
 		return (-1);
 	if (!is_in_env(env, name_exp))

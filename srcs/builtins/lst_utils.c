@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:26:03 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 18:18:41 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/30 18:28:01 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	create_export_node(t_env *env, char *name, char *value)
 	current_node->name = name;
 	current_node->value = value;
 	current_node->first_alpha_node = 0;
+	current_node->flag_export = 0;
 	lstadd_back_env(&env, current_node);
 	return (1);
 }

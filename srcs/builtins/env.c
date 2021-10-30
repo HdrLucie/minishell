@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/29 14:05:31 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/30 18:20:13 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 ** Retours d'erreurs : -1, arret du programme.
 **					   -2, erreur, mais le process continue. 
 */
-
-int	check_shlvl(char *str, t_env *env, int k)
-{
-	if (!ft_strcmp("SHLVL", env->name))
-	{
-		if_free(env->value);
-		env->value = ft_itoa(ft_atoi(&str[k]) + 1);
-		return (0);
-	}
-	return (1);
-}
 
 int	fill_env_lst_value(char *str, t_env *env, int i)
 {
@@ -64,7 +53,7 @@ int	fill_env_lst_name(char *str, t_env *env)
 	while (str[i] && str[i] != '=')
 		i++;
 	if (str[i] == '=')
-		i++;
+		env->flag_export = 1;
 	env->name = malloc(sizeof(char) * i + 1);
 	if (!env->name)
 		return (-1);
@@ -74,13 +63,7 @@ int	fill_env_lst_name(char *str, t_env *env)
 		env->name[i] = str[i];
 		i++;
 	}
-	if (str[i] == '=')
-	{
-		env->name[i] = '=';
-		env->name[i + 1] = '\0';
-	}
-	else
-		env->name[i] = '\0';
+	env->name[i] = '\0';
 	if (fill_env_lst_value(str, env, i) == -1)
 		return (-1);
 	return (0);
@@ -100,6 +83,7 @@ t_env	*create_env_lst(char **env)
 		current_node = malloc(sizeof(t_env));
 		if (!current_node)
 			return (NULL);
+		current_node->flag_export = 0;
 		current_node->next = NULL;
 		current_node->next_alpha = NULL;
 		lstadd_back_env(&env_lst, current_node);
