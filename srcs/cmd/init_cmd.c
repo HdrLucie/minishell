@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 19:54:00 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:05:30 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,10 @@ int	execute(char **cmd, t_mini *mini)
 		print_error(strerror(errno), -1, errno);
 		exit(127);
 	}
-	write(9, cmd[0], ft_strlen(cmd[0]));
-	write(9, "\n", 1);
-	ft_putnbr_fd(pid, 9);
-	write(9, "\n", 1);
-	waitpid(pid, &status, WNOHANG);
+	waitpid(pid, &status, 0);
 	g_flag_fork = 0;
 	if (WIFEXITED(status)) {
 		mini->old_ret = WEXITSTATUS(status);
-		write(9, "SALUTT\n", 7);
-
-	}
-	if (WIFSIGNALED(status)) {
-		mini->old_ret = WTERMSIG(status);
-		write(9, "COUCOU\n", 7);
 	}
 	return (0);
 }
@@ -53,22 +43,41 @@ void	wait_child(t_mini *mini)
 	int	i;
 	int	status;
 
-	i = mini->nb_pipe + 1;
+	i = 0;
 	status = 0;
-	while (!mini->pid[i])
-		;
-	while (i > 0)
+	
+	while (i < mini->nb_pipe + 1)
 	{
-		waitpid(mini->pid[i], &status, WUNTRACED);
-		i--;
+		waitpid(mini->pid[i], &status, 0);
+		i++;
 	}
+	free(mini->pid);
 	g_flag_fork = 0;
 }
+
+int	init_pipe(t_mini *mini)
+{
+	int	i;
+
+	mini->pipefd = malloc(sizeof(int) * 2 * mini->nb_pipe);
+	if (mini->pipefd == NULL)
+		return (print_error("ALLOCATION PIPE FAILED\n", -1, -1));
+	i = 0;
+	while (i < mini->nb_pipe)
+	{
+    	if (pipe(mini->pipefd + i * 2) == -1) 
+			return (print_error("PIPE FAILED\n", -1, -1));
+		i++;
+    }
+	return (0);
+}
+
 
 int	ft_execute_cmd(t_mini *mini)
 {
 	t_cmd	*tmp;
-
+	int		i;
+	
 	tmp = mini->cmd;
 	if (mini->nb_pipe == 0)
 	{
@@ -77,18 +86,21 @@ int	ft_execute_cmd(t_mini *mini)
 	}
 	else
 	{
+		if (init_pipe(mini) == -1)
+			return (-1);
 		mini->pid = malloc(sizeof(int) * (mini->nb_pipe + 1));
 		if (mini->pid == NULL)
 			return (print_error(strerror(errno), -1, -1));
+		i = 0;
 		while (tmp)
 		{
-			if (tmp->cmd && exe_pipe(mini, tmp) == -1)
+			if (tmp->cmd && exe_pipe(mini, tmp, i) == -1)
 				return (-1);
+			i++;
 			tmp = tmp->next;
 		}
+		close_all_pipe(mini);
 		wait_child(mini);
-		close_all_pipe(mini->cmd);
-
 	}
 	return (0);
 }

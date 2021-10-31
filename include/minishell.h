@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/29 18:41:36 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:59:06 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**cmd;
-	int				*pipe_in;
-	int				*pipe_out;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -72,6 +70,7 @@ typedef struct s_mini
 	t_redir	*red;
 	int		nb_red;
 	int		old_ret;
+	int		*pipefd;
 }				t_mini;
 
 /****************************/
@@ -110,7 +109,7 @@ int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
 void	ft_cmd_clear(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
-t_cmd	*ft_cmd_new(char **cmd, int *in, int *out);
+t_cmd	*ft_cmd_new(char **cmd);
 /*
 ** 	split_quote.c
 */
@@ -210,9 +209,9 @@ void	print_env_alpha(t_env *env);
 /*			PIPE			*/
 /****************************/
 
-int		exe_pipe(t_mini *mini, t_cmd *cmd);
+int		exe_pipe(t_mini *mini, t_cmd *cmd, int i);
 int		init_pipe(t_mini *mini);
 int		init_save_fd(t_mini *mini);
 void	close_pipe(int *fd);
-void	close_all_pipe(t_cmd *cmd);
+void	close_all_pipe(t_mini *mini);
 #endif

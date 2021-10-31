@@ -3,41 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 19:34:21 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:51:05 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execute_pipe(int *fd, int fd_std)
+void	close_all_pipe(t_mini *mini)
 {
-	close(fd[!fd_std]);
-	if (dup2(fd[fd_std], fd_std) == -1)
-		return (print_error(strerror(errno), -1, errno));
-	close(fd[fd_std]);
-	return (0);
-}
+	int	i;
 
-void	close_pipe(int *fd)
-{
-	close(fd[0]);
-	close(fd[1]);
-	fd = NULL;
-}
-
-void	close_all_pipe(t_cmd *cmd)
-{
-	while (cmd)
+	i = 0;
+	while (i < 2 * mini->nb_pipe)
 	{
-		if (cmd->pipe_in)
-			close_pipe(cmd->pipe_in);
-		if (cmd->pipe_out)
-			close_pipe(cmd->pipe_out);
-		cmd = cmd->next;
-	}
+		close(mini->pipefd[i]);
+		i++;
+    }
 }
 
 void	free_all(t_mini *mini)
@@ -53,35 +37,27 @@ void	free_all(t_mini *mini)
 	exit (0);
 }
 
-int	exe_pipe(t_mini *mini, t_cmd *cmd)
+int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 {
 	int	pid;
-	int	ret;
-	static int i = -1;
-
-	ret = 0;
+	int	j;
+	
+	j = 2 * i;
 	g_flag_fork = 1;
-	usleep(50);
 	pid = fork();
 	if (pid != 0)
-		mini->pid[++i] = pid;
+		mini->pid[i] = pid;
 	if (pid == 0)
 	{
-		write(9, cmd->cmd[0], 3);
-		write(9, "\n", 1);
-		if (cmd->pipe_out)
-			if (execute_pipe(cmd->pipe_out, 1) == -1)
+		if (cmd->next)
+			if (dup2(mini->pipefd[j + 1], 1) < 0)
 				return (-1);
-		if (cmd->pipe_in)
-			if (execute_pipe(cmd->pipe_in, 0) == -1)
+		if (j != 0)
+			if (dup2(mini->pipefd[j - 2], 0) < 0)
 				return (-1);
-		write(9, cmd->cmd[0], 3);
-		write(9, "\n", 1);
-		ret = redir(cmd->cmd, mini);
-		if (ret == -1)
+		close_all_pipe(mini);
+		if (redir(cmd->cmd, mini) == -1)
 			exit (-1);
-		write(9, cmd->cmd[0], 3);
-		write(9, "\n", 1);
 		free_all(mini);
 	}
 	else if (pid == -1)
