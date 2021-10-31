@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:44:41 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/22 17:45:07 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 16:41:06 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ char	*erase_copy(char *src, char *dest)
 
 char	**remove_quote(char **token)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	c;
 
 	j = 0;
 	while (token[j])
@@ -39,7 +40,10 @@ char	**remove_quote(char **token)
 		{
 			if (token[j][i] == '\"' || token[j][i] == '\'')
 			{
+				c = token[j][i];
 				erase_copy(&token[j][i + 1], &token[j][i]);
+				while (token[j][i] && token[j][i] != c)
+					i++;
 			}
 			else
 				i++;
