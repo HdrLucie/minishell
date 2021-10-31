@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/29 12:13:51 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:24:33 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_env(t_env *env)
 	env = NULL;
 }
 
-void	ft_exit(t_mini *mini)
+void	ft_exit(t_mini *mini, int flag)
 {
 	int	ret;
 
@@ -42,7 +42,8 @@ void	ft_exit(t_mini *mini)
 		free_strs(mini->envp);
 	if (mini->red)
 		free_red(mini->red, mini->nb_red);
-	write(2, "exit\n", 5);
+	if (flag)
+		write(2, "exit\n", 5);
 	if (ret == -1 && mini->old_ret)
 		exit(mini->old_ret);
 	else if (ret != -1)

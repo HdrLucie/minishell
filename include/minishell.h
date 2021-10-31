@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/31 12:59:06 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/31 13:24:45 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int		exe_here_doc(t_redir *red, int count);
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void	ft_exit(t_mini *mini);
+void	ft_exit(t_mini *mini, int flag);
 void	free_env(t_env *env);
 void	udpate_alpha_road(t_env *env);
 void	free_node(t_env *node);

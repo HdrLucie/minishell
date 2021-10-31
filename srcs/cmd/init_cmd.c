@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:05:30 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/31 13:26:48 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	execute(char **cmd, t_mini *mini)
 	if (pid == 0)
 	{
 		execve(cmd[0], cmd, mini->envp);
-		print_error(strerror(errno), -1, errno);
+		perror("EXECVE");
+		ft_exit(mini, 0);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);

@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 12:51:05 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/31 13:14:18 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ void	close_all_pipe(t_mini *mini)
 		close(mini->pipefd[i]);
 		i++;
     }
+	free(mini->pipefd);
 }
 
 void	free_all(t_mini *mini)
 {
 	if (mini->cmd)
-	{
 		ft_cmd_clear(mini->cmd);
-	}
 	if (mini->env)
 		free_env(*mini->env);
 	if (mini->envp && mini->f_envp)
 		free_strs(mini->envp);
+	if (mini->pid)
+		free(mini->pid);
 	exit (0);
 }
 
