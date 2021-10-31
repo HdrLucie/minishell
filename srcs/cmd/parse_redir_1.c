@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/28 15:59:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 10:20:46 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 	if (cmd[i + 1])
 		red[j].path = ft_strdup(cmd[i + 1]);
 	if (!cmd[i + 1] || valid_path(red[j].path))
-		return (print_error("PARSE ERROR\n", -1));
+		return (print_error("PARSE ERROR\n", -1, errno));
 	i++;
 	return (i);
 }
@@ -95,10 +95,10 @@ int	redir(char **exe, t_mini *mini)
 	mini->nb_red = count_redir(exe);
 	mini->red = malloc(mini->nb_red * sizeof(t_redir));
 	if (mini->red == NULL)
-		return (print_error("ALLOCATION FAILED\n", -1));
+		return (print_error("ALLOCATION FAILED\n", -1, errno));
 	mini->exe = malloc(sizeof(char *) * (ft_strslen(exe) + 1));
 	if (mini->exe == NULL)
-		return (print_error("ALLOCATION FAILED\n", -1));
+		return (print_error("ALLOCATION FAILED\n", -1, errno));
 	if (fill_red(exe, mini->red, mini->exe) == -1)
 		return (-1);
 	exe_redir(mini->red, mini->nb_red);

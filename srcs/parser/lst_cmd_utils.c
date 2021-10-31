@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/27 11:23:29 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 12:58:51 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_cmd	*ft_cmd_last(t_cmd *lst)
 	return (lst);
 }
 
-t_cmd	*ft_cmd_new(char **cmd, int *in, int *out)
+t_cmd	*ft_cmd_new(char **cmd)
 {
 	t_cmd	*new;
 
@@ -68,8 +68,6 @@ t_cmd	*ft_cmd_new(char **cmd, int *in, int *out)
 	if (!new)
 		return (NULL);
 	new->cmd = cmd;
-	new->pipe_in = in;
-	new->pipe_out = out;
 	new->next = NULL;
 	return (new);
 }

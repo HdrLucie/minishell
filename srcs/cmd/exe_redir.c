@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/28 15:21:40 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 10:20:06 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

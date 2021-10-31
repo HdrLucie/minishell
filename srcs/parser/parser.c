@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/27 11:25:47 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:00:22 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_substrs(char **s, size_t len)
 	return (str);
 }
 
-t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, int *in, int *out)
+t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp)
 {
 	t_cmd	*last;
 	t_cmd	*new;
@@ -43,17 +43,16 @@ t_cmd	*find_cmd_struct(t_cmd *cmd, char **tmp, int *in, int *out)
 	if (cmd && last->cmd == NULL)
 	{
 		last->cmd = tmp;
-		last->pipe_out = out;
 	}
 	else if (!cmd)
 	{
-		cmd = ft_cmd_new(tmp, in, out);
+		cmd = ft_cmd_new(tmp);
 		if (cmd == NULL)
 			return (NULL);
 	}
 	else
 	{
-		new = ft_cmd_new(tmp, in, out);
+		new = ft_cmd_new(tmp);
 		if (new == NULL)
 			return (NULL);
 		ft_cmd_add_back(&cmd, new);
@@ -69,10 +68,10 @@ t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);
-	cmd = find_cmd_struct(cmd, tmp, NULL, NULL);
+	cmd = find_cmd_struct(cmd, tmp);
 	if (cmd == NULL)
 		return (NULL);
-	new = ft_cmd_new(NULL, NULL, NULL);
+	new = ft_cmd_new(NULL);
 	if (new == NULL)
 		return (NULL);
 	ft_cmd_add_back(&cmd, new);
@@ -89,7 +88,7 @@ t_cmd	*parse_end(t_cmd *cmd, char **token, int *begin, int i)
 	if (tmp == NULL)
 		return (NULL);
 	last = ft_cmd_last(cmd);
-	cmd = find_cmd_struct(cmd, tmp, 0, 0);
+	cmd = find_cmd_struct(cmd, tmp);
 	if (cmd == NULL)
 		return (NULL);
 	*begin = i + 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recover_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 21:41:55 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 13:25:27 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	recover_cmd_part_2(t_mini *mini)
 {
 	if (!ft_strcmp(mini->exe[0], "exit"))
-		ft_exit(mini);
+		ft_exit(mini, 1);
 	else if (!ft_strncmp(mini->exe[0], "echo", ft_strlen("echo")))
 		mini->old_ret = echo(mini->exe);
 	else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))

@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/30 17:56:57 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 16:03:30 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**cmd;
-	int				*pipe_in;
-	int				*pipe_out;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -73,6 +71,7 @@ typedef struct s_mini
 	t_redir	*red;
 	int		nb_red;
 	int		old_ret;
+	int		*pipefd;
 }				t_mini;
 
 /****************************/
@@ -80,8 +79,8 @@ typedef struct s_mini
 /****************************/
 
 void	free_strs(char **strs);
-int		print_error(char *msg, int retur);
-char	**print_char_error(char *msg, int retur);
+int		print_error(char *msg, int retur, int error);
+char	**print_char_error(char *msg, int retur, int error);
 
 /****************************/
 /*			SIGNAL			*/
@@ -111,7 +110,7 @@ int		ft_cmd_add_back(t_cmd **alst, t_cmd *new);
 void	ft_cmd_add_front(t_cmd **alst, t_cmd *new);
 void	ft_cmd_clear(t_cmd *lst);
 t_cmd	*ft_cmd_last(t_cmd *lst);
-t_cmd	*ft_cmd_new(char **cmd, int *in, int *out);
+t_cmd	*ft_cmd_new(char **cmd);
 /*
 ** 	split_quote.c
 */
@@ -122,6 +121,7 @@ int		is_redir(char c);
 int		is_spe_char(char c);
 int		find_token(char *str, int i, char end);
 char	**ft_split_dollar(char *str);
+char	**remove_comments(char **split);
 /*
 **	parse_path.c 
 */
@@ -169,7 +169,7 @@ int		exe_here_doc(t_redir *red, int count);
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void	ft_exit(t_mini *mini);
+void	ft_exit(t_mini *mini, int flag);
 void	free_env(t_env *env);
 void	udpate_alpha_road(t_env *env);
 void	free_node(t_env *node);
@@ -211,9 +211,9 @@ void	print_env_alpha(t_env *env);
 /*			PIPE			*/
 /****************************/
 
-int		exe_pipe(t_mini *mini, t_cmd *cmd);
+int		exe_pipe(t_mini *mini, t_cmd *cmd, int i);
 int		init_pipe(t_mini *mini);
 int		init_save_fd(t_mini *mini);
 void	close_pipe(int *fd);
-void	close_all_pipe(t_cmd *cmd);
+void	close_all_pipe(t_mini *mini);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/28 18:05:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/29 14:43:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	fill_strs(char *str, char **strs, int word)
 		size = size_word(str, k);
 		strs[j] = malloc((size + 1) * sizeof(**strs));
 		if (strs[j] == NULL)
-			return (print_error("ALLOCATION FAILED\n", -1));
+			return (print_error("ALLOCATION FAILED\n", -1, -1));
 		i = 0;
 		while (i < size)
 		{
