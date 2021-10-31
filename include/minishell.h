@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/31 13:24:45 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/31 13:48:51 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int		is_redir(char c);
 int		is_spe_char(char c);
 int		find_token(char *str, int i, char end);
 char	**ft_split_dollar(char *str);
+char	**remove_comments(char **split);
 /*
 **	parse_path.c 
 */

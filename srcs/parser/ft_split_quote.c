@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 13:57:45 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:48:34 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	size_word(char *str, int *k)
 	i = 0;
 	while (str[i] && is_space(str[i]))
 		i++;
-	begin = i;	
+	begin = i;
 	*k = *k + begin;
 	i = check_quote(str, i);
 	return (i - begin);
@@ -78,11 +78,6 @@ char	**fill_split(char *str, char **split, int word)
 		if (str && str[k] && str[k + 1] && (str[k] == '\"' || str[k] == '\''))
 			k++;
 		split[j][i] = '\0';
-		if (split[j][0] == '#')
-		{
-			free(split[j]);
-			split[j] = NULL;
-		}
 	}
 	split[j] = NULL;
 	return (split);
@@ -104,6 +99,7 @@ char	**ft_split_quote(char *str)
 	split = fill_split(str, split, word);
 	if (split == NULL)
 		return (NULL);
+	split = remove_comments(split);
 	free(str);
 	return (split);
 }

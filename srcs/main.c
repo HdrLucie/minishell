@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 15:14:36 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/10/31 13:34:11 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ char	*find_couleur(void)
 	if (i > 5)
 		i = 0;
 	if (i == 0)
-		return("\033[1m\033[31m");
+		return ("\033[1m\033[31m");
 	if (i == 1)
-		return("\033[1m\033[32m");
+		return ("\033[1m\033[32m");
 	if (i == 2)
-		return("\033[1m\033[33m");
+		return ("\033[1m\033[33m");
 	if (i == 3)
-		return("\033[1m\033[34m");
+		return ("\033[1m\033[34m");
 	if (i == 4)
-		return("\033[1m\033[35m");
+		return ("\033[1m\033[35m");
 	if (i == 5)
-		return("\033[1m\033[36m");
-	return("\033[1m\033[36m");
+		return ("\033[1m\033[36m");
+	return ("\033[1m\033[36m");
 }
 
 char	*init_prompt(void)

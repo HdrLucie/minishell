@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:04:42 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/31 13:39:23 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	parser(char **token, t_mini *mini)
 	if (begin != ft_strslen(token))
 		mini->cmd = parse_end(mini->cmd, token, &begin, i);
 	free_strs(token);
-	if (mini->cmd == NULL)
-		return (-1);
-	if (ft_execute_cmd(mini) == -1)
+	if (mini->cmd == NULL || ft_execute_cmd(mini) == -1)
 		return (-1);
 	ft_cmd_clear(mini->cmd);
 	return (0);

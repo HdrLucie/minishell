@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:14:18 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/10/31 13:38:06 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	close_all_pipe(t_mini *mini)
 	{
 		close(mini->pipefd[i]);
 		i++;
-    }
+	}
 	free(mini->pipefd);
 }
 
@@ -42,7 +42,7 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 {
 	int	pid;
 	int	j;
-	
+
 	j = 2 * i;
 	g_flag_fork = 1;
 	pid = fork();
