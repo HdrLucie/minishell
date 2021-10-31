@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/31 18:28:23 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 19:07:07 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ int		go_home(t_env *env, int i, char *path, char *pwd);
 void	if_free(char *str);
 int		check_cd(t_env *env, char *start);
 int		check_chdir_ret(char *path);
+int		is_in_str(char *str, char c, char a);
 
 /****************************/
 /*			PRINT			*/

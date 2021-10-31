@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/31 18:45:42 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 19:07:28 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	next_simple_cd(t_env *env, char *path, char *pwd)
 		return (-1);
 	while (path[i] && path[i] == ' ')
 		i++;
-	if (path[i] == '-' && path[ft_strlen(path) - 1] != '-')
+	if (path[i] == '-' && !is_in_str(path, '-', '-'))
 	{
 		change_exp_value(env, "OLDPWD", pwd);
 		change_exp_value(env, "PWD", oldpwd);
@@ -62,7 +62,7 @@ int	simple_change_directory(t_env *env, char *path)
 	i = 0;
 	home = NULL;
 	pwd = NULL;
-	if (check_chdir_ret(path) == -1 || init_path(env, &home, &pwd) == -1)
+	if (init_path(env, &home, &pwd) == -1)
 		return (-1);
 	if (!path)
 	{
@@ -89,8 +89,8 @@ int	relative_change_directory(t_env *env, char *cmd)
 
 	pwd = NULL;
 	tmp_path = malloc(sizeof(char) * 1000);
-	if (!tmp_path || search_value(env, &pwd, "PWD") != 0
-		|| check_chdir_ret(cmd) == -1)
+	if (check_chdir_ret(cmd) == -1 || !tmp_path
+		|| search_value(env, &pwd, "PWD") != 0)
 	{
 		if_free(pwd);
 		if_free(tmp_path);
