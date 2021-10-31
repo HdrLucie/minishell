@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/30 18:20:13 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 16:50:40 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	fill_env_lst_name(char *str, t_env *env)
 	while (str[i] && str[i] != '=')
 		i++;
 	if (str[i] == '=')
-		env->flag_export = 1;
+		env->is_valid = 1;
 	env->name = malloc(sizeof(char) * i + 1);
 	if (!env->name)
 		return (-1);
@@ -83,9 +83,9 @@ t_env	*create_env_lst(char **env)
 		current_node = malloc(sizeof(t_env));
 		if (!current_node)
 			return (NULL);
-		current_node->flag_export = 0;
 		current_node->next = NULL;
 		current_node->next_alpha = NULL;
+		current_node->is_valid = 0;
 		lstadd_back_env(&env_lst, current_node);
 		if (fill_env_lst_name(env[i], current_node) == -1)
 			return (NULL);

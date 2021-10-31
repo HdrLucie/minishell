@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/31 16:03:30 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 18:28:23 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
-	int				flag_export;
+	int				is_valid;
 	int				first_alpha_node;
 	char			*name;
 	char			*value;
@@ -199,6 +199,8 @@ int		check_export_value(char **var_export);
 int		search_value(t_env *env, char **value, char *to_find);
 int		go_home(t_env *env, int i, char *path, char *pwd);
 void	if_free(char *str);
+int		check_cd(t_env *env, char *start);
+int		check_chdir_ret(char *path);
 
 /****************************/
 /*			PRINT			*/

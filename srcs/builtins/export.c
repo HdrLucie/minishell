@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/31 16:03:25 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/10/31 17:00:44 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	recover_name_exp(t_env *env, char *cmd, char **name, char **value)
 	while (cmd[++i] && cmd[i] != '=')
 		counter_l++;
 	if (cmd[i] == '=')
-		env->flag_export = 1;
+		env->is_valid = 1;
 	*name = malloc(sizeof(char) * counter_l + 1);
 	if (!name)
 		return (-1);
@@ -79,6 +79,7 @@ int	export(t_env *env, char *var_export, int ret)
 
 	value_exp = NULL;
 	name_exp = NULL;
+	env->is_valid = 0;
 	ret = recover_name_exp(env, var_export, &name_exp, &value_exp);
 	if (ret == -1)
 		return (-1);
