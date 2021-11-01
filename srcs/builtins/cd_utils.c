@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/31 18:54:51 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/01 14:55:01 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	check_cd(t_env *env, char *start)
 	if (is_in_env(env, "HOME") == 0)
 	{
 		printf("MINISHELL: cd: HOME not set\n");
-		return (0);
+		return (1);
 	}
 	if (start && (ft_strcmp("cd", start) != 0))
 	{
 		printf("MINISHELL: %s: No such file or directory\n", start);
-		return (0);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	go_home(t_env *env, int i, char *path, char *pwd)

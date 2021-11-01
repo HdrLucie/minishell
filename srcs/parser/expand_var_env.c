@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 14:53:22 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/01 16:37:38 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	expand(char **token, int i, char *value)
 	if (token[i] == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1, -1));
 	ft_strcpy(token[i], value);
-	free(value);
+	// printf("AVANT FREE VALUE %s\n", value);
+	// free(value);
+	// printf("APRES FREE : %s\n", value);
 	return (0);
 }
 

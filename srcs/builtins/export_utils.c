@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 19:44:13 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/01 16:44:10 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	check_export_value(char **var_export)
 	i = 1;
 	while (var_export[i])
 	{
-		if (ft_isdigit(var_export[i][0]) == 1)
+		if (ft_isdigit(var_export[i][0]) == 1 || var_export[i][0] == '='
+			|| var_export[i][0] == '\0')
 		{
-			printf("bash: export: `%c': not a valid identifier\n",
+			printf("MINISHELL : export: '%c': not a valid identifier\n",
 				var_export[i][0]);
 			return (1);
 		}
@@ -65,6 +66,9 @@ int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 
 int	is_in_env(t_env *env, char *var_export)
 {
+	int	i;
+
+	i = 0;
 	while (env)
 	{
 		if (ft_strcmp(env->name, var_export))

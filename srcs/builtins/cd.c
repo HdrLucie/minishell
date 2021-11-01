@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/31 19:07:28 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/01 14:57:37 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,9 @@ int	relative_change_directory(t_env *env, char *cmd)
 
 	pwd = NULL;
 	tmp_path = malloc(sizeof(char) * 1000);
-	if (check_chdir_ret(cmd) == -1 || !tmp_path
-		|| search_value(env, &pwd, "PWD") != 0)
+	if (check_chdir_ret(cmd) == -1)
+		return (1);
+	if (!tmp_path || search_value(env, &pwd, "PWD") != 0)
 	{
 		if_free(pwd);
 		if_free(tmp_path);
@@ -102,7 +103,7 @@ int	relative_change_directory(t_env *env, char *cmd)
 		if (!tmp_path)
 		{
 			printf("MINISHELL : cd: %s: No such file or directory\n", cmd);
-			return (-1);
+			return (1);
 		}
 		change_exp_value(env, "OLDPWD", pwd);
 		change_exp_value(env, "PWD", tmp_path);
@@ -117,8 +118,8 @@ int	change_directory(t_env *env, char *start, char *cmd)
 
 	ret = 1;
 	i = 0;
-	if (check_cd(env, start) == 0)
-		return (0);
+	if (check_cd(env, start) == 1)
+		return (1);
 	while (cmd && cmd[i] && ft_isalpha(cmd[i]))
 		i++;
 	if (!cmd || cmd[i])
