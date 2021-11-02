@@ -6,11 +6,25 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 03:16:39 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/31 17:00:39 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/02 12:13:46 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_in_str(char *str, char c, char a)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] != c && str[i + 1] != a)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	print_env(t_env *env)
 {
