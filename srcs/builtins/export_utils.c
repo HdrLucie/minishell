@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/01 16:44:10 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/02 12:39:21 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ int	check_export_value(char **var_export)
 	i = 1;
 	while (var_export[i])
 	{
-		if (ft_isdigit(var_export[i][0]) == 1 || var_export[i][0] == '='
-			|| var_export[i][0] == '\0')
+		if (ft_isdigit(var_export[i][0]) == 1 || var_export[i][0] == '=')
 		{
 			printf("MINISHELL : export: '%c': not a valid identifier\n",
 				var_export[i][0]);
 			return (1);
+		}
+		if (var_export[i][0] == '\0')
+		{
+			printf("MINISHELL : export: '%c': not a valid identifier\n",
+				var_export[i][0]);
+			return (0);
 		}
 		i++;
 	}

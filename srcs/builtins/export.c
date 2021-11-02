@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:28:50 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/01 16:42:39 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/02 12:36:43 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int	export_var(t_env *env, char **var_export)
 	}
 	while (var_export[i])
 	{
+		if (var_export[i][0] == '\0' && var_export[i + 1])
+			i++;
 		ret = export(env, var_export[i], ret);
 		if (ret == -1)
 			return (print_error("ALLOCATION FAILED\n", -1, errno));
