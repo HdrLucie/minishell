@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:37:16 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/02 13:41:26 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	execute(char **cmd, t_mini *mini)
 	{
 		execve(cmd[0], cmd, mini->envp);
 		perror("EXECVE");
-		ft_exit(mini, 0);
+		ft_exit(mini);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);

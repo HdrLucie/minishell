@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/01 17:14:05 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/02 13:41:33 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	recover_cmd_part_2(t_mini *mini)
 {
 	if (!ft_strcmp(mini->exe[0], "exit"))
-		ft_exit(mini, 1);
+		ft_exit(mini);
 	else if (!ft_strncmp(mini->exe[0], "echo", ft_strlen("echo")))
 		mini->old_ret = echo(mini->exe);
 	else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))
