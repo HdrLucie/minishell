@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/02 13:41:26 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/03 14:38:26 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	execute(char **cmd, t_mini *mini)
 	{
 		execve(cmd[0], cmd, mini->envp);
 		perror("EXECVE");
-		ft_exit(mini);
+		ft_exit(mini, 0);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);
