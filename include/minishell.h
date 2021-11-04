@@ -201,7 +201,7 @@ int		go_home(t_env *env, int i, char *path, char *pwd);
 void	if_free(char *str);
 int		check_cd(t_env *env, char *start);
 int		check_chdir_ret(char *path);
-int		is_in_str(char *str, char c, char a);
+int		is_in_str(char *str, char c);
 t_env	*create_ign_env(t_env *env);
 int		set_valid_flag(char *cmd);
 

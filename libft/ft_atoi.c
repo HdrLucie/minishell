@@ -35,6 +35,8 @@ int	ft_atoi(const char *str)
 		return (0);
 	else if ((res > LONG_MAX || (i - tmp) > 20) && signe == 1)
 		return (-1);
+	if (str[0] == '-' && str[1] == '\0')
+		return (2);
 	else
 		return (res * signe);
 }

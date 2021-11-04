@@ -16,7 +16,7 @@ int	check_chdir_ret(char *path)
 {
 	if (chdir(path) == -1)
 	{
-		perror("MINISHELL ");
+		perror("MINISHELL : ");
 		return (-1);
 	}
 	return (0);

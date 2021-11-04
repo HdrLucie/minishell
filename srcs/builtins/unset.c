@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+int	check_unset_var(char *var_to_unset)
+{
+	int	i;
+
+	i = 0;
+	if ((var_to_unset[i] == '=' && var_to_unset[i + 1] == '\0')
+		|| var_to_unset[i] == '\0' || ft_isdigit(var_to_unset[i]) == 1)
+	{
+		printf("MINISHELL: unset: `%s': not a valid identifier\n", var_to_unset);
+		return (1);
+	}
+	return (0);
+}
+
 int	unset_alpha_var(t_env *env, char *unset_alpha_var_name)
 {
 	t_env	*tmp_alpha;
@@ -35,7 +49,7 @@ int	unset_alpha_var(t_env *env, char *unset_alpha_var_name)
 		}
 		current_alpha_node = current_alpha_node->next_alpha;
 	}
-	return (1);
+	return (0);
 }
 
 int	unset_env_var(t_env *current_node, char *unset_var_name)
@@ -64,6 +78,8 @@ int	unset_var(t_env **env, char *unset_var_name)
 
 	tmp = NULL;
 	current_node = *env;
+	if (check_unset_var(unset_var_name) == 1)
+		return (1);
 	if (unset_alpha_var(*env, unset_var_name) == 1)
 		return (1);
 	if (!ft_strcmp((*env)->name, unset_var_name))
@@ -75,5 +91,5 @@ int	unset_var(t_env **env, char *unset_var_name)
 	}
 	if (unset_env_var(current_node, unset_var_name) == 0)
 		return (0);
-	return (1);
+	return (0);
 }

@@ -29,8 +29,10 @@ int	recover_cmd_part_2(t_mini *mini)
 int	recover_cmd(t_mini	*mini)
 {
 	int	i;
+	int	flag;
 
 	i = 0;
+	flag = 0;
 	if (mini->exe && mini->exe[0])
 	{
 		if (!ft_strcmp(mini->exe[0], "env"))
@@ -42,7 +44,11 @@ int	recover_cmd(t_mini	*mini)
 		else if (!ft_strncmp(mini->exe[0], "unset", ft_strlen("unset")))
 		{
 			while (mini->exe[++i])
-				mini->old_ret = unset_var(mini->env, mini->exe[i]);
+			{
+				flag = unset_var(mini->env, mini->exe[i]);
+				if (flag == 1)
+					mini->old_ret = 1;
+			}
 		}
 		else
 			return (recover_cmd_part_2(mini));
