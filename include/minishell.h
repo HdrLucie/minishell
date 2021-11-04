@@ -180,7 +180,7 @@ t_env	*ft_lstlast_env(t_env *lst);
 int		ft_fill_env_lst_value(char *str, t_env *env, int i);
 int		is_in_env(t_env *env, char *var_export);
 int		export_var(t_env *env, char **var_export);
-int		create_export_node(t_env *env, char *name, char *value);
+int		create_export_node(t_env *env, int flag, char *name, char *value);
 int		fill_env_lst_name(char *str, t_env *env);
 int		unset_var(t_env **env, char *unset_var_name);
 int		recover_cmd(t_mini *mini);
@@ -203,6 +203,7 @@ int		check_cd(t_env *env, char *start);
 int		check_chdir_ret(char *path);
 int		is_in_str(char *str, char c, char a);
 t_env	*create_ign_env(t_env *env);
+int		set_valid_flag(char *cmd);
 
 /****************************/
 /*			PRINT			*/

@@ -16,7 +16,7 @@ int	recover_cmd_part_2(t_mini *mini)
 {
 	if (!ft_strcmp(mini->exe[0], "exit"))
 		ft_exit(mini, 1);
-	else if (!ft_strncmp(mini->exe[0], "echo", ft_strlen("echo")))
+	else if (!ft_strcmp(mini->exe[0], "echo"))
 		mini->old_ret = echo(mini->exe);
 	else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))
 		mini->old_ret = change_directory(*mini->env, mini->exe[0],
