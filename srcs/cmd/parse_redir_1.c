@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 10:20:46 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/03 08:46:03 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 	if (cmd[i + 1])
 		red[j].path = ft_strdup(cmd[i + 1]);
 	if (!cmd[i + 1] || valid_path(red[j].path))
-		return (print_error("PARSE ERROR\n", -1, errno));
+		return (print_error("PARSE ERROR\n", -1, 2));
 	i++;
 	return (i);
 }
