@@ -52,6 +52,8 @@ void	wait_child(t_mini *mini)
 	}
 	free(mini->pid);
 	g_flag_fork = 0;
+	if (WIFEXITED(status))
+		mini->old_ret = WEXITSTATUS(status);
 }
 
 int	init_pipe(t_mini *mini)

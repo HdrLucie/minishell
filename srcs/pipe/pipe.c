@@ -35,7 +35,7 @@ void	free_all(t_mini *mini)
 		free_strs(mini->envp);
 	if (mini->pid)
 		free(mini->pid);
-	exit (0);
+	exit (mini->old_ret);
 }
 
 int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
