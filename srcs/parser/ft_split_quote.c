@@ -30,7 +30,7 @@ int	count_word(char *str)
 
 	i = 0;
 	word = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		while (str[i] && is_space(str[i]))
 			i++;

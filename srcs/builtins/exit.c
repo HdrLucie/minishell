@@ -44,6 +44,8 @@ void	ft_exit(t_mini *mini, int flag_exec)
 		free_red(mini->red, mini->nb_red);
 	if (mini->nb_pipe == 0 && flag_exec != 0)
 		write(2, "exit\n", 5);
+	if (flag_exec == 0)
+		return ;
 	if (ret == -1 && mini->old_ret)
 		exit(mini->old_ret);
 	else if (ret != -1)

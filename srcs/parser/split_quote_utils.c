@@ -44,7 +44,7 @@ char	**remove_comments(char **split)
 	int	i;
 
 	i = 0;
-	while (split[i])
+	while (split && split[i])
 	{
 		if (split[i][0] == '#')
 		{

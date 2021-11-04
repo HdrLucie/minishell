@@ -98,7 +98,7 @@ char	*parse_cmd(char *cmd, char **envp)
 	env_path = ft_getenv("PATH", envp);
 	path = ft_split(env_path, ':');
 	if (path == NULL)
-		return (NULL);
+		return (*print_char_error("PARSE PATH ERROR\n", -1, errno));
 	cmd = find_path(path, cmd);
 	free_strs(path);
 	return (cmd);

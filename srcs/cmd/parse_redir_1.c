@@ -92,6 +92,9 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 
 int	redir(char **exe, t_mini *mini)
 {
+	int	ret;
+
+	ret = 0;
 	mini->nb_red = count_redir(exe);
 	mini->red = malloc(mini->nb_red * sizeof(t_redir));
 	if (mini->red == NULL)
@@ -99,12 +102,16 @@ int	redir(char **exe, t_mini *mini)
 	mini->exe = malloc(sizeof(char *) * (ft_strslen(exe) + 1));
 	if (mini->exe == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1, errno));
-	if (fill_red(exe, mini->red, mini->exe) == -1)
-		return (-1);
-	exe_redir(mini->red, mini->nb_red);
-	exe_cmd(mini);
+	ret = fill_red(exe, mini->red, mini->exe);
+	if (ret < 0)
+	{
+		mini->old_ret = 2;
+		return (ret);
+	}
+	ret = exe_redir(mini->red, mini->nb_red);
+	ret = exe_cmd(mini);
 	close_fd(mini->red, mini->nb_red);
 	free_strs(mini->exe);
 	free_red(mini->red, mini->nb_red);
-	return (0);
+	return (ret);
 }

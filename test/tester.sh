@@ -26,10 +26,10 @@ chmod 755 minishell
 
 function exec_test()
 {
-	echo $@ "; exit" | ./minishell 2>&- 1>sorti
+	echo "exit |" $@ | ./minishell | cut -d'$' -f2 2>&- 1>sorti
 	ES_1=$?
-	TEST1=$(tail -n +2 sorti)
-	TEST2=$(echo $@ "; exit" | bash 2>&-)
+	TEST1=$(tail -n +2 sorti | head -n -1 )
+	TEST2=$(echo "exit |" $@ | bash 2>&-)
 	ES_2=$?
 	if [ "$TEST1" == "$TEST2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "
@@ -101,14 +101,10 @@ exec_test ''
 exec_test 'echo test tout'
 exec_test 'echo "coucou"les"amis"'
 exec_test 'echo test      tout'
-exec_test 'echo -n test tout'
-exec_test 'echo -n -n -n test tout'
 exec_test 'echo "salut"cou""'
 exec_test 'echo testtout' 
 exec_test 'echo "coucou"les"amis"' 
 exec_test 'echo testout' 
-exec_test 'echo -n test' 
-exec_test 'echo -n -n -n testtout' 
 exec_test 'echo "salut"cou""' 
 exec_test 'echo $PATH' 
 
@@ -151,21 +147,18 @@ exec_test 'echo $PATH?'
 # REDIRECTIONS
 exec_test 'cat < ls' 
 exec_test 'cat < ls > ls' 
-exec_test 'echo test > ls >> ls >> ls ; echo test >> ls; cat ls' 
-exec_test '> lol echo test lol; cat lol'  
-exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test' 
 exec_test 'cat ls > out' 
 exec_test 'cat ls > /dev/null' 
 # exec_test 'cat ls >> /dev/random'
 exec_test '< /dev/null cat' 
 
 # ENV EXPANSIONS
-ENV_SHOW="env"
-EXPORT_SHOW="export"
-exec_env 'export'
-exec_env 'export coucou="salut les gars" hey="heyhey" ; export'
-exec_env 'export coucou="salut" blabla=hey ; export'
-exec_env 'export coucou='salut' blabla=hey ; export'
+# ENV_SHOW="env"
+# EXPORT_SHOW="export"
+# exec_env 'export'
+# exec_env 'export coucou="salut les gars" hey="heyhey" ; export'
+# exec_env 'export coucou="salut" blabla=hey ; export'
+# exec_env 'export coucou='salut' blabla=hey ; export'
 # exec_test 'export 1TEST=louloute ;' $ENV_SHOW
 # exec_test 'export TEST ;' $EXPORT_SHOW
 # exec_test 'export ""="" ; ' $ENV_SHOW
@@ -179,19 +172,17 @@ exec_env 'export coucou='salut' blabla=hey ; export'
 # exec_test 'export TEST="ls       -l     - a" ; echo $TEST ; $LS ; ' $ENV_SHOW
 
 #NEW TEST
-exec_test 'echo bonjour ; ls'
 exec_test 'echo bonjour > test\ 1'
 exec_test 'cd $HOME/Documents'
 exec_test 'echo >'
-exec_test 'export "" et unset ""'
+exec_test 'export ""'
+exec_test 'unset ""'
 exec_test 'echo test > file test1'
 exec_test 'echo bonjour >>> test'
 exec_test 'echo bonjour > > out'
 exec_test 'echo 2 >> out1 > out2'
 exec_test 'echo 2 > out1 >> out2'
-exec_test 'export var; export var=test'
 exec_test 'tester.sh'
-exec_test 'cd ../../../../../.. ; pwd'
 exec_test 'export "test=ici"=coucou'
 exec_test '$LESS$VAR'
 exec_test '/bin/echo bonjour'
@@ -199,14 +190,12 @@ exec_test 'not_cmd'
 exec_test '"exit retour a la ligne"'
 exec_test 'exit -10'
 exec_test 'exit +10'
-exec_test ';'
 exec_test 'echo "$HOME"'
 exec_test 'echo '$HOME''
 exec_test '> log echo coucou'
 exec_test 'echo $HOME'
 exec_test 'echo'
 exec_test 'echo simple'
-exec_test 'echo -n simple'
 exec_test 'echo '''
 exec_test '> a ls > b < Makefile'
 exec_test 'echo > a Hello World!'
@@ -220,11 +209,9 @@ exec_test 'export "HI =hi"'
 exec_test '/bin/ls'
 exec_test 'echo $?'
 exec_test 'cd /'
-exec_test 'echo hi " ; " hihi'
 exec_test 'cd'
 exec_test 'cd .'
 exec_test 'l^Ds'
 exec_test 'cat < >'
-exec_test 'echo ;;'
 
 

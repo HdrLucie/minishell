@@ -51,8 +51,9 @@ int	parser(char **token, t_mini *mini)
 	if (begin != ft_strslen(token))
 		mini->cmd = parse_end(mini->cmd, token, &begin, i);
 	free_strs(token);
-	if (mini->cmd == NULL || ft_execute_cmd(mini) == -1)
-		return (-1);
+	i = ft_execute_cmd(mini);
+	if (mini->cmd == NULL || i < 0)
+		return (i);
 	ft_cmd_clear(mini->cmd);
 	return (0);
 }
@@ -75,7 +76,7 @@ int	lexer(char *str, t_mini *mini)
 		return (-2);
 	token = remove_quote(token);
 	ret = parser(token, mini);
-	if (ret == -1)
+	if (ret < 0)
 		return (ret);
 	return (ret);
 }

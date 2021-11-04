@@ -29,7 +29,7 @@
 /****************************/
 
 # define PAGE_SIZE 4096
-int	g_flag_fork;
+extern int	g_flag_fork;
 
 /****************************/
 /*			STRUCT			*/

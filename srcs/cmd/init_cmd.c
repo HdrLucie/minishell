@@ -19,7 +19,7 @@ int	execute(char **cmd, t_mini *mini)
 
 	cmd[0] = parse_cmd(cmd[0], mini->envp);
 	if (cmd[0] == NULL)
-		return (print_error("PARSE PATH ERROR\n", -1, errno));
+		return (-1);
 	g_flag_fork = 1;
 	pid = fork();
 	if (pid == -1)
@@ -75,12 +75,14 @@ int	ft_execute_cmd(t_mini *mini)
 {
 	t_cmd	*tmp;
 	int		i;
+	int		ret;
 
 	tmp = mini->cmd;
-	if (mini->nb_pipe == 0)
+	if (mini->nb_pipe == 0 && tmp->cmd)
 	{
-		if (tmp->cmd && redir(tmp->cmd, mini) == -1)
-			return (-1);
+		ret = redir(tmp->cmd, mini) == -1;
+		if (ret < 0)
+			return (ret);
 	}
 	else
 	{

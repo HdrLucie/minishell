@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+int	g_flag_fork;
 
 void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 {
@@ -26,24 +27,26 @@ void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 
 char	*find_couleur(void)
 {
-	static int	i = 0;
+	static int	i = -1;
 
 	i++;
-	if (i > 5)
+	if (i > 6)
 		i = 0;
 	if (i == 0)
-		return ("\033[1m\033[31m");
+		return ("\033[1m\033[37m");
 	if (i == 1)
-		return ("\033[1m\033[32m");
+		return ("\033[1m\033[31m");
 	if (i == 2)
 		return ("\033[1m\033[33m");
 	if (i == 3)
-		return ("\033[1m\033[34m");
+		return ("\033[1m\033[32m");
 	if (i == 4)
-		return ("\033[1m\033[35m");
+		return ("\033[1m\033[34m");
 	if (i == 5)
-		return ("\033[1m\033[36m");
-	return ("\033[1m\033[36m");
+		return ("\033[1m\033[35m");
+	if (i == 6)
+		return ("\033[1m\033[37m");
+	return ("\033[1m\033[37m");
 }
 
 char	*init_prompt(void)
