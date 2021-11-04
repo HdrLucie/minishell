@@ -14,7 +14,7 @@
 
 int	is_spe_char(char c)
 {
-	if (c == '$' || c == '#')
+	if (c == '#')
 		return (1);
 	return (0);
 }
