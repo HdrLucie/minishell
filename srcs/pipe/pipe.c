@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:38:06 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/02 13:35:41 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 				return (-1);
 		close_all_pipe(mini);
 		if (redir(cmd->cmd, mini) == -1)
-			exit (-1);
+			exit (1);
 		free_all(mini);
 	}
 	else if (pid == -1)

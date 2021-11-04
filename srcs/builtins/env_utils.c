@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 04:06:57 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/29 14:58:13 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/02 12:48:25 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@ void	fill_execve(t_env *env, char **execve)
 	k = 0;
 	while (env)
 	{
-		while (env->name[++i])
-			execve[j][k++] = env->name[i];
-		execve[j][k] = '=';
-		i = -1;
-		k++;
-		while (env->value[++i])
-			execve[j][k++] = env->value[i];
-		execve[j][k] = '\0';
-		k = 0;
-		i = -1;
-		j++;
+		if (env->is_valid)
+		{
+			while (env->name[++i])
+				execve[j][k++] = env->name[i];
+			execve[j][k] = '=';
+			i = -1;
+			k++;
+			while (env->value[++i])
+				execve[j][k++] = env->value[i];
+			execve[j][k] = '\0';
+			k = 0;
+			i = -1;
+			j++;
+		}
 		env = env->next;
 	}
 }
@@ -51,10 +54,13 @@ int	malloc_execve(t_env *env, char **execve)
 	tmp = env;
 	while (env)
 	{
-		size_name = ft_strlen(env->name);
-		size_value = ft_strlen(env->value);
-		execve[i] = malloc(sizeof(char) * size_value + size_name + 2);
-		i++;
+		if (env->is_valid == 1)
+		{
+			size_name = ft_strlen(env->name);
+			size_value = ft_strlen(env->value);
+			execve[i] = malloc(sizeof(char) * size_value + size_name + 2);
+			i++;
+		}
 		env = env->next;
 	}
 	fill_execve(tmp, execve);
@@ -74,7 +80,8 @@ char	**env_execve(t_mini *mini)
 	tmp = *mini->env;
 	while (tmp)
 	{
-		nb_var++;
+		if (tmp->is_valid == 1)
+			nb_var++;
 		tmp = tmp->next;
 	}
 	mini->envp = malloc(sizeof(char *) * (nb_var + 1));

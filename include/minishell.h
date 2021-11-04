@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/31 13:48:51 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/03 17:10:46 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_cmd
 
 typedef struct s_env
 {
+	int				is_valid;
 	int				first_alpha_node;
 	char			*name;
 	char			*value;
@@ -168,7 +169,7 @@ int		exe_here_doc(t_redir *red, int count);
 
 t_env	*find_first_alpha_node(t_env *env);
 void	ft_print_env_alpha(t_env *env);
-void	ft_exit(t_mini *mini, int flag);
+void	ft_exit(t_mini *mini, int flag_exec);
 void	free_env(t_env *env);
 void	udpate_alpha_road(t_env *env);
 void	free_node(t_env *node);
@@ -180,7 +181,7 @@ int		ft_fill_env_lst_value(char *str, t_env *env, int i);
 int		is_in_env(t_env *env, char *var_export);
 int		export_var(t_env *env, char **var_export);
 int		create_export_node(t_env *env, char *name, char *value);
-int		ft_fill_env_lst_name(char *str, t_env *env);
+int		fill_env_lst_name(char *str, t_env *env);
 int		unset_var(t_env **env, char *unset_var_name);
 int		recover_cmd(t_mini *mini);
 void	ft_print_env(t_env *env);
@@ -198,6 +199,10 @@ int		check_export_value(char **var_export);
 int		search_value(t_env *env, char **value, char *to_find);
 int		go_home(t_env *env, int i, char *path, char *pwd);
 void	if_free(char *str);
+int		check_cd(t_env *env, char *start);
+int		check_chdir_ret(char *path);
+int		is_in_str(char *str, char c, char a);
+t_env	*create_ign_env(t_env *env);
 
 /****************************/
 /*			PRINT			*/

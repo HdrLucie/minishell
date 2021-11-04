@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/28 21:10:50 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/03 17:57:17 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 ** Retours d'erreurs : -1, arret du programme.
 **					   -2, erreur, mais le process continue. 
 */
-
-int	check_shlvl(char *str, t_env *env, int k)
-{
-	if (!ft_strcmp("SHLVL", env->name))
-	{
-		if_free(env->value);
-		env->value = ft_itoa(ft_atoi(&str[k]) + 1);
-		return (0);
-	}
-	return (1);
-}
 
 int	fill_env_lst_value(char *str, t_env *env, int i)
 {
@@ -63,6 +52,8 @@ int	fill_env_lst_name(char *str, t_env *env)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
+	if (str[i] == '=')
+		env->is_valid = 1;
 	env->name = malloc(sizeof(char) * i + 1);
 	if (!env->name)
 		return (-1);
@@ -87,6 +78,8 @@ t_env	*create_env_lst(char **env)
 	i = 0;
 	env_lst = NULL;
 	current_node = NULL;
+	if (env[i] == NULL)
+		return (env_lst = create_ign_env(env_lst));
 	while (env[i])
 	{
 		current_node = malloc(sizeof(t_env));
@@ -94,6 +87,7 @@ t_env	*create_env_lst(char **env)
 			return (NULL);
 		current_node->next = NULL;
 		current_node->next_alpha = NULL;
+		current_node->is_valid = 0;
 		lstadd_back_env(&env_lst, current_node);
 		if (fill_env_lst_name(env[i], current_node) == -1)
 			return (NULL);
