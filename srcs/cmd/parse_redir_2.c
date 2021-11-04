@@ -68,7 +68,8 @@ int	count_redir(char **cmd)
 			count++;
 			i++;
 		}
-		i++;
+		if (cmd[i])
+			i++;
 	}
 	return (count);
 }

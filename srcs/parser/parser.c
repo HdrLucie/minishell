@@ -65,6 +65,11 @@ t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 	char	**tmp;
 	t_cmd	*new;
 
+	if (i - *begin <= 0)
+	{
+		print_error("SYNTAX ERROR UNEXPECTED NEAR '|'\n", -2, 2);
+		return (NULL);
+	}
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);

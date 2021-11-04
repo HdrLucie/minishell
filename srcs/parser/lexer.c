@@ -44,7 +44,7 @@ int	parser(char **token, t_mini *mini)
 		{
 			mini->cmd = parse_pipe(mini->cmd, token, &begin, i);
 			mini->nb_pipe++;
-			if (mini->cmd == NULL)
+			if (mini->cmd == NULL || mini->cmd->cmd == NULL)
 				return (-2);
 		}
 	}
@@ -72,7 +72,7 @@ int	lexer(char *str, t_mini *mini)
 	token = ft_split_quote(ft_reverse_split(token));
 	if (token == NULL && errno == -1)
 		return (print_error("ALLOCATION FAILED\n", -1, errno));
-	else if (token == NULL)
+	else if (token == NULL || !token[0])
 		return (-2);
 	token = remove_quote(token);
 	ret = parser(token, mini);
