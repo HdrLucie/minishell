@@ -61,7 +61,6 @@ int	echo(char **to_print)
 
 	i = 1;
 	new_line = 0;
-	ret = 0;
 	ret = is_in_str_echo(to_print);
 	if (ret > 0)
 	{

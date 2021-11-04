@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+int	g_flag_fork;
+
 void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 {
 	mini->env = env;

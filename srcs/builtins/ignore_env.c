@@ -19,6 +19,8 @@ int	fill_ign_value(t_env *env)
 
 	tmp = malloc(sizeof(char) * 1000);
 	shlvl = malloc(sizeof(char) * 1000);
+	if (!tmp || !shlvl)
+		return (-1);
 	shlvl[0] = '0';
 	shlvl[1] = '\0';
 	env->name = ft_strdup("LS_COLORS");
@@ -29,6 +31,10 @@ int	fill_ign_value(t_env *env)
 	env->next->next->value = ft_strdup(ft_strjoin(tmp, "/./minishell"));
 	env->next->next->next->name = ft_strdup("SHLVL");
 	env->next->next->next->value = ft_itoa(ft_atoi(shlvl) + 1);
+	if (!env->name || !env->value || !env->next->name || !env->next->value
+		|| !env->next->next->name || !env->next->next->value
+		|| !env->next->next->next->name || !env->next->next->next->value)
+		return (-1);
 	return (0);
 }
 

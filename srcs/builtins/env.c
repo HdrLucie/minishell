@@ -87,7 +87,6 @@ t_env	*create_env_lst(char **env)
 			return (NULL);
 		current_node->next = NULL;
 		current_node->next_alpha = NULL;
-		current_node->is_valid = 0;
 		lstadd_back_env(&env_lst, current_node);
 		if (fill_env_lst_name(env[i], current_node) == -1)
 			return (NULL);

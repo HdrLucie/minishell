@@ -48,7 +48,7 @@ int	recover_value_exp(char *cmd, char **value, int i)
 	return (0);
 }
 
-int	recover_name_exp(t_env *env, char *cmd, char **name, char **value)
+int	recover_name_exp(char *cmd, char **name, char **value)
 {
 	int	i;
 	int	k;
@@ -59,8 +59,6 @@ int	recover_name_exp(t_env *env, char *cmd, char **name, char **value)
 	counter_l = 0;
 	while (cmd[++i] && cmd[i] != '=')
 		counter_l++;
-	if (cmd[i] == '=')
-		env->is_valid = 1;
 	*name = malloc(sizeof(char) * counter_l + 1);
 	if (!name)
 		return (-1);
@@ -76,16 +74,18 @@ int	export(t_env *env, char *var_export, int ret)
 {
 	char	*name_exp;
 	char	*value_exp;	
+	int		flag;
 
 	value_exp = NULL;
 	name_exp = NULL;
-	env->is_valid = 0;
-	ret = recover_name_exp(env, var_export, &name_exp, &value_exp);
+	flag = 0;
+	ret = recover_name_exp(var_export, &name_exp, &value_exp);
 	if (ret == -1)
 		return (-1);
 	if (!is_in_env(env, name_exp))
 	{
-		ret = create_export_node(env, name_exp, value_exp);
+		flag = set_valid_flag(var_export);
+		ret = create_export_node(env, flag, name_exp, value_exp);
 		if (ret == -1)
 			return (-1);
 	}

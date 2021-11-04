@@ -25,7 +25,7 @@ void	free_node(t_env *node)
 	node = NULL;
 }
 
-int	create_export_node(t_env *env, char *name, char *value)
+int	create_export_node(t_env *env, int flag, char *name, char *value)
 {
 	t_env	*current_node;
 
@@ -33,7 +33,7 @@ int	create_export_node(t_env *env, char *name, char *value)
 	current_node = malloc(sizeof(t_env));
 	if (!current_node)
 		return (print_error("ALLOCATION FAILED\n", -1, -1));
-	if (env->is_valid == 1)
+	if (flag == 1)
 		current_node->is_valid = 1;
 	else
 		current_node->is_valid = 0;

@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+int	set_valid_flag(char *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 t_env	*find_first_alpha_node(t_env *env)
 {
 	if (env == NULL)
