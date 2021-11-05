@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/03 08:46:03 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/05 11:33:00 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 	if (cmd[i + 1])
 		red[j].path = ft_strdup(cmd[i + 1]);
 	if (!cmd[i + 1] || valid_path(red[j].path))
-		return (print_error("PARSE ERROR\n", -1, 2));
+		return (print_error("PARSE ERROR\n", -2, 2));
 	i++;
 	return (i);
 }
@@ -75,8 +75,8 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
 		{
 			i = parse_redir(cmd, i, red, j);
-			if (i == -1)
-				return (-1);
+			if (i < 0)
+				return (i);
 			j++;
 		}
 		else
@@ -109,6 +109,10 @@ int	redir(char **exe, t_mini *mini)
 		return (ret);
 	}
 	ret = exe_redir(mini->red, mini->nb_red);
+	if (ret < 0)
+	{
+		return (ret);
+	}
 	ret = exe_cmd(mini);
 	close_fd(mini->red, mini->nb_red);
 	free_strs(mini->exe);

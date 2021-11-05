@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/03 14:38:26 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/05 11:29:07 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	ft_execute_cmd(t_mini *mini)
 	tmp = mini->cmd;
 	if (mini->nb_pipe == 0 && tmp->cmd)
 	{
-		ret = redir(tmp->cmd, mini) == -1;
+		ret = redir(tmp->cmd, mini);
+		mini->old_ret = errno;
 		if (ret < 0)
 			return (ret);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/02 13:35:41 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/05 11:29:53 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	close_all_pipe(t_mini *mini)
 
 void	free_all(t_mini *mini)
 {
+	mini->old_ret = errno;
 	if (mini->cmd)
 		ft_cmd_clear(mini->cmd);
 	if (mini->env)
