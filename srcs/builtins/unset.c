@@ -23,6 +23,15 @@ int	check_unset_var(char *var_to_unset)
 		printf("MINISHELL: unset: `%s': not a valid identifier\n", var_to_unset);
 		return (1);
 	}
+	while (var_to_unset[i])
+	{
+		if (var_to_unset[i] == '=')
+		{
+			printf("MINISHELL: unset: `%s': not a valid identifier\n", var_to_unset);
+			return (1);
+		}
+		i++;	
+	}
 	return (0);
 }
 

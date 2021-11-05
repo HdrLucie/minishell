@@ -46,6 +46,8 @@ void	ft_exit(t_mini *mini, int flag_exec)
 	ret = -1;
 	if (mini->exe && mini->exe[1])
 		ret = ft_atoi(mini->exe[1]) % 256;
+	if (mini->exe && mini->exe[2])
+		write(2, "MINISHELL : exit: too many arguments\n", 37);
 	if (mini->exe && mini->exe[1] && check_string(mini->exe[1]) == 1)
 		ret = 2;
 	if (mini->cmd)

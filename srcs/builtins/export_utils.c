@@ -69,6 +69,7 @@ int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 		{
 			if (env->value)
 				free(env->value);
+			env->is_valid = 1;
 			env->value = value_exp;
 			return (0);
 		}
