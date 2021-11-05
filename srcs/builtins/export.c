@@ -102,11 +102,11 @@ int	export_var(t_env *env, char **var_export)
 {
 	int	ret;
 	int	i;
+	int	flag_msg;
 
 	i = 1;
-	ret = check_export_value(var_export);
-	if (ret == 1)
-		return (1);
+	flag_msg = 0;
+	ret = 0;
 	if (var_export && !var_export[1])
 	{
 		udpate_alpha_road(env);
@@ -114,12 +114,15 @@ int	export_var(t_env *env, char **var_export)
 	}
 	while (var_export[i])
 	{
-		if (var_export[i][0] == '\0' && var_export[i + 1])
-			i++;
-		ret = export(env, var_export[i], ret);
-		if (ret == -1)
+		ret = check_export_value(var_export[i]);
+		if (ret == 1 && flag_msg == 0)
+		{
+			printf("MINISHELL : export: '%s': not a valid identifier\n", var_export[i]);
+			flag_msg = 1;
+		}
+		if (ret == 0 && export(env, var_export[i], ret) == -1)
 			return (print_error("ALLOCATION FAILED\n", -1, errno));
 		i++;
 	}
-	return (0);
+	return (ret);
 }

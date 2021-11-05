@@ -39,25 +39,18 @@ t_env	*find_first_alpha_node(t_env *env)
 	return (NULL);
 }
 
-int	check_export_value(char **var_export)
+int	check_export_value(char *var_export)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
+	if (var_export[0] == '\0' || ft_isdigit(var_export[0]) == 1
+		|| var_export[0] == '=')
+		return (1);
 	while (var_export[i])
 	{
-		if (ft_isdigit(var_export[i][0]) == 1 || var_export[i][0] == '=')
-		{
-			printf("MINISHELL : export: '%c': not a valid identifier\n",
-				var_export[i][0]);
+		if (var_export[i] == '=' && var_export[i - 1] == ' ')
 			return (1);
-		}
-		if (var_export[i][0] == '\0')
-		{
-			printf("MINISHELL : export: '%c': not a valid identifier\n",
-				var_export[i][0]);
-			return (0);
-		}
 		i++;
 	}
 	return (0);

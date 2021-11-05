@@ -63,11 +63,9 @@ void	print_env_alpha(t_env *env)
 			write(1, "declare -x ", 11);
 			write(1, env->name, ft_strlen(env->name));
 		}
-		if (env->value)
+		if (env->value && env->is_valid)
 		{
-			if (env->name && env->name[last_char - 1] != '=')
-				printf("=");
-			printf("\"%s\"", env->value);
+			printf("=\"%s\"", env->value);
 		}
 		printf("\n");
 		env = env->next_alpha;

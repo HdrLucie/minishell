@@ -64,13 +64,10 @@ void	ft_exit(t_mini *mini, int flag_exec)
 		write(2, "MINISHELL: exit: numeric argument required\n", 43);
 	if (flag_exec == 0)
 		return ;
-	printf("ret : %d\n", ret);
-	// if (ret < 0)
-	// 	exit (mini->old_ret % 256);
+	if (ret < 0)
+		exit (ret);
 	if (ret == -1 && mini->old_ret)
-	{
 		exit(mini->old_ret);
-	}
 	else if (ret != -1)
 		exit(ret);
 	else

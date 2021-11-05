@@ -195,7 +195,7 @@ void	change_directory_root(t_env *env, char **pwd);
 char	**env_execve(t_mini *mini);
 int		relative_path(t_env *env, char *path, char **pwd);
 int		check_last_slash(char *str);
-int		check_export_value(char **var_export);
+int		check_export_value(char *var_export);
 int		search_value(t_env *env, char **value, char *to_find);
 int		go_home(t_env *env, int i, char *path, char *pwd);
 void	if_free(char *str);

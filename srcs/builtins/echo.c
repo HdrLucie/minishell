@@ -39,6 +39,8 @@ int	is_in_str_echo(char **str)
 	ret = 0;
 	while (str[i])
 	{
+		if (str[i][j] == '\0')
+			return (ret);
 		while (str[i][j])
 		{
 			if (str[i][j] != '-' && only_char(str[i], 'n') == 0)
@@ -50,7 +52,7 @@ int	is_in_str_echo(char **str)
 		ret += 1;
 		i++;
 	}
-	return (ret);
+	return (0);
 }
 
 int	echo(char **to_print)
