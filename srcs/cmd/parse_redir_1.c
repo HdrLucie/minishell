@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/05 11:33:00 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/06 14:37:46 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,9 @@ int	redir(char **exe, t_mini *mini)
 		return (ret);
 	}
 	ret = exe_redir(mini->red, mini->nb_red);
-	if (ret < 0)
-	{
-		return (ret);
-	}
 	ret = exe_cmd(mini);
 	close_fd(mini->red, mini->nb_red);
+	printf("coucou");
 	free_strs(mini->exe);
 	free_red(mini->red, mini->nb_red);
 	return (ret);
