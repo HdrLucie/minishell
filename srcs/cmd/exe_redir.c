@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/06 15:11:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:27:12 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	exe_cmd(t_mini *mini)
 		}
 	}
 	mini->envp = env_execve(mini);
+	if (ret == 2)
+		return (0);
 	return (ret);
 }
 

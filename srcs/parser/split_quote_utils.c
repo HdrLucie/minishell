@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 16:52:43 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:47:11 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,21 @@ int	check_quote(char *str, int i)
 {
 	if (str[i] == '#')
 		return (find_token(str, i, '\n'));
+	else if (ft_isdigit(str[i]))
+	{
+		if (str[i + 1] && is_redir(str[i + 1]))
+		{
+			if (str[i + 2] && is_redir(str[i + 2]))
+				return (i + 3);
+			return (i + 2);
+		}
+	}
+	else if (is_redir(str[i]))
+	{
+		if (str[i + 1] && is_redir(str[i + 1]))
+			return (i + 2);
+		return (i + 1);
+	}
 	return (check_car_spe(str, i));
 }
 

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 14:56:52 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/06 18:13:44 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	count_redir(char **cmd)
 	count = 0;
 	while (cmd && cmd[i])
 	{
-		if (ft_strcmp(">", cmd[i]) == 0 || ft_strcmp("<", cmd[i]) == 0)
+		if (cmd[i][0] && (is_redir(cmd[i][0])
+			|| (ft_isdigit(cmd[i][0]) && cmd[i][1] && is_redir(cmd[i][1]))))
 		{
 			count++;
 			i++;

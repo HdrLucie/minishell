@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 14:57:46 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/06 17:32:31 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	execute(char **cmd, t_mini *mini)
 	g_flag_fork = 0;
 	if (WIFEXITED(status))
 		mini->old_ret = WEXITSTATUS(status);
+	errno = mini->old_ret;
 	return (0);
 }
 
