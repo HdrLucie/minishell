@@ -3,14 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 18:40:49 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/07 20:45:01 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*copy_pipe(char *src, char *dest, int begin)
+{
+	int		i;
+	int		j;
+
+	i = begin + 1;
+	j = begin;
+	dest[j] = '"';
+	dest[++j] = '|';
+	dest[++j] = '"';
+	printf("dest : %s\n", dest);
+	while (src && dest && src[i])
+	{
+		dest[++j] = src[i];
+		i++;
+	}
+	dest[++j] = '\0';
+	return (dest);
+}
+
+char	*quote_pipe(char *str)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '|')
+		{
+			tmp = ft_strdup(str);
+			str = ft_realloc(str, ft_strlen(str) + 2);
+			if (str == NULL || tmp == NULL)
+				return (NULL);
+			str = ft_strcpy(str, tmp);
+			str = copy_pipe(tmp, str, i);
+			printf("str : %s\n", str);
+			free(tmp);
+			i += 2;
+		}
+		i++;
+	}
+	return (str);
+}
 
 int	expand(char **token, int i, char *value)
 {
@@ -22,13 +67,10 @@ int	expand(char **token, int i, char *value)
 	token[i] = ft_realloc(token[i], size + 1);
 	if (token[i] == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1, -1));
-	// token[i][0] = '"';
 	ft_strcpy(token[i], value);
-	// token[i][size + 1] = '"';
-	// token[i][size + 2] = '\0';
-	// printf("AVANT FREE VALUE %s\n", value);
-	// free(value);
-	// printf("APRES FREE : %s\n", value);
+	token[i] = quote_pipe(token[i]);
+	if (token[i] == NULL)
+		return (-1);
 	return (0);
 }
 

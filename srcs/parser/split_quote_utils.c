@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 17:47:11 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/07 22:28:08 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 int	check_car_spe(char *str, int i)
 {
-	while (str && str[i] && !(is_space(str[i]) || is_redir(str[i])
-			|| is_redir(str[i + 1]) || is_spe_char(str[i])))
+	while (str && str[i] && !(is_space(str[i]) || str[i] == '|'
+		|| (str[i + 1] == '|' && str[i] != '"')
+		|| is_redir(str[i]) || is_spe_char(str[i])))
 	{
-		if (str[i] == '\"')
-			i = find_token(str, i, '\"');
-		else if (str[i] == '\'')
-			i = find_token(str, i, '\'');
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			i = find_token(str, i, str[i]);
+			if (str[i + 1] == '|')
+				break ;
+		}
 		else
 			i++;
 		if (i == -1)
 			return (-1);
 	}
-	if (str && str[i] && str[i] != ' ' && (is_redir(str[i])
-			|| is_redir(str[i + 1])))
+	if (str && str[i] && str[i] != ' ' && (str[i] == '|'
+			|| str[i + 1] == '|'))
 		i++;
 	return (i);
 }

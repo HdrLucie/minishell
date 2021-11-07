@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:39:23 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/07 21:02:18 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	lexer(char *str, t_mini *mini)
 		return (print_error("ALLOCATION FAILED\n", -1, errno));
 	else if (token == NULL || !token[0])
 		return (-2);
-	token = remove_quote(token);
 	ret = parser(token, mini);
 	if (ret < 0)
 		return (ret);

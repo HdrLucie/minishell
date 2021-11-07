@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 13:00:22 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/07 21:03:10 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_cmd	*parse_pipe(t_cmd *cmd, char **token, int *begin, int i)
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);
+	tmp = remove_quote(tmp);
 	cmd = find_cmd_struct(cmd, tmp);
 	if (cmd == NULL)
 		return (NULL);
@@ -92,6 +93,7 @@ t_cmd	*parse_end(t_cmd *cmd, char **token, int *begin, int i)
 	tmp = ft_substrs(&token[*begin], i - *begin);
 	if (tmp == NULL)
 		return (NULL);
+	tmp = remove_quote(tmp);
 	last = ft_cmd_last(cmd);
 	cmd = find_cmd_struct(cmd, tmp);
 	if (cmd == NULL)
