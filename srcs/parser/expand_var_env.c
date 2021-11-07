@@ -6,7 +6,7 @@
 /*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 20:45:01 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/07 22:53:30 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ char	*copy_pipe(char *src, char *dest, int begin)
 {
 	int		i;
 	int		j;
+	char	c;
 
+	c = src[begin];
 	i = begin + 1;
 	j = begin;
 	dest[j] = '"';
-	dest[++j] = '|';
+	dest[++j] = c;
 	dest[++j] = '"';
-	printf("dest : %s\n", dest);
 	while (src && dest && src[i])
 	{
 		dest[++j] = src[i];
@@ -40,7 +41,7 @@ char	*quote_pipe(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '|')
+		if (str[i] == '|' || is_redir(str[i]))
 		{
 			tmp = ft_strdup(str);
 			str = ft_realloc(str, ft_strlen(str) + 2);

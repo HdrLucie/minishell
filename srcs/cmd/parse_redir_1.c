@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 18:33:02 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/07 22:59:58 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	redir(char **exe, t_mini *mini)
 	if (mini->exe == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1, errno));
 	ret = fill_red(exe, mini->red, mini->exe);
+	mini->exe = remove_quote(mini->exe);
 	if (ret < 0)
 	{
 		mini->old_ret = ret;
