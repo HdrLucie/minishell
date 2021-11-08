@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/08 15:12:26 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 15:49:30 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_chdir_ret(char *path)
 {
 	if (chdir(path) == -1)
 	{
-		perror("MINISHELL : ");
+		perror("MINISHELL");
 		return (-1);
 	}
 	return (0);

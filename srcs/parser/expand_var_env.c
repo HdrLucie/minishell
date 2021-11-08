@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 09:06:08 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:36:10 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*quote_pipe(char *str)
 		if (str[i] == '|' || is_redir(str[i]) || str[i] == '$' || str[i] == '#')
 		{
 			tmp = ft_strdup(str);
-			str = ft_realloc(str, ft_strlen(str) + 2);
+			str = ft_realloc(str, ft_strlen(str) + 3);
 			if (str == NULL || tmp == NULL)
 				return (NULL);
 			str = ft_strcpy(str, tmp);
