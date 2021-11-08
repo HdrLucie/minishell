@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 17:32:31 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:04:18 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	execute(char **cmd, t_mini *mini)
 		return (print_error("FORK ERROR\n", -1, errno));
 	if (pid == 0)
 	{
+		// signal(SIGQUIT, S);
 		execve(cmd[0], cmd, mini->envp);
 		perror("EXECVE");
 		ft_exit(mini, 0);
