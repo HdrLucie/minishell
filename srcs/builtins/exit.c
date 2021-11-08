@@ -26,7 +26,7 @@ void	free_struct(t_mini *mini, int ret, int flag_exec)
 		free_red(mini->red, mini->nb_red);
 	if (flag_exec == 0)
 		return ;
-	if (ret < 0)
+	if (ret < -1)
 		exit (ret);
 	if (ret == -1 && mini->old_ret)
 		exit(mini->old_ret);
@@ -76,15 +76,15 @@ void	ft_exit(t_mini *mini, int flag_exec)
 		write(2, "exit\n", 5);
 	if (mini->exe && mini->exe[1])
 		ret = ft_atoi(mini->exe[1]) % 256;
-	if (mini->exe && mini->exe[1] && check_string(mini->exe[1]) == 1
-		&& flag_exec != 0)
+	if (mini->exe && mini->exe[1] && flag_exec != 0
+		&& (check_string(mini->exe[1]) == 1 || ft_strlen(mini->exe[1]) > 19))
 	{
 		flag_msg = 1;
 		ret = 2;
 		write(2, "MINISHELL: exit: numeric argument required\n", 43);
 	}
-	if (mini->exe && ft_strslen(mini->exe) > 2 && flag_exec != 0
-		&& flag_msg == 0)
+	if (mini->exe && flag_msg == 0 && ft_strslen(mini->exe) > 2
+		&& flag_exec != 0)
 	{
 		write(2, "MINISHELL : exit: too many arguments\n", 37);
 		ret = 1;

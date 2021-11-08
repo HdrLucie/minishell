@@ -12,10 +12,24 @@
 
 #include "minishell.h"
 
+int	check_exit_cmd(t_mini *mini)
+{
+	if (mini->exe[1] && check_string(mini->exe[1]) == 0
+		&& ft_strslen(mini->exe) > 2)
+	{
+		printf("MINISHELL: exit: too many arguments\n");
+		return (1);
+	}
+	return (0);
+}
+
 int	recover_cmd_part_2(t_mini *mini)
 {
 	if (!ft_strcmp(mini->exe[0], "exit"))
-		ft_exit(mini, 1);
+	{
+		if (check_exit_cmd(mini) == 0)
+			ft_exit(mini, 1);
+	}
 	else if (!ft_strcmp(mini->exe[0], "echo"))
 		mini->old_ret = echo(mini->exe);
 	else if (!ft_strcmp(mini->exe[0], "pwd"))

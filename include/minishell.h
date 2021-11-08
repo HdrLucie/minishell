@@ -208,6 +208,7 @@ int		check_chdir_ret(char *path);
 int		is_in_str(char *str, char c);
 t_env	*create_ign_env(t_env *env);
 int		set_valid_flag(char *cmd);
+int		check_string(char *str);
 
 /****************************/
 /*			PRINT			*/
