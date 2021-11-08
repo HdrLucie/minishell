@@ -21,5 +21,5 @@ int	print_pwd(void)
 		return (-1);
 	printf("%s\n", getcwd(pwd, 1000));
 	free(pwd);
-	return (1);
+	return (0);
 }

@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+int	check_string(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (ft_isalpha(str[i]) == 1)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	free_env(t_env *env)
 {
 	t_env	*tmp;
@@ -31,7 +45,11 @@ void	ft_exit(t_mini *mini, int flag_exec)
 
 	ret = -1;
 	if (mini->exe && mini->exe[1])
-		ret = ft_atoi(mini->exe[1]);
+		ret = ft_atoi(mini->exe[1]) % 256;
+	if (mini->exe && mini->exe[2])
+		write(2, "MINISHELL : exit: too many arguments\n", 37);
+	if (mini->exe && mini->exe[1] && check_string(mini->exe[1]) == 1)
+		ret = 2;
 	if (mini->cmd)
 		ft_cmd_clear(mini->cmd);
 	if (mini->env)
@@ -44,8 +62,12 @@ void	ft_exit(t_mini *mini, int flag_exec)
 		free_red(mini->red, mini->nb_red);
 	if (mini->nb_pipe == 0 && flag_exec != 0)
 		write(2, "exit\n", 5);
+	if (ret == 2)
+		write(2, "MINISHELL: exit: numeric argument required\n", 43);
 	if (flag_exec == 0)
 		return ;
+	if (ret < 0)
+		exit (ret);
 	if (ret == -1 && mini->old_ret)
 		exit(mini->old_ret);
 	else if (ret != -1)

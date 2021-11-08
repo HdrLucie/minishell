@@ -23,7 +23,7 @@ int	next_simple_cd(t_env *env, char *path, char *pwd)
 		return (-1);
 	while (path[i] && path[i] == ' ')
 		i++;
-	if (path[i] == '-' && !is_in_str(path, '-', '-'))
+	if (path[i] == '-' && is_in_str(path, '-') == 1)
 	{
 		change_exp_value(env, "OLDPWD", pwd);
 		change_exp_value(env, "PWD", oldpwd);
@@ -66,13 +66,9 @@ int	simple_change_directory(t_env *env, char *path)
 		return (-1);
 	if (!path)
 	{
+		chdir(home);
 		change_exp_value(env, "OLDPWD", pwd);
 		change_exp_value(env, "PWD", home);
-		if (chdir(home) == -1)
-		{
-			perror("MINISHELL ");
-			return (-1);
-		}
 		return (0);
 	}
 	if_free(home);

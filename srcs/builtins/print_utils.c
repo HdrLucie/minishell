@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-int	is_in_str(char *str, char c, char a)
+int	is_in_str(char *str, char c)
 {
 	int	i;
 
 	i = 0;
 	while (str && str[i])
 	{
-		if (str[i] != c && str[i + 1] != a)
+		if (str[i] != c)
 			return (0);
 		i++;
 	}
@@ -63,11 +63,9 @@ void	print_env_alpha(t_env *env)
 			write(1, "declare -x ", 11);
 			write(1, env->name, ft_strlen(env->name));
 		}
-		if (env->value)
+		if (env->value && env->is_valid)
 		{
-			if (env->name && env->name[last_char - 1] != '=')
-				printf("=");
-			printf("\"%s\"", env->value);
+			printf("=\"%s\"", env->value);
 		}
 		printf("\n");
 		env = env->next_alpha;
