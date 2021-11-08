@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 22:59:58 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/08 11:31:29 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_op(char *cmd, char *op)
 
 	if (cmd && cmd[0] && is_redir(cmd[0]))
 		i = 0;
-	else if (cmd  && cmd[1] && is_redir(cmd[1]))
+	else if (cmd && cmd[1] && is_redir(cmd[1]))
 		i = 1;
 	else
 		return (-1);
@@ -75,33 +75,6 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 		return (print_error("PARSE ERROR REDIR\n", -2, 2));
 	i++;
 	return (i);
-}
-
-int	fill_red(char **cmd, t_redir *red, char **exe)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (cmd && cmd[i])
-	{
-		if (cmd[i][0] && (is_redir(cmd[i][0])
-			|| (ft_isdigit(cmd[i][0]) && cmd[i][1] && is_redir(cmd[i][1]))))
-		{
-			i = parse_redir(cmd, i, red, j);
-			if (i < 0)
-				return (i);
-			j++;
-		}
-		else
-			exe[k++] = ft_strdup(cmd[i]);
-		i++;
-	}
-	exe[k] = NULL;
-	return (0);
 }
 
 int	redir(char **exe, t_mini *mini)

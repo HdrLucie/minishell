@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/08 10:56:10 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:37:40 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 /****************************/
 
 # define PAGE_SIZE 4096
+
 extern int	g_flag_fork;
 
 /****************************/
@@ -147,10 +148,12 @@ int		execute(char **cmd, t_mini *mini);
 **	redir.c 
 */
 int		redir(char **exe, t_mini *mini);
+int		fill_red(char **cmd, t_redir *red, char **exe);
 void	free_red(t_redir *red, int size);
 int		count_redir(char **cmd);
 void	print_redir(t_redir	*red, int count, char **cmd);
 char	**ft_realloc_strs(char **strs, size_t size);
+int		parse_redir(char **cmd, int i, t_redir *red, int j);
 /*
 **	exe_redir.c 
 */

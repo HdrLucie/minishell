@@ -6,12 +6,11 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 11:03:22 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:22:30 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-int	g_flag_fork;
 
 int	g_flag_fork;
 
