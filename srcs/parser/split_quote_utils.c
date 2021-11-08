@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_quote_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 22:28:08 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/08 11:22:52 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	check_car_spe(char *str, int i)
 {
 	while (str && str[i] && !(is_space(str[i]) || str[i] == '|'
-		|| (str[i + 1] == '|' && str[i] != '"')
-		|| is_redir(str[i]) || is_spe_char(str[i])))
+			|| (str[i + 1] == '|' && str[i] != '"')
+			|| is_redir(str[i]) || is_spe_char(str[i])))
 	{
 		if (str[i] == '"' || str[i] == '\'')
 		{

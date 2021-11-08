@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 11:04:31 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:34:20 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 		mini->pid[i] = pid;
 	if (pid == 0)
 	{
-		// signal(SIGQUIT, sig_quit_daughter);
 		if (cmd->next)
 			if (dup2(mini->pipefd[j + 1], 1) < 0)
 				return (-1);

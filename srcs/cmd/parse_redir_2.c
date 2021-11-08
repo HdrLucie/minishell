@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/06 18:13:44 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 11:31:34 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,33 @@ char	**ft_realloc_strs(char **strs, size_t size)
 	res[size - 1] = NULL;
 	free_strs(strs);
 	return (res);
+}
+
+int	fill_red(char **cmd, t_redir *red, char **exe)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	while (cmd && cmd[i])
+	{
+		if (cmd[i][0] && (is_redir(cmd[i][0])
+			|| (ft_isdigit(cmd[i][0]) && cmd[i][1] && is_redir(cmd[i][1]))))
+		{
+			i = parse_redir(cmd, i, red, j);
+			if (i < 0)
+				return (i);
+			j++;
+		}
+		else
+			exe[k++] = ft_strdup(cmd[i]);
+		i++;
+	}
+	exe[k] = NULL;
+	return (0);
 }
 
 void	print_redir(t_redir	*red, int count, char **cmd)
