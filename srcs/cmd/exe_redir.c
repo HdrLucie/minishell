@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/08 11:33:54 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:13:01 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	close_fd(t_redir *red, int count)
 	i = count - 1;
 	while (i >= 0)
 	{
-		if (red[i].save_fd == -1)
+		if (red && red[i].save_fd && red[i].save_fd == -1)
 			close(red[i].n);
-		else
+		else if (red && red[i].save_fd)
 		{
 			dup2(red[i].save_fd, red[i].n);
 			close(red[i].save_fd);

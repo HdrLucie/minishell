@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/29 14:43:12 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:53:36 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*init_file(t_redir *red)
 	if (file == NULL || str == NULL)
 		return (NULL);
 	file[0] = '\0';
+	str[0] = '\0';
 	while (ft_strcmp(str, red->path))
 	{
 		free(str);
@@ -75,6 +76,7 @@ int	exe_here_doc(t_redir *red, int count)
 
 	i = -1;
 	last = -1;
+	fd = 0;
 	while (++i < count)
 	{
 		if (red[i].op[0] == '<' && red[i].op[1] == '<')
