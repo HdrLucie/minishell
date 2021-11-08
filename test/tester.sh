@@ -214,4 +214,4 @@ exec_test 'cd .'
 exec_test 'l^Ds'
 exec_test 'cat < >'
 
-
+rm a b file log out out1 out2 test\\ test\ 1 sorti 
