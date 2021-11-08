@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 22:28:36 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/08 13:46:01 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	find_token(char *str, int i, char end)
 		i++;
 	if (str[i] != end && end != '\n')
 		return (print_error("UNCLOSED QUOTE\n", -1, 130));
-	if (!str[i + 1] || str[i + 1] != '|')
+	if (str[i] && (!str[i + 1] || str[i + 1] != '|'))
 		i++;
 	return (i);
 }

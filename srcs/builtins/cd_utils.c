@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/02 13:23:49 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 13:25:38 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_chdir_ret(char *path)
 {
 	if (chdir(path) == -1)
 	{
-		perror("MINISHELL : ");
+		perror("MINISHELL");
 		return (-1);
 	}
 	return (0);

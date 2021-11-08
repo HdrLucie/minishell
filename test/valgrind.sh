@@ -4,7 +4,7 @@ EXEC=./minishell # Put your executable's path here.
 LOG=valgrind
 
 # Compile and set executable rights
-make debug -C ../ > /dev/null
+make debug -C ../
 cp ../minishell .
 chmod 755 minishell
 
@@ -14,10 +14,13 @@ valgrind \
 	--leak-resolution=high \
 	--track-origins=yes \
 	--show-reachable=yes \
-	--suppressions=/mnt/nfs/homes/ehautefa/Desktop/minishell/test/minimal.supp \
+	--suppressions=/mnt/nfs/homes/ehautefa/Desktop/minishell/test/minimale.supp \
 	--log-file=${LOG}.log \
 	$EXEC $@ \
 ;
+
+# cat valgrind.log | ./suppressions.sh > minimale.supp
+#--gen-suppressions=all \
 
 # Separate the logs from multiple processes into multiple log files.
 grep '==[0-9]*==' <valgrind.log --only-matching | sort --unique | tr -d = |
