@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_redir.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/10/31 10:20:06 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/06 17:27:12 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ int	do_right_redir(t_redir *red)
 	{
 		str = malloc(PAGE_SIZE);
 		file_fd = open(red->path, O_RDWR | O_CREAT, 0666);
+		if (file_fd == -1)
+			return (print_error("OPEN FAILED\n", -1, 1));
 		while (read(file_fd, str, PAGE_SIZE) == PAGE_SIZE)
 			;
 		free(str);
 	}
-	dup2(file_fd, red->n);
-	close(file_fd);
+	if (dup2(file_fd, red->n) == -1 || close(file_fd) == -1)
+		return (print_error("DUP FAILED\n", -1, 1));
 	return (red->save_fd);
 }
 
@@ -39,8 +41,10 @@ int	do_left_redir(t_redir *red)
 
 	red->save_fd = dup(red->n);
 	file_fd = open(red->path, O_RDONLY);
-	dup2(file_fd, red->n);
-	close(file_fd);
+	if (file_fd == -1)
+		return (print_error("OPEN FAILED\n", -1, 1));
+	if (dup2(file_fd, red->n) == -1 || close(file_fd) == -1)
+		return (print_error("DUP FAILED\n", -1, 1));
 	return (0);
 }
 
@@ -79,6 +83,8 @@ int	exe_cmd(t_mini *mini)
 		}
 	}
 	mini->envp = env_execve(mini);
+	if (ret == 2)
+		return (0);
 	return (ret);
 }
 
@@ -91,9 +97,19 @@ int	exe_redir(t_redir *red, int count)
 	while (++i < count)
 	{
 		if (red[i].op[0] == '>')
-			do_right_redir(&red[i]);
+		{
+			if (do_right_redir(&red[i]) == -1)
+			{
+				close_fd(red, i);
+				return (-2);
+			}
+		}
 		else if (red[i].op[1] == '\0')
-			do_left_redir(&red[i]);
+			if (do_left_redir(&red[i]) == -1)
+			{
+				close_fd(red, i);
+				return (-2);
+			}
 	}
 	return (0);
 }
