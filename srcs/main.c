@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/04 09:17:56 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/07 19:43:33 by elisehautef      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,19 @@ char	*find_couleur(void)
 	static int	i = -1;
 
 	i++;
-	if (i > 6)
+	if (i > 5)
 		i = 0;
 	if (i == 0)
-		return ("\033[1m\033[37m");
-	if (i == 1)
 		return ("\033[1m\033[31m");
-	if (i == 2)
+	if (i == 1)
 		return ("\033[1m\033[33m");
-	if (i == 3)
+	if (i == 2)
 		return ("\033[1m\033[32m");
-	if (i == 4)
+	if (i == 3)
 		return ("\033[1m\033[34m");
-	if (i == 5)
+	if (i == 4)
 		return ("\033[1m\033[35m");
-	if (i == 6)
+	if (i == 5)
 		return ("\033[1m\033[37m");
 	return ("\033[1m\033[37m");
 }
