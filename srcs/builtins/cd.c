@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/02 13:26:48 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 14:05:25 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int	relative_change_directory(t_env *env, char *cmd)
 
 	pwd = NULL;
 	tmp_path = malloc(sizeof(char) * 1000);
-	if (check_chdir_ret(cmd) == -1)
-		return (1);
 	if (!tmp_path || search_value(env, &pwd, "PWD") != 0)
 	{
 		if_free(pwd);
 		if_free(tmp_path);
 		return (-1);
 	}
+	if (check_chdir_ret(cmd) == -1)
+		return (1);
 	else
 	{
 		tmp_path = getcwd(tmp_path, 1000);

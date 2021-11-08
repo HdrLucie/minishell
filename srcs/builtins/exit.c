@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/08 10:33:02 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 15:34:55 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,15 @@ void	ft_exit(t_mini *mini, int flag_exec)
 		write(2, "exit\n", 5);
 	if (mini->exe && mini->exe[1])
 		ret = ft_atoi(mini->exe[1]) % 256;
-	if (mini->exe && mini->exe[1] && check_string(mini->exe[1]) == 1)
+	if (mini->exe && mini->exe[1] && check_string(mini->exe[1]) == 1
+		&& flag_exec != 0)
 	{
 		flag_msg = 1;
 		ret = 2;
 		write(2, "MINISHELL: exit: numeric argument required\n", 43);
 	}
-	if (mini->exe && ft_strslen(mini->exe) > 2 && flag_msg == 0)
+	if (mini->exe && ft_strslen(mini->exe) > 2 && flag_exec != 0
+		&& flag_msg == 0)
 	{
 		write(2, "MINISHELL : exit: too many arguments\n", 37);
 		ret = 1;

@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 14:25:52 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/03 17:57:17 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 14:24:46 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	fill_env_lst_value(char *str, t_env *env, int i)
 	int	k;
 	int	j;
 
-	j = 1;
+	j = 0;
 	k = i;
 	while (str[++i])
 		j++;

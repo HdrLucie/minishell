@@ -49,7 +49,6 @@ char	*quote_pipe(char *str)
 				return (NULL);
 			str = ft_strcpy(str, tmp);
 			str = copy_pipe(tmp, str, i);
-			printf("str : %s\n", str);
 			free(tmp);
 			i += 2;
 		}

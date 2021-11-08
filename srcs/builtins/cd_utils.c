@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/02 13:23:49 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 15:12:26 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	search_value(t_env *env, char **value, char *to_find)
 			size = ft_strlen(env->value);
 		env = env->next;
 	}
+	if (*value)
+		free(*value);
 	*value = malloc(sizeof(char) * size + 1);
 	if (!value)
 		return (-1);
