@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/08 11:37:40 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 12:19:26 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	**print_char_error(char *msg, int retur, int error);
 
 void	sig_int(int num);
 void	sig_quit_daughter(int num);
-void	sig_child(int num);
+void	signal_ret(int status, t_mini *mini);
 
 /****************************/
 /*			PARSER			*/

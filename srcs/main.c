@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 11:22:30 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 12:03:59 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	launch_minishell(t_mini *mini)
 	int		ret;
 
 	signal(SIGINT, sig_int);
-	signal(SIGQUIT, sig_quit_daughter);
+	signal(SIGQUIT, SIG_IGN);
 	prompt = init_prompt();
 	if (prompt == NULL)
 		return (-1);

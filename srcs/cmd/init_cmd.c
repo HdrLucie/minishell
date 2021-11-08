@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 11:30:11 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/08 12:20:03 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int	execute(char **cmd, t_mini *mini)
 		return (print_error("FORK ERROR\n", -1, errno));
 	if (pid == 0)
 	{
+		signal(SIGQUIT, sig_quit_daughter);
 		execve(cmd[0], cmd, mini->envp);
 		perror("EXECVE");
 		ft_exit(mini, 0);
 		exit(127);
 	}
 	waitpid(pid, &status, 0);
+	signal_ret(status, mini);
 	g_flag_fork = 0;
-	if (WIFEXITED(status))
-		mini->old_ret = WEXITSTATUS(status);
 	errno = mini->old_ret;
 	return (0);
 }
@@ -54,8 +54,7 @@ void	wait_child(t_mini *mini)
 	}
 	free(mini->pid);
 	g_flag_fork = 0;
-	if (WIFEXITED(status))
-		mini->old_ret = WEXITSTATUS(status);
+	signal_ret(status, mini);
 }
 
 int	init_pipe(t_mini *mini)
