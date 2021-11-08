@@ -18,6 +18,10 @@ int	recover_cmd_part_2(t_mini *mini)
 		ft_exit(mini, 1);
 	else if (!ft_strcmp(mini->exe[0], "echo"))
 		mini->old_ret = echo(mini->exe);
+	else if (!ft_strcmp(mini->exe[0], "pwd"))
+		mini->old_ret = print_pwd();
+	else if (!ft_strncmp(mini->exe[0], "export", ft_strlen("export")))
+		mini->old_ret = export_var(*mini->env, mini->exe);
 	else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))
 		mini->old_ret = change_directory(*mini->env, mini->exe[0],
 				mini->exe[1]);
@@ -37,10 +41,6 @@ int	recover_cmd(t_mini	*mini)
 	{
 		if (!ft_strcmp(mini->exe[0], "env"))
 			print_env(*mini->env);
-		else if (!ft_strcmp(mini->exe[0], "pwd"))
-			mini->old_ret = print_pwd();
-		else if (!ft_strncmp(mini->exe[0], "export", ft_strlen("export")))
-			mini->old_ret = export_var(*mini->env, mini->exe);
 		else if (!ft_strncmp(mini->exe[0], "unset", ft_strlen("unset")))
 		{
 			while (mini->exe[++i])

@@ -117,7 +117,7 @@ int	export_var(t_env *env, char **var_export)
 		ret = check_export_value(var_export[i]);
 		if (ret == 1 && flag_msg == 0)
 		{
-			printf("MINISHELL : export: '%s': not a valid identifier\n", var_export[i]);
+			printf("MINISHELL : export : not a valid identifier\n");
 			flag_msg = 1;
 		}
 		if (ret == 0 && export(env, var_export[i], ret) == -1)
