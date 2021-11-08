@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/03 17:10:46 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/08 10:56:10 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	**print_char_error(char *msg, int retur, int error);
 /****************************/
 
 void	sig_int(int num);
-void	sig_quit(int num);
+void	sig_quit_daughter(int num);
 void	sig_child(int num);
 
 /****************************/
