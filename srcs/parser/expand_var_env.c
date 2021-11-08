@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 22:53:30 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/08 09:06:08 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*quote_pipe(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '|' || is_redir(str[i]))
+		if (str[i] == '|' || is_redir(str[i]) || str[i] == '$' || str[i] == '#')
 		{
 			tmp = ft_strdup(str);
 			str = ft_realloc(str, ft_strlen(str) + 2);
