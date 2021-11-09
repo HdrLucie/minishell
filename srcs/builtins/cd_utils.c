@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/08 15:49:30 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/09 21:56:36 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,23 @@ int	search_value(t_env *env, char **value, char *to_find)
 {
 	int		i;
 	t_env	*tmp;
-	int		size;
+	size_t	size;
 
 	i = 0;
+	size = 0;
 	tmp = env;
 	while (env)
 	{
 		if (!ft_strcmp(to_find, env->name))
+		{
+			if (env->value == '\0')
+				return (-1);
 			size = ft_strlen(env->value);
+		}
 		env = env->next;
 	}
-	if (*value)
-		free(*value);
+	if (size == 0)
+		return (0);
 	*value = malloc(sizeof(char) * size + 1);
 	if (!value)
 		return (-1);

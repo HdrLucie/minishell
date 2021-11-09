@@ -6,11 +6,20 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 14:31:07 by hlucie            #+#    #+#             */
-/*   Updated: 2021/10/29 11:59:18 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/09 20:53:59 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_alpha_unset(char c)
+{
+	if (c == '_' || (c >= 'A' && c <= 'Z'))
+		return (1);
+	if (c == '_' || (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
+}
 
 int	check_unset_var(char *var_to_unset)
 {
@@ -18,7 +27,7 @@ int	check_unset_var(char *var_to_unset)
 
 	i = 0;
 	if ((var_to_unset[i] == '=' && var_to_unset[i + 1] == '\0')
-		|| var_to_unset[i] == '\0' || ft_isdigit(var_to_unset[i]) == 1)
+		|| var_to_unset[i] == '\0' || is_alpha_unset(var_to_unset[i]) == 0)
 	{
 		printf("MINISHELL: unset: `%s': not a valid identifier\n", var_to_unset);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/08 14:05:25 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/09 22:25:45 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,22 @@ int	next_simple_cd(t_env *env, char *path, char *pwd)
 		i++;
 	if (path[i] == '-' && is_in_str(path, '-') == 1)
 	{
-		change_exp_value(env, "OLDPWD", pwd);
-		change_exp_value(env, "PWD", oldpwd);
+		if (is_in_env(env, "OLDPWD") == 0)
+		{
+			write(2, "MINISHELL : cd: OLDPWD not set\n", 31);
+			return (-2);
+		}
 		if (check_chdir_ret(oldpwd) == -1)
 		{
 			if_free(oldpwd);
 			return (-1);
 		}
-		printf("%s\n", oldpwd);
+		if (pwd)	
+			change_exp_value(env, "OLDPWD", pwd);
+		else
+			unset_var(&env, "OLDPWD");
+		if (oldpwd)
+			change_exp_value(env, "PWD", oldpwd);
 		return (0);
 	}
 	if_free(oldpwd);
@@ -58,8 +66,10 @@ int	simple_change_directory(t_env *env, char *path)
 	char	*home;
 	char	*pwd;
 	int		i;
+	int		ret;
 
 	i = 0;
+	ret = 0;
 	home = NULL;
 	pwd = NULL;
 	if (init_path(env, &home, &pwd) == -1)
@@ -67,13 +77,22 @@ int	simple_change_directory(t_env *env, char *path)
 	if (!path)
 	{
 		chdir(home);
-		change_exp_value(env, "OLDPWD", pwd);
+		if (pwd)
+			change_exp_value(env, "OLDPWD", pwd);
 		change_exp_value(env, "PWD", home);
 		return (0);
 	}
 	if_free(home);
-	if (next_simple_cd(env, path, pwd) == 0)
+	ret = next_simple_cd(env, path, pwd);
+	if (ret == -2)
+	{
+		if_free(pwd);
+		return (-2);
+	}
+	if (ret == 0)
 		return (0);
+	else if (ret == -1)
+		return (-1);
 	if_free(pwd);
 	return (1);
 }
@@ -101,7 +120,8 @@ int	relative_change_directory(t_env *env, char *cmd)
 			printf("MINISHELL : cd: %s: No such file or directory\n", cmd);
 			return (1);
 		}
-		change_exp_value(env, "OLDPWD", pwd);
+		if (pwd)
+			change_exp_value(env, "OLDPWD", pwd);
 		change_exp_value(env, "PWD", tmp_path);
 	}
 	return (0);
@@ -120,6 +140,8 @@ int	change_directory(t_env *env, char *start, char *cmd)
 		i++;
 	if (!cmd || cmd[i])
 		ret = simple_change_directory(env, cmd);
+	if (ret == -2)
+		return (1);
 	if (ret == -1 || ret == 0)
 	{
 		if (ret == -1)

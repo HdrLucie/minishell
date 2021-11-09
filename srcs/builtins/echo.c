@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:21:45 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/02 14:27:35 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/09 21:10:58 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ int	only_char(char *str, char c)
 	while (str[i])
 	{
 		if (str[i] != c)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_only_n(char **to_print)
+{
+	int	i;
+
+	i = 1;
+	if (to_print[i] == NULL)
+	{
+		write(1, "\n", 1);
+		return (1);
+	}
+	while (to_print[i])
+	{
+		if (only_char(to_print[i], 'n') == 0)
 			return (0);
 		i++;
 	}
@@ -64,6 +83,8 @@ int	echo(char **to_print)
 	i = 1;
 	new_line = 0;
 	ret = is_in_str_echo(to_print);
+	if (check_only_n(to_print) == 1)
+		return (0);
 	if (ret > 0)
 	{
 		new_line = 1;

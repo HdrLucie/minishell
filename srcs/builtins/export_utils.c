@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:50:37 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/02 12:39:21 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/09 22:06:37 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	change_exp_value(t_env *env, char *name_exp, char *value_exp)
 			return (0);
 		}
 	}
+	if_free(value_exp);
 	return (1);
 }
 
