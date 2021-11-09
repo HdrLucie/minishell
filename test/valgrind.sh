@@ -14,7 +14,8 @@ valgrind \
 	--leak-resolution=high \
 	--track-origins=yes \
 	--show-reachable=yes \
-	--suppressions=/mnt/nfs/homes/hlucie/Documents/minishell/test/minimal.supp \
+	--track-fds=yes		\
+	--suppressions=$PWD/minimal.supp \
 	--log-file=${LOG}.log \
 	$EXEC $@ \
 ;

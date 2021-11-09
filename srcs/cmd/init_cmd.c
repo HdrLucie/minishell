@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:00:10 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 12:20:03 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:13:13 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	execute(char **cmd, t_mini *mini)
 	if (pid == 0)
 	{
 		signal(SIGQUIT, sig_quit_daughter);
+		errno = 0;
 		execve(cmd[0], cmd, mini->envp);
 		perror("EXECVE");
 		ft_exit(mini, 0);
