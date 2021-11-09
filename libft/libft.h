@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:36:59 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/09 12:08:54 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:26:49 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void			ft_putchar(char c);
 void			ft_memdel(void **ap);
 char			*ft_strjoin_size(char const *s1, char const *s2, int size_s2);
 char			*ft_strtrim_path(char const *s1, char const *set);
-char			**ft_split_str(char *str, char *charset);
 float			ft_abs(float nb);
 int				ft_strslen(char **strs);
 #endif

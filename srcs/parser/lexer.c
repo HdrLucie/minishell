@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 21:02:18 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/09 16:22:38 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int	lexer(char *str, t_mini *mini)
 	token = ft_split_dollar(str);
 	if (token == NULL)
 		return (-1);
+	if (g_flag_fork == 3)
+		mini->old_ret = 130;
+	g_flag_fork = 0;
 	token = expand_var_env(token, mini->env, mini->old_ret);
 	if (token == NULL)
 		return (-1);
