@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:10:11 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:56:43 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*init_file(t_redir *red)
 	while (ft_strcmp(str, red->path))
 	{
 		free(str);
-		str = readline("\033[1m\033[38m> \033[0m");
+		str = readline("\033[1m\033[31m> \033[0m");
 		if (!str)
 			return (NULL);
 		if (ft_strcmp(str, red->path))

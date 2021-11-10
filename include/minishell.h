@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/10 16:14:18 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:53:30 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,5 +233,6 @@ void	close_pipe(int *fd);
 void	close_all_pipe(t_mini *mini);
 char	*redir_pipe(char **exe, t_mini *mini, int *last);
 int		exe_redir_pipe(t_mini *mini, char *file, int last);
+char	*copy_pipe(char *src, char *dest, int begin);
 
 #endif
