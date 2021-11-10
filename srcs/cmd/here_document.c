@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 15:59:48 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:10:11 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*init_file(t_redir *red)
 				file = ft_strjoin(file, "\n");
 			file = ft_strjoin(file, str);
 		}
-		signal(SIGINT, sig_int);
 	}
 	free(str);
 	return (file);
