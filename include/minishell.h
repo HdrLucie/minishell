@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/09 16:06:01 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:55:16 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,14 +158,16 @@ int		parse_redir(char **cmd, int i, t_redir *red, int j);
 /*
 **	exe_redir.c 
 */
-int		exe_redir(t_redir *redir, int count);
+int		exe_redir(t_redir *redir, int count, int pipe_flag);
 int		close_fd(t_redir *red, int count);
 int		exe_cmd(t_mini *mini);
+int		quit_red(t_mini *mini, int ret, char *file);
 /*
 **	here_document.c 
 */
-int		do_here_doc(t_redir *red);
+int		do_here_doc(t_redir *red, char *file, int last);
 int		exe_here_doc(t_redir *red, int count);
+char	*find_file_here_doc(t_redir *red, int count, int *last);
 
 /****************************/
 /*			BUILTINS		*/
@@ -226,4 +228,7 @@ int		init_pipe(t_mini *mini);
 int		init_save_fd(t_mini *mini);
 void	close_pipe(int *fd);
 void	close_all_pipe(t_mini *mini);
+char	*redir_pipe(char **exe, t_mini *mini, int *last);
+int		exe_redir_pipe(t_mini *mini, char *file, int last);
+
 #endif

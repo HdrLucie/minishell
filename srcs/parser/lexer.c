@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 18:29:30 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/09 16:22:38 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:35:38 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	parser(char **token, t_mini *mini)
 		mini->cmd = parse_end(mini->cmd, token, &begin, i);
 	free_strs(token);
 	i = ft_execute_cmd(mini);
+	ft_cmd_clear(mini->cmd);
 	if (mini->cmd == NULL || i < 0)
 		return (i);
-	ft_cmd_clear(mini->cmd);
 	return (0);
 }
 

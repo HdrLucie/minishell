@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 15:27:58 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:56:07 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,18 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 	return (i);
 }
 
+int	quit_red(t_mini *mini, int ret, char *file)
+{
+	if (file)
+	{
+		free(file);
+		file = NULL;
+	}
+	free_strs(mini->exe);
+	free_red(mini->red, mini->nb_red);
+	return (ret);
+}
+
 int	redir(char **exe, t_mini *mini)
 {
 	int	ret;
@@ -94,14 +106,11 @@ int	redir(char **exe, t_mini *mini)
 	if (ret < 0)
 	{
 		mini->old_ret = ret;
-		return (ret);
+		return (quit_red(mini, ret, NULL));
 	}
-	ret = exe_redir(mini->red, mini->nb_red);
+	ret = exe_redir(mini->red, mini->nb_red, 0);
 	if (ret < 0)
-		return (ret);
+		return (quit_red(mini, ret, NULL));
 	ret = exe_cmd(mini);
-	close_fd(mini->red, mini->nb_red);
-	free_strs(mini->exe);
-	free_red(mini->red, mini->nb_red);
-	return (ret);
+	return (quit_red(mini, ret, NULL));
 }

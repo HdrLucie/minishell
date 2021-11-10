@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:16:58 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/08 16:13:01 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:52:22 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	close_fd(t_redir *red, int count)
 		{
 			dup2(red[i].save_fd, red[i].n);
 			close(red[i].save_fd);
+			red[i].save_fd = -1;
 		}
 		i--;
 	}
@@ -88,11 +89,12 @@ int	exe_cmd(t_mini *mini)
 	return (ret);
 }
 
-int	exe_redir(t_redir *red, int count)
+int	exe_redir(t_redir *red, int count, int pipe_flag)
 {
-	int	i;
+	int		i;
 
-	exe_here_doc(red, count);
+	if (pipe_flag == 0 && exe_here_doc(red, count) == -1)
+		return (-1);
 	i = -1;
 	while (++i < count)
 	{

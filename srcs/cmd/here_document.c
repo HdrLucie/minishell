@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/09 12:08:02 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 13:57:31 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*init_file(t_redir *red)
 	while (ft_strcmp(str, red->path))
 	{
 		free(str);
-		str = readline("> ");
+		str = readline("\033[1m\033[38m> \033[0m");
 		if (!str)
 			return (NULL);
 		if (ft_strcmp(str, red->path))
@@ -41,53 +41,59 @@ char	*init_file(t_redir *red)
 	return (file);
 }
 
-int	do_here_doc(t_redir *red)
+int	do_here_doc(t_redir *red, char *file, int last)
 {
 	int		fd[2];
-	char	*file;
 
 	pipe(fd);
-	file = init_file(red);
-	if (file == NULL)
-		return (-1);
 	write(fd[1], file, ft_strlen(file));
 	close(fd[1]);
 	free(file);
-	return (fd[0]);
+	red[last].save_fd = dup(red[last].n);
+	if (dup2(fd[0], red[last].n) == -1)
+		return (print_error(strerror(errno), -1, errno));
+	close(fd[0]);
+	return (0);
 }
 
-int	change_fd(t_redir *red, int last, int fd)
+char	*find_file_here_doc(t_redir *red, int count, int *last)
 {
-	if (last != -1)
+	int		i;
+	char	*file;
+
+	i = -1;
+	file = NULL;
+	while (++i < count)
 	{
-		red[last].save_fd = dup(red[last].n);
-		if (dup2(fd, red[last].n) == -1)
-			return (print_error(strerror(errno), -1, errno));
-		close(fd);
+		if (red[i].op[0] && red[i].op[1] &&
+			red[i].op[0] == '<' && red[i].op[1] == '<')
+		{
+			if (file)
+				free(file);
+			file = init_file(&red[i]);
+			if (file == NULL)
+			{
+				errno = -1;
+				return (NULL);
+			}
+			*last = i;
+		}
 	}
-	return (0);
+	return (file);
 }
 
 int	exe_here_doc(t_redir *red, int count)
 {
-	int	i;
-	int	last;
-	int	fd;
+	char	*file;
+	int		last;
 
-	i = -1;
-	last = -1;
-	fd = 0;
-	while (++i < count)
+	file = find_file_here_doc(red, count, &last);
+	if (file == NULL && errno == -1)
+		return (-1);
+	if (file)
 	{
-		if (red[i].op[0] == '<' && red[i].op[1] == '<')
-		{
-			if (fd)
-				close(fd);
-			fd = do_here_doc(&red[i]);
-			if (fd == -1)
-				return (-1);
-			last = i;
-		}
+		if (do_here_doc(red, file, last) == -1)
+			return (-1);
 	}
-	return (change_fd(red, last, fd) == -1);
+	return (0);
 }

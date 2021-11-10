@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/09 16:05:33 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:56:11 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 {
 	int	pid;
 	int	j;
+	int	last;
+	char	*file;
 
 	j = 2 * i;
 	g_flag_fork = 1;
+	file = redir_pipe(cmd->cmd, mini, &last);
+	if (file == NULL && errno == -1)
+		return (-1);
 	pid = fork();
 	if (pid != 0)
 		mini->pid[i] = pid;
@@ -59,11 +64,11 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 			if (dup2(mini->pipefd[j - 2], 0) < 0)
 				return (-1);
 		close_all_pipe(mini);
-		if (redir(cmd->cmd, mini) == -1)
+		if (exe_redir_pipe(mini, file, last) == -1)
 			exit (1);
 		free_all(mini);
 	}
 	else if (pid == -1)
 		return (print_error(strerror(errno), -1, errno));
-	return (0);
+	return (quit_red(mini, 0, file));
 }
