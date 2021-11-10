@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elise <elise@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 09:36:59 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/21 13:29:34 by elise            ###   ########.fr       */
+/*   Updated: 2021/11/09 16:26:49 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+
+# define PAGE_SIZE 4096
 
 void			*ft_memset(void *b, int c, size_t len);
 void			*ft_realloc(void *ptr, size_t size);
@@ -80,9 +82,7 @@ void			ft_putendl(char const *s);
 void			ft_putchar(char c);
 void			ft_memdel(void **ap);
 char			*ft_strjoin_size(char const *s1, char const *s2, int size_s2);
-int				get_next_line(const int fd, char **line);
 char			*ft_strtrim_path(char const *s1, char const *set);
-char			**ft_split_str(char *str, char *charset);
 float			ft_abs(float nb);
 int				ft_strslen(char **strs);
 #endif

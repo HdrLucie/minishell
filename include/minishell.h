@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/08 14:28:38 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:06:01 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 /*			DEFINE			*/
 /****************************/
 
-# define PAGE_SIZE 4096
+// # define PAGE_SIZE 4096
 
 extern int	g_flag_fork;
 
