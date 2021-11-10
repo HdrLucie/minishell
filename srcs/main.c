@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/09 15:54:17 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:28:14 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int	launch_minishell(t_mini *mini)
 	ret = lexer(str, mini);
 	if (ret == -1 || errno == -1)
 		return (-1);
-	mini->old_ret = errno;
+	if (mini->old_ret == 0)
+		mini->old_ret = errno;
 	free(str);
 	return (0);
 }
