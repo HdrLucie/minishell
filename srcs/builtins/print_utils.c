@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 03:16:39 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/02 12:13:46 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 14:40:43 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ int	is_in_str(char *str, char c)
 	return (1);
 }
 
-void	print_env(t_env *env)
+int	print_env(t_env *env)
 {
 	int	last_char;
 
 	last_char = 0;
+	if (is_in_env(env, "PATH") == 0)
+		return (127);
 	while (env)
 	{
 		last_char = ft_strlen(env->name);
@@ -48,6 +50,7 @@ void	print_env(t_env *env)
 		}
 		env = env->next;
 	}
+	return (0);
 }
 
 void	print_env_alpha(t_env *env)

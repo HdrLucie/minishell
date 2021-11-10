@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_cmd.c                                      :+:      :+:    :+:   */
+/*   exit                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/10 16:04:48 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 14:16:52 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ int	recover_cmd(t_mini	*mini)
 	if (mini->exe && mini->exe[0])
 	{
 		if (!ft_strcmp(mini->exe[0], "env"))
+		{
 			mini->old_ret = print_env(*mini->env);
+			printf("RET : %d\n", mini->old_ret);
+		}
 		else if (!ft_strncmp(mini->exe[0], "unset", ft_strlen("unset")))
 		{
 			while (mini->exe[++i])

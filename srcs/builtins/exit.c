@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:49:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/08 15:34:55 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 16:06:30 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ int	check_string(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (1);
 	while (str && str[i])
 	{
-		if (str[i] == '-')
-			i++;
 		if (ft_isdigit(str[i]) == 0)
 			return (1);
 		i++;

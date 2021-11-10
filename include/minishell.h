@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/10 12:34:16 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 14:14:55 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ int		is_oldpwd(t_env *env, char *oldpwd);
 /*			PRINT			*/
 /****************************/
 
-void	print_env(t_env *env);
+int		print_env(t_env *env);
 void	print_env_alpha(t_env *env);
 
 /****************************/
