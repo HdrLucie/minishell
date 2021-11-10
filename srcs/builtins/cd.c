@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/10 12:41:32 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 16:33:29 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,13 @@ int	relative_change_directory(t_env *env, char *cmd)
 		if_free(tmp_path);
 		return (-1);
 	}
-	if (check_chdir_ret(cmd) == -1)
+	if (check_path(pwd, tmp_path, cmd) != 0)
 		return (1);
 	else
 	{
 		tmp_path = getcwd(tmp_path, 1000);
 		if (!tmp_path)
 		{
-			if_free(tmp_path);
 			printf("MINISHELL : cd: %s: No such file or directory\n", cmd);
 			return (1);
 		}

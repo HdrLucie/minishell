@@ -6,11 +6,22 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 20:37:24 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/10 12:33:15 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 16:33:05 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	check_path(char *pwd, char *tmp_path, char *cmd)
+{
+	if (check_chdir_ret(cmd) == -1)
+	{
+		if_free(pwd);
+		if_free(tmp_path);
+		return (1);
+	}
+	return (0);
+}
 
 int	is_oldpwd(t_env *env, char *oldpwd)
 {

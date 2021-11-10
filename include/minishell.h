@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/10 16:14:18 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:33:17 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ int		check_string(char *str);
 int		ret_simple_cd(int ret, char *pwd);
 void	change_path(t_env *env, char *f_path, char *sec_path, char c);
 int		is_oldpwd(t_env *env, char *oldpwd);
+int		check_path(char *pwd, char *tmp_path, char *cmd);
 
 /****************************/
 /*			PRINT			*/
