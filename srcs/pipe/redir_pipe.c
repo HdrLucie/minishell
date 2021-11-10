@@ -6,16 +6,28 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:43:05 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 15:52:36 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:01:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	quit_red(t_mini *mini, int ret, char *file)
+{
+	if (file)
+	{
+		free(file);
+		file = NULL;
+	}
+	free_strs(mini->exe);
+	free_red(mini->red, mini->nb_red);
+	return (ret);
+}
+
 int	exe_redir_pipe(t_mini *mini, char *file, int last)
 {
 	int	ret;
-	
+
 	if (file && do_here_doc(mini->red, file, last) == -1)
 		return (-1);
 	ret = exe_redir(mini->red, mini->nb_red, 1);

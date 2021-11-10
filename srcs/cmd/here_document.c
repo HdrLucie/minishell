@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:23:06 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 13:57:31 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:59:48 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ char	*find_file_here_doc(t_redir *red, int count, int *last)
 	file = NULL;
 	while (++i < count)
 	{
-		if (red[i].op[0] && red[i].op[1] &&
-			red[i].op[0] == '<' && red[i].op[1] == '<')
+		if (red[i].op[0] && red[i].op[1]
+			&& red[i].op[0] == '<' && red[i].op[1] == '<')
 		{
 			if (file)
 				free(file);

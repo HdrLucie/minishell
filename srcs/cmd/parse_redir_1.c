@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 15:56:07 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:59:58 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,6 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 		return (print_error("PARSE ERROR REDIR\n", -2, 2));
 	i++;
 	return (i);
-}
-
-int	quit_red(t_mini *mini, int ret, char *file)
-{
-	if (file)
-	{
-		free(file);
-		file = NULL;
-	}
-	free_strs(mini->exe);
-	free_red(mini->red, mini->nb_red);
-	return (ret);
 }
 
 int	redir(char **exe, t_mini *mini)
