@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 19:32:54 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/09 22:25:45 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 12:41:32 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	next_simple_cd(t_env *env, char *path, char *pwd)
 {
 	int		i;
 	char	*oldpwd;
+	int		ret;
 
 	i = 0;
+	ret = 0;
 	oldpwd = NULL;
 	if (search_value(env, &oldpwd, "OLDPWD") != 0)
 		return (-1);
@@ -25,22 +27,10 @@ int	next_simple_cd(t_env *env, char *path, char *pwd)
 		i++;
 	if (path[i] == '-' && is_in_str(path, '-') == 1)
 	{
-		if (is_in_env(env, "OLDPWD") == 0)
-		{
-			write(2, "MINISHELL : cd: OLDPWD not set\n", 31);
-			return (-2);
-		}
-		if (check_chdir_ret(oldpwd) == -1)
-		{
-			if_free(oldpwd);
-			return (-1);
-		}
-		if (pwd)	
-			change_exp_value(env, "OLDPWD", pwd);
-		else
-			unset_var(&env, "OLDPWD");
-		if (oldpwd)
-			change_exp_value(env, "PWD", oldpwd);
+		ret = is_oldpwd(env, oldpwd);
+		if (ret != 0)
+			return (ret);
+		change_path(env, pwd, oldpwd, '-');
 		return (0);
 	}
 	if_free(oldpwd);
@@ -84,17 +74,7 @@ int	simple_change_directory(t_env *env, char *path)
 	}
 	if_free(home);
 	ret = next_simple_cd(env, path, pwd);
-	if (ret == -2)
-	{
-		if_free(pwd);
-		return (-2);
-	}
-	if (ret == 0)
-		return (0);
-	else if (ret == -1)
-		return (-1);
-	if_free(pwd);
-	return (1);
+	return (ret_simple_cd(ret, pwd));
 }
 
 int	relative_change_directory(t_env *env, char *cmd)
@@ -117,12 +97,11 @@ int	relative_change_directory(t_env *env, char *cmd)
 		tmp_path = getcwd(tmp_path, 1000);
 		if (!tmp_path)
 		{
+			if_free(tmp_path);
 			printf("MINISHELL : cd: %s: No such file or directory\n", cmd);
 			return (1);
 		}
-		if (pwd)
-			change_exp_value(env, "OLDPWD", pwd);
-		change_exp_value(env, "PWD", tmp_path);
+		change_path(env, pwd, tmp_path, 'r');
 	}
 	return (0);
 }

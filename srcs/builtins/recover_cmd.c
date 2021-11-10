@@ -6,7 +6,7 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:58:20 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/09 22:27:25 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 12:42:19 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int	recover_cmd_part_2(t_mini *mini)
 	else if (!ft_strncmp(mini->exe[0], "export", ft_strlen("export")))
 		mini->old_ret = export_var(*mini->env, mini->exe);
 	else if (!ft_strncmp(mini->exe[0], "cd", ft_strlen("cd")))
+	{
 		mini->old_ret = change_directory(*mini->env, mini->exe[0],
 				mini->exe[1]);
+		printf("RET : %d\n", mini->old_ret);
+	}
 	else
 		return (2);
 	return (1);

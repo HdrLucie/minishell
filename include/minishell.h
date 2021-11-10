@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/09 16:06:01 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 12:34:16 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,9 @@ int		is_in_str(char *str, char c);
 t_env	*create_ign_env(t_env *env);
 int		set_valid_flag(char *cmd);
 int		check_string(char *str);
+int		ret_simple_cd(int ret, char *pwd);
+void	change_path(t_env *env, char *f_path, char *sec_path, char c);
+int		is_oldpwd(t_env *env, char *oldpwd);
 
 /****************************/
 /*			PRINT			*/

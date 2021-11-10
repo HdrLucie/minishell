@@ -14,10 +14,6 @@ valgrind \
 	--leak-resolution=high \
 	--track-origins=yes \
 	--show-reachable=yes \
-<<<<<<< HEAD
-=======
-	--track-fds=yes		\
->>>>>>> main
 	--suppressions=$PWD/minimal.supp \
 	--log-file=${LOG}.log \
 	$EXEC $@ \

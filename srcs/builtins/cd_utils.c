@@ -6,20 +6,34 @@
 /*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/09 21:56:36 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 12:29:33 by hlucie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_chdir_ret(char *path)
+void	change_path(t_env *env, char *f_path, char *sec_path, char c)
 {
-	if (chdir(path) == -1)
+	if (c == '-')
 	{
-		perror("MINISHELL");
-		return (-1);
+		if (f_path)
+			change_exp_value(env, "OLDPWD", f_path);
+		else
+			unset_var(&env, "OLDPWD");
+		if (sec_path)
+		{
+			write(1, sec_path, ft_strlen(sec_path));
+			write(1, "\n", 1);
+			change_exp_value(env, "PWD", sec_path);
+		}
 	}
-	return (0);
+	else
+	{
+		if (f_path)
+			change_exp_value(env, "OLDPWD", f_path);
+		if (sec_path)
+			change_exp_value(env, "PWD", sec_path);
+	}
 }
 
 int	check_cd(t_env *env, char *start)
