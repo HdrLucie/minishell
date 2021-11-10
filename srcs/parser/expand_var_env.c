@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:05:51 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 16:53:54 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*copy_pipe(char *src, char *dest, int begin)
-{
-	int		i;
-	int		j;
-	char	c;
-
-	c = src[begin];
-	i = begin + 1;
-	j = begin;
-	dest[j] = '"';
-	dest[++j] = c;
-	dest[++j] = '"';
-	while (src && dest && src[i])
-	{
-		dest[++j] = src[i];
-		i++;
-	}
-	dest[++j] = '\0';
-	return (dest);
-}
 
 char	*quote_pipe(char *str)
 {
@@ -92,6 +71,17 @@ char	**find_value(t_env *env, char **token, int i)
 	return (token);
 }
 
+int	expand_retur(char **token, int old_ret, int i)
+{
+	char	*num;
+
+	num = ft_itoa(old_ret);
+	if (expand(token, i, num) == -1)
+		return (-1);
+	free(num);
+	return (0);
+}
+
 char	**expand_var_env(char **token, t_env **env_lst, int old_ret)
 {
 	int		i;
@@ -107,7 +97,7 @@ char	**expand_var_env(char **token, t_env **env_lst, int old_ret)
 			if (token == NULL)
 				return (NULL);
 			if (token[i][0] == '$' && token[i][1] == '?'
-				&& expand(token, i, ft_itoa(old_ret)) == -1)
+				&& expand_retur(token, old_ret, i))
 				return (NULL);
 			else if (token[i][0] == '$')
 			{

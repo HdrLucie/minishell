@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/10 16:33:17 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 16:59:56 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,5 +234,6 @@ void	close_pipe(int *fd);
 void	close_all_pipe(t_mini *mini);
 char	*redir_pipe(char **exe, t_mini *mini, int *last);
 int		exe_redir_pipe(t_mini *mini, char *file, int last);
+char	*copy_pipe(char *src, char *dest, int begin);
 
 #endif

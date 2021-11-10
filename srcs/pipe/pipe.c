@@ -6,11 +6,32 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:03:40 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:53:13 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*copy_pipe(char *src, char *dest, int begin)
+{
+	int		i;
+	int		j;
+	char	c;
+
+	c = src[begin];
+	i = begin + 1;
+	j = begin;
+	dest[j] = '"';
+	dest[++j] = c;
+	dest[++j] = '"';
+	while (src && dest && src[i])
+	{
+		dest[++j] = src[i];
+		i++;
+	}
+	dest[++j] = '\0';
+	return (dest);
+}
 
 void	close_all_pipe(t_mini *mini)
 {
