@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:01:37 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/10 16:14:55 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,11 @@ int	redir(char **exe, t_mini *mini)
 	if (ret < 0)
 	{
 		mini->old_ret = ret;
-		return (ret);
+		return (quit_red(mini, ret, NULL));
 	}
-	ret = exe_redir(mini->red, mini->nb_red);
+	ret = exe_redir(mini->red, mini->nb_red, 0);
 	if (ret < 0)
-		return (ret);
+		return (quit_red(mini, ret, NULL));
 	ret = exe_cmd(mini);
-	close_fd(mini->red, mini->nb_red);
-	free_strs(mini->exe);
-	free_red(mini->red, mini->nb_red);
-	return (ret);
+	return (quit_red(mini, ret, NULL));
 }
