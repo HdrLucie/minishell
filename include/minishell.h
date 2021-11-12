@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/12 14:04:16 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:58:01 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_mini
 
 void	free_strs(char **strs);
 int		print_error(char *msg, int retur, int error);
-char	**print_char_error(char *msg, int retur, int error);
+char	**print_char_error(char *msg, int retur, int error, char *str);
 
 /****************************/
 /*			SIGNAL			*/

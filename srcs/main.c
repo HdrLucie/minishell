@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 17:57:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/12 11:00:27 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:58:48 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ char	*init_prompt(void)
 	i = 0;
 	prompt = malloc(1000 * sizeof(char));
 	if (prompt == NULL)
-		return (*print_char_error("ALLOCATION FAILED\n", -1, errno));
+		return (*print_char_error("ALLOCATION FAILED\n", -1, errno, NULL));
 	ft_strcpy(prompt, find_couleur());
 	while (prompt[i])
 		i++;
 	getcwd(&prompt[i], 950);
 	if (prompt == NULL)
-		return (*print_char_error("TOO MUCH CHAR ON PWD\n", -1, errno));
+		return (*print_char_error("TOO MUCH CHAR ON PWD\n", -1, errno, prompt));
 	while (prompt[i])
 		i++;
 	ft_strcpy(&prompt[i], "\033[0m$ ");

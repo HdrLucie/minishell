@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 11:16:19 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/12 14:12:39 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:59:49 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**ft_split_quote(char *str)
 	char	**split;
 
 	if (str == NULL)
-		return (print_char_error("ALLOCATION FAILED\n", -1, -1));
+		return (print_char_error("ALLOCATION FAILED\n", -1, -1, NULL));
 	word = count_word(str);
 	if (word == -1)
 	{
@@ -99,10 +99,7 @@ char	**ft_split_quote(char *str)
 	}
 	split = malloc((word + 1) * sizeof(*split));
 	if (split == NULL)
-	{
-		free (str);
-		print_char_error("ALLOCATION FAILED\n", -1, -1);
-	}
+		print_char_error("ALLOCATION FAILED\n", -1, -1, str);
 	split = fill_split(str, split, word);
 	if (split == NULL)
 	{

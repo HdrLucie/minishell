@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:54:47 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:53:28 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ char	**expand_var_env(char **token, t_env **env_lst, int old_ret)
 				return (NULL);
 			else if (token[i][0] == '$')
 			{
-				if (token[i][1] && ft_isalnum(token[i][1]))
+				if (token[i][1] && (ft_isalnum(token[i][1])
+					|| token[i][1] == '{'))
 					token[i][0] = '\0';
 			}
 		}

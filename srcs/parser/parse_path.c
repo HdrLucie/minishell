@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:45:17 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:59:42 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*parse_cmd(char *cmd, char **envp)
 	env_path = ft_getenv("PATH", envp);
 	path = ft_split(env_path, ':');
 	if (path == NULL)
-		return (*print_char_error("PARSE PATH ERROR\n", -1, errno));
+		return (*print_char_error("PARSE PATH ERROR\n", -1, errno, NULL));
 	cmd = find_path(path, cmd);
 	free_strs(path);
 	return (cmd);

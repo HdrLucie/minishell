@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/11/12 14:28:35 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:56:22 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	find_var(int i, int *word, char *str)
 	{
 		while (str && str[i] && str[i] != '}')
 			i++;
+		if (!str[i])
+			return (i);
 		i++;
 	}
 	else
@@ -56,11 +58,8 @@ static int	count_word(char *str)
 	return (word);
 }
 
-static int	size_word(char *str, int k)
+static int	size_word(char *str, int k, int size)
 {
-	int	size;
-
-	size = k;
 	if (str[k] == '$' && str[k + 1] && str[k + 1] == '{')
 	{
 		while (str && str[++k] && str[k] != '}')
@@ -84,8 +83,7 @@ static int	size_word(char *str, int k)
 			k++;
 		}
 	}
-	size = k - size;
-	return (size);
+	return (k - size);
 }
 
 static int	fill_strs(char *str, char **strs, int word)
@@ -99,7 +97,7 @@ static int	fill_strs(char *str, char **strs, int word)
 	k = 0;
 	while (j < word)
 	{
-		size = size_word(str, k);
+		size = size_word(str, k, k);
 		strs[j] = malloc((size + 1) * sizeof(**strs));
 		if (strs[j] == NULL)
 			return (print_error("ALLOCATION FAILED\n", -1, -1));

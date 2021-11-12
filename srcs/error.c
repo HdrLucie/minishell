@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 14:34:37 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:57:32 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	print_error(char *msg, int retur, int error)
 	return (retur);
 }
 
-char	**print_char_error(char *msg, int retur, int error)
+char	**print_char_error(char *msg, int retur, int error, char *str)
 {
 	(void)retur;
+	if (str)
+		free (str);
 	write(2, "MINISHELL : ", 12);
 	write(2, msg, ft_strlen(msg));
 	errno = error;
