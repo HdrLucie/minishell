@@ -21,7 +21,7 @@ int	find_var(int i, int *word, char *str)
 		while (str && str[i] && str[i] != '}')
 			i++;
 		if (!str[i])
-			return (i);
+			return (print_error("BRACKET UNCLOSED", i, errno));
 		i++;
 	}
 	else
@@ -125,8 +125,14 @@ char	**ft_split_dollar(char *str)
 	word = count_word(str);
 	strs = malloc((word + 1) * sizeof(*strs));
 	if (strs == NULL)
+	{
+		errno = -1;
 		return (NULL);
+	}
 	if (fill_strs(str, strs, word) == -1)
+	{
+		errno = -1;
 		return (NULL);
+	}
 	return (strs);
 }
