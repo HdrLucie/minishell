@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 09:53:09 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 13:37:25 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:34:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int	check_car_spe(char *str, int i)
 		if (str[i] == '"' || str[i] == '\'')
 		{
 			i = find_token(str, i, str[i]);
+			if (i == -1)
+				return (-1);
 			if (str[i] && str[i + 1] && str[i + 1] == '|')
 				break ;
 		}
 		else
 			i++;
-		if (i == -1)
-			return (-1);
 	}
 	if (str && str[i] && str[i] != ' ' && (str[i] == '|'
 			|| str[i + 1] == '|'))

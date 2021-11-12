@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/08 11:31:34 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 13:59:51 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ char	**ft_realloc_strs(char **strs, size_t size)
 		return (NULL);
 	while (strs[i] && i < size)
 	{
-		write(1, "here\n", 6);
 		res[i] = ft_strdup(strs[i]);
 		i++;
 	}
@@ -48,7 +47,10 @@ int	fill_red(char **cmd, t_redir *red, char **exe)
 		{
 			i = parse_redir(cmd, i, red, j);
 			if (i < 0)
+			{
+				exe[k] = NULL;
 				return (i);
+			}
 			j++;
 		}
 		else
@@ -109,9 +111,11 @@ void	free_red(t_redir *red, int size)
 	i = 0;
 	while (i < size)
 	{
-		free (red[i].path);
+		if (red && &red[i] && red[i].path)
+			free (red[i].path);
 		i++;
 	}
 	free(red);
 	red = NULL;
 }
+ 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 17:44:41 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 16:41:06 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/12 12:04:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

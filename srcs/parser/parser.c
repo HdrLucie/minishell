@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:10:50 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 22:56:36 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

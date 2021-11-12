@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:56:50 by elise             #+#    #+#             */
-/*   Updated: 2021/10/29 14:43:29 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:28:35 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,17 @@ static int	count_word(char *str)
 
 	i = 0;
 	word = 1;
-	if (str[i] == '$')
+	if (str[i] && str[i] == '$')
 		word = 0;
 	while (str && str[i])
 	{
 		if (str[i] == '\'')
+		{
 			while (str && str[++i] && str[i] != '\'')
 				;
+			if (!(str[i]))
+				return (word);
+		}
 		if (str[i] == '$')
 			i = find_var(i, &word, str);
 		else
@@ -71,8 +75,12 @@ static int	size_word(char *str, int k)
 		while (str && str[k] && str[k] != '$')
 		{
 			if (str[k] == '\'')
+			{
 				while (str && str[++k] && str[k] != '\'')
 					;
+				if (!(str[k]))
+					return (k - size);
+			}
 			k++;
 		}
 	}
@@ -114,6 +122,8 @@ char	**ft_split_dollar(char *str)
 	char	**strs;
 	int		word;
 
+	if (!str)
+		return (NULL);
 	word = count_word(str);
 	strs = malloc((word + 1) * sizeof(*strs));
 	if (strs == NULL)

@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:22:31 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:53:13 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:04:39 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 	}
 	else if (pid == -1)
 		return (print_error(strerror(errno), -1, errno));
-	return (quit_red(mini, 0, file));
+	return (quit_red(mini, 0, file, 1));
 }

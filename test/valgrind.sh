@@ -8,15 +8,17 @@ make debug -C ../
 cp ../minishell .
 chmod 755 minishell
 
-valgrind \
-	--tool=memcheck \
-	--leak-check=full \
-	--leak-resolution=high \
-	--track-origins=yes \
-	--show-reachable=yes \
-	--suppressions=$PWD/minimal.supp \
-	--log-file=${LOG}.log \
-	$EXEC $@ \
+valgrind 								\
+	--tool=memcheck 					\
+	--leak-check=full 					\
+	--leak-resolution=high			 	\
+	--track-origins=yes 				\
+	--track-fds=yes						\
+	--show-reachable=yes		 		\
+	--suppressions=$PWD/linux.supp 		\
+	--suppressions=$PWD/minimal.supp 	\
+	--log-file=${LOG}.log 				\
+	$EXEC $@ 							\
 ;
 
 # cat valgrind.log | ./suppressions.sh > minimale.supp

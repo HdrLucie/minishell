@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_char.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:56:11 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/07 20:54:38 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

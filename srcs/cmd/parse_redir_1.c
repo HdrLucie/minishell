@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:59:12 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:23:28 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:04:35 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,16 @@ int	redir(char **exe, t_mini *mini)
 	if (mini->exe == NULL)
 		return (print_error("ALLOCATION FAILED\n", -1, errno));
 	ret = fill_red(exe, mini->red, mini->exe);
-	mini->exe = remove_quote(mini->exe);
 	if (ret < 0)
 	{
 		mini->old_ret = ret;
-		return (quit_red(mini, ret, NULL));
+		return (quit_red(mini, ret, NULL, 0));
 	}
+	mini->exe = remove_quote(mini->exe);
 	ret = exe_redir(mini->red, mini->nb_red, 0);
 	if (ret < 0)
-		return (quit_red(mini, ret, NULL));
+		return (quit_red(mini, ret, NULL, 1));
 	ret = exe_cmd(mini);
-	return (quit_red(mini, ret, NULL));
+	close_fd(mini->red, mini->nb_red);
+	return (quit_red(mini, ret, NULL, 1));
 }

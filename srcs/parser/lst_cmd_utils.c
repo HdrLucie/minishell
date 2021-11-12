@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_cmd_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elisehautefaye <elisehautefaye@student.    +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 17:17:48 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/10/31 12:58:51 by elisehautef      ###   ########.fr       */
+/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

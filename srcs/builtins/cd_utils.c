@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlucie <hlucie@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:42:34 by hlucie            #+#    #+#             */
-/*   Updated: 2021/11/10 12:29:33 by hlucie           ###   ########.fr       */
+/*   Updated: 2021/11/12 10:55:25 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	search_value(t_env *env, char **value, char *to_find)
 	{
 		if (!ft_strcmp(to_find, env->name))
 		{
-			if (env->value == '\0')
+			if (env->value[0] == '\0')
 				return (-1);
 			size = ft_strlen(env->value);
 		}

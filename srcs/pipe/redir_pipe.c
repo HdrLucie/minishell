@@ -6,21 +6,25 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:43:05 by ehautefa          #+#    #+#             */
-/*   Updated: 2021/11/10 16:22:33 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:06:06 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	quit_red(t_mini *mini, int ret, char *file)
+int	quit_red(t_mini *mini, int ret, char *file, int flag)
 {
 	if (file)
 	{
 		free(file);
 		file = NULL;
 	}
-	free_strs(mini->exe);
-	free_red(mini->red, mini->nb_red);
+	if (mini->exe)
+		free_strs(mini->exe);
+	if (flag)
+		free_red(mini->red, mini->nb_red);
+	else
+		free(mini->red);
 	return (ret);
 }
 

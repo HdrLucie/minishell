@@ -6,7 +6,7 @@
 /*   By: ehautefa <ehautefa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 12:09:59 by elisehautef       #+#    #+#             */
-/*   Updated: 2021/11/10 16:59:56 by ehautefa         ###   ########.fr       */
+/*   Updated: 2021/11/12 14:04:16 by ehautefa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ int		parse_redir(char **cmd, int i, t_redir *red, int j);
 int		exe_redir(t_redir *redir, int count, int pipe_flag);
 int		close_fd(t_redir *red, int count);
 int		exe_cmd(t_mini *mini);
-int		quit_red(t_mini *mini, int ret, char *file);
+int		quit_red(t_mini *mini, int ret, char *file, int flag);
 /*
 **	here_document.c 
 */
