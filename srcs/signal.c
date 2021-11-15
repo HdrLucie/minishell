@@ -22,7 +22,7 @@ void	sig_int(int num)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else	
+	else
 		signal(SIGINT, SIG_IGN);
 	g_flag_fork = 3;
 }
