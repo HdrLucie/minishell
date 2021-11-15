@@ -44,6 +44,27 @@ int	exe_redir_pipe(t_mini *mini, char *file, int last)
 	return (ret);
 }
 
+int	run_every_pipe(t_mini *mini)
+{
+	int		i;
+	t_cmd	*tmp;
+
+	tmp = mini->cmd;
+	if (init_pipe(mini) == -1)
+		return (-1);
+	i = 0;
+	while (tmp)
+	{
+		if (tmp->cmd && exe_pipe(mini, tmp, i) == -1)
+			return (-1);
+		if (errno == -3)
+			return (0);
+		i++;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 char	*redir_pipe(char **exe, t_mini *mini, int *last)
 {
 	int		ret;

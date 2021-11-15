@@ -27,6 +27,7 @@ void	sig_int(int num)
 
 void	sig_quit_daughter(int num)
 {
+	write(1, "\n", 1);
 	signal(num, SIG_IGN);
 }
 
@@ -42,4 +43,16 @@ void	signal_ret(int status, t_mini *mini)
 		write(1, "Quit (core dumped)\n", 19);
 	if (status && WIFEXITED(status))
 		mini->old_ret = WEXITSTATUS(status);
+}
+
+void	handler_in_here_doc(int num)
+{
+	int	save_fd;
+
+	(void)num;
+	g_flag_fork = 2;
+	write(1, "\n", 1);
+	save_fd = dup(0);
+	close(0);
+	g_flag_fork = save_fd;
 }
