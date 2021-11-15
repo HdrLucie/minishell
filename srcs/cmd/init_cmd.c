@@ -56,12 +56,12 @@ void	wait_child(t_mini *mini)
 	while (i < mini->nb_pipe + 1)
 	{
 		waitpid(mini->pid[i], &status, 0);
+		signal_ret(status, mini);
 		i++;
 	}
 	free(mini->pid);
 	if (g_flag_fork != 3)
 		g_flag_fork = 0;
-	signal_ret(status, mini);
 }
 
 int	init_pipe(t_mini *mini)

@@ -15,13 +15,15 @@
 void	sig_int(int num)
 {
 	(void)num;
-	write(1, "\n", 1);
 	if (g_flag_fork == 0 || g_flag_fork == 3)
 	{
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	else
+		signal(SIGINT, SIG_IGN);
 	g_flag_fork = 3;
 }
 
@@ -34,13 +36,14 @@ void	sig_quit_daughter(int num)
 void	sig_child(int num)
 {
 	(void)num;
-	g_flag_fork = 0;
 }
 
 void	signal_ret(int status, t_mini *mini)
 {
 	if (status && WIFSIGNALED(status) && WTERMSIG(status) == 3)
 		write(1, "Quit (core dumped)\n", 19);
+	if (status && WIFSIGNALED(status) && WTERMSIG(status) == 2)
+		write(1, "\n", 1);
 	if (status && WIFEXITED(status))
 		mini->old_ret = WEXITSTATUS(status);
 }
@@ -50,7 +53,6 @@ void	handler_in_here_doc(int num)
 	int	save_fd;
 
 	(void)num;
-	g_flag_fork = 2;
 	write(1, "\n", 1);
 	save_fd = dup(0);
 	close(0);

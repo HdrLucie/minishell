@@ -46,3 +46,21 @@ void	free_strs(char **strs)
 	free(strs);
 	strs = NULL;
 }
+
+void	control_d(t_mini *mini)
+{
+	int	ret;
+
+	ret = -1;
+	if (mini->env)
+		free_env(*mini->env);
+	write(2, "exit\n", 5);
+	if (ret < -1)
+		exit (ret);
+	if (ret == -1 && mini->old_ret)
+		exit(mini->old_ret);
+	else if (ret != -1)
+		exit(ret);
+	else
+		exit (0);
+}
