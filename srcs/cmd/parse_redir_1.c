@@ -72,7 +72,10 @@ int	parse_redir(char **cmd, int i, t_redir *red, int j)
 	if (cmd[i + 1])
 		red[j].path = ft_strdup(cmd[i + 1]);
 	if (!cmd[i + 1] || valid_path(red[j].path))
+	{
+		free(red[j].path);
 		return (print_error("PARSE ERROR REDIR\n", -2, 2));
+	}
 	i++;
 	return (i);
 }
