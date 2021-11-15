@@ -29,7 +29,7 @@ int	execute(char **cmd, t_mini *mini)
 
 	cmd[0] = parse_cmd(cmd[0], mini->envp);
 	if (cmd[0] == NULL)
-		return (-1);
+		return (-2);
 	if (g_flag_fork != 3)
 		g_flag_fork = 1;
 	pid = fork();
