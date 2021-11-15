@@ -1,0 +1,197 @@
+==510358== Memcheck, a memory error detector
+==510358== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==510358== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==510358== Command: ./minishell
+==510358== Parent PID: 510299
+==510358== 
+==510358== 
+==510358== FILE DESCRIPTORS: 29 open at exit.
+==510358== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 60: /usr/share/code/resources/app/node_modules.asar
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 55: /dev/shm/.org.chromium.Chromium.sU3OAH (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 54: /usr/share/code/resources/app/node_modules.asar
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 53: /dev/shm/.org.chromium.Chromium.uwZyIH (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 52: /dev/shm/.org.chromium.Chromium.bAkmMF (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 51: /dev/shm/.org.chromium.Chromium.FOTnlq (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 50: /dev/shm/.org.chromium.Chromium.bAkmMF (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 49: /dev/shm/.org.chromium.Chromium.bL1jYE (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 48: /usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 47: /dev/shm/.org.chromium.Chromium.lIqiUG (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 46: /dev/shm/.org.chromium.Chromium.zb4uCm (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 45: /dev/shm/.org.chromium.Chromium.uLyiJE (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 44: /dev/shm/.org.chromium.Chromium.FIwYdn (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 43: /dev/shm/.org.chromium.Chromium.dtW3KG (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 42: /dev/shm/.org.chromium.Chromium.cJV10o (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 41: /dev/shm/.org.chromium.Chromium.x4o5Nn (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open AF_UNIX socket 40: <unknown>
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 39: /dev/shm/.org.chromium.Chromium.9ZGXnn (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 38: /dev/shm/.org.chromium.Chromium.Sd5FSo (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 33: /tmp/.org.chromium.Chromium.oGCC1E (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 32: /proc/478649/status
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 31: /proc/478649/statm
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 25: /dev/shm/.org.chromium.Chromium.wFHQBD (deleted)
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 21: /usr/share/code/v8_context_snapshot.bin
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 3: /mnt/nfs/homes/hlucie/Documents/minishell/test/valgrind.log
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 2: /dev/pts/0
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 1: /dev/pts/0
+==510358==    <inherited from parent>
+==510358== 
+==510358== Open file descriptor 0: /dev/pts/0
+==510358==    at 0x49C3A3B: dup2 (syscall-template.S:78)
+==510358==    by 0x402A65: close_fd (exe_redir.c:62)
+==510358==    by 0x402359: redir (parse_redir_1.c:104)
+==510358==    by 0x401D3F: ft_execute_cmd (init_cmd.c:108)
+==510358==    by 0x403A4B: parser (lexer.c:54)
+==510358==    by 0x403BA1: lexer (lexer.c:80)
+==510358==    by 0x40164F: launch_minishell (main.c:92)
+==510358==    by 0x401756: main (main.c:116)
+==510358== 
+==510358== 
+==510358== HEAP SUMMARY:
+==510358==     in use at exit: 211,643 bytes in 423 blocks
+==510358==   total heap usage: 700 allocs, 277 frees, 234,133 bytes allocated
+==510358== 
+==510358== 2 bytes in 1 blocks are indirectly lost in loss record 1 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x40A416: ft_itoa (in /mnt/nfs/homes/hlucie/Documents/minishell/test/minishell)
+==510358==    by 0x405D26: fill_env_lst_value (env.c:38)
+==510358==    by 0x405ED7: fill_env_lst_name (env.c:67)
+==510358==    by 0x405FC3: create_env_lst (env.c:91)
+==510358==    by 0x40170A: main (main.c:110)
+==510358== 
+==510358== 8 bytes in 1 blocks are still reachable in loss record 3 of 67
+==510358==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x489E041: xrealloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x4889063: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x48897D5: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x4876FE5: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x48784AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x402D9E: init_file (here_document.c:43)
+==510358==    by 0x40308B: find_file_here_doc (here_document.c:98)
+==510358==    by 0x4030FE: exe_here_doc (here_document.c:115)
+==510358==    by 0x402B97: exe_redir (exe_redir.c:96)
+==510358==    by 0x4022F3: redir (parse_redir_1.c:99)
+==510358==    by 0x401D3F: ft_execute_cmd (init_cmd.c:108)
+==510358== 
+==510358== 9 bytes in 1 blocks are definitely lost in loss record 5 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x489E00C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x48772AB: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x4878504: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x4015DB: launch_minishell (main.c:84)
+==510358==    by 0x401756: main (main.c:116)
+==510358== 
+==510358== 16 bytes in 1 blocks are still reachable in loss record 11 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x489E00C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x4877010: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x48784AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x402D9E: init_file (here_document.c:43)
+==510358==    by 0x40308B: find_file_here_doc (here_document.c:98)
+==510358==    by 0x4030FE: exe_here_doc (here_document.c:115)
+==510358==    by 0x402B97: exe_redir (exe_redir.c:96)
+==510358==    by 0x4022F3: redir (parse_redir_1.c:99)
+==510358==    by 0x401D3F: ft_execute_cmd (init_cmd.c:108)
+==510358==    by 0x403A4B: parser (lexer.c:54)
+==510358==    by 0x403BA1: lexer (lexer.c:80)
+==510358== 
+==510358== 16 bytes in 1 blocks are still reachable in loss record 12 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x489E00C: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x488902F: ??? (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x48897D5: rl_expand_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x4876FE5: rl_set_prompt (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x48784AA: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.0)
+==510358==    by 0x402D9E: init_file (here_document.c:43)
+==510358==    by 0x40308B: find_file_here_doc (here_document.c:98)
+==510358==    by 0x4030FE: exe_here_doc (here_document.c:115)
+==510358==    by 0x402B97: exe_redir (exe_redir.c:96)
+==510358==    by 0x4022F3: redir (parse_redir_1.c:99)
+==510358==    by 0x401D3F: ft_execute_cmd (init_cmd.c:108)
+==510358== 
+==510358== 955 bytes in 68 blocks are indirectly lost in loss record 29 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x405E23: fill_env_lst_name (env.c:57)
+==510358==    by 0x405FC3: create_env_lst (env.c:91)
+==510358==    by 0x40170A: main (main.c:110)
+==510358== 
+==510358== 2,680 bytes in 67 blocks are indirectly lost in loss record 40 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x405F6D: create_env_lst (env.c:85)
+==510358==    by 0x40170A: main (main.c:110)
+==510358== 
+==510358== 3,288 bytes in 67 blocks are indirectly lost in loss record 41 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x405C98: fill_env_lst_value (env.c:29)
+==510358==    by 0x405ED7: fill_env_lst_name (env.c:67)
+==510358==    by 0x405FC3: create_env_lst (env.c:91)
+==510358==    by 0x40170A: main (main.c:110)
+==510358== 
+==510358== 6,965 (40 direct, 6,925 indirect) bytes in 1 blocks are definitely lost in loss record 53 of 67
+==510358==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==510358==    by 0x405F6D: create_env_lst (env.c:85)
+==510358==    by 0x40170A: main (main.c:110)
+==510358== 
+==510358== LEAK SUMMARY:
+==510358==    definitely lost: 49 bytes in 2 blocks
+==510358==    indirectly lost: 6,925 bytes in 203 blocks
+==510358==      possibly lost: 0 bytes in 0 blocks
+==510358==    still reachable: 40 bytes in 3 blocks
+==510358==         suppressed: 204,629 bytes in 215 blocks
+==510358== 
+==510358== For lists of detected and suppressed errors, rerun with: -s
+==510358== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
