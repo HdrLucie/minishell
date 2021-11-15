@@ -84,7 +84,7 @@ int	launch_minishell(t_mini *mini)
 	str = readline(prompt);
 	free(prompt);
 	if (!str)
-		return (print_error("exit\n", -1, -1));
+		ft_exit(mini, 1);
 	if (str[0] == '\0')
 		return (0);
 	if (ft_strcmp(str, ""))

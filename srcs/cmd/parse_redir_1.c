@@ -97,9 +97,10 @@ int	redir(char **exe, t_mini *mini)
 	}
 	mini->exe = remove_quote(mini->exe);
 	ret = exe_redir(mini->red, mini->nb_red, 0);
-	if (ret < 0)
+	if (ret < 0 && errno == -1)
 		return (quit_red(mini, ret, NULL, 1));
-	ret = exe_cmd(mini);
+	if (errno != -3)
+		ret = exe_cmd(mini);
 	close_fd(mini->red, mini->nb_red);
 	return (quit_red(mini, ret, NULL, 1));
 }

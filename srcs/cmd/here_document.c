@@ -12,6 +12,19 @@
 
 #include "minishell.h"
 
+void	handler(int num)
+{
+	int save_fd;
+	(void)num;
+	g_flag_fork = 2;
+	write(1, "\n", 1);
+	save_fd = dup(0);
+	close(0);
+	g_flag_fork = save_fd;
+// 
+
+}
+
 char	*init_file(t_redir *red)
 {
 	char	*str;
@@ -23,20 +36,33 @@ char	*init_file(t_redir *red)
 		return (NULL);
 	file[0] = '\0';
 	str[0] = '\0';
-	while (ft_strcmp(str, red->path))
-	{
-		free(str);
-		str = readline("\033[1m\033[31m> \033[0m");
-		if (!str)
-			return (NULL);
-		if (ft_strcmp(str, red->path))
+		while (str && ft_strcmp(str, red->path))
 		{
-			if (file[0] != '\0')
-				file = ft_strjoin(file, "\n");
-			file = ft_strjoin(file, str);
+			free(str);
+			signal(SIGINT, handler);
+			str = readline("\033[1m\033[31m> \033[0m");
+			if (g_flag_fork > 1)
+			{
+				dup2(g_flag_fork, 0);
+				close(g_flag_fork);
+				g_flag_fork = 3;
+				file[0] = '\0';
+				errno = -3;
+				return (file);
+			}
+			else if (!str)
+				write(2, "minishell: warning: here-document delimited by end-of-file (wanted `EOF')\n", 74);
+			if (str && ft_strcmp(str, red->path))
+			{
+				if (file[0] != '\0')
+					file = ft_strjoin(file, "\n");
+				file = ft_strjoin(file, str);
+			}
 		}
-	}
-	free(str);
+		if (file[0] != '\0')
+			file = ft_strjoin(file, "\n");
+		if (str)
+			free(str);
 	return (file);
 }
 

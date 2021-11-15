@@ -20,7 +20,8 @@ int	execute(char **cmd, t_mini *mini)
 	cmd[0] = parse_cmd(cmd[0], mini->envp);
 	if (cmd[0] == NULL)
 		return (-1);
-	g_flag_fork = 1;
+	if (g_flag_fork != 3)
+		g_flag_fork = 1;
 	pid = fork();
 	if (pid == -1)
 		return (print_error("FORK ERROR\n", -1, errno));
@@ -35,7 +36,8 @@ int	execute(char **cmd, t_mini *mini)
 	}
 	waitpid(pid, &status, 0);
 	signal_ret(status, mini);
-	g_flag_fork = 0;
+	if (g_flag_fork != 3)
+		g_flag_fork = 0;
 	errno = mini->old_ret;
 	return (0);
 }
@@ -54,7 +56,8 @@ void	wait_child(t_mini *mini)
 		i++;
 	}
 	free(mini->pid);
-	g_flag_fork = 0;
+	if (g_flag_fork != 3)
+		g_flag_fork = 0;
 	signal_ret(status, mini);
 }
 
@@ -88,6 +91,8 @@ int	run_every_pipe(t_mini *mini)
 	{
 		if (tmp->cmd && exe_pipe(mini, tmp, i) == -1)
 			return (-1);
+		if (errno == -3)
+			return (0);
 		i++;
 		tmp = tmp->next;
 	}
@@ -101,6 +106,8 @@ int	ft_execute_cmd(t_mini *mini)
 	if (mini->nb_pipe == 0 && mini->cmd->cmd)
 	{
 		ret = redir(mini->cmd->cmd, mini);
+		if (errno == -3)
+			errno = 0;
 		if (mini->old_ret == 0)
 			mini->old_ret = errno;
 		if (ret < 0)
