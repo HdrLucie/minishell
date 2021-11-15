@@ -12,17 +12,30 @@
 
 #include "minishell.h"
 
-void	handler(int num)
+char	*exec_readline(char **str, char *file, t_redir *red)
 {
-	int save_fd;
-	(void)num;
-	g_flag_fork = 2;
-	write(1, "\n", 1);
-	save_fd = dup(0);
-	close(0);
-	g_flag_fork = save_fd;
-// 
-
+	free(*str);
+	signal(SIGINT, handler_in_here_doc);
+	str[0] = readline("\033[1m\033[31m> \033[0m");
+	if (g_flag_fork > 1)
+	{
+		dup2(g_flag_fork, 0);
+		close(g_flag_fork);
+		g_flag_fork = 3;
+		file[0] = '\0';
+		errno = -3;
+		return (file);
+	}
+	else if (str[0] == NULL)
+		write(2, "minishell: warning: here-document \
+		delimited by end-of-file (wanted `EOF')\n", 74);
+	if (*str && ft_strcmp(*str, red->path))
+	{
+		if (file[0] != '\0')
+			file = ft_strjoin(file, "\n");
+		file = ft_strjoin(file, *str);
+	}
+	return (file);
 }
 
 char	*init_file(t_redir *red)
@@ -36,33 +49,14 @@ char	*init_file(t_redir *red)
 		return (NULL);
 	file[0] = '\0';
 	str[0] = '\0';
-		while (str && ft_strcmp(str, red->path))
-		{
-			free(str);
-			signal(SIGINT, handler);
-			str = readline("\033[1m\033[31m> \033[0m");
-			if (g_flag_fork > 1)
-			{
-				dup2(g_flag_fork, 0);
-				close(g_flag_fork);
-				g_flag_fork = 3;
-				file[0] = '\0';
-				errno = -3;
-				return (file);
-			}
-			else if (!str)
-				write(2, "minishell: warning: here-document delimited by end-of-file (wanted `EOF')\n", 74);
-			if (str && ft_strcmp(str, red->path))
-			{
-				if (file[0] != '\0')
-					file = ft_strjoin(file, "\n");
-				file = ft_strjoin(file, str);
-			}
-		}
-		if (file[0] != '\0')
-			file = ft_strjoin(file, "\n");
-		if (str)
-			free(str);
+	while (str && ft_strcmp(str, red->path))
+	{
+		file = exec_readline(&str, file, red);
+	}
+	if (file[0] != '\0')
+		file = ft_strjoin(file, "\n");
+	if (str)
+		free(str);
 	return (file);
 }
 

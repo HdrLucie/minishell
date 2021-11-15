@@ -79,7 +79,7 @@ int	exe_cmd(t_mini *mini)
 		if (mini->exe && ret == 2)
 		{
 			ret = execute(mini->exe, mini);
-			if (ret == -1)
+			if (ret < 0)
 				return (ret);
 		}
 	}

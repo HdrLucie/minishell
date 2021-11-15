@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+void	child_execution(char **cmd, t_mini *mini)
+{
+	signal(SIGQUIT, sig_quit_daughter);
+	errno = 0;
+	execve(cmd[0], cmd, mini->envp);
+	perror("EXECVE");
+	ft_exit(mini, 0);
+	exit(127);
+}
+
 int	execute(char **cmd, t_mini *mini)
 {
 	int	pid;
@@ -19,21 +29,14 @@ int	execute(char **cmd, t_mini *mini)
 
 	cmd[0] = parse_cmd(cmd[0], mini->envp);
 	if (cmd[0] == NULL)
-		return (-1);
+		return (-2);
 	if (g_flag_fork != 3)
 		g_flag_fork = 1;
 	pid = fork();
 	if (pid == -1)
 		return (print_error("FORK ERROR\n", -1, errno));
 	if (pid == 0)
-	{
-		signal(SIGQUIT, sig_quit_daughter);
-		errno = 0;
-		execve(cmd[0], cmd, mini->envp);
-		perror("EXECVE");
-		ft_exit(mini, 0);
-		exit(127);
-	}
+		child_execution(cmd, mini);
 	waitpid(pid, &status, 0);
 	signal_ret(status, mini);
 	if (g_flag_fork != 3)
@@ -75,27 +78,6 @@ int	init_pipe(t_mini *mini)
 	mini->pid = malloc(sizeof(int) * (mini->nb_pipe + 1));
 	if (mini->pid == NULL)
 		return (print_error(strerror(errno), -1, -1));
-	return (0);
-}
-
-int	run_every_pipe(t_mini *mini)
-{
-	int		i;
-	t_cmd	*tmp;
-
-	tmp = mini->cmd;
-	if (init_pipe(mini) == -1)
-		return (-1);
-	i = 0;
-	while (tmp)
-	{
-		if (tmp->cmd && exe_pipe(mini, tmp, i) == -1)
-			return (-1);
-		if (errno == -3)
-			return (0);
-		i++;
-		tmp = tmp->next;
-	}
 	return (0);
 }
 

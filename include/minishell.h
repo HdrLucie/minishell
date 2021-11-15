@@ -91,6 +91,7 @@ void	sig_int(int num);
 void	sig_quit_daughter(int num);
 void	signal_ret(int status, t_mini *mini);
 void	sig_child(int num);
+void	handler_in_here_doc(int num);
 
 /****************************/
 /*			PARSER			*/
@@ -235,5 +236,6 @@ void	close_all_pipe(t_mini *mini);
 char	*redir_pipe(char **exe, t_mini *mini, int *last);
 int		exe_redir_pipe(t_mini *mini, char *file, int last);
 char	*copy_pipe(char *src, char *dest, int begin);
+int		run_every_pipe(t_mini *mini);
 
 #endif

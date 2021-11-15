@@ -81,25 +81,23 @@ int	exe_pipe(t_mini *mini, t_cmd *cmd, int i)
 	char	*file;
 
 	j = 2 * i;
-	if (g_flag_fork != 3)
-		g_flag_fork = 1;
 	file = redir_pipe(cmd->cmd, mini, &last);
 	if (file == NULL && errno == -1)
 		return (-1);
-	if (errno != -3)
+	if (g_flag_fork != 3)
+		g_flag_fork = 1;
+	pid = fork();
+	if (pid != 0)
+		mini->pid[i] = pid;
+	if (pid == 0)
 	{
-		pid = fork();
-		if (pid != 0)
-			mini->pid[i] = pid;
-		if (pid == 0)
-		{
-			if (child_pipe(cmd, j, mini) == -1
-				|| exe_redir_pipe(mini, file, last) == -1)
-				return (-1);
-			free_all(mini);
-		}
-		else if (pid == -1)
-			return (print_error(strerror(errno), -1, errno));
+		signal(SIGQUIT, sig_quit_daughter);
+		if (child_pipe(cmd, j, mini) == -1
+			|| exe_redir_pipe(mini, file, last) == -1)
+			return (-1);
+		free_all(mini);
 	}
+	else if (pid == -1)
+		return (print_error(strerror(errno), -1, errno));
 	return (quit_red(mini, 0, file, 1));
 }
