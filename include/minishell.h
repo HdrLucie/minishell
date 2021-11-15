@@ -92,6 +92,7 @@ void	sig_quit_daughter(int num);
 void	signal_ret(int status, t_mini *mini);
 void	sig_child(int num);
 void	handler_in_here_doc(int num);
+void	control_d(t_mini *mini);
 
 /****************************/
 /*			PARSER			*/

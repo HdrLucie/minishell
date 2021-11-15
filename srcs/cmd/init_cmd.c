@@ -15,6 +15,7 @@
 void	child_execution(char **cmd, t_mini *mini)
 {
 	signal(SIGQUIT, sig_quit_daughter);
+	// signal(SIGINT, sig_quit_daughter);
 	errno = 0;
 	execve(cmd[0], cmd, mini->envp);
 	perror("EXECVE");
@@ -56,12 +57,13 @@ void	wait_child(t_mini *mini)
 	while (i < mini->nb_pipe + 1)
 	{
 		waitpid(mini->pid[i], &status, 0);
+		signal_ret(status, mini);
 		i++;
 	}
 	free(mini->pid);
 	if (g_flag_fork != 3)
 		g_flag_fork = 0;
-	signal_ret(status, mini);
+	// signal_ret(status, mini);
 }
 
 int	init_pipe(t_mini *mini)

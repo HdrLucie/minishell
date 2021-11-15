@@ -47,7 +47,7 @@ NAME = minishell
 
 CC		= clang
 
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror # -fsanitize=address
 
 DEBUG_FLAG =  -g3
 
