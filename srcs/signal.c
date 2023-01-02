@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	sig_int(int num)
+void sig_int(int num)
 {
 	(void)num;
 	if (g_flag_fork == 0 || g_flag_fork == 3)
@@ -27,18 +27,18 @@ void	sig_int(int num)
 	g_flag_fork = 3;
 }
 
-void	sig_quit_daughter(int num)
+void sig_quit_daughter(int num)
 {
 	write(1, "\n", 1);
 	signal(num, SIG_IGN);
 }
 
-void	sig_child(int num)
+void sig_child(int num)
 {
 	(void)num;
 }
 
-void	signal_ret(int status, t_mini *mini)
+void signal_ret(int status, t_mini *mini)
 {
 	if (status && WIFSIGNALED(status) && WTERMSIG(status) == 3)
 		write(1, "Quit (core dumped)\n", 19);
@@ -48,9 +48,9 @@ void	signal_ret(int status, t_mini *mini)
 		mini->old_ret = WEXITSTATUS(status);
 }
 
-void	handler_in_here_doc(int num)
+void handler_in_here_doc(int num)
 {
-	int	save_fd;
+	int save_fd;
 
 	(void)num;
 	write(1, "\n", 1);

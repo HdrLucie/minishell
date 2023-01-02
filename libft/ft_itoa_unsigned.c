@@ -12,9 +12,9 @@
 
 #include "./libft.h"
 
-static int	ft_count_char(unsigned int num)
+static int ft_count_char(unsigned int num)
 {
-	int				i;
+	int i;
 
 	i = 0;
 	while (num >= 1)
@@ -25,11 +25,11 @@ static int	ft_count_char(unsigned int num)
 	return (i);
 }
 
-char	*ft_itoa_unsigned(unsigned int num)
+char *ft_itoa_unsigned(unsigned int num)
 {
-	int				i;
-	char			*str;
-	int				size;
+	int i;
+	char *str;
+	int size;
 
 	i = 1;
 	size = 1;

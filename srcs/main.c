@@ -12,9 +12,9 @@
 
 #include "minishell.h"
 
-int	g_flag_fork;
+int g_flag_fork;
 
-void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
+void init_mini_struct(t_mini *mini, char **envp, t_env **env)
 {
 	mini->env = env;
 	mini->cmd = NULL;
@@ -26,9 +26,9 @@ void	init_mini_struct(t_mini *mini, char **envp, t_env **env)
 	mini->old_ret = 0;
 }
 
-char	*find_couleur(void)
+char *find_couleur(void)
 {
-	static int	i = -1;
+	static int i = -1;
 
 	i++;
 	if (i > 5)
@@ -48,10 +48,10 @@ char	*find_couleur(void)
 	return ("\033[1m\033[37m");
 }
 
-char	*init_prompt(void)
+char *init_prompt(void)
 {
-	char	*prompt;
-	int		i;
+	char *prompt;
+	int i;
 
 	i = 0;
 	prompt = malloc(1000 * sizeof(char));
@@ -69,11 +69,11 @@ char	*init_prompt(void)
 	return (prompt);
 }
 
-int	launch_minishell(t_mini *mini)
+int launch_minishell(t_mini *mini)
 {
-	char	*str;
-	char	*prompt;
-	int		ret;
+	char *str;
+	char *prompt;
+	int ret;
 
 	signal(SIGINT, sig_int);
 	signal(SIGQUIT, SIG_IGN);
@@ -98,10 +98,10 @@ int	launch_minishell(t_mini *mini)
 	return (0);
 }
 
-int	main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **envp)
 {
-	t_mini	mini;
-	t_env	*env;
+	t_mini mini;
+	t_env *env;
 
 	if (ac != 1)
 		return (print_error("TOO MUCH ARG", -1, errno));
