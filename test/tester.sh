@@ -43,12 +43,7 @@ function exec_test()
 		printf $BOLDRED"Your output : \n%.20s\n$BOLDRED|$TEST1|\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 		printf $BOLDGREEN"Expected output : \n%.20s\n$BOLDGREEN|$TEST2|\n%.20s$RESET\n" "-----------------------------------------" "-----------------------------------------"
 	fi
-	# if [ "$ES_1" != "$ES_2" ]; then
-	# 	echo
-	# 	echo
-	# 	printf $BOLDRED"Your exit status : $BOLDRED$ES_1$RESET\n"
-	# 	printf $BOLDGREEN"Expected exit status : $BOLDGREEN$ES_2$RESET\n"
-	# fi
+
 	echo
 	sleep 0.1
 }
